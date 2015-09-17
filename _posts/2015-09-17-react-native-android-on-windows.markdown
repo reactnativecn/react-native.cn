@@ -50,7 +50,7 @@ categories: tutorials
 npm install -g react-native-cli
 {% endhighlight %}
 
-但是由于npm上的版本在windows下存在BUG，因此需要安装github上的master支线，否则会在下一步骤报一下错误：
+但是由于npm上的版本在windows下存在BUG，因此需要安装github上的master支线，否则会在下一步骤报以下错误：
 
 {% highlight bash %}
 This will walk you through creating a new React Native project in ***
@@ -147,7 +147,7 @@ node node_modules\react-native\packager\packager.js
 
 如果有真机，可以不必运行模拟器，要配置好驱动，使得adb devices可以看到对应的设备。
 
-## 安卓真机运行 ##
+## 安卓运行 ##
 
 保持packager开启，另外打开一个命令行窗口，然后在工程目录下运行
 
@@ -166,4 +166,9 @@ react-native run-android
 至此，应该能看到APP运行，并报错 Unable to download JS bundle
 
 摇晃设备或按Menu键（Bluestacks模拟器按键盘上的菜单键，通常在右Ctrl的左边 或者左Windows键旁边），可以打开调试菜单，点击Dev Settings，选Debug server host for device，输入你的局域网IP，再按back键返回，再按Menu键，在调试菜单中选择Reload JS，就应该可以看到运行的结果了。
+
+
+## 安卓调试 ##
+
+目前Windows下无法自动打开chrome进行调试，所以手动打开chrome，访问如下地址：[http://localhost:8081/debugger-ui](http://localhost:8081/debugger-ui) 即可。
 
