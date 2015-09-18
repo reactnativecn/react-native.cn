@@ -54,16 +54,14 @@ layout: default
 
             <h2>异步执行</h2>
 
-            <p>在Javascript代码和原生平台之间的所有操作都以异步的形式体现，并且原生模块可以根据需要创建新的线程。这意味着你可以在主线程解码图片，然后在后台将它保存到磁盘，或者在不阻塞UI的情况下计算文字大小和界面布局，等等。所以React Native apps天然地流畅和反应灵敏。Javascript和原生代码之间的通讯是充分序列化的，这使得借助Chrome开发者工具去调试应用成为可能，不论应用是运行在模拟器里还是真机上。</p>
+            <p>在Javascript代码和原生平台之间的所有操作都以异步的形式体现，并且原生模块可以根据需要创建新的线程。这意味着你可以在主线程解码图片，然后在后台将它保存到磁盘，或者在不阻塞UI的情况下计算文字大小和界面布局，等等。所以React Native开发的app天然就流畅和反应灵敏。Javascript和原生代码之间的通讯是充分序列化的，这使得借助Chrome开发者工具去调试应用成为可能，不论应用是运行在模拟器里还是真机上。</p>
 
-            <p>See <a href="docs/debugging.html#content">Debugging</a>.</p><img
+            <p>参见 <a href="docs/debugging.html#content">调试</a>.</p><img
                     src="/img/chrome_breakpoint.png" width="800" height="443">
 
-            <h2>Touch Handling</h2>
+            <h2>触摸操控</h2>
 
-            <p>React Native implements a powerful system to negotiate touches in complex view hierarchies and provides
-                high level components such as TouchableHighlight that integrate properly with scroll views and other
-                elements without any additional configuration.</p>
+            <p>React Native实现了一个强大的触摸事件处理系统，可以在复杂的View层次关系下正确的处理触摸事件，并且提供了常用组件如TouchableHighlight等，在ScrollView或者其它的元素之下也可以正常工作，而无需额外配置。</p>
 
             <div class="prism language-javascript"><span class="token comment" spellcheck="true">// iOS &amp; Android
 </span>
@@ -82,13 +80,9 @@ layout: default
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></div>
 
-            <h2>Flexbox and Styling</h2>
+            <h2>布局和样式</h2>
 
-            <p>Laying out views should be easy, which is why we brought the flexbox layout model from the web to React
-                Native. Flexbox makes it simple to build the most common UI layouts, such as stacked and nested boxes
-                with margin and padding. React Native also supports common web styles, such as fontWeight, and the
-                StyleSheet abstraction provides an optimized mechanism to declare all your styles and layout right along
-                with the components that use them and apply them inline.</p>
+            <p>控制view的布局应当简单易行，这就是为什么React Native从web向原生app引入了Flexbox模型。Flexbox让大多数常见的UI布局可以被轻松构建（譬如带有外衬和内衬的堆叠在一起的矩形）。React Native还支持多种常见的web样式，例如fontWeight等。抽象样式表提供了一个高性能的机制来声明所有的样式和布局并且在你的组件中直接应用。</p>
 
             <div class="prism language-javascript"><span class="token comment" spellcheck="true">// iOS &amp; Android
 </span>
@@ -123,13 +117,9 @@ layout: default
   subtitle<span class="token punctuation">:</span> <span class="token punctuation">{</span> fontSize<span class="token punctuation">:</span> <span class="token number">10</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></div>
 
-            <h2>Polyfills</h2>
+            <h2>标准化</h2>
 
-            <p>React Native is focused on changing the way view code is written. For the rest, we look to the web for
-                universal standards and polyfill those APIs where appropriate. You can use npm to install JavaScript
-                libraries that work on top of the functionality baked into React Native, such as XMLHttpRequest,
-                window.requestAnimationFrame, and navigator.geolocation. We are working on expanding the available APIs,
-                and are excited for the Open Source community to contribute as well.</p>
+            <p>React Native关注于改变view代码编写的方式。除此以外，我们还纳入了web的生态系统中常见的标准和恰当的API，这使得npm上的许多库可以在React Native中直接使用。例如XMLHttpRequest, window.requestAnimationFrame, 还有navigator.geolocation。我们还在努力增加更多的API，并且十分欢迎开源社区进行贡献。</p>
 
             <div class="prism language-javascript"><span class="token comment" spellcheck="true">// iOS (Android support for geolocation coming)
 </span>
@@ -155,18 +145,13 @@ layout: default
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></div>
 
-            <h2>Extensibility</h2>
+            <h2>扩展性</h2>
 
-            <p>It is certainly possible to create a great app using React Native without writing a single line of native
-                code, but React Native is also designed to be easily extended with custom native views and modules -
-                that means you can reuse anything you&#x27;ve already built, and can import and use your favorite native
-                libraries.</p>
+            <p>使用React Native，一行原生代码也不写就创造一个不错的app是完全可能的，尽管如此，React Native非常容易扩展全新的原生view和模块。——这意味着你现有的大量工作都可以被复用，你喜欢的各种原生库都可以被导入。</p>
 
-            <h3>Creating iOS modules</h3>
+            <h3>创建iOS模块</h3>
 
-            <p>To create a simple iOS module, create a new class that implements the RCTBridgeModule protocol, and wrap
-                the function that you want to make available to JavaScript in RCT_EXPORT_METHOD. Additionally, the class
-                itself must be explicitly exported with RCT_EXPORT_MODULE();.</p>
+            <p>想要创建一个iOS模块，只需要创建一个类（应为接口），实现RCTBridgeModule协议，然后把你想在Javascript中使用的任何方法用RCT_EXPORT_METHOD包装。最后，再用RCT_EXPORT_MODULE导出整个模块即可。</p>
 
             <div class="prism language-javascript"><span class="token comment" spellcheck="true">// Objective-C
 </span>
@@ -205,11 +190,9 @@ layout: default
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></div>
 
-            <h3>Creating iOS views</h3>
+            <h3>创建iOS View</h3>
 
-            <p>Custom iOS views can be exposed by subclassing RCTViewManager, implementing a -(UIView *)view method, and
-                exporting properties with the RCT_EXPORT_VIEW_PROPERTY macro. Then a simple JavaScript file connects the
-                dots.</p>
+            <p>自定义的iOS View可以通过继承RCTViewManager来实现，实现一个-(UIView *)view方法，并且使用RCT_EXPORT_VIEW_PROPERTY宏导出属性。最后用一个Javascript文件连接并进行包装。</p>
 
             <div class="prism language-javascript"><span class="token comment" spellcheck="true">// Objective-C
 </span>
@@ -245,14 +228,11 @@ MyCustomView<span class="token punctuation">.</span>propTypes <span class="token
 <span class="token keyword">var</span> NativeMyCustomView <span class="token operator">=</span> <span class="token function">requireNativeComponent<span class="token punctuation">(</span></span><span class="token string">&#x27;MyCustomView&#x27;</span><span class="token punctuation">,</span> MyCustomView<span class="token punctuation">)</span><span class="token punctuation">;</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> MyCustomView<span class="token punctuation">;</span></div>
 
-            <h3>Creating Android modules</h3>
+            <h3>创建Android模块</h3>
 
-            <p>Likewise, Android also supports custom extensions, the methods are just slightly different.</p>
+            <p>同样的，Android也支持自定义扩展。仅仅是方法有少许不同。</p>
 
-            <p>To create a simple module in Android, create a new class that extends the ReactContextBaseJavaModule
-                class, and annotate the function that you want to make available to JavaScript with @ReactMethod.
-                Additionally, the class itself must be registered in the ReactPackage of your React Native
-                application.</p>
+            <p>创建一个基础的安卓模块，需要先创建一个继承自ReactContentBaseJavaModule的类，然后使用@ReactMethod标注(Annotation)来标记所有你希望Javascript可以访问的方法。最后，需要通过ReactPackage在你的应用程序中注册这个模块。</p>
 
             <div class="prism language-javascript"><span class="token comment" spellcheck="true">// Java
 </span>
@@ -286,11 +266,9 @@ public class <span class="token class-name">MyCustomModule</span> extends <span 
 </div>
 
 
-            <h3>Creating Android views</h3>
+            <h3>创建Android View</h3>
 
-            <p>Custom Android views can be exposed by extending SimpleViewManager, implementing a createViewInstance and
-                getName methods, and exporting properties with the @UIProp annotation. Then a simple JavaScript file
-                connects the dots.</p>
+            <p>创建自定义的Android View，首先定义一个继承自SimpleViewManager的类，并实现createViewInstance和getName方法，然后使用@UIProp标注导出属性，最后用一个Javascript文件连接并进行包装。</p>
 
             <div class="prism language-javascript"><span class="token comment" spellcheck="true">// Java
 </span>
