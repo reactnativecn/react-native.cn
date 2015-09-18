@@ -1,7 +1,8 @@
 ---
 layout: post
 title:  "在Windows下搭建React Native Android开发环境"
-author: tdzl2003
+author: 天地之灵_邓鋆
+author_url: https://github.com/tdzl2003
 date:   2015-09-16 22:52:43
 categories: tutorials
 ---

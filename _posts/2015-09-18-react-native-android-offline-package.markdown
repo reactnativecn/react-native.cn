@@ -1,7 +1,8 @@
 ---
 layout: post
 title:  "React Native Android生成发行包"
-author: tdzl2003
+author: 天地之灵_邓鋆
+author_url: https://github.com/tdzl2003
 date:   2015-09-18 08:00:00
 categories: tutorials
 ---
