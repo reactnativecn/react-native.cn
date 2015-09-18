@@ -1,0 +1,17 @@
+---
+layout: default
+nav: changelog
+---
+
+<section class="content wrap documentationContent nosidebar">
+  <header class="post-header">
+  </header>
+  <div class="post">
+    {% for post in site.changelog reversed %}
+      <h2 id="{{post.name}}">{{ post.version }}</h2>
+      {{ post.content }}
+    {% endfor %}
+  </div>
+  <p class="rss-subscribe">通过<a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS订阅</a></p>
+</div>
+

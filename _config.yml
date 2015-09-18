@@ -9,3 +9,9 @@ github_username:  tdzl2003
 
 # Build settings
 markdown: kramdown
+
+# Collections
+collections:
+  changelog:
+  	output: true
+

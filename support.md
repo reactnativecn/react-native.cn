@@ -1,5 +1,6 @@
 ---
 layout: page
+nav: support
 ---
 
 # 需要帮助？ #
