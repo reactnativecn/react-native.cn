@@ -20,7 +20,7 @@ layout: default
         <div style="margin:40px auto;max-width:800px;"><h2>原生组件</h2>
 
             <p>使用React Native，你可以使用标准的平台组件，例如iOS的UITabBar或安卓的Drawer。这使你的app获得平台一致的视觉效果和体验，并且获得最佳的性能和流畅性。
-              原生组件很容易作为React component组成你的React Native应用。</p>
+              原生组件很容易作为React component组成你的React Native应用，就像TabBarIOS和DrawerLayoutAndroid。</p>
 <div class="prism language-javascript"><span class="token comment" spellcheck="true">// iOS
 </span>
 <span class="token keyword">var</span> React <span class="token operator">=</span> <span class="token function">require<span class="token punctuation">(</span></span><span class="token string">&#x27;react-native&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -54,7 +54,7 @@ layout: default
 
             <h2>异步执行</h2>
 
-            <p>在Javascript代码和原生平台之间的所有操作都以异步的形式体现，并且原生模块可以根据需要创建新的线程。这意味着你可以在主线程解码图片，然后在后台将它保存到磁盘，或者在不阻塞UI的情况下计算文字大小和界面布局，等等。所以React Native开发的app天然就流畅和反应灵敏。Javascript和原生代码之间的通讯是充分序列化的，这使得借助Chrome开发者工具去调试应用成为可能，不论应用是运行在模拟器里还是真机上。</p>
+            <p>在Javascript代码和原生平台之间的所有操作都以异步的形式体现，并且原生模块可以根据需要创建新的线程。这意味着你可以在主线程解码图片，然后在后台将它保存到磁盘，或者在不阻塞UI的情况下计算文字大小和界面布局，等等。所以React Native开发的app天然具备流畅和反应灵敏的优势。Javascript和原生代码之间的通讯是完全可序列化的，这使得借助Chrome开发者工具去调试应用成为可能，不论应用是运行在模拟器里还是真机上。</p>
 
             <p>参见 <a href="docs/debugging.html#content">调试</a>.</p><img
                     src="/img/chrome_breakpoint.png" width="800" height="443">
@@ -80,7 +80,7 @@ layout: default
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></div>
 
-            <h2>布局和样式</h2>
+            <h2>弹性盒和样式</h2>
 
             <p>控制view的布局应当简单易行，这就是为什么React Native从web向原生app引入了Flexbox模型。Flexbox让大多数常见的UI布局可以被轻松构建（譬如带有外衬和内衬的堆叠在一起的矩形）。React Native还支持多种常见的web样式，例如fontWeight等。抽象样式表提供了一个高性能的机制来声明所有的样式和布局并且在你的组件中直接应用。</p>
 
@@ -147,7 +147,7 @@ layout: default
 
             <h2>扩展性</h2>
 
-            <p>使用React Native，一行原生代码也不写就创造一个不错的app是完全可能的，尽管如此，React Native非常容易扩展全新的原生view和模块。——这意味着你现有的大量工作都可以被复用，你喜欢的各种原生库都可以被导入。</p>
+            <p>使用React Native，无需编写一行原生代码即可创造一款不错的app，尽管如此，React Native非常容易扩展全新的原生view和模块。——这意味着你现有的大量工作都可以被复用，你喜欢的各种原生库都可以被导入。</p>
 
             <h3>创建iOS模块</h3>
 
