@@ -11,3 +11,5 @@ React Native 中文网由以下人员共同维护：
 [晴明](http://github.com/sunnylqm)
 
 QQ群：[439022088](http://shang.qq.com/wpa/qunwpa?idkey=0da41b12f13bcaa86959176bf27bf32b74b08aedf4f0bbd0ef53d943c62a2dcd)
+
+React, React Native版权由Facebook Inc.所有。本网站并非隶属于Facebook。

@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+{% include post_nav.html %}
+<section class="content wrap documentationContent nosidebar">
+  <header class="post-header">
+    <h1 class="post-title">博客</h1>
+  </header>
+  <div class="post">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+        <h2>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </div>
+  <p class="rss-subscribe">通过<a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS订阅</a></p>
+</div>
+
