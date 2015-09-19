@@ -7,20 +7,20 @@ layout: default
   <div class="hero">
       <div class="wrap">
           <div class="text"><strong>React Native 中文网</strong></div>
-          <div class="minitext">使用现代Javascript为iOS、Android编写跨平台原生APP</div>
+          <div class="minitext">使用前沿的Javascript为iOS、Android编写跨平台原生APP</div>
       </div>
   </div>
   <section class="content wrap">
-        <div style="margin:40px auto;max-width:800px;"><p>React Native使你能够使用基于Javascript和<a
-                    href="http://facebook.github.io/react/">React</a>一致的开发体验构建世界一流的原生APP。<br/>
-                    React Native关注于提高多平台开发的开发效率——仅需学习一次，编写任何平台。</br>
-                    Facebook使用React Native开发多款APP产品，并且将持续地投入建设React Native。</p></div>
+        <div style="margin:40px auto;max-width:800px;"><p>React Native使你能够在Javascript和<a
+                    href="http://facebook.github.io/react/">React</a>的基础上获得完全一致的开发体验，构建世界一流的原生APP。<br/>
+                    React Native着力于提高多平台开发的开发效率 —— 仅需学习一次，编写任何平台。</br>
+                    Facebook已经在多项产品中使用了React Native，并且将持续地投入建设React Native。</p></div>
         <div class="buttons-unit"><a href="docs/getting-started.html#content" class="button">开始使用React
             Native</a></div>
         <div style="margin:40px auto;max-width:800px;"><h2>原生组件</h2>
 
             <p>使用React Native，你可以使用标准的平台组件，例如iOS的UITabBar或安卓的Drawer。这使你的app获得平台一致的视觉效果和体验，并且获得最佳的性能和流畅性。
-              原生组件很容易作为React component组成你的React Native应用，就像TabBarIOS和DrawerLayoutAndroid。</p>
+              使用对应的React component，就可以轻松地把这些原生组件整合到你的React Native应用中，例如TabBarIOS和DrawerLayoutAndroid。</p>
 <div class="prism language-javascript"><span class="token comment" spellcheck="true">// iOS
 </span>
 <span class="token keyword">var</span> React <span class="token operator">=</span> <span class="token function">require<span class="token punctuation">(</span></span><span class="token string">&#x27;react-native&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -54,14 +54,14 @@ layout: default
 
             <h2>异步执行</h2>
 
-            <p>在Javascript代码和原生平台之间的所有操作都以异步的形式体现，并且原生模块可以根据需要创建新的线程。这意味着你可以在主线程解码图片，然后在后台将它保存到磁盘，或者在不阻塞UI的情况下计算文字大小和界面布局，等等。所以React Native开发的app天然具备流畅和反应灵敏的优势。Javascript和原生代码之间的通讯是完全可序列化的，这使得借助Chrome开发者工具去调试应用成为可能，不论应用是运行在模拟器里还是真机上。</p>
+            <p>在Javascript代码和原生平台之间的所有操作都是异步执行的，并且原生模块还可以根据需要创建新的线程。这意味着你可以在主线程解码图片，然后在后台将它保存到磁盘，或者在不阻塞UI的情况下计算文字大小和界面布局等等。所以React Native开发的app天然具备流畅和反应灵敏的优势。Javascript和原生代码之间的通讯是完全可序列化的，这使得我们可以借助Chrome开发者工具去调试应用，而不论应用运行在模拟器还是真机上。</p>
 
             <p>参见 <a href="docs/debugging.html#content">调试</a>.</p><img
                     src="/img/chrome_breakpoint.png" width="800" height="443">
 
-            <h2>触摸操控</h2>
+            <h2>触摸事件处理</h2>
 
-            <p>React Native实现了一个强大的触摸事件处理系统，可以在复杂的View层次关系下正确的处理触摸事件，并且提供了常用组件如TouchableHighlight等，在ScrollView或者其它的元素之下也可以正常工作，而无需额外配置。</p>
+            <p>React Native实现了一个强大的触摸事件处理系统，可以在复杂的View层次关系下正确地处理触摸事件。同时还提供了高度封装的组件如TouchableHighlight等，可以直接嵌入到ScrollView或者其它的元素中，无需额外配置。</p>
 
             <div class="prism language-javascript"><span class="token comment" spellcheck="true">// iOS &amp; Android
 </span>
@@ -80,9 +80,9 @@ layout: default
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></div>
 
-            <h2>弹性盒和样式</h2>
+            <h2>弹性盒(Flexbox)和样式</h2>
 
-            <p>控制view的布局应当简单易行，这就是为什么React Native从web向原生app引入了Flexbox模型。Flexbox让大多数常见的UI布局可以被轻松构建（譬如带有外衬和内衬的堆叠在一起的矩形）。React Native还支持多种常见的web样式，例如fontWeight等。抽象样式表提供了一个高性能的机制来声明所有的样式和布局并且在你的组件中直接应用。</p>
+            <p>控制view的布局应当简单易行，这就是为什么React Native从web中借鉴了Flexbox模型。Flexbox让大多数常见的UI布局构建变得简单（譬如带有外衬margin和内衬padding，且堆叠在一起的多个矩形）。React Native还支持多种常见的web样式，例如fontWeight等。抽象样式表提供了一个高性能的机制来声明所有的样式和布局，并且在你的组件中直接应用。</p>
 
             <div class="prism language-javascript"><span class="token comment" spellcheck="true">// iOS &amp; Android
 </span>
@@ -117,11 +117,11 @@ layout: default
   subtitle<span class="token punctuation">:</span> <span class="token punctuation">{</span> fontSize<span class="token punctuation">:</span> <span class="token number">10</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></div>
 
-            <h2>标准化</h2>
+            <h2>兼容通用标准</h2>
 
-            <p>React Native关注于改变view代码编写的方式。除此以外，我们还纳入了web的生态系统中常见的标准和恰当的API，这使得npm上的许多库可以在React Native中直接使用。例如XMLHttpRequest, window.requestAnimationFrame, 还有navigator.geolocation。我们还在努力增加更多的API，并且十分欢迎开源社区进行贡献。</p>
+            <p>React Native致力于改进视图代码的编写方式。在此之外，我们则纳入了web生态系统中的通用标准，并在需要的时候为这些API提供兼容层。这使得npm上的许多库可以在React Native中直接使用。例如XMLHttpRequest, window.requestAnimationFrame, 还有navigator.geolocation。我们还在努力增加更多的API，并且十分欢迎开源社区进行贡献。</p>
 
-            <div class="prism language-javascript"><span class="token comment" spellcheck="true">// iOS (Android support for geolocation coming)
+            <div class="prism language-javascript"><span class="token comment" spellcheck="true">// iOS (Android的地理定位支持也即将实现)
 </span>
 <span class="token keyword">var</span> React <span class="token operator">=</span> <span class="token function">require<span class="token punctuation">(</span></span><span class="token string">&#x27;react-native&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">var</span> <span class="token punctuation">{</span> Text <span class="token punctuation">}</span> <span class="token operator">=</span> React<span class="token punctuation">;</span>
@@ -147,7 +147,7 @@ layout: default
 
             <h2>扩展性</h2>
 
-            <p>使用React Native，无需编写一行原生代码即可创造一款不错的app，尽管如此，React Native非常容易扩展全新的原生view和模块。——这意味着你现有的大量工作都可以被复用，你喜欢的各种原生库都可以被导入。</p>
+            <p>使用React Native，无需编写一行原生代码即可创造一款不错的app。尽管如此，使用自定义的原生视图和模块来扩展React Native也非常容易 —— 这意味着你现有的所有工作都可以被复用，你喜欢的各种原生库都可以被导入。</p>
 
             <h3>创建iOS模块</h3>
 
