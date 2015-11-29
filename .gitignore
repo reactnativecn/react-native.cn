@@ -2,3 +2,4 @@
 /node_modules
 /build-release
 /build-debug
+/webpack-assets.json
