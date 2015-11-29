@@ -26,10 +26,11 @@ const server = new http.Server(app);
 import getDataDependencies from './helpers/getDataDependencies';
 
 if (__DEV__) {
-  app.use(Express.static(path.join(__dirname, '..', 'static')));
+  app.use('/static/', Express.static(path.join(__dirname, '..', 'static')));
 }
 if (__OPTIONS__.serveAssets) {
   app.use('/scripts/', Express.static(path.join(__dirname, '..', 'build-release')));
+  app.use('/static/', Express.static(path.join(__dirname, '..', 'static')));
 }
 
 app.use((req, res) => {
