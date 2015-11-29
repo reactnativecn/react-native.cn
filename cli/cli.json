@@ -6,14 +6,55 @@
       "options": {
         "production": {
           "default": true
+        },
+        "launchServer":{
+          "default": true
+        }
+      }
+    },
+    "productionWithAssets":{
+      "options": {
+        "production": {
+          "default": true
+        },
+        "launchServer":{
+          "default": true
+        },
+        "serveAssets":{
+          "default": true
         }
       }
     },
     "development":{
+      "options": {
+        "launchServer":{
+          "default": true
+        }
+      }
+    },
+    "developmentWithWebpack":{
+      "options": {
+        "serveWebpack":{
+          "default": false
+        },
+        "launchServer":{
+          "default": true
+        }
+      }
+    },
+    "build-client":{
+      "options": {
+        "production": {
+          "default": true
+        }
+      }
     },
     "webpack-dev":{
-    },
-    "server": {
+      "options": {
+        "serveWebpack":{
+          "default": true
+        }
+      }
     }
   },
   "globalOptions":{
@@ -40,6 +81,15 @@
     "webpackHost": {
       "default": "localhost",
       "hasValue": true
+    },
+    "serveWebpack":{
+      "default": false
+    },
+    "launchServer":{
+      "default": false
+    },
+    "serveAssets": {
+      "default": false
     }
   }
 }

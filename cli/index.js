@@ -24,12 +24,15 @@ function doPiping() {
 }
 
 if (doPiping()) {
-  if (command === 'webpack-dev') {
-    require('./webpack-dev-server');
-  } else if (command === 'server') {
-    require('./server');
-  } else if (command === 'development') {
-    require('./webpack-dev-server');
-    require('./server');
+  if (command === 'build-client') {
+    require('./build');
+  } else {
+    // General commands.
+    if (options.serveWebpack) {
+      require('./webpack-dev-server');
+    }
+    if (options.launchServer) {
+      require('./server');
+    }
   }
 }

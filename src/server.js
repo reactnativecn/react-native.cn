@@ -28,6 +28,9 @@ import getDataDependencies from './helpers/getDataDependencies';
 if (__DEV__) {
   app.use(Express.static(path.join(__dirname, '..', 'static')));
 }
+if (__OPTIONS__.serveAssets) {
+  app.use('/scripts/', Express.static(path.join(__dirname, '..', 'build-release')));
+}
 
 app.use((req, res) => {
   if (__DEV__) {
@@ -61,7 +64,6 @@ app.use((req, res) => {
       ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component}
                                     store={store}/>));
   }
-  //sendRendered();
   store.dispatch(match(req.originalUrl, (error, redirectLocation, routerState) => {
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
@@ -78,11 +80,11 @@ app.use((req, res) => {
       if (routerState.location.search && !routerState.location.query) {
         routerState.location.query = qs.parse(routerState.location.search);
       }
+      Promise.all(getDataDependencies(routerState.components, store.getState, store.dispatch, routerState.location, routerState.params))
+        .then(()=>{
+          sendRendered(routerState);
+        });
     }
-    Promise.all(getDataDependencies(routerState.components, store.getState, store.dispatch, routerState.location, routerState.params))
-      .then(()=>{
-        sendRendered(routerState);
-      });
   }));
 });
 
