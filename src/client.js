@@ -2,6 +2,8 @@
  * Created by Yun on 2015-11-28.
  */
 
+import 'bootstrap/less/bootstrap.less';
+
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -42,7 +44,7 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-if (__DEV__ && !window.devToolsExtension) {
+if (__DEVTOOLS__ && !window.devToolsExtension) {
   ReactDOM.render(
     <Provider store={store} key="provider">
       <div>

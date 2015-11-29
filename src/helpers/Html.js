@@ -39,7 +39,7 @@ export default class Html extends Component {
         {/* outputs a <style/> tag with all bootstrap styles + App.scss + it could be CurrentPage.scss. */}
         {/* can smoothen the initial style flash (flicker) on page load in development mode. */}
         {/* ideally one could also include here the style for the current page (Home.scss, About.scss, etc) */}
-        { Object.keys(assets.styles).length === 0 ? <style dangerouslySetInnerHTML={{__html:  require('../pages/Site.less')._style}}/> : null }
+        { Object.keys(assets.styles).length === 0 ? <style dangerouslySetInnerHTML={{__html:  require('bootstrap/less/bootstrap.less')._style + require('../pages/Site.less')._style}}/> : null }
       </head>
       <body>
       <div id="content" dangerouslySetInnerHTML={{__html: content}}/>

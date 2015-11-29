@@ -57,7 +57,7 @@ module.exports = {
   },
   output: {
     path: assetsPath,
-    filename: __DEV__?'[name]-[hash].js': '[name]-[chunkhash].js',
+    filename: __DEV__ ? '[name]-[hash].js': '[name]-[chunkhash].js',
     chunkFilename: '[name]-[chunkhash].js',
     publicPath: __DEV__ ? webpackRoot + '/build-debug/' : '/scripts/',
   },
@@ -91,6 +91,7 @@ module.exports = {
       __CLIENT__: true,
       __SERVER__: false,
       __DEV__: !!__DEV__,
+      __DEVTOOLS__: !!options.showDevTool,
       'process.env': {
         // Useful to reduce the size of client-side libraries, e.g. react
         NODE_ENV: __DEV__ ? JSON.stringify('development') : JSON.stringify('production'),

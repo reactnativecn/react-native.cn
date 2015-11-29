@@ -90,6 +90,9 @@
     },
     "serveAssets": {
       "default": false
+    },
+    "showDevTool":{
+      "default": false
     }
   }
 }
