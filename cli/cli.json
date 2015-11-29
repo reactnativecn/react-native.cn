@@ -1,0 +1,45 @@
+{
+  "useCommand": true,
+  "defaultCommand": "development",
+  "commands": {
+    "production":{
+      "options": {
+        "production": {
+          "default": true
+        }
+      }
+    },
+    "development":{
+    },
+    "webpack-dev":{
+    },
+    "server": {
+    }
+  },
+  "globalOptions":{
+    "production": {
+      "default": false
+    },
+    "enableSSR":{
+      "default": true
+    },
+    "port": {
+      "default": 3000,
+      "hasValue": true,
+      "type": "int"
+    },
+    "host": {
+      "default": "localhost",
+      "hasValue": true
+    },
+    "webpackPort": {
+      "default": 3001,
+      "hasValue": true,
+      "type": "int"
+    },
+    "webpackHost": {
+      "default": "localhost",
+      "hasValue": true
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "plugins": [
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "transform-strict-mode"
+  ],
+  "presets": [
+    "es2015",
+    "react"
+  ],
+  "env":{
+    "development":{
+
+    },
+    "web":{
+
+    }
+  }
+}

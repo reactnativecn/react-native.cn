@@ -1,0 +1,37 @@
+{
+  "extends": "eslint-config-airbnb",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    // Disable for __DEV__, __SERVER__ usage.
+    "no-undef" : 0,
+
+    // Disable for console/alert
+    "no-console": 0,
+    "no-alert": 0,
+
+    "indent": [2, 2, {"SwitchCase": 1}]
+  },
+  "plugins": [
+    "react", "import"
+  ],
+  "settings": {
+    "import/parser": "babel-eslint",
+    "import/resolve": {
+      "moduleDirectory": ["node_modules", "src"]
+    }
+  },
+  "globals": {
+    "__DEVELOPMENT__": true,
+    "__CLIENT__": true,
+    "__SERVER__": true,
+    "__DISABLE_SSR__": true,
+    "__DEVTOOLS__": true,
+    "socket": true,
+    "webpackIsomorphicTools": true
+  }
+}
