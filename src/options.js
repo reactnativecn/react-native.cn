@@ -9,6 +9,7 @@ module.exports = Object.assign({
     meta: {
       charSet: 'utf-8',
       property: {
+        'keyword': 'react native,react native中文网,react native ios,react native android,react native教程',
         'og:site_name': 'React Native 中文网',
         'og:image': 'https://react-native.cn/assets/img/opengraph.png',
         'og:locale': 'zh_CN',

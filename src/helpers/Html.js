@@ -39,12 +39,16 @@ export default class Html extends Component {
         {/* outputs a <style/> tag with all bootstrap styles + App.scss + it could be CurrentPage.scss. */}
         {/* can smoothen the initial style flash (flicker) on page load in development mode. */}
         {/* ideally one could also include here the style for the current page (Home.scss, About.scss, etc) */}
-        { Object.keys(assets.styles).length === 0 ? <style dangerouslySetInnerHTML={{__html:  require('bootstrap/less/bootstrap.less')._style + require('../pages/Site.less')._style}}/> : null }
+        { Object.keys(assets.styles).length === 0 && (
+          <style dangerouslySetInnerHTML={{
+            __html: Object.keys(assets.assets).map(key=>assets.assets[key]).filter(v=>typeof(v) === 'object' && v._style).map(v=>v._style).join('\n'),
+          }}/>
+        )}
       </head>
       <body>
-      <div id="content" dangerouslySetInnerHTML={{__html: content}}/>
-      <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(state)};`}} charSet="UTF-8"/>
-      <script src={assets.javascript.main} charSet="UTF-8"/>
+        <div id="content" dangerouslySetInnerHTML={{__html: content}}/>
+        <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(state)};`}} charSet="UTF-8"/>
+        <script src={assets.javascript.main} charSet="UTF-8"/>
       </body>
       </html>
     );

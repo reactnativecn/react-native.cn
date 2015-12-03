@@ -35,13 +35,11 @@ delete babelLoaderQuery.env;
 
 const webpackRoot = 'http://' + options.webpackHost + ':' + options.webpackPort;
 
-const stylePrefix = __DEV__ ? 'style!' : '';
-
 function styleLoader(type) {
   if (__DEV__) {
-    return 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!'+type+'?outputStyle=expanded&sourceMap';
+    return 'style!css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!' + type + '?outputStyle=expanded&sourceMap';
   }
-  return ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!'+type+'?outputStyle=expanded&sourceMap=true&sourceMapContents=true');
+  return ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!' + type + '?outputStyle=expanded&sourceMap=true&sourceMapContents=true');
 }
 
 module.exports = {
@@ -92,6 +90,9 @@ module.exports = {
       __SERVER__: false,
       __DEV__: !!__DEV__,
       __DEVTOOLS__: !!options.showDevTool,
+      __OPTIONS__: {
+        "production": !__DEV__
+      },
       'process.env': {
         // Useful to reduce the size of client-side libraries, e.g. react
         NODE_ENV: __DEV__ ? JSON.stringify('development') : JSON.stringify('production'),

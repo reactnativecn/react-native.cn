@@ -3,8 +3,10 @@
  */
 
 import React from 'react';
-
 import styles from './Site.less';
+import DocumentMeta from 'react-document-meta';
+import config from '../options';
+import MyNavBar from '../components/MyNavBar';
 
 export default class Site extends React.Component
 {
@@ -16,12 +18,14 @@ export default class Site extends React.Component
   }
   render() {
     return (<div>
+      <DocumentMeta {...config.app}/>
+      <MyNavBar />
       {this.props.children}
-      <footer className={styles.wrap}>
-        <div className={styles.container}>
-          <div className={styles.right}>
+      <footer className="wrap">
+        <div className="container">
+          <div className="right">
             <p>© 2015 React Native中文网.</p>
-            <p className={styles.gray}>浙ICP备15023664号-3</p>
+            <p className="gray">浙ICP备15023664号-3</p>
           </div>
         </div>
       </footer>

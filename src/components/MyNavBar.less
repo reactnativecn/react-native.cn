@@ -1,0 +1,41 @@
+
+.navbar.nav-main {
+  *zoom: 1;
+  background: #3B3738;
+  color: #fafafa;
+  position: fixed;
+  top: 0;
+  min-height: 50px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  z-index: 100;
+  border: 0;
+
+  a.navbar-brand {
+    line-height: 50px;
+    padding: 0;
+    font-size: 20px;
+    color: white;
+    > img {
+      display: inline-block;
+      width: 34px;
+      margin-right: 8px;
+      margin-left: 1px;
+    }
+  }
+
+  .navbar-nav > li {
+    &.active a{
+      color: #fff;
+      background: #333;
+      border-bottom: 3px solid #05A5D1;
+    }
+    > a {
+      color: #ddd;
+    }
+  }
+}
+
+.navbar-placeholder {
+  height: 50px;
+}
