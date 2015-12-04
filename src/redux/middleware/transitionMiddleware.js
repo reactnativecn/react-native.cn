@@ -3,7 +3,7 @@
  */
 import {ROUTER_DID_CHANGE} from 'redux-router/lib/constants';
 import getDataDependencies from '../../helpers/getDataDependencies';
-
+import {getRedirectFromRoutes} from '../../helpers/getStatusFromRoutes';
 import {startFetchData, fetchDataOver, fetchDataFailed} from '../modules/fetchData';
 
 const locationsAreEqual = (locA, locB) => locA && locB && (locA.pathname === locB.pathname) && (locA.search === locB.search);
@@ -13,7 +13,15 @@ export default ({getState, dispatch}) => next => action => {
     if (getState().router && locationsAreEqual(action.payload.location, getState().router.location)) {
       return next(action);
     }
-    const {components, location, params} = action.payload;
+    const {components, location, params, routes} = action.payload;
+
+    if (__CLIENT__) {
+      const redirect = getRedirectFromRoutes(routes, params);
+      if (redirect) {
+        window.location = redirect;
+        return;
+      }
+    }
 
     const promise = Promise.resolve()
       .then(()=>Promise.all(getDataDependencies(components, getState, dispatch, location, params)))

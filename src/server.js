@@ -20,7 +20,7 @@ import {Provider} from 'react-redux';
 
 import qs from 'query-string';
 import getRoutes from './routes';
-import getStatusFromRoutes from './helpers/getStatusFromRoutes';
+import {getStatusFromRoutes, getRedirectFromRoutes} from './helpers/getStatusFromRoutes';
 
 const app = new Express();
 const server = new http.Server(app);
@@ -54,6 +54,11 @@ app.use((req, res) => {
   }
 
   function sendRendered(routerState) {
+    const redirect = getRedirectFromRoutes(routerState.routes, routerState.params);
+    if (redirect){
+      res.redirect(redirect);
+      return;
+    }
     const component = (
       <Provider store={store} key="provider">
         <ReduxRouter/>
@@ -83,15 +88,16 @@ app.use((req, res) => {
       if (routerState.location.search && !routerState.location.query) {
         routerState.location.query = qs.parse(routerState.location.search);
       }
+      const state = store.getState();
+      state.fetchData && state.fetchData.then(()=>{
+        sendRendered(store.getState().router);
+      }).catch(err=>{
+        console.error(err.stack);
+        res.status(500);
+        hydrateOnClient();
+      })
     }
   }));
-  store.getState().fetchData.then(()=>{
-    sendRendered(store.getState().router);
-  }).catch(err=>{
-    console.error(err.stack);
-    res.status(500);
-    hydrateOnClient();
-  })
 });
 
 if (options.port) {
