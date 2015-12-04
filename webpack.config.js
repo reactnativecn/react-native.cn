@@ -102,6 +102,9 @@ module.exports = {
       },
     }),
     webpackIsomorphicToolsPlugin.development(__DEV__),
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
   ].concat(__DEV__ ? [
     // hot reload
     new webpack.HotModuleReplacementPlugin(),
