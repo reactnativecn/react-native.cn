@@ -16,7 +16,7 @@ const linksInternal = [
   // {section: 'blogs', href: '/blog/', text: '博客'},
   // {section: 'releases', href: 'https://github.com/facebook/react-native/releases', text: '版本'},
   // {section: 'showcase', href: 'https://facebook.github.io/react-native/showcase.html', text: '案例'},
-  {section: 'docs', href: '/docs/getting-started.html', text: '文档', hash: '#content'},
+  {section: 'docs', href: '/docs/', text: '文档'},
   {section: 'bbs', href: 'http://bbs.react-native.cn/', text: '讨论', hot: true, newTab: false},
   {section: 'about', href: '/about.html', text: '关于', hash: '#content'},
 ];
