@@ -19,7 +19,7 @@ export default ({getState, dispatch}) => next => action => {
       const redirect = getRedirectFromRoutes(routes, params);
       if (redirect) {
         window.location = redirect;
-        return;
+        return action;
       }
     }
 

@@ -6,9 +6,7 @@ import {FETCH_DATA_STARTED} from './fetchData.js';
 
 const CONTENT_LOADED = 'react-native.cn/content/loaded';
 
-const initialState = {
-  loaded: false,
-};
+const initialState = null;
 
 export default function reducer(state = initialState, action = {}) {
   if (action.type === FETCH_DATA_STARTED) {

@@ -6,9 +6,11 @@ import { routerStateReducer } from 'redux-router';
 
 import fetchDataReducer from './modules/fetchData';
 import contentReducer from './modules/content';
+import docIndexReducer from './modules/docIndex.js';
 
 export default combineReducers({
   router: routerStateReducer,
   fetchData: fetchDataReducer,
   content: contentReducer,
+  docIndex: docIndexReducer,
 });
