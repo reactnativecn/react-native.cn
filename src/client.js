@@ -29,29 +29,39 @@ const component = (
   <ReduxRouter routes={getRoutes(store)} />
 );
 
-ReactDOM.render(
-  <Provider store={store} key="provider">
-    {component}
-  </Provider>,
-  dest
-);
+function render() {
+  if (__DEVTOOLS__ && !window.devToolsExtension) {
+    ReactDOM.render(
+      <Provider store={store} key="provider">
+        <div>
+          {component}
+          <DevTools />
+        </div>
+      </Provider>,
+      dest
+    );
+  } else {
+    ReactDOM.render(
+      <Provider store={store} key="provider">
+        {component}
+      </Provider>,
+      dest
+    );
+  }
+}
 
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
 
-  if ((!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum'])) {
+  if (!dest || (dest.firstChild && (!dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']))) {
     console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
   }
 }
 
-if (__DEVTOOLS__ && !window.devToolsExtension) {
-  ReactDOM.render(
-    <Provider store={store} key="provider">
-      <div>
-        {component}
-        <DevTools />
-      </div>
-    </Provider>,
-    dest
-  );
+const state = store.getState();
+console.log(state);
+if (state.fetchData) {
+  state.fetchData.then(()=>render());
+} else {
+  render();
 }

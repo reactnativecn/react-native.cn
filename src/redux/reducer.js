@@ -8,5 +8,5 @@ import fetchData from './modules/fetchData';
 
 export default combineReducers({
   router: routerStateReducer,
-  fetchData: fetchData
+  fetchData: fetchData,
 });
