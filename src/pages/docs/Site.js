@@ -24,6 +24,10 @@ class Site extends React.Component {
     docIndex: React.PropTypes.object,
   };
   static fetchData(getState, dispatch) {
+    const state = getState();
+    if (state.docIndex) {
+      return Promise.resolve();
+    }
     return fetchStaticJson('/docs/indexes.json')
       .then(json=>dispatch(indexLoaded(json)));
   }

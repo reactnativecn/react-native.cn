@@ -12,6 +12,7 @@ import Index from './pages/Index';
 import Page from './pages/Page';
 
 import DocRoot from './pages/docs/Site';
+import DocPage from './pages/docs/Page';
 
 import bbsRedirect from './bbsRedirect.json';
 
@@ -29,7 +30,7 @@ export default () => {
       </Route>
       <Route path="docs" component={DocRoot}>
         <IndexRoute onEnter={(nextState, replaceState)=>{replaceState(null, '/docs/getting-started.html');}} />
-        <Route path=":docid" component={Page} />
+        <Route path=":docid" component={DocPage} />
       </Route>
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404} />
