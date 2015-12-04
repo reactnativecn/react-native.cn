@@ -4,7 +4,7 @@
 import {ROUTER_DID_CHANGE} from 'redux-router/lib/constants';
 import getDataDependencies from '../../helpers/getDataDependencies';
 
-import {startFetchData, fetchDataOver} from '../modules/fetchData';
+import {startFetchData, fetchDataOver, fetchDataFailed} from '../modules/fetchData';
 
 const locationsAreEqual = (locA, locB) => locA && locB && (locA.pathname === locB.pathname) && (locA.search === locB.search);
 
@@ -21,7 +21,9 @@ export default ({getState, dispatch}) => next => action => {
         next(action);
         return Promise.all(getDataDependencies(components, getState, dispatch, location, params, true));
       })
-      .then(()=>dispatch(fetchDataOver()));
+      .then(()=>dispatch(fetchDataOver()), err=>{
+        dispatch(fetchDataFailed(err)); throw err;
+      });
     dispatch(startFetchData(promise));
 
     return promise;

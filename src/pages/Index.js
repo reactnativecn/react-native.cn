@@ -6,13 +6,19 @@ import React from 'react';
 import Marked from '../components/Marked';
 import Container from '../components/Container';
 import './Index.less';
+import {fetchStaticContent} from '../helpers/fetchStatic';
+import {connect} from 'react-redux';
 
-export default class Index extends React.Component {
-  static contextTypes = {
+class Index extends React.Component {
+  static propTypes = {
+    content: React.PropTypes.string,
     location: React.PropTypes.object,
+  };
+  static fetchDataDeferred(getState, dispatch) {
+    return fetchStaticContent('/index.md', getState, dispatch);
   }
   render() {
-    let hash = this.context.location.hash;
+    let hash = this.props.location.hash;
     hash = hash && hash.substr(1);
 
     return (
@@ -31,7 +37,7 @@ export default class Index extends React.Component {
           <Container>
             <a className="anchor" name="content"></a>
             <Marked uri={"/static/"} scrollTo={hash} createHashLink>
-              {}
+              {this.props.content}
             </Marked>
           </Container>
         </section>
@@ -39,3 +45,4 @@ export default class Index extends React.Component {
     );
   }
 }
+export default connect(state=>({content: state.content}))(Index);

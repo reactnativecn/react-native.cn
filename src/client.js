@@ -59,8 +59,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const state = store.getState();
-console.log(state);
-if (state.fetchData) {
+if (state.fetchData && !state.fetchData.err) {
   state.fetchData.then(()=>render());
 } else {
   render();

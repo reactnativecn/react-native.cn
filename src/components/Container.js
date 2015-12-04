@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import classnames from 'classnames';
-import styles from './Container.less';
+import  './Container.less';
 
 export default class Container extends React.Component {
   static propTypes = {
@@ -15,9 +15,9 @@ export default class Container extends React.Component {
   }
   render() {
     const {children, type, ...props} = this.props;
-    const classNames = {[styles.container]: true};
+    const classNames = {"container": true};
     if (type) {
-      classNames[styles['container-' + type]] = true;
+      classNames['container-' + type] = true;
     }
     return (
       <div className={classnames(classNames)} {...props}>

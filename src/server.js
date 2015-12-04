@@ -2,6 +2,8 @@
  * Created by Yun on 2015-11-28.
  */
 
+import 'isomorphic-fetch';
+
 import Express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
@@ -26,11 +28,11 @@ const server = new http.Server(app);
 import getDataDependencies from './helpers/getDataDependencies';
 
 if (__DEV__) {
-  app.use('/static/', Express.static(path.join(__dirname, '..', 'static')));
+  app.use('/static/', Express.static(path.join(__dirname, '../../react-native-docs-cn')));
 }
 if (__OPTIONS__.serveAssets) {
   app.use('/scripts/', Express.static(path.join(__dirname, '..', 'build-release')));
-  app.use('/static/', Express.static(path.join(__dirname, '..', 'static')));
+  app.use('/static/', Express.static(path.join(__dirname, '../../react-native-docs-cn')));
 }
 
 app.use((req, res) => {
@@ -85,7 +87,11 @@ app.use((req, res) => {
   }));
   store.getState().fetchData.then(()=>{
     sendRendered(store.getState().router);
-  });
+  }).catch(err=>{
+    console.error(err.stack);
+    res.status(500);
+    hydrateOnClient();
+  })
 });
 
 if (options.port) {
