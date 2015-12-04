@@ -81,12 +81,11 @@ app.use((req, res) => {
       if (routerState.location.search && !routerState.location.query) {
         routerState.location.query = qs.parse(routerState.location.search);
       }
-      Promise.all(getDataDependencies(routerState.components, store.getState, store.dispatch, routerState.location, routerState.params))
-        .then(()=>{
-          sendRendered(routerState);
-        });
     }
   }));
+  store.getState().fetchData.then(()=>{
+    sendRendered(store.getState().router);
+  });
 });
 
 if (options.port) {

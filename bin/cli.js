@@ -10,6 +10,7 @@ require('babel-register')({
     'transform-strict-mode',
     'transform-class-properties',
     'transform-es2015-parameters',
+    'syntax-decorators',
   ],
 });
 

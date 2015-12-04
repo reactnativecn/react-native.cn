@@ -8,11 +8,7 @@ import reducer from './reducer';
 import DevTools from '../components/DevTools/DevTools';
 
 export default function createStore(reduxReactRouter, getRoutes, createHistory, data) {
-  const middleware = [];
-
-  if (__CLIENT__) {
-    middleware.push(transitionMiddleware);
-  }
+  const middleware = [transitionMiddleware];
 
   let finalCreateStore;
   if (__DEV__ && __CLIENT__) {

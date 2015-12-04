@@ -37,9 +37,11 @@ const webpackRoot = 'http://' + options.webpackHost + ':' + options.webpackPort;
 
 function styleLoader(type) {
   if (__DEV__) {
-    return 'style!css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!' + type + '?outputStyle=expanded&sourceMap';
+    return 'style!css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version' +
+      (type ? ('!' + type + '?outputStyle=expanded&sourceMap') : '' );
   }
-  return ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!' + type + '?outputStyle=expanded&sourceMap=true&sourceMapContents=true');
+  return ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version' +
+    (type ? ('!' + type + '?outputStyle=expanded&sourceMap=true&sourceMapContents=true') : ''));
 }
 
 module.exports = {
@@ -55,7 +57,7 @@ module.exports = {
   },
   output: {
     path: assetsPath,
-    filename: __DEV__ ? '[name]-[hash].js': '[name]-[chunkhash].js',
+    filename: __DEV__ ? '[name]-[hash].js' : '[name]-[chunkhash].js',
     chunkFilename: '[name]-[chunkhash].js',
     publicPath: __DEV__ ? webpackRoot + '/build-debug/' : '/scripts/',
   },
@@ -68,6 +70,7 @@ module.exports = {
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.less$/, loader: styleLoader('less') },
       { test: /\.scss$/, loader: styleLoader('sass') },
+      { test: /\.css$/, loader: styleLoader() },
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
       { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
@@ -91,7 +94,7 @@ module.exports = {
       __DEV__: !!__DEV__,
       __DEVTOOLS__: !!options.showDevTool,
       __OPTIONS__: {
-        "production": !__DEV__
+        'production': !__DEV__,
       },
       'process.env': {
         // Useful to reduce the size of client-side libraries, e.g. react

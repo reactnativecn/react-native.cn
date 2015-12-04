@@ -2,7 +2,8 @@
   "plugins": [
     "transform-class-properties",
     "transform-object-rest-spread",
-    "transform-strict-mode"
+    "transform-strict-mode",
+    "syntax-decorators"
   ],
   "presets": [
     "es2015",

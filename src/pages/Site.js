@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import styles from './Site.less';
+import './Site.less';
 import DocumentMeta from 'react-document-meta';
 import config from '../options';
 import MyNavBar from '../components/MyNavBar';

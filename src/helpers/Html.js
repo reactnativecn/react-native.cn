@@ -19,8 +19,10 @@ export default class Html extends Component {
 
     const {router, ...state} = store.getState();
 
-    const {components, ...other} = router;
-    state.router = other;
+    if (router) {
+      const {components, ...other} = router;
+      state.router = router && other;
+    }
 
     return (
       <html lang="en-us">

@@ -4,27 +4,25 @@
 import {ROUTER_DID_CHANGE} from 'redux-router/lib/constants';
 import getDataDependencies from '../../helpers/getDataDependencies';
 
-const locationsAreEqual = (locA, locB) => (locA.pathname === locB.pathname) && (locA.search === locB.search);
+import {startFetchData, fetchDataOver} from '../modules/fetchData';
+
+const locationsAreEqual = (locA, locB) => locA && locB && (locA.pathname === locB.pathname) && (locA.search === locB.search);
 
 export default ({getState, dispatch}) => next => action => {
   if (action.type === ROUTER_DID_CHANGE) {
     if (getState().router && locationsAreEqual(action.payload.location, getState().router.location)) {
       return next(action);
     }
-
     const {components, location, params} = action.payload;
-    const promise = new Promise((resolve, reject) => {
-      const doTransition = () => {
-        next(action);
-        Promise.all(getDataDependencies(components, getState, dispatch, location, params, true))
-          .then(resolve)
-          .catch(reject);
-      };
 
-      Promise.all(getDataDependencies(components, getState, dispatch, location, params))
-        .then(doTransition)
-        .catch(reject);
-    });
+    const promise = Promise.resolve()
+      .then(()=>Promise.all(getDataDependencies(components, getState, dispatch, location, params)))
+      .then(() => {
+        next(action);
+        return Promise.all(getDataDependencies(components, getState, dispatch, location, params, true));
+      })
+      .then(()=>dispatch(fetchDataOver()));
+    dispatch(startFetchData(promise));
 
     return promise;
   }

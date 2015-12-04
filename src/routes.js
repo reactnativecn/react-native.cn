@@ -3,10 +3,12 @@
  */
 
 import React from 'react';
-import {Route} from 'react-router';
+import {Route, IndexRoute} from 'react-router';
 
 import Site from './pages/Site.js';
 import NotFound from './pages/NotFound.js';
+
+import Index from './pages/Index.js';
 
 export default () => {
   /**
@@ -14,6 +16,7 @@ export default () => {
    */
   return (
     <Route path="/" component={Site}>
+      <IndexRoute component={Index} />
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404} />
     </Route>

@@ -3,110 +3,39 @@
  */
 
 import React from 'react';
+import Marked from '../components/Marked';
+import Container from '../components/Container';
+import './Index.less';
 
-import Container from '../../components/Container';
-import Marked from '../../components/Marked';
-
-import {LinkContainer} from 'react-router-bootstrap';
-import {Link} from 'react-router';
-import {Grid, Row, Col, Button, Table, SafeAnchor} from 'react-bootstrap';
-import DocumentTitle from 'react-document-title';
-
-import {ViewModel} from 'redux-viewmodel';
-
-import "./Index.less";
-import Subjects from "./Subjects.js";
-
-export default class Index extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      docsLink:[]
-    }
+export default class Index extends React.Component {
+  static contextTypes = {
+    location: React.PropTypes.object,
   }
-  static get contextTypes() {
-    return {
-      location: React.PropTypes.object
-    }
-  }
-  componentDidMount(){
-  }
-  componentWillMount(){
-    var jsonPath = global.__static_path + "docs/indexes.json";
-    var docsLink = [];
-    var subjects = [];
-    docsLink.push("");
-
-    fetch(jsonPath).then(resp=>resp.json()).then(data=> {
-      var i = 1;
-
-      data.contains.map(v=> {
-        v.id = i++;
-        var j = 1;
-        v.contains.map(u=> {
-          u.id = j++;
-          docsLink.push("/docs/" + u.mdlink + ".html");
-          subjects.push(u.subject);
-        })
-      });
-      return data.contains;
-
-    }).then(resp=> {
-      docsLink.push("");
-
-      this.setState({
-        docsLink: docsLink,
-        subjects: subjects
-      })
-    });
-  }
-  static get contextTypes(){
-    return {
-      location: React.PropTypes.object
-    }
-  }
-  render(){
-    var f = this.props.params.docid.match(/([0-9A-Za-z_-]+)\.html/)[1];
-
-    var pathname = global.__static_path + "docs/" + f + ".md";
-
-    var prevlink = "";
-    var nextlink = "";
-    var subjects = {
-      prev:"",
-      now:"",
-      next:""
-    }
-    for(var i=0;i<this.state.docsLink.length;i++)
-    {
-      if (("/docs/" + f + ".html") == this.state.docsLink[i]){
-        prevlink = this.state.docsLink[i-1];
-        nextlink = this.state.docsLink[i+1];
-        subjects.now = this.state.subjects[i-1];
-        subjects.prev = this.state.subjects[i-2];
-        subjects.next = this.state.subjects[i];
-        break;
-      }
-    }
-
-    var hash = this.context.location.hash;
+  render() {
+    let hash = this.context.location.hash;
     hash = hash && hash.substr(1);
 
     return (
-      <DocumentTitle title = {subjects.now}>
-        <div>
-          <h1>{subjects.now}</h1>
-          <Marked uri={pathname} scrollTo={hash} createHashLink></Marked>
-          <Row className = "prevNextRow">
-            {prevlink==""?"":<Col xs = {3} md = {3} mdOffset = {9} xsOffset = {7}>
-              <Link className = "nextprevLink" to={prevlink}>前一篇：{subjects.prev}</Link>
-            </Col>}
-            {nextlink==""?"":<Col xs = {3} md = {3} mdOffset = {9} xsOffset = {7}>
-              <Link className = "nextprevLink" to={nextlink}>后一篇：{subjects.next}</Link>
-            </Col>}
-          </Row>
+      <div>
+        <div className="hero">
+          <div className="wrap">
+            <div className="text"><strong>React Native 中文网</strong></div>
+            <div className="minitext">
+              <p>最专业的翻译，最及时的资讯，最火爆的社区</p>
+              <p>使用前沿的JAVASCRIPT为IOS、ANDROID编写跨平台原生APP</p>
+            </div>
+          </div>
         </div>
-      </DocumentTitle>
-    )
+
+        <section className="content">
+          <Container>
+            <a className="anchor" name="content"></a>
+            <Marked uri={"/static/"} scrollTo={hash} createHashLink>
+              {}
+            </Marked>
+          </Container>
+        </section>
+      </div>
+    );
   }
 }
