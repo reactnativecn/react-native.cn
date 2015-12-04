@@ -13,8 +13,16 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   if (action.type === ROUTER_DID_CHANGE) {
     // Clear content after router change.
-
-  } else {
-
+    return null;
+  } else if (action.type === CONTENT_LOADED) {
+    return action.state;
   }
+  return state;
+}
+
+export function contentLoaded(state) {
+  return {
+    type: 'CONTENT_LOADED',
+    state: state,
+  };
 }
