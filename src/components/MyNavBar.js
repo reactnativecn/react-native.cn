@@ -22,7 +22,7 @@ const linksInternal = [
 ];
 const linksExternal = [
   {section: 'github', href: 'https://github.com/facebook/react-native', text: 'GitHub'},
-  {section: 'react', href: 'http://facebook.github.io/react-native', text: 'in English'},
+  // {section: 'react', href: 'http://facebook.github.io/react-native', text: 'in English'},
 ];
 
 
