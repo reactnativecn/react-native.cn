@@ -4,10 +4,10 @@
 
 import {contentLoaded} from '../redux/modules/content';
 
-const rootUrl = __DEV__ ? 'http://localhost:3000/static' : 'http://react-native.cn/static';
+const rootUrl = __DEV__ ? 'http://localhost:3000' : 'http://react-native.cn';
 
 export function fetchStatic(url) {
-  return fetch(__SERVER__ ? (rootUrl + url) : url)
+  return fetch(__SERVER__ ? (rootUrl + '/static' + url) : ('/static' + url))
     .then(resp=>resp.text());
 }
 

@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import classnames from 'classnames';
-import  './Container.less';
+import './Container.less';
 
 export default class Container extends React.Component {
   static propTypes = {
@@ -12,10 +12,10 @@ export default class Container extends React.Component {
       React.PropTypes.node,
     ]),
     type: React.PropTypes.string,
-  }
+  };
   render() {
     const {children, type, ...props} = this.props;
-    const classNames = {"container": true};
+    const classNames = {'container': true};
     if (type) {
       classNames['container-' + type] = true;
     }

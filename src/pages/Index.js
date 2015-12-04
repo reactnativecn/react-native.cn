@@ -14,7 +14,7 @@ class Index extends React.Component {
     content: React.PropTypes.string,
     location: React.PropTypes.object,
   };
-  static fetchDataDeferred(getState, dispatch) {
+  static fetchData(getState, dispatch) {
     return fetchStaticContent('/index.md', getState, dispatch);
   }
   render() {

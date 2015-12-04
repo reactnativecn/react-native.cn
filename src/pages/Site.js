@@ -7,6 +7,7 @@ import './Site.less';
 import DocumentMeta from 'react-document-meta';
 import config from '../options';
 import MyNavBar from '../components/MyNavBar';
+import MyFooter from '../components/MyFooter.js';
 
 export default class Site extends React.Component
 {
@@ -21,14 +22,7 @@ export default class Site extends React.Component
       <DocumentMeta {...config.app}/>
       <MyNavBar />
       {this.props.children}
-      <footer className="wrap">
-        <div className="container">
-          <div className="right">
-            <p>© 2015 React Native中文网.</p>
-            <p className="gray">浙ICP备15023664号-3</p>
-          </div>
-        </div>
-      </footer>
+      <MyFooter />
     </div>);
   }
 }
