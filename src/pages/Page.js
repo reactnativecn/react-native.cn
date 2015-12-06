@@ -1,6 +1,3 @@
-/**
- * Created by Yun on 2015-10-24.
- */
 
 import React from 'react';
 import Marked from '../components/Marked';
@@ -9,30 +6,22 @@ import './Index.less';
 import {fetchStaticContent} from '../helpers/fetchStatic';
 import {connect} from 'react-redux';
 
-class Index extends React.Component {
+class Page extends React.Component {
   static propTypes = {
     content: React.PropTypes.string,
     location: React.PropTypes.object,
   };
-  static fetchData(getState, dispatch) {
-    return fetchStaticContent('/index.md', getState, dispatch);
+
+  static fetchData(getState, dispatch, location) {
+    return fetchStaticContent(location.pathname.replace(/\.html$/, '.md'), getState, dispatch);
   }
+
   render() {
     let hash = this.props.location.hash;
     hash = hash && hash.substr(1);
 
     return (
       <div>
-        <div className="hero">
-          <div className="wrap">
-            <div className="text"><strong>React Native 中文网</strong></div>
-            <div className="minitext">
-              <p>最专业的翻译，最及时的资讯，最火爆的社区</p>
-              <p>使用前沿的JAVASCRIPT为IOS、ANDROID编写跨平台原生APP</p>
-            </div>
-          </div>
-        </div>
-
         <section className="content">
           <Container>
             <a className="anchor" name="content"></a>
@@ -45,4 +34,4 @@ class Index extends React.Component {
     );
   }
 }
-export default connect(state=>({content: state.content}))(Index);
+export default connect(state=>({content: state.content}))(Page);

@@ -40,7 +40,7 @@ function styleLoader(type) {
     return 'style!css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version' +
       (type ? ('!' + type + '?outputStyle=expanded&sourceMap') : '' );
   }
-  return ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version' +
+  return ExtractTextPlugin.extract('style', 'css!autoprefixer?browsers=last 2 version' +
     (type ? ('!' + type + '?outputStyle=expanded&sourceMap=true&sourceMapContents=true') : ''));
 }
 
@@ -102,6 +102,9 @@ module.exports = {
       },
     }),
     webpackIsomorphicToolsPlugin.development(__DEV__),
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
   ].concat(__DEV__ ? [
     // hot reload
     new webpack.HotModuleReplacementPlugin(),

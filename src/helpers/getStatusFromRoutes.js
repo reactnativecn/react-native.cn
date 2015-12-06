@@ -7,6 +7,10 @@
  * @param matchedRoutes
  * @returns {Number|null}
  */
-export default (matchedRoutes) => {
+export function getStatusFromRoutes(matchedRoutes) {
   return matchedRoutes.reduce((prev, cur) => cur.status || prev, null);
-};
+}
+
+export function getRedirectFromRoutes(matchedRoutes, params) {
+  return matchedRoutes.reduce((prev, cur) => cur.redirect || (cur.getRedirect && cur.getRedirect(params)) || prev, null);
+}
