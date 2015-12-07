@@ -17,6 +17,7 @@ import {ReduxRouter} from 'redux-router';
 import createHistory from 'history/lib/createMemoryHistory';
 import {reduxReactRouter, match} from 'redux-router/server';
 import {Provider} from 'react-redux';
+import {exec} from 'child-process';
 
 import qs from 'query-string';
 import getRoutes from './routes';
@@ -30,7 +31,16 @@ import getDataDependencies from './helpers/getDataDependencies';
 if (__DEV__) {
   app.use('/static/', Express.static(path.join(__dirname, '../../react-native-docs-cn')));
 }
-if (__OPTIONS__.serveAssets) {
+if (__OPTIONS__.updateDocs) {
+  app.post('/update', (req, res) =>{
+    res.send("OK");
+    exec('git pull', {
+      cwd: __OPTIONS__.docsRoot
+    })
+  })
+}
+
+if (options.serveAssets) {
   app.use('/scripts/', Express.static(path.join(__dirname, '..', 'build-release')));
   app.use('/static/', Express.static(path.join(__dirname, '../../react-native-docs-cn')));
 }

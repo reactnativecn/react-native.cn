@@ -9,6 +9,12 @@
         },
         "launchServer":{
           "default": true
+        },
+        "updateDocs": {
+          "default": true
+        },
+        "docsRoot": {
+          "default": "/root/react-native-docs-cn"
         }
       }
     },

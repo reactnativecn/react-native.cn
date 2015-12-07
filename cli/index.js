@@ -2,7 +2,7 @@
  * Created by Yun on 2015-11-28.
  */
 
-const config = require('../cli/cli.json');
+const config = require('./cli.json');
 if (process.env.NODE_ENV === 'production') {
   config.defaultCommand = 'production';
 }
