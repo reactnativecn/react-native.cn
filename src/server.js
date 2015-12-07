@@ -17,7 +17,7 @@ import {ReduxRouter} from 'redux-router';
 import createHistory from 'history/lib/createMemoryHistory';
 import {reduxReactRouter, match} from 'redux-router/server';
 import {Provider} from 'react-redux';
-import {exec} from 'child-process';
+import {exec} from 'child_process';
 
 import qs from 'query-string';
 import getRoutes from './routes';
