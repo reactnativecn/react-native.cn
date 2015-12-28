@@ -39,7 +39,7 @@ class Page extends React.Component {
 
     return (
       <div>
-        <DocumentMeta title={title + ' - react native 中文网'}/>
+        <DocumentMeta title={title ? title + ' - react native 中文网' : 'react native 中文网'}/>
         <a className="anchor" name="content"></a>
         <h1>{title}</h1>
         <section className="content">
