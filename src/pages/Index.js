@@ -23,6 +23,7 @@ class Index extends React.Component {
 
     return (
       <div>
+        <DocumentMeta title="react native - react native 中文网"/>
         <div className="hero">
           <div className="wrap">
             <div className="text"><strong>React Native 中文网</strong></div>

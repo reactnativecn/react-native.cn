@@ -34,10 +34,13 @@ class Page extends React.Component {
     const prev = currIndex >= 0 && indexes[currIndex - 1];
     const next = currIndex >= 0 && indexes[currIndex + 1];
 
+    const title = this.props.content && curr && curr.subject;
+
     return (
       <div>
+        <DocumentMeta title={title + ' - react native 中文网'}/>
         <a className="anchor" name="content"></a>
-        <h1>{this.props.content && curr && curr.subject}</h1>
+        <h1>{title}</h1>
         <section className="content">
           <Marked uri={"/static/docs/"} scrollTo={hash} createHashLink>
             {this.props.content}
