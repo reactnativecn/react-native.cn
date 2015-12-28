@@ -5,6 +5,7 @@ import {fetchStaticContent} from '../../helpers/fetchStatic';
 import {connect} from 'react-redux';
 import {Row, Col} from 'react-bootstrap';
 import {Link} from 'react-router';
+import DocumentMeta from 'react-document-meta';
 
 class Page extends React.Component {
   static propTypes = {

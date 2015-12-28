@@ -8,6 +8,7 @@ import Container from '../components/Container';
 import './Index.less';
 import {fetchStaticContent} from '../helpers/fetchStatic';
 import {connect} from 'react-redux';
+import DocumentMeta from 'react-document-meta';
 
 class Index extends React.Component {
   static propTypes = {
