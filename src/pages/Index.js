@@ -9,6 +9,7 @@ import './Index.less';
 import {fetchStaticContent} from '../helpers/fetchStatic';
 import {connect} from 'react-redux';
 import DocumentMeta from 'react-document-meta';
+import config from '../options';
 
 class Index extends React.Component {
   static propTypes = {
@@ -24,7 +25,7 @@ class Index extends React.Component {
 
     return (
       <div>
-        <DocumentMeta title="react native - react native 中文网"/>
+        <DocumentMeta {...config.app} title="react native - react native 中文网"/>
         <div className="hero">
           <div className="wrap">
             <div className="text"><strong>React Native 中文网</strong></div>

@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {Row, Col} from 'react-bootstrap';
 import {Link} from 'react-router';
 import DocumentMeta from 'react-document-meta';
+import config from '../../options';
 
 class Page extends React.Component {
   static propTypes = {
@@ -39,7 +40,7 @@ class Page extends React.Component {
 
     return (
       <div>
-        <DocumentMeta title={title ? title + ' - react native 中文网' : 'react native 中文网'}/>
+        <DocumentMeta  {...config.app} title={title ? title + ' - react native 中文网' : 'react native 中文网'}/>
         <a className="anchor" name="content"></a>
         <h1>{title}</h1>
         <section className="content">
