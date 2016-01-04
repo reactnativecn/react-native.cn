@@ -25,7 +25,7 @@ export default class Html extends Component {
     }
 
     return (
-      <html lang="en-us">
+      <html>
       <head>
         {DocumentMeta.renderAsReact()}
 
@@ -35,7 +35,7 @@ export default class Html extends Component {
         {/* styles (will be present only in production with webpack extract text plugin) */}
         {Object.keys(assets.styles).map((style, key) =>
           <link href={assets.styles[style]} key={key} media="screen, projection"
-                rel="stylesheet" type="text/css" charSet="UTF-8"/>
+                rel="stylesheet" />
         )}
 
         {/* (will be present only in development mode) */}
@@ -44,14 +44,14 @@ export default class Html extends Component {
         {/* ideally one could also include here the style for the current page (Home.scss, About.scss, etc) */}
         { Object.keys(assets.styles).length === 0 && (
           <style dangerouslySetInnerHTML={{
-            __html: Object.keys(assets.assets).map(key=>assets.assets[key]).filter(v=>typeof(v) === 'object' && v._style).map(v=>v._style).join('\n'),
+            __html: Object.keys(assets.assets).map(key=>assets.assets[key]).filter(v=>typeof(v) === 'object' && v._style).map(v=>v._style).join('\n')
           }}/>
         )}
       </head>
       <body>
-        <div id="content" dangerouslySetInnerHTML={{__html: content}}/>
-        <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(state)};`}} charSet="UTF-8"/>
-        <script src={assets.javascript.main} charSet="UTF-8"/>
+        <div id="content" dangerouslySetInnerHTML={{__html: content}}></div>
+        <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(state)};`}}></script>
+        <script src={assets.javascript.main}></script>
       </body>
       </html>
     );
