@@ -28,7 +28,7 @@ class Index extends React.Component {
         <DocumentMeta {...config.app} title="react native - react native 中文网"/>
         <div className="hero">
           <div className="wrap">
-            <div className="text"><strong>React Native 中文网</strong></div>
+            <div className="text"><h1>React Native 中文网</h1></div>
             <div className="minitext">
               <p>最专业的翻译，最及时的资讯，最火爆的社区</p>
               <p>使用前沿的JAVASCRIPT为IOS、ANDROID编写跨平台原生APP</p>
