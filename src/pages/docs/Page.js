@@ -40,8 +40,8 @@ class Page extends React.Component {
 
     return (
       <div>
-        <DocumentMeta  {...config.app} title={title ? title + ' - react native 中文网' : 'react native 中文网'}/>
-        <a className="anchor" name="content"></a>
+        <DocumentMeta {...config.app} title={title ? title + ' - react native 中文网' : 'react native 中文网'}/>
+        <a className="anchor" name="content" />
         <h1>{title}</h1>
         <section className="content">
           <Marked uri={"/static/docs/"} scrollTo={hash} createHashLink>

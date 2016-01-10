@@ -4,7 +4,7 @@
 
 import {FETCH_DATA_STARTED} from './fetchData.js';
 
-const CONTENT_LOADED = 'react-native.cn/content/loaded';
+const CONTENT_LOADED = 'reactnative.cn/content/loaded';
 
 const initialState = null;
 

@@ -38,7 +38,7 @@ class Index extends React.Component {
 
         <section className="content">
           <Container>
-            <a className="anchor" name="content"></a>
+            <a className="anchor" name="content" />
             <Marked uri={"/static/"} scrollTo={hash} createHashLink>
               {this.props.content}
             </Marked>

@@ -2,9 +2,9 @@
  * Created by Yun on 2015-12-04.
  */
 
-export const FETCH_DATA_STARTED = 'react-native.cn/fetchData/started';
-const FETCH_DATA_ENDED = 'react-native.cn/fetchData/ended';
-const FETCH_DATA_FAILED = 'react-native.cn/fetchData/failed';
+export const FETCH_DATA_STARTED = 'reactnative.cn/fetchData/started';
+const FETCH_DATA_ENDED = 'reactnative.cn/fetchData/ended';
+const FETCH_DATA_FAILED = 'reactnative.cn/fetchData/failed';
 
 export default function reducer(state = null, action = {}) {
   if (action.type === FETCH_DATA_STARTED) {

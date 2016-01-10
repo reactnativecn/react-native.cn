@@ -82,10 +82,10 @@ export default class Marked extends React.Component {
     sanitize: React.PropTypes.bool,
     createHashLink: React.PropTypes.bool,
     scrollTo: React.PropTypes.string,
-  }
+  };
   static defaultProps = {
     options: {},
-  }
+  };
 
   constructor(props) {
     super(props);

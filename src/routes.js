@@ -9,6 +9,7 @@ import Site from './pages/Site';
 import NotFound from './pages/NotFound';
 
 import Index from './pages/Index';
+import Cases from './pages/Cases';
 import Page from './pages/Page';
 
 import DocRoot from './pages/docs/Site';
@@ -23,10 +24,11 @@ export default () => {
   return (
     <Route path="/" component={Site}>
       <IndexRoute component={Index} />
+      <Route path="cases.html" component={Cases}/>
       <Route path="about.html" component={Page}/>
       <Route path="bbs">
-        <IndexRoute redirect="http://bbs.react-native.cn/" />
-        <Route path="post/:postId" getRedirect={({postId})=>(bbsRedirect.redirects[postId] || 'http://bbs.react-native.cn/')} />
+        <IndexRoute redirect="http://bbs.reactnative.cn/" />
+        <Route path="post/:postId" getRedirect={({postId})=>(bbsRedirect.redirects[postId] || 'http://bbs.reactnative.cn/')} />
       </Route>
       <Route path="docs" component={DocRoot}>
         <IndexRoute onEnter={(nextState, replaceState)=>{replaceState(null, '/docs/getting-started.html');}} />

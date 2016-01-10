@@ -9,14 +9,13 @@ import config from '../options';
 import MyNavBar from '../components/MyNavBar';
 import MyFooter from '../components/MyFooter.js';
 
-export default class Site extends React.Component
-{
+export default class Site extends React.Component {
   static propTypes = {
     children: React.PropTypes.oneOfType([
       React.PropTypes.arrayOf(React.PropTypes.node),
       React.PropTypes.node,
     ]),
-  }
+  };
   render() {
     return (<div>
       <DocumentMeta {...config.app}/>

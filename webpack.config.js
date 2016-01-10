@@ -69,6 +69,7 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, loaders: ['babel?' + JSON.stringify(babelLoaderQuery)]},
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.less$/, loader: styleLoader('less') },
+      { test: /\.styl$/, loader: styleLoader('stylus') },
       { test: /\.scss$/, loader: styleLoader('sass') },
       { test: /\.css$/, loader: styleLoader() },
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },

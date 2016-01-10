@@ -2,7 +2,7 @@
  * Created by Yun on 2015-12-04.
  */
 
-const INDEX_LOADED = 'react-native.cn/docIndex/loaded';
+const INDEX_LOADED = 'reactnative.cn/docIndex/loaded';
 
 const initialState = null;
 
