@@ -3,8 +3,10 @@
  */
 
 import React from 'react';
-import {fetchStaticCases} from '../helpers/fetchStatic';
-import {connect} from 'react-redux';
+import QRCode from 'qrcode.react';
+import { fetchStaticCases } from '../helpers/fetchStatic';
+import { connect } from 'react-redux';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Container from '../components/Container';
 import DocumentMeta from 'react-document-meta';
 import config from '../options';
@@ -32,22 +34,30 @@ class Cases extends React.Component {
           </p>
           <div className="cases">
             {
-              cases.map( c =>
-                <div className="case">
+              cases.map( (c, i) =>
+                <div className="case" key={i}>
                   <img src={c.icon} title={c.name}/>
                   <h3>{c.name}</h3>
                   <p className="desc">{c.desc}</p>
                   <p>
                   {
                     c.ios ?
-                    <a href={c.ios} target="blank">iOS</a>
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip><QRCode value={c.ios} /></Tooltip>}>
+                      <a href={c.ios} target="blank">iOS</a>
+                    </OverlayTrigger>
                     :
                     <span>iOS</span>
                   }
                   <span> - </span>
                   {
                     c.android ?
-                    <a href={c.android} target="blank">Android</a>
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip><QRCode value={c.android} /></Tooltip>}>
+                      <a href={c.android} target="blank">Android</a>
+                    </OverlayTrigger>
                     :
                     <span>Android</span>
                   }

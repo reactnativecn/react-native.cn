@@ -63,6 +63,7 @@
     "less-loader": "^2.2.2",
     "marked": "^0.3.5",
     "multireducer": "^1.0.2",
+    "qrcode.react": "^0.5.2",
     "raw-loader": "^0.5.1",
     "react": "^0.14.3",
     "react-bootstrap": "^0.28.1",
