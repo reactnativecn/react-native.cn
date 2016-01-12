@@ -18,6 +18,7 @@ const linksInternal = [
   { section: 'cases', href: '/cases.html', text: '案例'},
   { section: 'docs', href: '/docs/', text: '文档' },
   { section: 'bbs', href: 'http://bbs.reactnative.cn/', text: '讨论', hot: true, newTab: false },
+  { section: 'gzfx', hot: true, onClick: () => window.location.href = 'http://reactnative.68xg.com', text: '广州分享会', newTab: true },
   { section: 'about', href: '/about.html', text: '关于', hash: '#content' },
 ];
 const linksExternal = [
@@ -28,19 +29,21 @@ const linksExternal = [
 
 export default class MyNavBar extends React.Component {
   createLink(v) {
-    const external = /^\w+\:/.test(v.href);
+    const external = /^\w+:/.test(v.href);
 
     const newTab = v.newTab !== null ? v.newTab : external;
 
+    const noop = () => {};
+
     return (external || newTab) ? (
-      <NavItem key={v.section} href={v.href} target={newTab ? '_blank' : '_self'}>
+      <NavItem key={v.section} onClick={v.onClick || noop} href={v.href} target={newTab ? '_blank' : '_self'}>
         {v.text}
-        {v.hot && <div className = "hotSign"><img src = {require('../images/hot.png')}/></div>}
+        {v.hot && <div className="hotSign"><img src={require('../images/hot.png')}/></div>}
       </NavItem>
     ) : (
-      <LinkContainer to={v.href} key={v.section} hash={v.hash}><NavItem>
+      <LinkContainer to={v.href} onClick={v.onClick || noop} key={v.section} hash={v.hash}><NavItem>
         {v.text}
-        {v.hot && <div className = "hotSign"><img src = {require('../images/hot.png')}/></div>}
+        {v.hot && <div className="hotSign"><img src={require('../images/hot.png')}/></div>}
       </NavItem></LinkContainer>
     );
   }
