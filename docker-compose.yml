@@ -1,0 +1,8 @@
+test:
+  image: 'registry.aliyuncs.com/reactnativecn/react-native.cn:master'
+  labels:
+    aliyun.routing.port_3000: 'http://test.reactnative.cn/'
+    aliyun.scale: '1'
+  restart: always
+
+
