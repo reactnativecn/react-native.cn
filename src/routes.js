@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound';
 
 import Index from './pages/Index';
 import Cases from './pages/Cases';
+import FriendLink from './pages/FriendLink';
 import Page from './pages/Page';
 
 import DocRoot from './pages/docs/Site';
@@ -26,6 +27,7 @@ export default () => {
       <IndexRoute component={Index} />
       <Route path="cases.html" component={Cases}/>
       <Route path="about.html" component={Page}/>
+      <Route path="friendlink.html" component={FriendLink}/>
       <Route path="bbs">
         <IndexRoute redirect="http://bbs.reactnative.cn/" />
         <Route path="post/:postId" getRedirect={({postId})=>(bbsRedirect.redirects[postId] || 'http://bbs.reactnative.cn/')} />

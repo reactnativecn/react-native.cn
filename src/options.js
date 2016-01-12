@@ -23,5 +23,5 @@ module.exports = Object.assign({
     },
   },
   host: 'http://reactnative.cn',
-  bbs: 'http://bbs.reactnative.cn'
+  bbs: 'http://bbs.reactnative.cn',
 }, __OPTIONS__);
