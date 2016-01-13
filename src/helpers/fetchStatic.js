@@ -6,6 +6,7 @@
 
 import {contentLoaded} from '../redux/modules/content';
 import {casesLoaded} from '../redux/modules/cases';
+import {linksLoaded} from '../redux/modules/links';
 
 const rootUrl = __DEV__ ? 'http://localhost:3000' : 'http://reactnative.cn';
 
@@ -35,4 +36,12 @@ export function fetchStaticCases(url, getState, dispatch) {
     return Promise.resolve();
   }
   return fetchStaticJson(url).then(data=>dispatch(casesLoaded(data)));
+}
+
+export function fetchStaticLinks(url, getState, dispatch) {
+  const state = getState();
+  if (state.links) {
+    return Promise.resolve();
+  }
+  return fetchStaticJson(url).then(data=>dispatch(linksLoaded(data)));
 }

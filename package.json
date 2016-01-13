@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack-dev": "node bin/cli webpack-dev --showDevTool",
+    "webpack-dev": "node bin/cli webpack-dev",
     "development": "node bin/cli development",
     "build-client(dev)": "node bin/cli build-client $ node bin/cli productionWithAssets"
   },
@@ -44,6 +44,7 @@
     "babel-preset-react": "^6.1.18",
     "babel-register": "^6.2.0",
     "bootstrap": "^3.3.6",
+    "classnames": "^2.2.3",
     "clean-webpack-plugin": "^0.1.4",
     "cli-arguments": "^0.2.0",
     "css-loader": "^0.23.0",
@@ -64,6 +65,7 @@
     "marked": "^0.3.5",
     "multireducer": "^1.0.2",
     "qrcode.react": "^0.5.2",
+    "query-string": "^3.0.0",
     "raw-loader": "^0.5.1",
     "react": "^0.14.3",
     "react-bootstrap": "^0.28.1",

@@ -2,8 +2,6 @@
  * Created by sunnylqm on 2016-01-10.
  */
 
-import {FETCH_DATA_STARTED} from './fetchData.js';
-
 const CASES_LOADED = 'reactnative.cn/cases/loaded';
 
 const initialState = null;

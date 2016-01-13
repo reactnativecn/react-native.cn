@@ -40,8 +40,11 @@ if (__OPTIONS__.updateDocs) {
   })
 }
 
-if (options.serveAssets) {
+if (!__DEV__) {
   app.use('/scripts/', Express.static(path.join(__dirname, '..', 'build-release')));
+}
+
+if (options.serveAssets) {
   app.use('/static/', Express.static(path.join(__dirname, '../../react-native-docs-cn')));
 }
 
