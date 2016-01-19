@@ -35,7 +35,7 @@ class Site extends React.Component {
     return (
       <section className="content">
         <Container>
-          <a className="anchor" name="content"></a>
+          <a className="anchor" name="content" />
           <Row className = "apiContainer">
             <Col className = "mdContaint" xs = {12} sm = {8} md = {9} mdPush={3} smPush={4}>
               <div className = "mainText">
