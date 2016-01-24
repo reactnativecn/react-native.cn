@@ -38,14 +38,15 @@ class Page extends React.Component {
 
     const title = this.props.content && curr && curr.subject;
 
-    const currLink = `https://github.com/reactnativecn/react-native-docs-cn/blob/master/docs/${curr.mdlink}.md`;
+    const currLink = this.props.content && curr && 
+                      `https://github.com/reactnativecn/react-native-docs-cn/blob/master/docs/${curr.mdlink}.md`;
 
     return (
       <div>
         <DocumentMeta {...config.app} title={title ? title + ' - react native 中文网' : 'react native 中文网'}/>
         <a className="anchor" name="content" />
         <h1>{title}</h1>
-        <a className="edit-github" href={currLink}>在GitHub上修改这篇文档</a>
+        { currLink && <a className="edit-github" href={currLink}>在GitHub上修改这篇文档</a> }
         <section className="content">
           <Marked uri={"/static/docs/"} scrollTo={hash} createHashLink>
             {this.props.content}
