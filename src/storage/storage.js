@@ -7,7 +7,7 @@ import sync from './sync';
 const storage = new Storage({
   size: 1000,
   sync,
-  defaultExpires: 1000 * 3600 * 2,
+  defaultExpires: __SERVER__ ? 1000 * 60 : 1000 * 60 * 10,
   enableCache: true,
 });
 
