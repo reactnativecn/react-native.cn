@@ -4,12 +4,14 @@
 
 import React from 'react';
 import QRCode from 'qrcode.react';
-import { fetchStaticCases } from '../helpers/fetchStatic';
+//import { fetchStaticCases } from '../helpers/fetchStatic';
 import { connect } from 'react-redux';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Container from '../components/Container';
 import DocumentMeta from 'react-document-meta';
 import config from '../options';
+import storage from '../storage/storage';
+import {casesLoaded} from '../redux/modules/cases';
 import './Cases.styl';
 
 class Cases extends React.Component {
@@ -18,7 +20,13 @@ class Cases extends React.Component {
   };
 
   static fetchData(getState, dispatch) {
-    return fetchStaticCases('/cases/cases.json', getState, dispatch);
+    //return fetchStaticCases('/cases/cases.json', getState, dispatch);
+    if (getState().content) {
+      return Promise.resolve();
+    }
+    return storage.load({
+      key: 'cases',
+    }).then( data => dispatch(casesLoaded(data)));
   }
 
   render() {

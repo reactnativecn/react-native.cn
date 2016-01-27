@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound';
 
 import Index from './pages/Index';
 import Cases from './pages/Cases';
+import Blog from './pages/blog';
 import FriendLink from './pages/FriendLink';
 import Page from './pages/Page';
 
@@ -26,6 +27,7 @@ export default () => {
     <Route path="/" component={Site}>
       <IndexRoute component={Index} />
       <Route path="cases.html" component={Cases}/>
+      <Route path="blog.html" component={Blog}/>
       <Route path="about.html" component={Page}/>
       <Route path="friendlink.html" component={FriendLink}/>
       <Route path="bbs">

@@ -1,12 +1,14 @@
 
 import React from 'react';
 import Marked from '../../components/Marked';
-import {fetchStaticContent} from '../../helpers/fetchStatic';
+//import {fetchStaticContent} from '../../helpers/fetchStatic';
 import {connect} from 'react-redux';
 import {Row, Col} from 'react-bootstrap';
 import {Link} from 'react-router';
 import DocumentMeta from 'react-document-meta';
 import config from '../../options';
+import storage from '../../storage/storage';
+import {contentLoaded} from '../../redux/modules/content';
 
 class Page extends React.Component {
   static propTypes = {
@@ -17,7 +19,15 @@ class Page extends React.Component {
   };
 
   static fetchData(getState, dispatch, location) {
-    return fetchStaticContent(location.pathname.replace(/\.html$/, '.md'), getState, dispatch);
+    //return fetchStaticContent(location.pathname.replace(/\.html$/, '.md'), getState, dispatch);
+
+    if (getState().content) {
+      return Promise.resolve();
+    }
+    return storage.load({
+      key: 'docContent',
+      id: location.pathname.replace(/\.html$/, ''),
+    }).then( data => dispatch(contentLoaded(data)));
   }
 
   render() {
@@ -38,7 +48,7 @@ class Page extends React.Component {
 
     const title = this.props.content && curr && curr.subject;
 
-    const currLink = this.props.content && curr && 
+    const currLink = this.props.content && curr &&
                       `https://github.com/reactnativecn/react-native-docs-cn/blob/master/docs/${curr.mdlink}.md`;
 
     return (

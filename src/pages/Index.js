@@ -6,10 +6,12 @@ import React from 'react';
 import Marked from '../components/Marked';
 import Container from '../components/Container';
 import './Index.less';
-import {fetchStaticContent} from '../helpers/fetchStatic';
+//import {fetchStaticContent} from '../helpers/fetchStatic';
 import {connect} from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../options';
+import storage from '../storage/storage';
+import {contentLoaded} from '../redux/modules/content';
 
 class Index extends React.Component {
   static propTypes = {
@@ -17,7 +19,13 @@ class Index extends React.Component {
     location: React.PropTypes.object,
   };
   static fetchData(getState, dispatch) {
-    return fetchStaticContent('/index.md', getState, dispatch);
+    if (getState().content) {
+      return Promise.resolve();
+    }
+    return storage.load({
+      key: 'pageContent',
+      id: 'index'
+    }).then( data => dispatch(contentLoaded(data)));
   }
   render() {
     let hash = this.props.location.hash;
