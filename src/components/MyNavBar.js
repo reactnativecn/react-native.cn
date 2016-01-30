@@ -18,7 +18,7 @@ const linksInternal = [
   { section: 'cases', href: '/cases.html', text: '案例'},
   { section: 'docs', href: '/docs/', text: '文档' },
   { section: 'bbs', href: 'http://bbs.reactnative.cn/', text: '讨论', hot: true, newTab: false },
-  { section: 'gzfx', hot: true, onClick: () => window.location.href = 'http://68xg.com/reactnative/activity/', text: '广州分享会', newTab: true },
+  { section: 'gzfx', hot: true, href: 'http://bbs.reactnative.cn/topic/321/', text: '广州分享会', newTab: true },
   { section: 'about', href: '/about.html', text: '关于', hash: '#content' },
 ];
 const linksExternal = [
