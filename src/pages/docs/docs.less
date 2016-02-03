@@ -100,3 +100,45 @@
 .compactProps{
     margin-left: 20px;
 }
+
+
+.color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    position: relative;
+    top: 5px;
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+}
+
+.deprecated {
+    margin-bottom: 24px;
+}
+
+.deprecatedTitle {
+    margin-bottom: 6px;
+    line-height: 18px;
+    font-weight: bold;
+    color: #ffa500;
+}
+
+//.deprecatedIcon {
+//    width: 18px;
+//    height: 18px;
+//    margin-right: 8px;
+//    vertical-align: top;
+//}
+//
+//.deprecatedMessage {
+//    margin-left: 26px;
+//}

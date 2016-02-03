@@ -61,9 +61,6 @@ module.exports = {
     chunkFilename: '[name]-[chunkhash].js',
     publicPath: __DEV__ ? webpackRoot + '/build-debug/' : '/scripts/',
   },
-  externals: {
-    "react-native": {}     // This line is required for react-native-storage
-  },
   module: {
     preLoaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'eslint'},
