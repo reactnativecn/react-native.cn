@@ -12,8 +12,9 @@ import {Row, Col} from 'react-bootstrap';
 import './docs.less';
 import Subjects from './Subjects.js';
 import {connect} from 'react-redux';
+import storage from '../../storage/storage';
 import {indexLoaded} from '../../redux/modules/docIndex.js';
-import {fetchStaticJson} from '../../helpers/fetchStatic';
+//import {fetchStaticJson} from '../../helpers/fetchStatic';
 
 class Site extends React.Component {
   static propTypes={
@@ -28,8 +29,11 @@ class Site extends React.Component {
     if (state.docIndex) {
       return Promise.resolve();
     }
-    return fetchStaticJson('/docs/indexes.json')
-      .then(json=>dispatch(indexLoaded(json)));
+    //return fetchStaticJson('/docs/indexes.json')
+    //  .then(json=>dispatch(indexLoaded(json)));
+    return storage.load({
+      key: 'docIndex'
+    }).then( data => dispatch(indexLoaded(data)));
   }
   render() {
     return (

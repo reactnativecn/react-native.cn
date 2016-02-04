@@ -67,6 +67,7 @@ module.exports = {
     ],
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loaders: ['babel?' + JSON.stringify(babelLoaderQuery)]},
+      //{ test: /\.js$/, exclude: /node_modules/, loader: 'babel', query: babelLoaderQuery },
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.less$/, loader: styleLoader('less') },
       { test: /\.styl$/, loader: styleLoader('stylus') },

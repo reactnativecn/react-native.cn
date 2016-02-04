@@ -3,8 +3,10 @@ import React from 'react';
 import Marked from '../components/Marked';
 import Container from '../components/Container';
 import './Index.less';
-import {fetchStaticContent} from '../helpers/fetchStatic';
+//import {fetchStaticContent} from '../helpers/fetchStatic';
 import {connect} from 'react-redux';
+import storage from '../storage/storage';
+import {contentLoaded} from '../redux/modules/content';
 
 class Page extends React.Component {
   static propTypes = {
@@ -13,7 +15,14 @@ class Page extends React.Component {
   };
 
   static fetchData(getState, dispatch, location) {
-    return fetchStaticContent(location.pathname.replace(/\.html$/, '.md'), getState, dispatch);
+    //return fetchStaticContent(location.pathname.replace(/\.html$/, '.md'), getState, dispatch);
+    if (getState().content) {
+      return Promise.resolve();
+    }
+    return storage.load({
+      key: 'pageContent',
+      id: location.pathname.replace(/\.html$/, ''),
+    }).then( data => dispatch(contentLoaded(data)));
   }
 
   render() {
@@ -24,7 +33,7 @@ class Page extends React.Component {
       <div>
         <section className="content">
           <Container>
-            <a className="anchor" name="content"></a>
+            <a className="anchor" name="content" />
             <Marked uri={"/static/"} scrollTo={hash} createHashLink>
               {this.props.content}
             </Marked>

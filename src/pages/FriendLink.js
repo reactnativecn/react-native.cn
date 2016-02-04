@@ -3,11 +3,13 @@
  */
 
 import React from 'react';
-import { fetchStaticLinks } from '../helpers/fetchStatic';
+//import { fetchStaticLinks } from '../helpers/fetchStatic';
 import { connect } from 'react-redux';
 import Container from '../components/Container';
 import DocumentMeta from 'react-document-meta';
 import config from '../options';
+import {linksLoaded} from '../redux/modules/links';
+import storage from '../storage/storage';
 import './FriendLink.styl';
 
 class FriendLink extends React.Component {
@@ -16,7 +18,13 @@ class FriendLink extends React.Component {
   };
 
   static fetchData(getState, dispatch) {
-    return fetchStaticLinks('/links/links.json', getState, dispatch);
+    //return fetchStaticLinks('/links/links.json', getState, dispatch);
+    if (getState().links) {
+      return Promise.resolve();
+    }
+    return storage.load({
+      key: 'links',
+    }).then( data => dispatch(linksLoaded(data)));
   }
   render() {
     const { links } = this.props;

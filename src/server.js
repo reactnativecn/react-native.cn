@@ -12,6 +12,7 @@ import path from 'path';
 import createStore from './redux/create';
 import Html from './helpers/Html';
 import http from 'http';
+import httpProxy from 'http-proxy';
 
 import {ReduxRouter} from 'redux-router';
 import createHistory from 'history/lib/createMemoryHistory';
@@ -28,6 +29,15 @@ const server = new http.Server(app);
 
 import getDataDependencies from './helpers/getDataDependencies';
 
+if (__DEV__) {
+  const proxy = httpProxy.createProxyServer();
+  app.use('/bbs', (req, res) => {
+    proxy.web(req, res, {
+      changeOrigin: true,
+      target: 'http://bbs.reactnative.cn'
+    });
+  });
+}
 if (__DEV__) {
   app.use('/static/', Express.static(path.join(__dirname, '../../react-native-docs-cn')));
 }
