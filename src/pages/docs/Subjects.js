@@ -24,7 +24,9 @@ export default class Subjects extends React.Component {
             <ul className="apiSub">
               {v.contains.map(u=>(
                 <li key={u.mdlink}>
-                  <Link activeClassName="active" to={'/docs/' + u.mdlink + '.html'} hash="#content">{u.subject}</Link>
+                  <Link
+                    activeClassName="active"
+                    to={{ pathname: `/docs/${this.props.params.version}/${u.mdlink}.html`, hash: "#content" }}>{u.subject}</Link>
                 </li>
               ))}
             </ul>

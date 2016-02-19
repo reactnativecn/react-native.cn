@@ -16,10 +16,17 @@ export default class Site extends React.Component {
       React.PropTypes.node,
     ]),
   };
+  //static childContextTypes = {
+  //  location: React.PropTypes.object
+  //};
+  //getChildContext() {
+  //  return { location: this.props.location }
+  //}
+
   render() {
     return (<div>
       <DocumentMeta {...config.app}/>
-      <MyNavBar />
+      <MyNavBar params={this.props.params} />
       {this.props.children}
       <MyFooter />
     </div>);

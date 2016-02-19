@@ -69,6 +69,8 @@ export default {
   },
   docContent(params) {
     const { id, resolve, reject } = params;
+    //const { version, docid } = JSON.parse(id);
+    //fetchStaticText(`/docs/${version}/${docid}.md`)
     fetchStaticText(`/${id}.md`)
       .then(data => {
         storage.save({
@@ -83,11 +85,12 @@ export default {
     });
   },
   docIndex(params) {
-    const { resolve, reject } = params;
-    fetchStaticJson('/docs/indexes.json')
+    const { id, resolve, reject } = params;
+    fetchStaticJson(`/docs/${id}/indexes.json`)
       .then(data => {
         storage.save({
           key: 'docIndex',
+          id,
           rawData: data,
         });
         resolve && resolve(data);
