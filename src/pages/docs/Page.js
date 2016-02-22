@@ -21,22 +21,25 @@ class Page extends React.Component {
   static fetchData(getState, dispatch, location) {
     //return fetchStaticContent(location.pathname.replace(/\.html$/, '.md'), getState, dispatch);
 
-    if (getState().content) {
-      return Promise.resolve();
-    }
+    //if (getState().content) {
+    //  return Promise.resolve();
+    //}
+    //const { version, docid } = location.params;
     return storage.load({
       key: 'docContent',
       id: location.pathname.replace(/\.html$/, ''),
+      //id: JSON.stringify({ version, docid }),
     }).then( data => dispatch(contentLoaded(data)));
   }
 
   render() {
-    let hash = this.props.location.hash;
+    const { location, params, docIndex, content } = this.props;
+    let hash = location.hash;
     hash = hash && hash.substr(1);
 
-    const curId = this.props.params.docid.replace(/\.html$/, '');
+    const curId = params.docid.replace(/\.html$/, '');
 
-    let indexes = this.props.docIndex.contains;
+    let indexes = docIndex.contains;
     indexes = indexes.reduce((prev, cur)=>prev.concat(cur.contains), []);
 
     const curr = indexes.filter(v=>v.mdlink === curId)[0];
@@ -46,27 +49,27 @@ class Page extends React.Component {
     const prev = currIndex >= 0 && indexes[currIndex - 1];
     const next = currIndex >= 0 && indexes[currIndex + 1];
 
-    const title = this.props.content && curr && curr.subject;
+    const title = content && curr && curr.subject;
 
-    const currLink = this.props.content && curr &&
-                      `https://github.com/reactnativecn/react-native-docs-cn/blob/master/docs/${curr.mdlink}.md`;
+    const gitLink = content && curr &&
+                      `https://github.com/reactnativecn/react-native-docs-cn/blob/master/docs/${params.version}/${curr.mdlink}.md`;
 
     return (
       <div>
         <DocumentMeta {...config.app} title={title ? title + ' - react native 中文网' : 'react native 中文网'}/>
         <a className="anchor" name="content" />
         <h1>{title}</h1>
-        { currLink && <a className="edit-github" href={currLink}>在GitHub上修改这篇文档</a> }
+        { gitLink && <a className="edit-github" href={gitLink}>在GitHub上修改这篇文档</a> }
         <section className="content">
           <Marked uri={"/static/docs/"} scrollTo={hash} createHashLink>
-            {this.props.content}
+            {content}
           </Marked>
           <Row className="prevNextRow">
             {prev && <Col xs = {3} md = {3} mdOffset = {9} xsOffset = {7}>
-              <Link className="nextprevLink" to={'/docs/' + prev.mdlink + '.html'}>前一篇：{prev.subject}</Link>
+              <Link className="nextprevLink" to={{pathname: `/docs/${params.version}/${prev.mdlink}.html`}}>前一篇：{prev.subject}</Link>
             </Col>}
             {next && <Col xs = {3} md = {3} mdOffset = {9} xsOffset = {7}>
-              <Link className="nextprevLink" to={'/docs/' + next.mdlink + '.html'}>后一篇：{next.subject}</Link>
+              <Link className="nextprevLink" to={{pathname: `/docs/${params.version}/${next.mdlink}.html`}}>后一篇：{next.subject}</Link>
             </Col>}
           </Row>
         </section>

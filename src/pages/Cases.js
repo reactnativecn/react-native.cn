@@ -52,7 +52,7 @@ class Cases extends React.Component {
                     c.ios ?
                     <OverlayTrigger
                       placement="top"
-                      overlay={<Tooltip><QRCode value={c.ios} /></Tooltip>}>
+                      overlay={<Tooltip id={c.name}><QRCode value={c.ios} /></Tooltip>}>
                       <a href={c.ios} target="blank">iOS</a>
                     </OverlayTrigger>
                     :
@@ -63,7 +63,7 @@ class Cases extends React.Component {
                     c.android ?
                     <OverlayTrigger
                       placement="top"
-                      overlay={<Tooltip><QRCode value={c.android} /></Tooltip>}>
+                      overlay={<Tooltip id={c.name}><QRCode value={c.android} /></Tooltip>}>
                       <a href={c.android} target="blank">Android</a>
                     </OverlayTrigger>
                     :

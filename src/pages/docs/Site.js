@@ -24,15 +24,16 @@ class Site extends React.Component {
     ]),
     docIndex: React.PropTypes.object,
   };
-  static fetchData(getState, dispatch) {
-    const state = getState();
-    if (state.docIndex) {
-      return Promise.resolve();
-    }
+  static fetchData(getState, dispatch, location) {
+    //const state = getState();
+    //if (state.docIndex) {
+    //  return Promise.resolve();
+    //}
     //return fetchStaticJson('/docs/indexes.json')
     //  .then(json=>dispatch(indexLoaded(json)));
     return storage.load({
-      key: 'docIndex'
+      key: 'docIndex',
+      id: location.pathname.split('/')[2],
     }).then( data => dispatch(indexLoaded(data)));
   }
   render() {
@@ -48,7 +49,7 @@ class Site extends React.Component {
             </Col>
 
             <Col xs = {12} sm = {4} md = {3} mdPull = {9} smPull={8}>
-              <Subjects docIndex={this.props.docIndex}/>
+              <Subjects params={this.props.params} docIndex={this.props.docIndex}/>
             </Col>
 
           </Row>

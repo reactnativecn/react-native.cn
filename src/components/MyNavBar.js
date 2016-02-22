@@ -8,15 +8,18 @@ import './MyNavBar.less';
 import { Link } from 'react-router';
 import {LinkContainer} from 'react-router-bootstrap';
 import {
-  Navbar, NavbarBrand, Nav, NavItem,
+  Navbar, Nav, NavItem, NavDropdown, MenuItem,
 } from 'react-bootstrap';
+
+import versions from '../pages/docs/versions.json';
 
 const linksInternal = [
   // {section: 'offdocs', href: 'https://facebook.github.io/react-native/docs/getting-started.html', text: '官方文档(英文)'},
+  // {section: 'blogs', href: '/blog/', text: '博客'},
   // {section: 'releases', href: 'https://github.com/facebook/react-native/releases', text: '版本'},
-  { section: 'cases', href: '/cases.html', text: '案例'},
   { section: 'docs', href: '/docs/', text: '文档' },
-  // { section: 'blog', href: '/blog.html', text: '博客' },
+  { section: 'cases', href: '/cases.html', text: '案例'},
+  //{ section: 'blog', href: '/blog.html', text: '博客' },
   { section: 'bbs', href: 'http://bbs.reactnative.cn/', text: '讨论', hot: true, newTab: false },
   { section: 'gzfx', hot: true, href: 'http://bbs.reactnative.cn/topic/321/', text: '广州分享会', newTab: true },
   { section: 'about', href: '/about.html', text: '关于', hash: '#content' },
@@ -28,6 +31,9 @@ const linksExternal = [
 
 
 export default class MyNavBar extends React.Component {
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired,
+  };
   createLink(v) {
     const external = /^\w+:/.test(v.href);
 
@@ -41,23 +47,40 @@ export default class MyNavBar extends React.Component {
         {v.hot && <div className="hotSign"><img src={require('../images/hot.png')}/></div>}
       </NavItem>
     ) : (
-      <LinkContainer to={v.href} onClick={v.onClick || noop} key={v.section} hash={v.hash}><NavItem>
+      <LinkContainer to={v.href} onClick={v.onClick || noop} key={v.section} hash={v.hash}>
+        <NavItem>
         {v.text}
         {v.hot && <div className="hotSign"><img src={require('../images/hot.png')}/></div>}
-      </NavItem></LinkContainer>
+        </NavItem>
+      </LinkContainer>
     );
   }
+
   render() {
     return (
       <div>
         <Navbar className="nav-main">
           <Navbar.Header>
-            <NavbarBrand>
-              <Link to="/">
+            <Navbar.Brand>
+              <Link
+                className="nav-home"
+                to={{pathname: '/'}}
+              >
                 <img src={require('../images/header_logo.png')} />
                 React Native
               </Link>
-            </NavbarBrand>
+            </Navbar.Brand>
+            <NavDropdown className="nav-version" title={ this.props.params.version || versions.current } id="nav_version">
+              {
+                versions.list.map( (v, i) =>
+                  <MenuItem key={i} onSelect={ () => {
+                    this.context.router.push(`/docs/${v.version}`);
+                  }}>
+                    {v.text}
+                  </MenuItem>
+                )
+              }
+            </NavDropdown>
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse eventKey={0}>
