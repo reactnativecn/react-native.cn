@@ -61,7 +61,7 @@ class Page extends React.Component {
         <h1>{title}</h1>
         { gitLink && <a className="edit-github" href={gitLink}>在GitHub上修改这篇文档</a> }
         <section className="content">
-          <Marked uri={"/static/docs/"} scrollTo={hash} createHashLink>
+          <Marked uri={`/static/docs/${params.version}/`} scrollTo={hash} createHashLink>
             {content}
           </Marked>
           <Row className="prevNextRow">
