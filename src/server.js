@@ -64,6 +64,8 @@ app.use((req, res) => {
     // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh();
   }
+  const referer = req.get('referer');
+  referer && (global.referer = referer);
 
   const store = createStore(reduxReactRouter, getRoutes, createHistory );
 
@@ -112,7 +114,6 @@ app.use((req, res) => {
         routerState.location.query = qs.parse(routerState.location.search);
       }
 
-      const referer = req.get('referer');
       referer && res.cookie('referer', referer, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24) });
 
       const state = store.getState();

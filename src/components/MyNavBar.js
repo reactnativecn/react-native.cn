@@ -25,7 +25,12 @@ const linksInternal = [
   { section: 'gzfx', hot: true, href: 'http://bbs.reactnative.cn/topic/321/', text: '广州分享会', newTab: true },
   { section: 'pushy', hot: true, href: '', text: '热更新内测', newTab: true, isHidden: () => {
     const regex = /baidu.com/;
-    return !(regex.test(document.cookie) || regex.test(document.referrer));
+    if(__SERVER__) {
+      return regex.test(global.referer);
+    }
+    else {
+      return !(regex.test(document.cookie) || regex.test(document.referrer));
+    }
   }},
   { section: 'about', href: '/about.html', text: '关于', hash: '#content' },
 ];
