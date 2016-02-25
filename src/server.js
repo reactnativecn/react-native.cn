@@ -42,7 +42,7 @@ if (__DEV__) {
   app.use('/static/', Express.static(path.join(__dirname, '../../react-native-docs-cn')));
 }
 if (__OPTIONS__.updateDocs) {
-  app.post('/update', (req, res) =>{
+  app.post('/update', (req, res) => {
     res.send("OK");
     exec('git pull', {
       cwd: __OPTIONS__.docsRoot
@@ -65,7 +65,7 @@ app.use((req, res) => {
     webpackIsomorphicTools.refresh();
   }
 
-  const store = createStore(reduxReactRouter, getRoutes, createHistory);
+  const store = createStore(reduxReactRouter, getRoutes, createHistory );
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
@@ -111,10 +111,14 @@ app.use((req, res) => {
       if (routerState.location.search && !routerState.location.query) {
         routerState.location.query = qs.parse(routerState.location.search);
       }
+
+      const referer = req.get('referer');
+      referer && res.cookie('referer', referer, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24) });
+
       const state = store.getState();
-      state.fetchData && state.fetchData.then(()=>{
+      state.fetchData && state.fetchData.then(() => {
         sendRendered(store.getState().router);
-      }).catch(err=>{
+      }).catch(err => {
         console.error(err.stack);
         res.status(500);
         hydrateOnClient();

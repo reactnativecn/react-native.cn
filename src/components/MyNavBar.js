@@ -6,6 +6,7 @@ import React from 'react';
 import './MyNavBar.less';
 
 import { Link } from 'react-router';
+import {connect} from 'react-redux';
 import {LinkContainer} from 'react-router-bootstrap';
 import {
   Navbar, Nav, NavItem, NavDropdown, MenuItem,
@@ -21,7 +22,11 @@ const linksInternal = [
   { section: 'cases', href: '/cases.html', text: '案例'},
   //{ section: 'blog', href: '/blog.html', text: '博客' },
   { section: 'bbs', href: 'http://bbs.reactnative.cn/', text: '讨论', hot: true, newTab: false },
-  { section: 'gzfx', hot: true, onClick: () => window.location.href = 'http://68xg.com/reactnative/activity/', text: '广州分享会', newTab: true },
+  { section: 'gzfx', hot: true, href: 'http://bbs.reactnative.cn/topic/321/', text: '广州分享会', newTab: true },
+  { section: 'pushy', hot: true, href: '', text: '热更新内测', newTab: true, isHidden: () => {
+    const regex = /baidu.com/;
+    return !(regex.test(document.cookie) || regex.test(document.referrer));
+  }},
   { section: 'about', href: '/about.html', text: '关于', hash: '#content' },
 ];
 const linksExternal = [
@@ -30,11 +35,16 @@ const linksExternal = [
 ];
 
 
-export default class MyNavBar extends React.Component {
+class MyNavBar extends React.Component {
   static contextTypes = {
     router: React.PropTypes.object.isRequired,
   };
   createLink(v) {
+
+    if(v.isHidden && v.isHidden()) {
+      return null;
+    }
+
     const external = /^\w+:/.test(v.href);
 
     const newTab = v.newTab !== null ? v.newTab : external;
@@ -101,3 +111,6 @@ export default class MyNavBar extends React.Component {
     );
   }
 }
+export default connect(state=>({
+  referer: state.referer,
+}))(MyNavBar);
