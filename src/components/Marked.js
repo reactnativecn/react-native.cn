@@ -2,7 +2,7 @@ import React from 'react';
 import marked from 'marked';
 import URI from 'urijs';
 import './Marked.less';
-import {highlight, highlightAuto, getLanguage} from 'highlight.js';
+import { highlight, highlightAuto, getLanguage } from 'highlight.js';
 import 'highlight.js/styles/vs.css';
 let anim;
 
@@ -16,9 +16,9 @@ class Renderer extends marked.Renderer {
     if (!(/^\w+?\:\/\/'/.test(href))) {
       _href = new URI(href).absoluteTo(this.options.baseUrl).toString();
     }
-    let out = '<img class="img-responsive" src="' + _href + '" alt="' + text + '"';
+    let out = `<img class="img-responsive" src="${_href}" alt="${text}"`;
     if (title) {
-      out += ' title="' + title + '"';
+      out += ` title="${title}"`;
     }
     out += this.options.xhtml ? '/>' : '>';
     return out;
@@ -34,44 +34,33 @@ class Renderer extends marked.Renderer {
       } catch (e) {
         return '';
       }
-      if (prot.indexOf('javascript' + ':') === 0 || prot.indexOf('vbscript:') === 0) {
+      // eslint-disable-next-line no-script-url
+      if (prot.indexOf('javascript:') === 0 || prot.indexOf('vbscript:') === 0) {
         return '';
       }
     }
     const external = /^\w+\:/.test(href);
-    let out = '<a href="' + href + '"';
+    let out = `<a href="${href}"`;
     if (title) {
-      out += ' title="' + title + '"';
+      out += ` title="${title}"`;
     }
     if (external) {
       out += ' target="_blank"';
     }
-    out += '>' + text + '</a>';
+    out += `>${text}</a>`;
     return out;
   }
 
   heading(text, level, raw) {
     if (!this.options.createHashLink) {
-      return '<h'
-        + level
-        + '>'
-        + text
-        + '</h'
-        + level
-        + '>\n';
+      return `<h${level}>${text}</h${level}>\n`;
     }
-    const name = raw.toLowerCase().replace(/[\u4E00-\u9FA5]/g, v=> {
-      return encodeURIComponent(v);
-    }).replace(/[^\w%]+/g, '-');
-    return '<h'
-      + level
-      + '>'
-      + '<a class="anchor" name="' + name + '"></a>'
-      + text
-      + '<a class="hash-link" href="#' + name + '">#</a>'
-      + '</h'
-      + level
-      + '>\n';
+    const name = raw.toLowerCase()
+                    .replace(/[\u4E00-\u9FA5]/g, v => encodeURIComponent(v))
+                    .replace(/[^\w%]+/g, '-');
+    return `<h${level}><a class="anchor" name="${name}"></a>
+    ${text}<a class="hash-link" href="#${name}">#</a>
+    </h${level}>\n`;
   }
 }
 export default class Marked extends React.Component {
@@ -86,11 +75,6 @@ export default class Marked extends React.Component {
   static defaultProps = {
     options: {},
   };
-
-  constructor(props) {
-    super(props);
-  }
-
   rawMarkup() {
     const content = this.props.children;
     if (!content) {
@@ -99,7 +83,8 @@ export default class Marked extends React.Component {
     const options = this.props.options;
     return marked(content, {
       gfm: true,
-      highlight: (code, lang)=>(lang && getLanguage(lang)) ? highlight(lang, code, true).value : highlightAuto(code).value,
+      highlight: (code, lang) =>
+        (lang && getLanguage(lang)) ? highlight(lang, code, true).value : highlightAuto(code).value,
       renderer: new Renderer(),
       sanitize: this.props.sanitize,
       baseUrl: this.props.uri || global.__static_path,
@@ -114,7 +99,8 @@ export default class Marked extends React.Component {
       let target = document.getElementsByName(hash);
       target = target && target[0];
       if (target) {
-        const scrollTop = target.getBoundingClientRect().top - document.body.getBoundingClientRect().top;
+        const scrollTop =
+          target.getBoundingClientRect().top - document.body.getBoundingClientRect().top;
         anim(document.body, scrollTop, 300);
         anim(document.documentElement, scrollTop, 300);
       }
@@ -123,12 +109,16 @@ export default class Marked extends React.Component {
 
   render() {
     return (
-      <div className="markdown" dangerouslySetInnerHTML={{__html: this.rawMarkup()}} ref={
-                __CLIENT__ && (div=>{
-                  this.div = div;
-                  this.doScroll();
-                })
-              }>
+      <div
+        className="markdown"
+        dangerouslySetInnerHTML={{ __html: this.rawMarkup() }}
+        ref={
+          __CLIENT__ && (div => {
+            this.div = div;
+            this.doScroll();
+          })
+        }
+      >
       </div>
     );
   }

@@ -6,15 +6,15 @@ import storage from './storage';
 const rootUrl = __DEV__ ? 'http://localhost:3000' : 'http://reactnative.cn';
 
 export function fetchStatic(url) {
-  return fetch(__SERVER__ ? (rootUrl + '/static' + url) : ('/static' + url));
+  return fetch(__SERVER__ ? `${rootUrl}/static${url}` : `/static${url}`);
 }
 
 export function fetchStaticText(url) {
-  return fetchStatic(url).then(resp=>resp.text());
+  return fetchStatic(url).then(resp => resp.text());
 }
 
 export function fetchStaticJson(url) {
-  return fetchStatic(url).then(resp=>resp.json());
+  return fetchStatic(url).then(resp => resp.json());
 }
 
 const bbsRootUrl = __SERVER__ ? 'http://bbs.reactnative.cn' : '/bbs';
@@ -29,15 +29,15 @@ export default {
           key: 'blogList',
           rawData: data,
         });
-        resolve && resolve(data);
+        if (resolve) resolve(data);
       }).catch(error => {
         console.warn(error);
-        reject && reject();
-    });
+        if (reject) reject();
+      });
   },
   blog(params) {
     const { id, resolve, reject } = params;
-    const [ tid, title ] = id.split('/');
+    const [tid, title] = id.split('/');
     fetch(`${bbsRootUrl}/api/topic/${tid}/${encodeURIComponent(title)}`)
       .then(response => response.json())
       .then(data => {
@@ -46,11 +46,11 @@ export default {
           id,
           rawData: data,
         });
-        resolve && resolve(data);
+        if (resolve) resolve(data);
       }).catch(error => {
         console.warn(error);
-        reject && reject();
-    });
+        if (reject) reject();
+      });
   },
   pageContent(params) {
     const { id, resolve, reject } = params;
@@ -61,16 +61,14 @@ export default {
           id,
           rawData: data,
         });
-        resolve && resolve(data);
+        if (resolve) resolve(data);
       }).catch(error => {
-      console.warn(error);
-      reject && reject();
-    });
+        console.warn(error);
+        if (reject) reject();
+      });
   },
   docContent(params) {
     const { id, resolve, reject } = params;
-    //const { version, docid } = JSON.parse(id);
-    //fetchStaticText(`/docs/${version}/${docid}.md`)
     fetchStaticText(`/${id}.md`)
       .then(data => {
         storage.save({
@@ -78,11 +76,11 @@ export default {
           id,
           rawData: data,
         });
-        resolve && resolve(data);
+        if (resolve) resolve(data);
       }).catch(error => {
-      console.warn(error);
-      reject && reject();
-    });
+        console.warn(error);
+        if (reject) reject();
+      });
   },
   docIndex(params) {
     const { id, resolve, reject } = params;
@@ -93,11 +91,11 @@ export default {
           id,
           rawData: data,
         });
-        resolve && resolve(data);
+        if (resolve) resolve(data);
       }).catch(error => {
-      console.warn(error);
-      reject && reject();
-    });
+        console.warn(error);
+        if (reject) reject();
+      });
   },
   cases(params) {
     const { resolve, reject } = params;
@@ -107,11 +105,11 @@ export default {
           key: 'cases',
           rawData: data,
         });
-        resolve && resolve(data);
+        if (resolve) resolve(data);
       }).catch(error => {
-      console.warn(error);
-      reject && reject();
-    });
+        console.warn(error);
+        if (reject) reject();
+      });
   },
   links(params) {
     const { resolve, reject } = params;
@@ -121,11 +119,10 @@ export default {
           key: 'links',
           rawData: data,
         });
-        resolve && resolve(data);
+        if (resolve) resolve(data);
       }).catch(error => {
-      console.warn(error);
-      reject && reject();
-    });
+        console.warn(error);
+        if (reject) reject();
+      });
   },
-
 };

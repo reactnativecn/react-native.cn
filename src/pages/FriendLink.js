@@ -3,12 +3,12 @@
  */
 
 import React from 'react';
-//import { fetchStaticLinks } from '../helpers/fetchStatic';
+// import { fetchStaticLinks } from '../helpers/fetchStatic';
 import { connect } from 'react-redux';
 import Container from '../components/Container';
 import DocumentMeta from 'react-document-meta';
 import config from '../options';
-import {linksLoaded} from '../redux/modules/links';
+import { linksLoaded } from '../redux/modules/links';
 import storage from '../storage/storage';
 import './FriendLink.styl';
 
@@ -18,13 +18,13 @@ class FriendLink extends React.Component {
   };
 
   static fetchData(getState, dispatch) {
-    //return fetchStaticLinks('/links/links.json', getState, dispatch);
+    //  return fetchStaticLinks('/links/links.json', getState, dispatch);
     if (getState().links) {
       return Promise.resolve();
     }
     return storage.load({
       key: 'links',
-    }).then( data => dispatch(linksLoaded(data)));
+    }).then(data => dispatch(linksLoaded(data)));
   }
   render() {
     const { links } = this.props;
@@ -38,7 +38,7 @@ class FriendLink extends React.Component {
           </p>
           <div className="links">
             {
-              links.map( (l, i) =>
+              links.map((l, i) =>
                 <a key={i} href={l.href}>
                   {l.text}
                 </a>
@@ -50,6 +50,6 @@ class FriendLink extends React.Component {
     );
   }
 }
-export default connect(state=>({
+export default connect(state => ({
   links: state.links,
 }))(FriendLink);

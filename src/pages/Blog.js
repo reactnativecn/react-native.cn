@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import Container from '../components/Container';
 import DocumentMeta from 'react-document-meta';
 import config from '../options';
-import {blogLoaded} from '../redux/modules/blog';
+import { blogLoaded } from '../redux/modules/blog';
 import storage from '../storage/storage';
 import './Blog.styl';
 
@@ -22,9 +22,9 @@ class Blog extends React.Component {
     }
     return storage.load({
       key: 'blogList',
-    }).then( blogList =>
-        storage.getBatchData( blogList.topics.map( t => ({ key: 'blog', id: t.slug }) ) )
-    ).then( data => dispatch(blogLoaded(data)));
+    }).then(blogList =>
+      storage.getBatchData(blogList.topics.map(t => ({ key: 'blog', id: t.slug })))
+    ).then(data => dispatch(blogLoaded(data)));
   }
 
   render() {
@@ -37,10 +37,14 @@ class Blog extends React.Component {
             <h3>最近的博客文章</h3>
             <ul>
               {
-                blog.map( (t, i) =>
+                blog.map((t, i) =>
                   <li key={i}>
-                    <a target="_blank" href={`${config.bbs}/topic/${t.tid}`} className={t.pinned && 'pinned'}
-                    dangerouslySetInnerHTML={{__html: t.title}} />
+                    <a
+                      target="_blank"
+                      href={`${config.bbs}/topic/${t.tid}`}
+                      className={t.pinned && 'pinned'}
+                      dangerouslySetInnerHTML={{ __html: t.title }}
+                    />
                   </li>
                 )
               }
@@ -49,22 +53,34 @@ class Blog extends React.Component {
           </div>
           <div className="inner-content">
             {
-              blog.map( topic => {
+              blog.map(topic => {
                 const post = topic.posts[0];
                 return (
                   <div className="post-list-item">
                     <h1>
-                      <a target="_blank" href={`${config.bbs}/topic/${post.tid}`} dangerouslySetInnerHTML={{__html: topic.title}} />
+                      <a
+                        target="_blank"
+                        href={`${config.bbs}/topic/${post.tid}`}
+                        dangerouslySetInnerHTML={{ __html: topic.title }}
+                      />
                     </h1>
                     <p className="meta">
                       { post.relativeTime.split('T')[0] }
                       {' by '}
-                      <a href={`${config.bbs}/user/${post.user.username}`} target="_blank">{post.user.username}</a>
+                      <a
+                        target="_blank"
+                        href={`${config.bbs}/user/${post.user.username}`}
+                      >
+                        {post.user.username}
+                      </a>
                     </p>
                     <hr />
-                    <div className="post" dangerouslySetInnerHTML={{__html: post.content}} />
+                    <div
+                      className="post"
+                      dangerouslySetInnerHTML={{ __html: post.content }}
+                    />
                   </div>
-                )
+                );
               })
             }
             <div className="pagination">
@@ -76,6 +92,6 @@ class Blog extends React.Component {
     );
   }
 }
-export default connect(state=>({
+export default connect(state => ({
   blog: state.blog,
 }))(Blog);

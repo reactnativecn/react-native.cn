@@ -14,10 +14,11 @@ export default class Container extends React.Component {
     type: React.PropTypes.string,
   };
   render() {
-    const {children, type, ...props} = this.props;
-    const classNames = {'container': true};
+    // eslint-disable-next-line no-use-before-define
+    const { children, type, ...props } = this.props;
+    const classNames = { container: true };
     if (type) {
-      classNames['container-' + type] = true;
+      classNames[`container-${type}`] = true;
     }
     return (
       <div className={classnames(classNames)} {...props}>

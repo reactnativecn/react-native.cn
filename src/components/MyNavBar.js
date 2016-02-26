@@ -6,8 +6,8 @@ import React from 'react';
 import './MyNavBar.less';
 
 import { Link } from 'react-router';
-import {connect} from 'react-redux';
-import {LinkContainer} from 'react-router-bootstrap';
+import { connect } from 'react-redux';
+import { LinkContainer } from 'react-router-bootstrap';
 import {
   Navbar, Nav, NavItem, NavDropdown, MenuItem,
 } from 'react-bootstrap';
@@ -16,22 +16,19 @@ import versions from '../pages/docs/versions.json';
 
 const linksInternal = [
   // {section: 'offdocs', href: 'https://facebook.github.io/react-native/docs/getting-started.html', text: '官方文档(英文)'},
-  // {section: 'blogs', href: '/blog/', text: '博客'},
   // {section: 'releases', href: 'https://github.com/facebook/react-native/releases', text: '版本'},
   { section: 'docs', href: '/docs/', text: '文档' },
-  { section: 'cases', href: '/cases.html', text: '案例'},
-  //{ section: 'blog', href: '/blog.html', text: '博客' },
+  { section: 'cases', href: '/cases.html', text: '案例' },
+  // { section: 'blog', href: '/blog.html', text: '博客' },
   { section: 'bbs', href: 'http://bbs.reactnative.cn/', text: '讨论', hot: true, newTab: false },
   { section: 'gzfx', hot: true, href: 'http://bbs.reactnative.cn/topic/321/', text: '广州分享会', newTab: true },
   { section: 'pushy', hot: true, href: '', text: '热更新内测', newTab: true, isHidden: () => {
     const regex = /baidu.com/;
-    if(__SERVER__) {
+    if (__SERVER__) {
       return !regex.test(global.referer);
     }
-    else {
-      return !(regex.test(document.cookie) || regex.test(document.referrer));
-    }
-  }},
+    return !(regex.test(document.cookie) || regex.test(document.referrer));
+  } },
   { section: 'about', href: '/about.html', text: '关于', hash: '#content' },
 ];
 const linksExternal = [
@@ -41,12 +38,14 @@ const linksExternal = [
 
 
 class MyNavBar extends React.Component {
+  static propTypes = {
+    params: React.PropTypes.object,
+  };
   static contextTypes = {
     router: React.PropTypes.object.isRequired,
   };
   createLink(v) {
-
-    if(v.isHidden && v.isHidden()) {
+    if (v.isHidden && v.isHidden()) {
       return null;
     }
 
@@ -57,20 +56,26 @@ class MyNavBar extends React.Component {
     const noop = () => {};
 
     return (external || newTab) ? (
-      <NavItem key={v.section} onClick={v.onClick || noop} href={v.href} target={newTab ? '_blank' : '_self'}>
+      <NavItem
+        key={v.section}
+        onClick={v.onClick || noop}
+        href={v.href}
+        target={newTab ? '_blank' : '_self'}
+      >
         {v.text}
-        {v.hot && <div className="hotSign"><img src={require('../images/hot.png')}/></div>}
+        {v.hot && <div className="hotSign"><img src={require('../images/hot.png')} /></div>}
       </NavItem>
     ) : (
       <LinkContainer to={v.href} onClick={v.onClick || noop} key={v.section} hash={v.hash}>
         <NavItem>
         {v.text}
-        {v.hot && <div className="hotSign"><img src={require('../images/hot.png')}/></div>}
+        {v.hot && <div className="hotSign"><img src={require('../images/hot.png')} /></div>}
         </NavItem>
       </LinkContainer>
     );
   }
-
+  goToDoc = (version) =>
+    () => this.context.router.push(`/docs/${version}`);
   render() {
     return (
       <div>
@@ -79,18 +84,19 @@ class MyNavBar extends React.Component {
             <Navbar.Brand>
               <Link
                 className="nav-home"
-                to={{pathname: '/'}}
+                to={{ pathname: '/' }}
               >
                 <img src={require('../images/header_logo.png')} />
                 React Native
               </Link>
             </Navbar.Brand>
-            <NavDropdown className="nav-version" title={ this.props.params.version || versions.current } id="nav_version">
+            <NavDropdown
+              className="nav-version"
+              title={ this.props.params.version || versions.current } id="nav_version"
+            >
               {
-                versions.list.map( (v, i) =>
-                  <MenuItem key={i} onSelect={ () => {
-                    this.context.router.push(`/docs/${v.version}`);
-                  }}>
+                versions.list.map((v, i) =>
+                  <MenuItem key={i} onSelect={this.goToDoc(v.version)}>
                     {v.text}
                   </MenuItem>
                 )
@@ -101,12 +107,12 @@ class MyNavBar extends React.Component {
           <Navbar.Collapse eventKey={0}>
             <Nav>
               {
-                linksInternal.map(v=>this.createLink(v))
+                linksInternal.map(v => this.createLink(v))
               }
             </Nav>
             <Nav pullRight>
               {
-                linksExternal.map(v=>this.createLink(v))
+                linksExternal.map(v => this.createLink(v))
               }
             </Nav>
           </Navbar.Collapse>
@@ -116,6 +122,6 @@ class MyNavBar extends React.Component {
     );
   }
 }
-export default connect(state=>({
+export default connect(state => ({
   referer: state.referer,
 }))(MyNavBar);

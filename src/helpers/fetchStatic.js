@@ -4,9 +4,9 @@
  * 2016-01-10 add casesLoaded by sunnylqm
  */
 
-import {contentLoaded} from '../redux/modules/content';
-import {casesLoaded} from '../redux/modules/cases';
-import {linksLoaded} from '../redux/modules/links';
+import { contentLoaded } from '../redux/modules/content';
+import { casesLoaded } from '../redux/modules/cases';
+import { linksLoaded } from '../redux/modules/links';
 
 const rootUrl = __DEV__ ? 'http://localhost:3000' : 'http://reactnative.cn';
 

@@ -6,12 +6,12 @@ import React from 'react';
 import Marked from '../components/Marked';
 import Container from '../components/Container';
 import './Index.less';
-//import {fetchStaticContent} from '../helpers/fetchStatic';
-import {connect} from 'react-redux';
+// import { fetchStaticContent } from '../helpers/fetchStatic';
+import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../options';
 import storage from '../storage/storage';
-import {contentLoaded} from '../redux/modules/content';
+import { contentLoaded } from '../redux/modules/content';
 
 class Index extends React.Component {
   static propTypes = {
@@ -24,8 +24,8 @@ class Index extends React.Component {
     }
     return storage.load({
       key: 'pageContent',
-      id: 'index'
-    }).then( data => dispatch(contentLoaded(data)));
+      id: 'index',
+    }).then(data => dispatch(contentLoaded(data)));
   }
   render() {
     let hash = this.props.location.hash;
@@ -33,7 +33,7 @@ class Index extends React.Component {
 
     return (
       <div>
-        <DocumentMeta {...config.app} title="react native - react native 中文网"/>
+        <DocumentMeta {...config.app} title="react native - react native 中文网" />
         <div className="hero">
           <div className="wrap">
             <div className="text"><h1>React Native 中文网</h1></div>
@@ -56,4 +56,6 @@ class Index extends React.Component {
     );
   }
 }
-export default connect(state=>({content: state.content}))(Index);
+export default connect(state => ({
+  content: state.content,
+}))(Index);

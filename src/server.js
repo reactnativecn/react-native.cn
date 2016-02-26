@@ -14,15 +14,15 @@ import Html from './helpers/Html';
 import http from 'http';
 import httpProxy from 'http-proxy';
 
-import {ReduxRouter} from 'redux-router';
+import { ReduxRouter } from 'redux-router';
 import createHistory from 'history/lib/createMemoryHistory';
-import {reduxReactRouter, match} from 'redux-router/server';
-import {Provider} from 'react-redux';
-import {exec} from 'child_process';
+import { reduxReactRouter, match } from 'redux-router/server';
+import { Provider } from 'react-redux';
+import { exec } from 'child_process';
 
 import qs from 'query-string';
 import getRoutes from './routes';
-import {getStatusFromRoutes, getRedirectFromRoutes} from './helpers/getStatusFromRoutes';
+import { getStatusFromRoutes, getRedirectFromRoutes } from './helpers/getStatusFromRoutes';
 
 const app = new Express();
 const server = new http.Server(app);

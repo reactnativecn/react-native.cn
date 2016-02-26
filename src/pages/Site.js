@@ -11,21 +11,16 @@ import MyFooter from '../components/MyFooter.js';
 
 export default class Site extends React.Component {
   static propTypes = {
+    params: React.PropTypes.object,
     children: React.PropTypes.oneOfType([
       React.PropTypes.arrayOf(React.PropTypes.node),
       React.PropTypes.node,
     ]),
   };
-  //static childContextTypes = {
-  //  location: React.PropTypes.object
-  //};
-  //getChildContext() {
-  //  return { location: this.props.location }
-  //}
 
   render() {
     return (<div>
-      <DocumentMeta {...config.app}/>
+      <DocumentMeta {...config.app} />
       <MyNavBar params={this.props.params} />
       {this.props.children}
       <MyFooter />

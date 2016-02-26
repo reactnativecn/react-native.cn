@@ -16,6 +16,6 @@ export default function reducer(state = initialState, action = {}) {
 export function indexLoaded(content) {
   return {
     type: INDEX_LOADED,
-    content: content,
+    content,
   };
 }

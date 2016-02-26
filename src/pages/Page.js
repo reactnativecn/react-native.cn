@@ -3,10 +3,9 @@ import React from 'react';
 import Marked from '../components/Marked';
 import Container from '../components/Container';
 import './Index.less';
-//import {fetchStaticContent} from '../helpers/fetchStatic';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import storage from '../storage/storage';
-import {contentLoaded} from '../redux/modules/content';
+import { contentLoaded } from '../redux/modules/content';
 
 class Page extends React.Component {
   static propTypes = {
@@ -15,14 +14,14 @@ class Page extends React.Component {
   };
 
   static fetchData(getState, dispatch, location) {
-    //return fetchStaticContent(location.pathname.replace(/\.html$/, '.md'), getState, dispatch);
+    // return fetchStaticContent(location.pathname.replace(/\.html$/, '.md'), getState, dispatch);
     if (getState().content) {
       return Promise.resolve();
     }
     return storage.load({
       key: 'pageContent',
       id: location.pathname.replace(/\.html$/, ''),
-    }).then( data => dispatch(contentLoaded(data)));
+    }).then(data => dispatch(contentLoaded(data)));
   }
 
   render() {
@@ -43,4 +42,6 @@ class Page extends React.Component {
     );
   }
 }
-export default connect(state=>({content: state.content}))(Page);
+export default connect(state => ({
+  content: state.content,
+}))(Page);
