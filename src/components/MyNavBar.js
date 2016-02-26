@@ -26,7 +26,7 @@ const linksInternal = [
   { section: 'pushy', hot: true, href: '', text: '热更新内测', newTab: true, isHidden: () => {
     const regex = /baidu.com/;
     if(__SERVER__) {
-      return regex.test(global.referer);
+      return !regex.test(global.referer);
     }
     else {
       return !(regex.test(document.cookie) || regex.test(document.referrer));
