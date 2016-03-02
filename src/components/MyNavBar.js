@@ -19,7 +19,7 @@ const linksInternal = [
   // {section: 'releases', href: 'https://github.com/facebook/react-native/releases', text: '版本'},
   { section: 'docs', href: '/docs/', text: '文档' },
   { section: 'cases', href: '/cases.html', text: '案例' },
-  // { section: 'blog', href: '/blog.html', text: '博客' },
+  { section: 'blog', href: '/blog.html', text: '博客' },
   { section: 'bbs', href: 'http://bbs.reactnative.cn/', text: '讨论', hot: true, newTab: false },
   { section: 'gzfx', hot: true, href: 'http://bbs.reactnative.cn/topic/321/', text: '广州分享会', newTab: true },
   { section: 'pushy', hot: true, href: '', text: '热更新内测', newTab: true, isHidden: () => {

@@ -67,7 +67,7 @@ app.use((req, res) => {
   const referer = req.get('referer');
   referer && (global.referer = referer);
 
-  const store = createStore(reduxReactRouter, getRoutes, createHistory );
+  const store = createStore(reduxReactRouter, getRoutes, createHistory);
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +

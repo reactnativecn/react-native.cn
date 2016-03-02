@@ -10,6 +10,7 @@ import config from '../options';
 import { blogLoaded } from '../redux/modules/blog';
 import storage from '../storage/storage';
 import './Blog.styl';
+import options from '../options';
 
 class Blog extends React.Component {
   static propTypes = {
@@ -26,45 +27,39 @@ class Blog extends React.Component {
       storage.getBatchData(blogList.topics.map(t => ({ key: 'blog', id: t.slug })))
     ).then(data => dispatch(blogLoaded(data)));
   }
-
+  parseBlogBody = (rawBody, link) => {
+    const endFlag = /<hr \/>([\s\S]*?)<hr \/>/;
+    // let matchArray;
+    // do {
+    //   matchArray = endFlag.exec(rawBody);
+    //   if (endFlag.lastIndex >= 100) {
+    //     break;
+    //   }
+    // } while (matchArray !== null);
+    // const parsedText = rawBody.substr(0, endFlag.lastIndex);
+    const parsedText = endFlag.exec(rawBody)[1]
+                              .replace(/\/uploads\/file/g, `${options.bbs}/uploads/file`);
+    return `${parsedText}<a href="${link}" class="more">[阅读全文]</a>`;
+  };
   render() {
     const { blog } = this.props;
     return (
       <div>
         <DocumentMeta {...config.app} title="React Native博客 - react native 中文网" />
         <Container type="blog">
-          <div className="blog-list">
-            <h3>最近的博客文章</h3>
-            <ul>
-              {
-                blog.map((t, i) =>
-                  <li key={i}>
+          {
+            blog.map(topic => {
+              const post = topic.posts[0];
+              return (
+                <div className="post-list-item">
+                  <div className="post-header">
                     <a
+                      className="post-title"
                       target="_blank"
-                      href={`${config.bbs}/topic/${t.tid}`}
-                      className={t.pinned && 'pinned'}
-                      dangerouslySetInnerHTML={{ __html: t.title }}
+                      href={`${config.bbs}/topic/${post.tid}`}
+                      dangerouslySetInnerHTML={{ __html: topic.title }}
                     />
-                  </li>
-                )
-              }
-              <li><a href={`${config.bbs}/category/3/blogs`} target="_blank">查看全部 ...</a></li>
-            </ul>
-          </div>
-          <div className="inner-content">
-            {
-              blog.map(topic => {
-                const post = topic.posts[0];
-                return (
-                  <div className="post-list-item">
-                    <h1>
-                      <a
-                        target="_blank"
-                        href={`${config.bbs}/topic/${post.tid}`}
-                        dangerouslySetInnerHTML={{ __html: topic.title }}
-                      />
-                    </h1>
-                    <p className="meta">
+                    <div className="meta">
                       { post.relativeTime.split('T')[0] }
                       {' by '}
                       <a
@@ -73,20 +68,19 @@ class Blog extends React.Component {
                       >
                         {post.user.username}
                       </a>
-                    </p>
-                    <hr />
-                    <div
-                      className="post"
-                      dangerouslySetInnerHTML={{ __html: post.content }}
-                    />
+                    </div>
                   </div>
-                );
-              })
-            }
-            <div className="pagination">
-              <a href={`${config.bbs}/category/3/blogs`} target="_blank">查看全部 ...</a>
-            </div>
-          </div>
+                  <div
+                    className="post"
+                    dangerouslySetInnerHTML={{
+                      __html: this.parseBlogBody(post.content, `${config.bbs}/topic/${post.tid}`),
+                    }}
+                  />
+                  <hr />
+                </div>
+              );
+            })
+          }
         </Container>
       </div>
     );
