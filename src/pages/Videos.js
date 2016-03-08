@@ -51,7 +51,7 @@ class Videos extends React.Component {
         <DocumentMeta {...config.app} title="React Native博客 - react native 中文网" />
         <Container type="videos">
           {videos && videos.map(v =>
-            <a className="video" href={v.link} target="_blank">
+            <a className="video" href={v.link} target="_blank" key={v.id}>
               <img src={v.thumbnail} alt={v.title} />
               <span className="v-time">{`${Math.floor(v.duration / 60)}:${v.duration % 60}`}</span>
               <div className="v-overlay" />

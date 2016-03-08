@@ -44,7 +44,7 @@ class Blog extends React.Component {
             blog.map(topic => {
               const post = topic.posts[0];
               return (
-                <div className="post-list-item">
+                <div className="post-list-item" key={post.tid}>
                   <div className="post-header">
                     <a
                       className="post-title"
