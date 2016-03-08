@@ -20,8 +20,9 @@ const linksInternal = [
   { section: 'docs', href: '/docs/', text: '文档' },
   { section: 'cases', href: '/cases.html', text: '案例' },
   { section: 'blog', href: '/blog.html', text: '博客' },
+  { section: 'videos', href: '/videos.html', text: '视频' },
   { section: 'bbs', href: 'http://bbs.reactnative.cn/', text: '讨论', hot: true, newTab: false },
-  { section: 'gzfx', hot: true, href: 'http://bbs.reactnative.cn/topic/321/', text: '广州分享会', newTab: true },
+  { section: 'shfx', hot: true, href: 'http://bbs.reactnative.cn/topic/509', text: '3.19上海分享会', newTab: true },
   { section: 'pushy', hot: true, href: '', text: '热更新内测', newTab: true, isHidden: () => {
     const regex = /baidu.com/;
     if (__SERVER__) {

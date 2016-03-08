@@ -29,16 +29,9 @@ class Blog extends React.Component {
   }
   parseBlogBody = (rawBody, link) => {
     const endFlag = /<hr \/>([\s\S]*?)<hr \/>/;
-    // let matchArray;
-    // do {
-    //   matchArray = endFlag.exec(rawBody);
-    //   if (endFlag.lastIndex >= 100) {
-    //     break;
-    //   }
-    // } while (matchArray !== null);
-    // const parsedText = rawBody.substr(0, endFlag.lastIndex);
-    const parsedText = endFlag.exec(rawBody)[1]
-                              .replace(/\/uploads\/file/g, `${options.bbs}/uploads/file`);
+    let parsedText = endFlag.exec(rawBody);
+    parsedText = parsedText ? parsedText[1] : rawBody;
+    parsedText = parsedText.replace(/\/uploads\/file/g, `${options.bbs}/uploads/file`);
     return `${parsedText}<a href="${link}" class="more">[阅读全文]</a>`;
   };
   render() {

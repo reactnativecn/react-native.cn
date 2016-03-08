@@ -11,6 +11,7 @@ import NotFound from './pages/NotFound';
 import Index from './pages/Index';
 import Cases from './pages/Cases';
 import Blog from './pages/Blog';
+import Videos from './pages/Videos';
 import FriendLink from './pages/FriendLink';
 import Page from './pages/Page';
 
@@ -34,6 +35,7 @@ export default () => (
     <IndexRoute component={Index} />
     <Route path="cases.html" component={Cases} />
     <Route path="blog.html" component={Blog} />
+    <Route path="videos.html" component={Videos} />
     <Route path="about.html" component={Page} />
     <Route path="friendlink.html" component={FriendLink} />
     <Route path="bbs">

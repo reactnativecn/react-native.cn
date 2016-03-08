@@ -125,4 +125,24 @@ export default {
         if (reject) reject();
       });
   },
+// APP KEY 3f4eca228da38d9e
+// APP Secret 205373e09529572526bd0284019f69ea
+  videos(params) {
+    const { resolve, reject } = params;
+    // https://openapi.youku.com/v2/videos/by_user.json?user_name=react-native&client_id=3f4eca228da38d9e
+    const youkuUrl = 'https://openapi.youku.com/v2/videos/by_user.json?';
+    const clientid = '3f4eca228da38d9e';
+    fetch(`${youkuUrl}user_name=react-native&client_id=${clientid}&count=100`)
+      .then(responseData => responseData.json())
+      .then(data => {
+        storage.save({
+          key: 'videos',
+          rawData: data,
+        });
+        if (resolve) resolve(data);
+      }).catch(error => {
+        console.warn(error);
+        if (reject) reject();
+      });
+  },
 };

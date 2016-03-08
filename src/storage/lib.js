@@ -1,10 +1,9 @@
 /*
  *  local storage(web/react native) wrapper
- *  sunnylqm 2016-01-26
- *  version 0.0.12
+ *  sunnylqm 2016-03-03
+ *  version 0.0.16
  */
-
-/*eslint-disable */
+/*eslint-disable*/
 export default class Storage {
   constructor(options = {}) {
     let me = this;
@@ -13,47 +12,50 @@ export default class Storage {
     me.sync = options.sync || {};      // remote sync method
     me.defaultExpires = options.defaultExpires || 1000 * 3600 * 24;
     me.enableCache = options.enableCache || true;
+    me._s = options.storageBackend || null;
+    me.isPromise = options.isPromise || true;
     me._innerVersion = 10;
     me.cache = {};
 
-    //detect browser or ios javascriptCore
-    me.isBrowser = false;
-    if(typeof window !== 'undefined' && window.localStorage) {
-      try {
-        // avoid key conflict
-        window.localStorage.setItem('__react_native_storage_test', 'test');
+    if(!me._s) {
+      if(typeof window !== 'undefined' && window.localStorage) {
+        try {
+          // avoid key conflict
+          window.localStorage.setItem('__react_native_storage_test', 'test');
 
-        me._s = window.localStorage;
-        me.isBrowser = true;
-      }
-      catch(e) {
-        console.warn(e);
-        delete me._s;
-        throw e;
+          me._s = window.localStorage;
+          me.isPromise = false;
+        }
+        catch(e) {
+          console.warn(e);
+          delete me._s;
+          throw e;
+        }
       }
     }
 
-    me._mapPromise = me.getItem('map').then( map => {
+    me._mapPromise = me.getItem('map').then(map => {
       me._m = me._checkMap(map && JSON.parse(map) || {});
+      // delete me._mapPromise;
     });
   }
   getItem(key) {
     return this._s
       ?
-      this.isBrowser ? Promise.resolve(this._s.getItem(key)) : this._s.getItem(key)
+      this.isPromise ? this._s.getItem(key) : Promise.resolve(this._s.getItem(key))
       :
       Promise.resolve();
   }
   setItem(key, value) {
     return this._s
       ?
-      this.isBrowser ? Promise.resolve(this._s.setItem(key, value)) : this._s.setItem(key, value)
+      this.isPromise ? this._s.setItem(key, value) : Promise.resolve(this._s.setItem(key, value))
       :
       Promise.resolve();
   }
   removeItem(key) {
     return this._s
-      ? this.isBrowser ? Promise.resolve(this._s.removeItem(key)) : this._s.removeItem(key)
+      ? this.isPromise ? this._s.removeItem(key) : Promise.resolve(this._s.removeItem(key))
       :
       Promise.resolve();
   }
@@ -73,36 +75,34 @@ export default class Storage {
     return key + '_' + id;
   }
   _saveToMap(params) {
-    var promise = new Promise((resolve, reject) => {
-      let { key, id, data } = params,
-        newId = this._getId(key, id),
-        m = this._m;
-      if(m[newId] !== undefined) {
-        //update existed data
-        if(this.enableCache) this.cache[newId] = JSON.parse(data);
-        return this.setItem('map_' + m[newId], data);
-      }
-      if(m[m.index] !== undefined){
-        //loop over, delete old data
-        let oldId = m[m.index];
-        delete m[oldId];
-        if(this.enableCache) {
-          delete this.cache[oldId];
-        }
-      }
-      m[newId] = m.index;
-      m[m.index] = newId;
+    let { key, id, data } = params,
+      newId = this._getId(key, id),
+      m = this._m;
+    if(m[newId] !== undefined) {
+      //update existed data
+      if(this.enableCache) this.cache[newId] = JSON.parse(data);
+      return this.setItem('map_' + m[newId], data);
+    }
+    if(m[m.index] !== undefined){
+      //loop over, delete old data
+      let oldId = m[m.index];
+      delete m[oldId];
       if(this.enableCache) {
-        const cacheData = JSON.parse(data);
-        this.cache[newId] = cacheData;
+        delete this.cache[oldId];
       }
-
-      this.setItem('map_' + m.index, data);
-      this.setItem('map', JSON.stringify(m));
-      if(++m.index === this._SIZE) {
-        m.index = 0;
-      }
-    });
+    }
+    m[newId] = m.index;
+    m[m.index] = newId;
+    if(this.enableCache) {
+      const cacheData = JSON.parse(data);
+      this.cache[newId] = cacheData;
+    }
+    let currentIndex = m.index;
+    if(++m.index === this._SIZE) {
+      m.index = 0;
+    }
+    this.setItem('map_' + currentIndex, data);
+    this.setItem('map', JSON.stringify(m));
   }
   save(params) {
     let me = this;
@@ -153,13 +153,23 @@ export default class Storage {
 
     return Promise.all(
       ids.map((id) => me.load({ key, id, syncInBackground, autoSync: false, batched: true }))
-    ).then((results) => handlePromise((resolve, reject) => me.sync[key]({
-      id: results
-        .filter((value) => value.syncId !== undefined)
-        .map((value) => value.syncId),
-      resolve: resolve,
-      reject: reject
-    })).then((data) => results.map((value) => value.syncId ? data.shift() : value)))
+    ).then((results) => {
+      return new Promise((resolve, reject) => {
+        const ids = results.filter((value) => value.syncId !== undefined);
+        if(!ids.length){
+          return resolve();
+        }
+        return me.sync[key]({
+          id: ids.map((value) => value.syncId),
+          resolve,
+          reject
+        });
+      }).then((data) => {
+        return results.map(value => {
+          return value.syncId ? data.shift() : value
+        });
+      });
+    })
   }
   _lookupGlobalItem(params) {
     let me = this,
@@ -176,7 +186,7 @@ export default class Storage {
     let { key, ret, autoSync, syncInBackground } = params;
     if(ret === null || ret === undefined) {
       if(autoSync && me.sync[key]) {
-        return handlePromise((resolve, reject) => me.sync[key]({resolve, reject}));
+        return new Promise((resolve, reject) => me.sync[key]({resolve, reject}));
       }
       return Promise.reject();
     }
@@ -189,7 +199,7 @@ export default class Storage {
         me.sync[key]({});
         return Promise.resolve(ret.rawData);
       }
-      return handlePromise((resolve, reject) => me.sync[key]({resolve, reject}));
+      return new Promise((resolve, reject) => me.sync[key]({resolve, reject}));
     }
     return Promise.resolve(ret.rawData);
   }
@@ -198,7 +208,7 @@ export default class Storage {
     let { key, id, autoSync } = params;
     if(me.sync[key]) {
       if(autoSync) {
-        return handlePromise((resolve, reject) => me.sync[key]({id, resolve, reject}));
+        return new Promise((resolve, reject) => me.sync[key]({id, resolve, reject}));
       }
       return Promise.resolve({ syncId: id });
     }
@@ -220,7 +230,7 @@ export default class Storage {
           me.sync[key]({id});
           return Promise.resolve(ret.rawData);
         }
-        return handlePromise((resolve, reject) => me.sync[key]({id, resolve, reject}));
+        return new Promise((resolve, reject) => me.sync[key]({id, resolve, reject}));
       }
       if(batched) {
         return Promise.resolve({ syncId: id });
@@ -244,32 +254,33 @@ export default class Storage {
     return me._noItemFound( {ret, ...params } );
   }
   remove(params) {
-    let me = this,
-      m = me._m;
-    let { key, id } = params;
+    return this._mapPromise.then(() => {
+      let me = this,
+        m = me._m;
+      let { key, id } = params;
 
-    if(id === undefined) {
-      if(me.enableCache && me.cache[key]) {
-        delete me.cache[key];
+      if(id === undefined) {
+        if(me.enableCache && me.cache[key]) {
+          delete me.cache[key];
+        }
+        return me.removeItem(key);
       }
-      return me.removeItem(key);
-    }
-    let newId = me._getId(key, id);
+      let newId = me._getId(key, id);
 
-    //remove existed data
-    if(m[newId] !== undefined) {
-      if(me.enableCache && me.cache[newId]) {
-        delete me.cache[newId];
+      //remove existed data
+      if(m[newId] !== undefined) {
+        if(me.enableCache && me.cache[newId]) {
+          delete me.cache[newId];
+        }
+        let idTobeDeleted = m[newId];
+        delete m[newId];
+        me.setItem('map', JSON.stringify(m));
+        return me.removeItem('map_' + idTobeDeleted);
       }
-      let idTobeDeleted = m[newId];
-      delete m[newId];
-      me.setItem('map', JSON.stringify(m));
-      return me.removeItem('map_' + idTobeDeleted);
-    }
+    });
   }
   load(params) {
-    let me = this,
-      m = me._m;
+    let me = this;
     let { key, id, autoSync, syncInBackground } = params;
     if(autoSync === undefined) {
       autoSync = true;
@@ -277,7 +288,7 @@ export default class Storage {
     if(syncInBackground === undefined) {
       syncInBackground = true;
     }
-    return this._mapPromise.then(() => new Promise((resolve, reject) => {
+    return me._mapPromise.then(() => new Promise((resolve, reject) => {
       if(id === undefined) {
         return resolve(me._lookupGlobalItem({key, resolve, reject, autoSync, syncInBackground}));
       }
@@ -294,12 +305,12 @@ export default class Storage {
   }
 }
 
-function noop() {}
-
-// compatible with legacy version promise
-function handlePromise (fn) {
-  return new Promise((resolve, reject) => {
-    var promise, isPromise;
-    if (isPromise = (promise = fn((data) => isPromise ? noop() : resolve(data), (err) => isPromise ? noop() : reject(err))) instanceof Promise) resolve(promise);
-  });
-}
+// function noop() {}
+//
+// // compatible with legacy version promise
+// function handlePromise (fn) {
+//   return new Promise((resolve, reject) => {
+//     var promise, isPromise;
+//     if (isPromise = (promise = fn((data) => isPromise ? noop() : resolve(data), (err) => isPromise ? noop() : reject(err))) instanceof Promise) resolve(promise);
+//   });
+// }
