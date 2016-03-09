@@ -29,8 +29,16 @@ const server = new http.Server(app);
 
 import getDataDependencies from './helpers/getDataDependencies';
 
+const proxy = httpProxy.createProxyServer();
+
+app.use('/youkuvideos', (req, res) => {
+  proxy.web(req, res, {
+    changeOrigin: true,
+    target: 'https://openapi.youku.com/v2/videos'
+  });
+});
+
 if (__DEV__) {
-  const proxy = httpProxy.createProxyServer();
   app.use('/bbs', (req, res) => {
     proxy.web(req, res, {
       changeOrigin: true,
