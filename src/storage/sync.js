@@ -17,9 +17,9 @@ export function fetchStaticJson(url) {
   return fetchStatic(url).then(resp => resp.json());
 }
 
-const bbsRootUrl = __SERVER__ ? 'http://bbs.reactnative.cn' : '/bbs';
+const bbsRootUrl = __SERVER__ ? 'http://bbs.reactnative.cn' : '/proxy/bbs';
 const youkuUrl = __SERVER__ ?
-                      'https://openapi.youku.com/v2/videos/by_user.json?' : '/youkuvideos/by_user.json?';
+                      'https://openapi.youku.com/v2/videos/by_user.json?' : '/proxy/videos/by_user.json?';
 const clientid = '3f4eca228da38d9e';
 
 export default {
@@ -28,11 +28,13 @@ export default {
     fetch(`${bbsRootUrl}/api/category/3/blogs`)
       .then(response => response.json())
       .then(data => {
-        storage.save({
-          key: 'blogList',
-          rawData: data,
-        });
-        if (resolve) resolve(data);
+        if (data.cid) {
+          storage.save({
+            key: 'blogList',
+            rawData: data,
+          });
+          if (resolve) resolve(data);
+        }
       }).catch(error => {
         console.warn(error);
         if (reject) reject();
@@ -44,12 +46,14 @@ export default {
     fetch(`${bbsRootUrl}/api/topic/${tid}/${encodeURIComponent(title)}`)
       .then(response => response.json())
       .then(data => {
-        storage.save({
-          key: 'blog',
-          id,
-          rawData: data,
-        });
-        if (resolve) resolve(data);
+        if (data.tid) {
+          storage.save({
+            key: 'blog',
+            id,
+            rawData: data,
+          });
+          if (resolve) resolve(data);
+        }
       }).catch(error => {
         console.warn(error);
         if (reject) reject();
@@ -136,12 +140,13 @@ export default {
     fetch(`${youkuUrl}user_id=UMzM5ODI5MDA4MA==&client_id=${clientid}&count=100`)
       .then(responseData => responseData.json())
       .then(data => {
-        console.log(data);
-        storage.save({
-          key: 'videos',
-          rawData: data,
-        });
-        if (resolve) resolve(data);
+        if (data.count) {
+          storage.save({
+            key: 'videos',
+            rawData: data,
+          });
+          if (resolve) resolve(data);
+        }
       }).catch(error => {
         console.warn(error);
         if (reject) reject();
