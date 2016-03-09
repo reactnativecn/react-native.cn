@@ -23,13 +23,13 @@ const linksInternal = [
   { section: 'videos', href: '/videos.html', text: '视频' },
   { section: 'bbs', href: 'http://bbs.reactnative.cn/', text: '讨论', hot: true, newTab: false },
   { section: 'shfx', hot: true, href: 'http://bbs.reactnative.cn/topic/509', text: '3.19上海分享会', newTab: true },
-  { section: 'pushy', hot: true, href: '', text: '热更新内测', newTab: true, isHidden: () => {
-    const regex = /baidu.com/;
-    if (__SERVER__) {
-      return !regex.test(global.referer);
-    }
-    return !(regex.test(document.cookie) || regex.test(document.referrer));
-  } },
+  // { section: 'pushy', hot: true, href: '', text: '热更新内测', newTab: true, isHidden: () => {
+  //   const regex = /baidu.com/;
+  //   if (__SERVER__) {
+  //     return !regex.test(global.referer);
+  //   }
+  //   return !(regex.test(document.cookie) || regex.test(document.referrer));
+  // } },
   { section: 'about', href: '/about.html', text: '关于', hash: '#content' },
 ];
 const linksExternal = [
