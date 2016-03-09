@@ -18,6 +18,9 @@ export function fetchStaticJson(url) {
 }
 
 const bbsRootUrl = __SERVER__ ? 'http://bbs.reactnative.cn' : '/bbs';
+const youkuUrl = __SERVER__ ?
+                      'https://openapi.youku.com/v2/videos/by_user.json?' : '/youkuvideos/by_user.json?';
+const clientid = '3f4eca228da38d9e';
 
 export default {
   blogList(params) {
@@ -130,11 +133,10 @@ export default {
   videos(params) {
     const { resolve, reject } = params;
     // https://openapi.youku.com/v2/videos/by_user.json?user_name=react-native&client_id=3f4eca228da38d9e
-    const youkuUrl = 'https://openapi.youku.com/v2/videos/by_user.json?';
-    const clientid = '3f4eca228da38d9e';
-    fetch(`${youkuUrl}user_name=react-native&client_id=${clientid}&count=100`)
+    fetch(`${youkuUrl}user_id=UMzM5ODI5MDA4MA==&client_id=${clientid}&count=100`)
       .then(responseData => responseData.json())
       .then(data => {
+        console.log(data);
         storage.save({
           key: 'videos',
           rawData: data,
