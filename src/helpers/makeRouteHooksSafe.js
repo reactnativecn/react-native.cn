@@ -11,6 +11,7 @@ function makeHooksSafe(routes, store) {
   const onEnter = routes.onEnter;
 
   if (onEnter) {
+    // eslint-disable-next-line no-param-reassign
     routes.onEnter = function safeOnEnter(...args) {
       try {
         store.getState();

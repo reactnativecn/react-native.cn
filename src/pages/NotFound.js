@@ -2,7 +2,7 @@
  * Created by Yun on 2015-11-29.
  */
 import React from 'react';
-import {Panel} from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 import Container from '../components/Container';
 import './Site.less';
 

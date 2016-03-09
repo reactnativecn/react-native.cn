@@ -4,13 +4,14 @@
 
 import React from 'react';
 
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 
 import './docs.less';
 
 export default class Subjects extends React.Component {
   static propTypes = {
     docIndex: React.PropTypes.object,
+    params: React.PropTypes.object,
   };
 
   render() {
@@ -18,13 +19,21 @@ export default class Subjects extends React.Component {
 
     return (
       <ul>
-        {indexes.map(v=> (
+        {indexes.map(v => (
           <li className="apiGroup" key={v.group}>
             {v.group}
             <ul className="apiSub">
-              {v.contains.map(u=>(
+              {v.contains.map(u => (
                 <li key={u.mdlink}>
-                  <Link activeClassName="active" to={'/docs/' + u.mdlink + '.html'} hash="#content">{u.subject}</Link>
+                  <Link
+                    activeClassName="active"
+                    to={{
+                      pathname: `/docs/${this.props.params.version}/${u.mdlink}.html`,
+                      hash: '#content',
+                    }}
+                  >
+                    {u.subject}
+                  </Link>
                 </li>
               ))}
             </ul>

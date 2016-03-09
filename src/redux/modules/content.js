@@ -2,7 +2,7 @@
  * Created by Yun on 2015-12-04.
  */
 
-import {FETCH_DATA_STARTED} from './fetchData.js';
+import { FETCH_DATA_STARTED } from './fetchData.js';
 
 const CONTENT_LOADED = 'reactnative.cn/content/loaded';
 
@@ -21,6 +21,6 @@ export default function reducer(state = initialState, action = {}) {
 export function contentLoaded(content) {
   return {
     type: CONTENT_LOADED,
-    content: content,
+    content,
   };
 }

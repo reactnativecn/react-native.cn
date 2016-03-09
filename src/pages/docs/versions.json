@@ -1,0 +1,8 @@
+{
+  "current": "0.20",
+  "list": [
+    { "version": "0.20", "text": "0.20(当前版本)", "current": true },
+    { "version": "0.21", "text": "0.21" },
+    { "version": "next", "text": "未来版本" }
+  ]
+}

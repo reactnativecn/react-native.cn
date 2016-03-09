@@ -11,15 +11,17 @@ import MyFooter from '../components/MyFooter.js';
 
 export default class Site extends React.Component {
   static propTypes = {
+    params: React.PropTypes.object,
     children: React.PropTypes.oneOfType([
       React.PropTypes.arrayOf(React.PropTypes.node),
       React.PropTypes.node,
     ]),
   };
+
   render() {
     return (<div>
-      <DocumentMeta {...config.app}/>
-      <MyNavBar />
+      <DocumentMeta {...config.app} />
+      <MyNavBar params={this.props.params} />
       {this.props.children}
       <MyFooter />
     </div>);

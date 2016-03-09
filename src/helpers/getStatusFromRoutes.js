@@ -12,5 +12,7 @@ export function getStatusFromRoutes(matchedRoutes) {
 }
 
 export function getRedirectFromRoutes(matchedRoutes, params) {
-  return matchedRoutes.reduce((prev, cur) => cur.redirect || (cur.getRedirect && cur.getRedirect(params)) || prev, null);
+  return matchedRoutes.reduce((prev, cur) =>
+                                cur.redirect ||
+                                (cur.getRedirect && cur.getRedirect(params)) || prev, null);
 }

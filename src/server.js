@@ -12,16 +12,17 @@ import path from 'path';
 import createStore from './redux/create';
 import Html from './helpers/Html';
 import http from 'http';
+import httpProxy from 'http-proxy';
 
-import {ReduxRouter} from 'redux-router';
+import { ReduxRouter } from 'redux-router';
 import createHistory from 'history/lib/createMemoryHistory';
-import {reduxReactRouter, match} from 'redux-router/server';
-import {Provider} from 'react-redux';
-import {exec} from 'child_process';
+import { reduxReactRouter, match } from 'redux-router/server';
+import { Provider } from 'react-redux';
+import { exec } from 'child_process';
 
 import qs from 'query-string';
 import getRoutes from './routes';
-import {getStatusFromRoutes, getRedirectFromRoutes} from './helpers/getStatusFromRoutes';
+import { getStatusFromRoutes, getRedirectFromRoutes } from './helpers/getStatusFromRoutes';
 
 const app = new Express();
 const server = new http.Server(app);
@@ -29,10 +30,19 @@ const server = new http.Server(app);
 import getDataDependencies from './helpers/getDataDependencies';
 
 if (__DEV__) {
+  const proxy = httpProxy.createProxyServer();
+  app.use('/bbs', (req, res) => {
+    proxy.web(req, res, {
+      changeOrigin: true,
+      target: 'http://bbs.reactnative.cn'
+    });
+  });
+}
+if (__DEV__) {
   app.use('/static/', Express.static(path.join(__dirname, '../../react-native-docs-cn')));
 }
 if (__OPTIONS__.updateDocs) {
-  app.post('/update', (req, res) =>{
+  app.post('/update', (req, res) => {
     res.send("OK");
     exec('git pull', {
       cwd: __OPTIONS__.docsRoot
@@ -54,6 +64,8 @@ app.use((req, res) => {
     // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh();
   }
+  const referer = req.get('referer');
+  referer && (global.referer = referer);
 
   const store = createStore(reduxReactRouter, getRoutes, createHistory);
 
@@ -101,10 +113,13 @@ app.use((req, res) => {
       if (routerState.location.search && !routerState.location.query) {
         routerState.location.query = qs.parse(routerState.location.search);
       }
+
+      referer && res.cookie('referer', referer, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24) });
+
       const state = store.getState();
-      state.fetchData && state.fetchData.then(()=>{
+      state.fetchData && state.fetchData.then(() => {
         sendRendered(store.getState().router);
-      }).catch(err=>{
+      }).catch(err => {
         console.error(err.stack);
         res.status(500);
         hydrateOnClient();

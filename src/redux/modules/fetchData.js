@@ -12,7 +12,7 @@ export default function reducer(state = null, action = {}) {
   } else if (action.type === FETCH_DATA_ENDED) {
     return null;
   } else if (action.type === FETCH_DATA_FAILED) {
-    return { err: action.err};
+    return { err: action.err };
   }
   return state;
 }
@@ -20,7 +20,7 @@ export default function reducer(state = null, action = {}) {
 export function startFetchData(promise) {
   return {
     type: FETCH_DATA_STARTED,
-    promise: promise,
+    promise,
   };
 }
 

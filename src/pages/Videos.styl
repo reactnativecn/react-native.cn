@@ -1,0 +1,47 @@
+.container-videos
+  width 960px
+  padding-top 40px
+  margin 0 auto
+  .video
+    width 220px
+    margin 10px 5px
+    display inline-block
+    position relative
+    img
+      width 200px
+      height 112px
+    .v-time
+      position absolute
+      top 90px
+      right 25px
+      font-size 12px
+      font-family tahoma
+      color #ddd
+      font-weight bold
+      z-index 1
+    .v-overlay
+      position absolute
+      width 100%
+      left 0
+      top 65px
+      height 45px
+      background url(http://static.youku.com/index/img/2013/video/bg_video_mini.png) no-repeat left bottom
+    h3
+      color #555
+      line-height 15px
+      font-size 14px
+
+@media screen and (max-width:800px)
+  .container-videos
+    width 100%!important
+    .video
+      width 50%!important
+      margin 10px 0!important
+      text-align center
+      img
+        width 150px
+        height 84px
+        display block
+        margin 0 auto
+      .v-time, .v-overlay
+        display none!important
