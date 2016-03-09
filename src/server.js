@@ -12,7 +12,6 @@ import path from 'path';
 import createStore from './redux/create';
 import Html from './helpers/Html';
 import http from 'http';
-import httpProxy from 'http-proxy';
 
 import { ReduxRouter } from 'redux-router';
 import createHistory from 'history/lib/createMemoryHistory';
@@ -27,25 +26,32 @@ import { getStatusFromRoutes, getRedirectFromRoutes } from './helpers/getStatusF
 const app = new Express();
 const server = new http.Server(app);
 
-import getDataDependencies from './helpers/getDataDependencies';
+// import getDataDependencies from './helpers/getDataDependencies';
+import storage from './storage/storage';
 
-const proxy = httpProxy.createProxyServer();
-
-app.use('/youkuvideos', (req, res) => {
-  proxy.web(req, res, {
-    changeOrigin: true,
-    target: 'https://openapi.youku.com/v2/videos'
+app.use('/proxy/bbs/api/category', (req, res) => {
+  storage.load({
+    key: 'blogList'
+  }).then(blogList => {
+    res.json(blogList);
+  });
+});
+app.use('/proxy/bbs/api/topic', (req, res) => {
+  storage.load({
+    key: 'blog',
+    id: decodeURIComponent(req.path.substr(1, req.path.length - 1))
+  }).then(blog => {
+    res.json(blog);
+  });
+});
+app.use('/proxy/videos', (req, res) => {
+  storage.load({
+    key: 'videos'
+  }).then(videos => {
+    res.json(videos);
   });
 });
 
-if (__DEV__) {
-  app.use('/bbs', (req, res) => {
-    proxy.web(req, res, {
-      changeOrigin: true,
-      target: 'http://bbs.reactnative.cn'
-    });
-  });
-}
 if (__DEV__) {
   app.use('/static/', Express.static(path.join(__dirname, '../../react-native-docs-cn')));
 }
