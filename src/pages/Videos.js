@@ -48,7 +48,7 @@ class Videos extends React.Component {
     const { videos } = this.props.videos;
     return (
       <div>
-        <DocumentMeta {...config.app} title="React Native博客 - react native 中文网" />
+        <DocumentMeta {...config.app} title="React Native视频 - react native 中文网" />
         <Container type="videos">
           {videos && videos.map(v =>
             <a className="video" href={v.link} target="_blank" key={v.id}>
