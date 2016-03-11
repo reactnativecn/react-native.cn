@@ -77,7 +77,9 @@ class MyNavBar extends React.Component {
   }
   goToDoc = (version) =>
     () => this.context.router.push(`/docs/${version}`);
-  goToReleaseNote = () => (window.location = 'http://bbs.reactnative.cn/category/1');
+  goToReleaseNote = () => {
+    window.location = 'http://bbs.reactnative.cn/category/1';
+  };
   render() {
     return (
       <div>
