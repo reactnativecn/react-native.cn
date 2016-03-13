@@ -69,14 +69,15 @@ class MyNavBar extends React.Component {
     ) : (
       <LinkContainer to={v.href} onClick={v.onClick || noop} key={v.section} hash={v.hash}>
         <NavItem>
-        {v.text}
-        {v.hot && <div className="hotSign"><img src={require('../images/hot.png')} /></div>}
+          {v.text}
+          {v.hot && <div className="hotSign"><img src={require('../images/hot.png')} /></div>}
         </NavItem>
       </LinkContainer>
     );
   }
   goToDoc = (version) =>
     () => this.context.router.push(`/docs/${version}`);
+  goToReleaseNote = () => (window.location = 'http://bbs.reactnative.cn/category/1');
   render() {
     return (
       <div>
@@ -95,6 +96,9 @@ class MyNavBar extends React.Component {
               className="nav-version"
               title={ this.props.params.version || versions.current } id="nav_version"
             >
+              <MenuItem onSelect={this.goToReleaseNote}>
+                更新日志
+              </MenuItem>
               {
                 versions.list.map((v, i) =>
                   <MenuItem key={i} onSelect={this.goToDoc(v.version)}>
