@@ -69,8 +69,8 @@ class MyNavBar extends React.Component {
     ) : (
       <LinkContainer to={v.href} onClick={v.onClick || noop} key={v.section} hash={v.hash}>
         <NavItem>
-        {v.text}
-        {v.hot && <div className="hotSign"><img src={require('../images/hot.png')} /></div>}
+          {v.text}
+          {v.hot && <div className="hotSign"><img src={require('../images/hot.png')} /></div>}
         </NavItem>
       </LinkContainer>
     );
