@@ -14,7 +14,7 @@ import './FriendLink.styl';
 
 class FriendLink extends React.Component {
   static propTypes = {
-    links: React.PropTypes.array,
+    links: React.PropTypes.object,
   };
 
   static fetchData(getState, dispatch) {
@@ -38,7 +38,7 @@ class FriendLink extends React.Component {
           </p>
           <div className="links">
             {
-              links.map((l, i) =>
+              links.more.map((l, i) =>
                 <a key={i} href={l.href}>
                   {l.text}
                 </a>

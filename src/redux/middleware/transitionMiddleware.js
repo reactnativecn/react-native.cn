@@ -38,7 +38,7 @@ export default ({getState, dispatch}) => next => action => {
     }
 
     const promise = Promise.resolve()
-      .then(()=>Promise.all(getDataDependencies(components, getState, dispatch, location, params)))
+      .then(() => Promise.all(getDataDependencies(components, getState, dispatch, location, params)))
       .then(() => {
         next(action);
         if (__CLIENT__ && !__DEV__){
@@ -46,7 +46,7 @@ export default ({getState, dispatch}) => next => action => {
         }
         return Promise.all(getDataDependencies(components, getState, dispatch, location, params, true));
       })
-      .then(()=>dispatch(fetchDataOver()), err=>{
+      .then(() => dispatch(fetchDataOver()), err => {
         dispatch(fetchDataFailed(err)); throw err;
       });
     dispatch(startFetchData(promise));

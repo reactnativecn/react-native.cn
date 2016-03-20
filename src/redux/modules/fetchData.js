@@ -33,6 +33,6 @@ export function fetchDataOver() {
 export function fetchDataFailed(err) {
   return {
     type: FETCH_DATA_FAILED,
-    err: err.message,
+    // err: err.message,
   };
 }

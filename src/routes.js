@@ -11,6 +11,7 @@ import NotFound from './pages/NotFound';
 import Index from './pages/Index';
 import Cases from './pages/Cases';
 import Blog from './pages/Blog';
+import Post from './pages/Post';
 import Videos from './pages/Videos';
 import FriendLink from './pages/FriendLink';
 import Page from './pages/Page';
@@ -38,6 +39,7 @@ export default () => (
     <Route path="videos.html" component={Videos} />
     <Route path="about.html" component={Page} />
     <Route path="friendlink.html" component={FriendLink} />
+    <Route path="post/:tid" component={Post} />
     <Route path="bbs">
       <IndexRoute redirect="http://bbs.reactnative.cn/" />
       <Route path="post/:postId" getRedirect={redirectFunc} />

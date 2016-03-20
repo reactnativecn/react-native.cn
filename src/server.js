@@ -38,10 +38,10 @@ app.use('/proxy/bbs/api/category', (req, res) => {
 });
 app.use('/proxy/bbs/api/topic', (req, res) => {
   storage.load({
-    key: 'blog',
-    id: decodeURIComponent(req.path.substr(1, req.path.length - 1))
-  }).then(blog => {
-    res.json(blog);
+    key: 'post',
+    id: req.path.substr(1, req.path.length - 1)
+  }).then(post => {
+    res.json(post);
   });
 });
 app.use('/proxy/videos', (req, res) => {

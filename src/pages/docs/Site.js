@@ -22,6 +22,9 @@ class Site extends React.Component {
     params: React.PropTypes.object,
   };
   static fetchData(getState, dispatch, location) {
+    if (getState().docIndex) {
+      return Promise.resolve();
+    }
     return storage.load({
       key: 'docIndex',
       id: location.pathname.split('/')[2],

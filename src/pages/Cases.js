@@ -21,7 +21,7 @@ class Cases extends React.Component {
 
   static fetchData(getState, dispatch) {
     // return fetchStaticCases('/cases/cases.json', getState, dispatch);
-    if (getState().content) {
+    if (getState().cases) {
       return Promise.resolve();
     }
     return storage.load({

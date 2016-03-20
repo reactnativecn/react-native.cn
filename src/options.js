@@ -29,4 +29,9 @@ module.exports = Object.assign({
   },
   host: 'http://reactnative.cn',
   bbs: 'http://bbs.reactnative.cn',
+  rootUrl: __DEV__ ? 'http://localhost:3000' : 'http://reactnative.cn',
+  bbsRootUrl: __SERVER__ ? 'http://bbs.reactnative.cn' : '/proxy/bbs',
+  youkuUrl: __SERVER__ ?
+    'https://openapi.youku.com/v2/videos/by_user.json?' : '/proxy/videos/by_user.json?',
+  clientid: '3f4eca228da38d9e',
 }, __OPTIONS__);

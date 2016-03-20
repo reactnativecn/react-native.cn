@@ -2,8 +2,8 @@
  * Created by sunny on 1/26/16.
  */
 import storage from './storage';
+import { bbsRootUrl, rootUrl, youkuUrl, clientid } from '../options';
 
-const rootUrl = __DEV__ ? 'http://localhost:3000' : 'http://reactnative.cn';
 
 export function fetchStatic(url) {
   return fetch(__SERVER__ ? `${rootUrl}/static${url}` : `/static${url}`);
@@ -17,15 +17,10 @@ export function fetchStaticJson(url) {
   return fetchStatic(url).then(resp => resp.json());
 }
 
-const bbsRootUrl = __SERVER__ ? 'http://bbs.reactnative.cn' : '/proxy/bbs';
-const youkuUrl = __SERVER__ ?
-                      'https://openapi.youku.com/v2/videos/by_user.json?' : '/proxy/videos/by_user.json?';
-const clientid = '3f4eca228da38d9e';
-
 export default {
   blogList(params) {
     const { resolve, reject } = params;
-    fetch(`${bbsRootUrl}/api/category/3/blogs`)
+    fetch(`${bbsRootUrl}/api/category/3`)
       .then(response => response.json())
       .then(data => {
         if (data.cid) {
@@ -40,15 +35,16 @@ export default {
         if (reject) reject();
       });
   },
-  blog(params) {
+  post(params) {
     const { id, resolve, reject } = params;
-    const [tid, title] = id.split('/');
-    fetch(`${bbsRootUrl}/api/topic/${tid}/${encodeURIComponent(title)}`)
+    // const [tid, title] = id.split('/');
+    // fetch(`${bbsRootUrl}/api/topic/${tid}/${encodeURIComponent(title)}`)
+    fetch(`${bbsRootUrl}/api/topic/${id}`)
       .then(response => response.json())
       .then(data => {
         if (data.tid) {
           storage.save({
-            key: 'blog',
+            key: 'post',
             id,
             rawData: data,
           });
@@ -58,6 +54,24 @@ export default {
         console.warn(error);
         if (reject) reject();
       });
+  },
+  newsList(params) {
+    const { resolve, reject } = params;
+    // 公告 %E5%85%AC%E5%91%8A
+    fetch(`${bbsRootUrl}/api/category/1/%E5%85%AC%E5%91%8A`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.cid) {
+          storage.save({
+            key: 'newsList',
+            rawData: data,
+          });
+          if (resolve) resolve(data);
+        }
+      }).catch(error => {
+        console.warn(error);
+        if (reject) reject();
+    });
   },
   pageContent(params) {
     const { id, resolve, reject } = params;
