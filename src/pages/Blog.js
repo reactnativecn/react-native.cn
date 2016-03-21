@@ -15,17 +15,33 @@ class Blog extends React.Component {
   static propTypes = {
     blogDetailedList: React.PropTypes.array,
   };
-
   static fetchData(getState, dispatch) {
     if (getState().blogDetailedList) {
       return Promise.resolve();
     }
     return storage.load({
       key: 'blogList',
-    }).then(blogList =>
-      storage.getBatchData(blogList.topics.map(t => ({ key: 'post', id: t.tid })))
+    }).then(blogList => storage.getBatchData(blogList.topics.map(t => ({ key: 'post', id: t.tid })))
     ).then(data => dispatch(blogDetailedListLoaded(data)));
   }
+  constructor(props) {
+    super(props);
+    this.state = {
+      appendList: [],
+    };
+    this.currentPage = 1;
+  }
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+  }
+  onScroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      this.fetchMore();
+    }
+  };
   parseBlogBody = (rawBody, link) => {
     const endFlag = /<hr \/>([\s\S]*?)<hr \/>/;
     let parsedText = endFlag.exec(rawBody);
@@ -33,14 +49,59 @@ class Blog extends React.Component {
     parsedText = parsedText.replace(/\/uploads\/file/g, `${config.bbs}/uploads/file`);
     return `${parsedText}<a href="${link}" class="more">[阅读全文]</a>`;
   };
+  fetchMore = () => {
+    if (this.fetching || this.fetchOver) {
+      return;
+    }
+    this.fetching = true;
+    storage.sync.blogList({
+      query: `?page=${this.currentPage + 1}`,
+      resolve: blogList => {
+        if (blogList.topics) {
+          const { currentPage, pageCount } = blogList.pagination;
+          if (currentPage === pageCount) {
+            this.fetchOver = true;
+          }
+          this.currentPage = currentPage;
+          return storage.getBatchData(blogList.topics.map(t => ({ key: 'post', id: t.tid })))
+          .then(blogs => {
+            this.setState({
+              appendList: this.state.appendList.concat(blogs),
+            });
+            this.fetching = false;
+          });
+        } else {
+          this.fetchOver = true;
+        }
+      }
+    });
+    // fetch(`${config.bbsRootUrl}/api/category/3?page=${this.currentPage + 1}`)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     if (data.topics) {
+    //       const { currentPage, pageCount } = data.pagination;
+    //       if (currentPage === pageCount) {
+    //         this.fetchOver = true;
+    //       }
+    //       this.currentPage = currentPage;
+    //       this.setState({
+    //         appendList: this.state.appendList.concat(data.topics),
+    //       });
+    //       this.fetching = false;
+    //     } else {
+    //       this.fetchOver = true;
+    //     }
+    //   });
+  };
   render() {
     const { blogDetailedList } = this.props;
+    let blogList = blogDetailedList.concat(this.state.appendList);
     return (
       <div>
         <DocumentMeta {...config.app} title="React Native博客 - react native 中文网" />
         <Container type="blog">
           {
-            blogDetailedList.map(topic => {
+            blogList.map(topic => {
               const post = topic.posts[0];
               return (
                 <div className="post-list-item" key={post.tid}>

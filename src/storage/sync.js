@@ -19,15 +19,17 @@ export function fetchStaticJson(url) {
 
 export default {
   blogList(params) {
-    const { resolve, reject } = params;
-    fetch(`${bbsRootUrl}/api/category/3`)
+    const { resolve, reject, query } = params;
+    fetch(`${bbsRootUrl}/api/category/3${query || ''}`)
       .then(response => response.json())
       .then(data => {
         if (data.cid) {
-          storage.save({
-            key: 'blogList',
-            rawData: data,
-          });
+          if (!query) {
+            storage.save({
+              key: 'blogList',
+              rawData: data,
+            });
+          }
           if (resolve) resolve(data);
         }
       }).catch(error => {

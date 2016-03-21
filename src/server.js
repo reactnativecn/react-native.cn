@@ -28,13 +28,19 @@ const server = new http.Server(app);
 
 // import getDataDependencies from './helpers/getDataDependencies';
 import storage from './storage/storage';
+import { objectToQueryString } from './helpers/paramsHelper';
 
 app.use('/proxy/bbs/api/category', (req, res) => {
-  storage.load({
-    key: 'blogList'
-  }).then(blogList => {
-    res.json(blogList);
-  });
+  if (req.query) {
+    storage.sync.blogList({
+      query: objectToQueryString(req.query),
+      resolve: blogList => res.json(blogList),
+    });
+  } else {
+    storage.load({
+      key: 'blogList',
+    }).then(blogList => res.json(blogList));
+  }
 });
 app.use('/proxy/bbs/api/topic', (req, res) => {
   storage.load({
