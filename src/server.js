@@ -30,7 +30,19 @@ const server = new http.Server(app);
 import storage from './storage/storage';
 import { objectToQueryString } from './helpers/paramsHelper';
 
-app.use('/proxy/bbs/api/category', (req, res) => {
+app.use('/proxy/bbs/api/category/1', (req, res) => {
+  if (req.query) {
+    storage.sync.newsList({
+      query: objectToQueryString(req.query),
+      resolve: newsList => res.json(newsList),
+    });
+  } else {
+    storage.load({
+      key: 'newsList',
+    }).then(newsList => res.json(newsList));
+  }
+});
+app.use('/proxy/bbs/api/category/3', (req, res) => {
   if (req.query) {
     storage.sync.blogList({
       query: objectToQueryString(req.query),

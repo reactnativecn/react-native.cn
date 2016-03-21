@@ -58,16 +58,17 @@ export default {
       });
   },
   newsList(params) {
-    const { resolve, reject } = params;
-    // 公告 %E5%85%AC%E5%91%8A
-    fetch(`${bbsRootUrl}/api/category/1/%E5%85%AC%E5%91%8A`)
+    const { resolve, reject, query } = params;
+    fetch(`${bbsRootUrl}/api/category/1${query || ''}`)
       .then(response => response.json())
       .then(data => {
         if (data.cid) {
-          storage.save({
-            key: 'newsList',
-            rawData: data,
-          });
+          if (!query) {
+            storage.save({
+              key: 'newsList',
+              rawData: data,
+            });
+          }
           if (resolve) resolve(data);
         }
       }).catch(error => {
