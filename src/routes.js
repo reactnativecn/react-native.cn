@@ -24,6 +24,7 @@ import versions from './pages/docs/versions.json';
 
 const redirectFunc = ({ postId }) => (bbsRedirect.redirects[postId] || 'http://bbs.reactnative.cn/');
 const docRedirect = (nextState, replace) => {
+  console.log(nextState);
   const { params } = nextState;
   if (params.docid && params.docid.indexOf('.html') !== -1) {
     replace(`/docs/${versions.current}/${params.docid}`);
@@ -44,8 +45,8 @@ export default () => (
       <IndexRoute redirect="http://bbs.reactnative.cn/" />
       <Route path="post/:postId" getRedirect={redirectFunc} />
     </Route>
+    <Route path="docs" redirect={`/docs/${versions.current}/getting-started.html`} />
     <Route path="docs" component={DocRoot}>
-      <IndexRoute redirect={`/docs/${versions.current}/getting-started.html`} />
       <Route
         path=":docid"
         onEnter={docRedirect}

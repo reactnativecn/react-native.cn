@@ -102,8 +102,8 @@ app.use((req, res) => {
   const store = createStore(reduxReactRouter, getRoutes, createHistory);
 
   function hydrateOnClient() {
-    res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store}/>));
+    res.send(`<!doctype html>\n
+      ${ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />)}`);
   }
   if (!options.enableSSR) {
     hydrateOnClient();
@@ -112,24 +112,29 @@ app.use((req, res) => {
 
   function sendRendered(routerState) {
     const redirect = getRedirectFromRoutes(routerState.routes, routerState.params);
-    if (redirect){
+    if (redirect) {
       res.redirect(redirect);
       return;
     }
     const component = (
       <Provider store={store} key="provider">
-        <ReduxRouter/>
+        <ReduxRouter />
       </Provider>
     );
     const status = getStatusFromRoutes(routerState.routes);
     if (status) {
       res.status(status);
     }
-    res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component}
-                                    store={store}/>));
+    res.send(`<!doctype html>\n
+      ${ReactDOM.renderToString(
+      <Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />
+      )}`);
   }
   store.dispatch(match(req.originalUrl, (error, redirectLocation, routerState) => {
+    console.log(redirectLocation);
+    console.log(1);
+    console.log(routerState);
+
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (error) {
