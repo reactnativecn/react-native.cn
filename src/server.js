@@ -131,10 +131,6 @@ app.use((req, res) => {
       )}`);
   }
   store.dispatch(match(req.originalUrl, (error, redirectLocation, routerState) => {
-    console.log(redirectLocation);
-    console.log(1);
-    console.log(routerState);
-
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (error) {

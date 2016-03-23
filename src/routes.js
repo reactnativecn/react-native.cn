@@ -24,7 +24,6 @@ import versions from './pages/docs/versions.json';
 
 const redirectFunc = ({ postId }) => (bbsRedirect.redirects[postId] || 'http://bbs.reactnative.cn/');
 const docRedirect = (nextState, replace) => {
-  console.log(nextState);
   const { params } = nextState;
   if (params.docid && params.docid.indexOf('.html') !== -1) {
     replace(`/docs/${versions.current}/${params.docid}`);
