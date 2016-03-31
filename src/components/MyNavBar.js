@@ -94,7 +94,8 @@ class MyNavBar extends React.Component {
             </Navbar.Brand>
             <NavDropdown
               className="nav-version"
-              title={ this.props.params.version || versions.current } id="nav_version"
+              title={ this.props.params.version || versions.current }
+              id="nav_version"
             >
               <MenuItem onSelect={this.goToReleaseNote}>
                 更新日志
