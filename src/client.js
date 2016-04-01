@@ -16,7 +16,6 @@ import { reduxReactRouter, ReduxRouter } from 'redux-router';
 import getRoutes from './routes';
 import makeRouteHooksSafe from './helpers/makeRouteHooksSafe';
 
-import DevTools from './components/DevTools/DevTools';
 
 // Three different types of scroll behavior available.
 // Documented here: https://github.com/rackt/scroll-behavior
@@ -34,6 +33,7 @@ const component = (
 
 function render() {
   if (__DEVTOOLS__ && !window.devToolsExtension) {
+    const DevTools = require('./components/DevTools/DevTools').default;
     ReactDOM.render(
       <Provider store={store} key="provider">
         <div>
