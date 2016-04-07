@@ -44,8 +44,12 @@ export default () => (
       <IndexRoute redirect="http://bbs.reactnative.cn/" />
       <Route path="post/:postId" getRedirect={redirectFunc} />
     </Route>
-    <Route path="docs" redirect={`/docs/${versions.current}/getting-started.html`} />
+    {
+      __SERVER__ &&
+      <Route path="docs" redirect={`/docs/${versions.current}/getting-started.html`} />
+    }
     <Route path="docs" component={DocRoot}>
+      <IndexRoute redirect={`/docs/${versions.current}/getting-started.html`} />
       <Route
         path=":docid"
         onEnter={docRedirect}
