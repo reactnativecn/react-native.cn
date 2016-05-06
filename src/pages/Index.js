@@ -82,9 +82,6 @@ class Index extends React.Component {
         <section className="content">
           <Container>
             <a className="anchor" name="content" />
-            <Marked uri={"/static/"} scrollTo={hash} createHashLink>
-              {content}
-            </Marked>
             <div className="news">
               <div className="news-list">
                 {
@@ -123,6 +120,9 @@ class Index extends React.Component {
                 }
               </div>
             </div>
+            <Marked uri={"/static/"} scrollTo={hash} createHashLink>
+              {content}
+            </Marked>
             <div className="buttons-unit">
               <a
                 type="button"
