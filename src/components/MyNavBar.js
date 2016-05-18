@@ -117,6 +117,12 @@ class MyNavBar extends React.Component {
               }
             </Nav>
             <Nav pullRight>
+              <NavItem>
+                <form className="nav-search-form" target="_blank" action="http://zhannei.baidu.com/cse/site">
+                  <input className="nav-search" type="text" name="q" size="30" placeholder="搜索文档" />
+                  <input type="hidden" name="cc" />
+                </form>
+              </NavItem>
               {
                 linksExternal.map(v => this.createLink(v))
               }
