@@ -120,7 +120,7 @@ class MyNavBar extends React.Component {
               <NavItem>
                 <form className="nav-search-form" target="_blank" action="http://zhannei.baidu.com/cse/site">
                   <input className="nav-search" type="text" name="q" size="30" placeholder="搜索文档" />
-                  <input type="hidden" name="cc" />
+                  <input type="hidden" name="cc" value="reactnative.cn" />
                 </form>
               </NavItem>
               {
