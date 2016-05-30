@@ -42,6 +42,7 @@ class Post extends React.Component {
     const { location } = this.props;
     var el = document.createElement('div');
     el.setAttribute('data-thread-key', tkey);
+    el.setAttribute('data-author-key', '325758');
     DUOSHUO.EmbedThread(el);
     container.innerHTML = '';
     container.appendChild(el);
