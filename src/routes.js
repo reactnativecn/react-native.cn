@@ -49,7 +49,10 @@ export default () => (
       <Route path="docs" redirect={`/docs/${versions.current}/getting-started.html`} />
     }
     <Route path="docs" component={DocRoot}>
-      <IndexRoute redirect={`/docs/${versions.current}/getting-started.html`} />
+    {
+       __CLIENT__ &&
+       <IndexRoute redirect={`/docs/${versions.current}/getting-started.html`} />
+    }
       <Route
         path=":docid"
         onEnter={docRedirect}

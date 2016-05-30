@@ -23,12 +23,43 @@ class Post extends React.Component {
       id,
     }).then(data => dispatch(postLoaded(data)));
   }
+
+  componentDidMount() {
+    const { location } = this.props;
+    setTimeout(() => {
+      this.renderDuoshuo(this.refs.duoshuo, location.pathname);
+    }, 1000); // why?
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { location } = nextProps;
+    if (location.pathname !== this.threadKey) {
+      this.renderDuoshuo(this.refs.duoshuo, location.pathname);
+    }
+  }
+
+  renderDuoshuo = (container, tkey) => {
+    const { location } = this.props;
+    var el = document.createElement('div');
+    el.setAttribute('data-thread-key', tkey);
+    DUOSHUO.EmbedThread(el);
+    container.innerHTML = '';
+    container.appendChild(el);
+    this.threadKey = tkey;
+  };
+
+
   parseBlogBody = (rawBody, link) => {
     const parsedText = rawBody.replace(/\/uploads\/file/g, `${config.bbs}/uploads/file`);
     return `${parsedText}<a href="${link}" class="more">[去论坛发表意见]</a>`;
   };
+
+  // componentDidMount() {
+  //   DUOSHUO.EmbedThread(this.refs.duoshuo);
+  // }
+
   render() {
-    const { post } = this.props;
+    const { post, location } = this.props;
     const body = post.posts[0];
     return (
       <div>
@@ -56,10 +87,11 @@ class Post extends React.Component {
             <div
               className="post"
               dangerouslySetInnerHTML={{
-                      __html: this.parseBlogBody(body.content, `${config.bbs}/topic/${post.tid}`),
-                    }}
+                __html: this.parseBlogBody(body.content, `${config.bbs}/topic/${post.tid}`),
+              }}
             />
           </div>
+          <div ref="duoshuo"></div>
         </Container>
       </div>
     );

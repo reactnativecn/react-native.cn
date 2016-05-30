@@ -47,6 +47,8 @@ export default class Html extends Component {
             __html: Object.keys(assets.assets).map(key=>assets.assets[key]).filter(v=>typeof(v) === 'object' && v._style).map(v=>v._style).join('\n')
           }}/>
         )}
+        <script  dangerouslySetInnerHTML={{__html: 'var duoshuoQuery = {short_name:"reactnative"}'}}></script>
+        <script src="http://static.duoshuo.com/embed.js"></script>
       </head>
       <body>
         <div id="content" dangerouslySetInnerHTML={{__html: content}}></div>
