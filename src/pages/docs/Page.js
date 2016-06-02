@@ -8,6 +8,7 @@ import { Link } from 'react-router';
 import DocumentMeta from 'react-document-meta';
 import config from '../../options';
 import storage from '../../storage/storage';
+import SNSComment from '../../components/SNSComment';
 import { contentLoaded } from '../../redux/modules/content';
 
 class Page extends React.Component {
@@ -24,32 +25,6 @@ class Page extends React.Component {
       id: location.pathname.replace(/\.html$/, ''),
     }).then(data => dispatch(contentLoaded(data)));
   }
-
-  componentDidMount() {
-    const { location } = this.props;
-    setTimeout(() => {
-      this.renderDuoshuo(this.refs.duoshuo, location.pathname);
-    }, 1000); // why?
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { location } = nextProps;
-    if (location.pathname !== this.threadKey) {
-      this.renderDuoshuo(this.refs.duoshuo, location.pathname);
-    }
-  }
-
-  renderDuoshuo = (container, tkey) => {
-    const { location } = this.props;
-    var el = document.createElement('div');
-    el.setAttribute('data-thread-key', tkey);
-    el.setAttribute('data-author-key', '325758');
-    DUOSHUO.EmbedThread(el);
-    container.innerHTML = '';
-    container.appendChild(el);
-    this.threadKey = tkey;
-  };
-
   render() {
     const { location, params, docIndex, content } = this.props;
     let hash = location.hash;
@@ -104,7 +79,7 @@ class Page extends React.Component {
             </Col>}
           </Row>
         </section>
-        <div ref="duoshuo"></div>
+        <SNSComment threadKey={location.pathname} />
       </div>
     );
   }
