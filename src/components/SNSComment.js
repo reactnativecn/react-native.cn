@@ -38,8 +38,8 @@ export default class SNSComment extends React.Component {
     const { container, threadKey, authorKey, url, title } = params;
     var el = document.createElement('div');
     el.setAttribute('data-thread-key', threadKey);
-    // el.setAttribute('data-author-key', authorKey || '325758');
-    el.setAttribute('data-author-key', authorKey || '6291453554058068738');
+    el.setAttribute('data-author-key', authorKey || '325758');
+    // el.setAttribute('data-author-key', authorKey || '6291453554058068738');
     el.setAttribute('data-url', url || window.location.href);
     el.setAttribute('data-title', title || '');
     DUOSHUO.EmbedThread(el);
