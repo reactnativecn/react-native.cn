@@ -79,7 +79,7 @@ class Page extends React.Component {
             </Col>}
           </Row>
         </section>
-        <SNSComment threadKey={location.pathname} />
+        <SNSComment threadKey={location.pathname} title={`${params.version}/${title}`} />
       </div>
     );
   }
