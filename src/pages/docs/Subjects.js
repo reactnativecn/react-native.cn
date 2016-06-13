@@ -31,6 +31,7 @@ export default class Subjects extends React.Component {
                       pathname: u.external || `/docs/${this.props.params.version}/${u.mdlink}.html`,
                       hash: '#content',
                     }}
+                    target={u.external ? '_blank' : '_self'}
                   >
                     {u.subject}
                   </Link>

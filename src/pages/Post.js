@@ -31,10 +31,6 @@ class Post extends React.Component {
     return `${parsedText}<a href="${link}" class="more">[去论坛发表意见]</a>`;
   };
 
-  // componentDidMount() {
-  //   DUOSHUO.EmbedThread(this.refs.duoshuo);
-  // }
-
   render() {
     const { post, location } = this.props;
     const body = post.posts[0];
@@ -51,7 +47,7 @@ class Post extends React.Component {
                 dangerouslySetInnerHTML={{ __html: post.title }}
               />
               <div className="meta">
-                { body.timestampISO.split('T')[0] }
+                {body.timestampISO.split('T')[0]}
                 {' by '}
                 <a
                   target="_blank"
