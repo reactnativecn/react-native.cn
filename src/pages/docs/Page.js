@@ -64,7 +64,11 @@ class Page extends React.Component {
             {prev && <Col xs={3} md={3} mdOffset={9} xsOffset={7}>
               <Link
                 className="nextprevLink"
-                to={{ pathname: `/docs/${params.version}/${prev.mdlink}.html` }}
+                to={{
+                  pathname: prev.external || `/docs/${this.props.params.version}/${prev.mdlink}.html`,
+                  hash: '#content',
+                }}
+                target={prev.external ? '_blank' : '_self'}
               >
                 前一篇：{prev.subject}
               </Link>
@@ -72,7 +76,11 @@ class Page extends React.Component {
             {next && <Col xs={3} md={3} mdOffset={9} xsOffset={7}>
               <Link
                 className="nextprevLink"
-                to={{ pathname: `/docs/${params.version}/${next.mdlink}.html` }}
+                to={{
+                  pathname: next.external || `/docs/${this.props.params.version}/${next.mdlink}.html`,
+                  hash: '#content',
+                }}
+                target={next.external ? '_blank' : '_self'}
               >
                 后一篇：{next.subject}
               </Link>
