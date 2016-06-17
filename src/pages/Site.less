@@ -34,6 +34,27 @@ footer {
 
 .content {
   margin: 20px 0;
+  blockquote {
+    padding: 15px 30px 15px 15px;
+    margin: 20px 0;
+    background-color: rgba(248, 245, 236, 0.1);
+    border-left: 5px solid rgba(191, 87, 73, 0.2);
+
+    h4 {
+      margin-top: 0;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 0;
+      text-rendering: optimizelegibility;
+    }
+
+    p:first-child {
+      margin-top: 0;
+    }
+  }
 }
 
 h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-link, h5:hover .hash-link, h6:hover .hash-link {
@@ -51,7 +72,16 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
   top: -70px;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6 {
+  margin: 10px 0;
+  font-family: inherit;
+  font-weight: bold;
+  line-height: 20px;
+  color: inherit;
+  text-rendering: optimizelegibility;
+}
+
+h1, h2, h3, h4 {
   line-height: 40px;
 }
 
@@ -67,7 +97,6 @@ h1, h2, h3 {
 @media (max-width: 768px) {
   .hotSign {
     position: absolute;
-
     top: 10px;
     left: 60px;
   }
