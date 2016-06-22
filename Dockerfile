@@ -4,7 +4,7 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.1/install.sh
 
 RUN apt-get update
 
-RUN apt-get -y install make gcc g++ python
+RUN apt-get -y install make gcc g++ python git
 
 RUN bash -c "source ~/.nvm/nvm.sh && nvm install v4.2.4"
 
