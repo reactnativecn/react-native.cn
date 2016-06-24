@@ -1,5 +1,5 @@
 import React from 'react';
-import marked from 'marked';
+import marked from '../lib/Marked';
 import URI from 'urijs';
 import './Marked.less';
 import { highlight, highlightAuto, getLanguage } from 'highlight.js';
