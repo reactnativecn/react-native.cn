@@ -22,7 +22,9 @@ class Site extends React.Component {
     params: React.PropTypes.object,
   };
   static fetchData(getState, dispatch, location) {
-    if (getState().docIndex) {
+    let id = location.pathname.split('/')[2];
+    let docIndex = getState().docIndex;
+    if (docIndex && docIndex.id === id) {
       return Promise.resolve();
     }
     return storage.load({

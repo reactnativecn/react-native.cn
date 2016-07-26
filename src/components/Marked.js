@@ -107,6 +107,15 @@ export default class Marked extends React.Component {
     }
   }
 
+  checkScript() {
+    const content = this.props.children;
+    if (content && content.indexOf('markdown-script') !== -1) {
+      setTimeout(() => {
+        eval(document.querySelector('.markdown-script').innerHTML);
+      }, 0);
+    }
+  }
+
   render() {
     return (
       <div
@@ -114,6 +123,7 @@ export default class Marked extends React.Component {
         dangerouslySetInnerHTML={{ __html: this.rawMarkup() }}
         ref={
           __CLIENT__ && (div => {
+            this.checkScript();
             this.div = div;
             this.doScroll();
           })

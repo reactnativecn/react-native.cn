@@ -110,6 +110,7 @@ export default {
     const { id, resolve, reject } = params;
     fetchStaticJson(`/docs/${id}/indexes.json`)
       .then(data => {
+        data.id = id;
         storage.save({
           key: 'docIndex',
           id,

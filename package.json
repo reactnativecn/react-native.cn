@@ -69,7 +69,7 @@
     "query-string": "^4.1.0",
     "raw-loader": "^0.5.1",
     "react": "^15.2.1",
-    "react-bootstrap": "^0.30.0-rc.2",
+    "react-bootstrap": "^0.30.0",
     "react-document-meta": "^2.0.3",
     "react-dom": "^15.2.1",
     "react-redux": "^4.4.5",

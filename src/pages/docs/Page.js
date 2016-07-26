@@ -65,7 +65,7 @@ class Page extends React.Component {
               <Link
                 className="nextprevLink"
                 to={{
-                  pathname: prev.external || `/docs/${this.props.params.version}/${prev.mdlink}.html`,
+                  pathname: prev.external || `${prev.mdlink}.html`,
                   hash: '#content',
                 }}
                 target={prev.external ? '_blank' : '_self'}
@@ -77,7 +77,7 @@ class Page extends React.Component {
               <Link
                 className="nextprevLink"
                 to={{
-                  pathname: next.external || `/docs/${this.props.params.version}/${next.mdlink}.html`,
+                  pathname: next.external || `${next.mdlink}.html`,
                   hash: '#content',
                 }}
                 target={next.external ? '_blank' : '_self'}
