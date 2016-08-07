@@ -10,11 +10,21 @@ export function fetchStatic(url) {
 }
 
 export function fetchStaticText(url) {
-  return fetchStatic(url).then(resp => resp.text());
+  return fetchStatic(url).then(resp => {
+    if (resp.status === 404) {
+      return '';
+    }
+    return resp.text();
+  });
 }
 
 export function fetchStaticJson(url) {
-  return fetchStatic(url).then(resp => resp.json());
+  return fetchStatic(url)
+    .then(resp => resp.json())
+    .catch(e => {
+      console.warn(e);
+      return {};
+    });
 }
 
 export default {
@@ -111,6 +121,9 @@ export default {
     fetchStaticJson(`/docs/${id}/indexes.json`)
       .then(data => {
         data.id = id;
+        if (!data.contains) {
+          data.contains = [];
+        }
         storage.save({
           key: 'docIndex',
           id,

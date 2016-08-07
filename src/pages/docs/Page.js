@@ -10,6 +10,7 @@ import config from '../../options';
 import storage from '../../storage/storage';
 import SNSComment from '../../components/SNSComment';
 import { contentLoaded } from '../../redux/modules/content';
+import NotFound from '../NotFound';
 
 class Page extends React.Component {
   static propTypes = {
@@ -57,9 +58,14 @@ class Page extends React.Component {
         <h1>{title}</h1>
         { gitLink && <a className="edit-github" href={gitLink}>在GitHub上修改这篇文档</a> }
         <section className="content">
-          <Marked uri={`/static/docs/${params.version}/`} scrollTo={hash} createHashLink>
-            {content}
-          </Marked>
+          {
+            content ?
+              <Marked uri={`/static/docs/${params.version}/`} scrollTo={hash} createHashLink>
+                {content}
+              </Marked>
+              :
+              <NotFound />
+          }
           <Row className="prevNextRow">
             {prev && <Col xs={3} md={3} mdOffset={9} xsOffset={7}>
               <Link
