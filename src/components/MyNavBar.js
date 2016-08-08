@@ -17,7 +17,7 @@ import versions from '../pages/docs/versions.json';
 const linksInternal = [
   // {section: 'offdocs', href: 'https://facebook.github.io/react-native/docs/getting-started.html', text: '官方文档(英文)'},
   // {section: 'releases', href: 'https://github.com/facebook/react-native/releases', text: '版本'},
-  { section: 'docs', href: '/docs/', text: '文档' },
+  { section: 'docs', href: `/docs/${versions.current}/getting-started.html`, text: '文档' },
   { section: 'cases', href: '/cases.html', text: '案例' },
   { section: 'blog', href: '/blog.html', text: '博客' },
   { section: 'videos', href: '/videos.html', text: '视频' },

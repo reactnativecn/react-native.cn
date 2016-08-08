@@ -42,9 +42,9 @@ export default {
           }
           if (resolve) resolve(data);
         }
-      }).catch(error => {
-        console.warn(error);
-        if (reject) reject();
+      }).catch(e => {
+        console.warn(e);
+        if (reject) reject(e);
       });
   },
   post(params) {
@@ -64,7 +64,7 @@ export default {
         }
       }).catch(error => {
         console.warn(error);
-        if (reject) reject();
+        if (resolve) resolve(null);
       });
   },
   newsList(params) {
@@ -81,9 +81,9 @@ export default {
           }
           if (resolve) resolve(data);
         }
-      }).catch(error => {
-        console.warn(error);
-        if (reject) reject();
+      }).catch(e => {
+        console.warn(e);
+        if (reject) reject(e);
     });
   },
   pageContent(params) {
@@ -96,9 +96,9 @@ export default {
           rawData: data,
         });
         if (resolve) resolve(data);
-      }).catch(error => {
-        console.warn(error);
-        if (reject) reject();
+      }).catch(e => {
+        console.warn(e);
+        if (reject) reject(e);
       });
   },
   docContent(params) {
@@ -111,9 +111,9 @@ export default {
           rawData: data,
         });
         if (resolve) resolve(data);
-      }).catch(error => {
-        console.warn(error);
-        if (reject) reject();
+      }).catch(e => {
+        console.warn(e);
+        if (reject) reject(e);
       });
   },
   docIndex(params) {
@@ -130,9 +130,9 @@ export default {
           rawData: data,
         });
         if (resolve) resolve(data);
-      }).catch(error => {
-        console.warn(error);
-        if (reject) reject();
+      }).catch(e => {
+        console.warn(e);
+        if (reject) reject(e);
       });
   },
   cases(params) {
@@ -144,9 +144,9 @@ export default {
           rawData: data,
         });
         if (resolve) resolve(data);
-      }).catch(error => {
-        console.warn(error);
-        if (reject) reject();
+      }).catch(e => {
+        console.warn(e);
+        if (reject) reject(e);
       });
   },
   links(params) {
@@ -158,9 +158,9 @@ export default {
           rawData: data,
         });
         if (resolve) resolve(data);
-      }).catch(error => {
-        console.warn(error);
-        if (reject) reject();
+      }).catch(e => {
+        console.warn(e);
+        if (reject) reject(e);
       });
   },
 // APP KEY 3f4eca228da38d9e
@@ -178,9 +178,9 @@ export default {
           });
           if (resolve) resolve(data);
         }
-      }).catch(error => {
-        console.warn(error);
-        if (reject) reject();
+      }).catch(e => {
+        console.warn(e);
+        if (reject) reject(e);
       });
   },
 };

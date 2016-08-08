@@ -10,6 +10,7 @@ import config from '../options';
 import { postLoaded } from '../redux/modules/post';
 import storage from '../storage/storage';
 import SNSComment from '../components/SNSComment';
+import NotFound from './NotFound';
 import './Post.styl';
 
 class Post extends React.Component {
@@ -33,39 +34,46 @@ class Post extends React.Component {
 
   render() {
     const { post, location } = this.props;
-    const body = post.posts[0];
+    let body;
     return (
       <div>
         <DocumentMeta {...config.app} title={`${post.title} - react native 中文网`} />
-        <Container type="post">
-          <div className="post-list-item" key={body.tid}>
-            <div className="post-header">
-              <a
-                className="post-title"
-                target="_blank"
-                href={`${config.bbs}/topic/${body.tid}`}
-                dangerouslySetInnerHTML={{ __html: post.title }}
-              />
-              <div className="meta">
-                {body.timestampISO.split('T')[0]}
-                {' by '}
-                <a
-                  target="_blank"
-                  href={`${config.bbs}/user/${body.user.username}`}
-                >
-                  {body.user.username}
-                </a>
+        {
+          post ? (body = post.posts[0]) &&
+            <Container type="post">
+              <div className="post-list-item" key={body.tid}>
+                <div className="post-header">
+                  <a
+                    className="post-title"
+                    target="_blank"
+                    href={`${config.bbs}/topic/${body.tid}`}
+                    dangerouslySetInnerHTML={{ __html: post.title }}
+                  />
+                  <div className="meta">
+                    {body.timestampISO.split('T')[0]}
+                    {' by '}
+                    <a
+                      target="_blank"
+                      href={`${config.bbs}/user/${body.user.username}`}
+                    >
+                      {body.user.username}
+                    </a>
+                  </div>
+                </div>
+                <div
+                  className="post"
+                  dangerouslySetInnerHTML={{
+                    __html: this.parseBlogBody(body.content, `${config.bbs}/topic/${post.tid}`),
+                  }}
+                />
               </div>
-            </div>
-            <div
-              className="post"
-              dangerouslySetInnerHTML={{
-                __html: this.parseBlogBody(body.content, `${config.bbs}/topic/${post.tid}`),
-              }}
-            />
-          </div>
-          <SNSComment threadKey={location.pathname} title={post.title} />
-        </Container>
+              <SNSComment threadKey={location.pathname} title={post.title} />
+            </Container>
+            :
+            <Container>
+              <NotFound />
+            </Container>
+        }
       </div>
     );
   }
