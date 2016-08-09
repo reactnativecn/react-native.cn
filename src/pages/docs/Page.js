@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Marked from '../../components/Marked';
 // import { fetchStaticContent} from '../../helpers/fetchStatic';
 import { connect } from 'react-redux';
@@ -10,14 +10,13 @@ import config from '../../options';
 import storage from '../../storage/storage';
 import SNSComment from '../../components/SNSComment';
 import { contentLoaded } from '../../redux/modules/content';
-import NotFound from '../NotFound';
 
 class Page extends React.Component {
   static propTypes = {
-    content: React.PropTypes.string,
-    location: React.PropTypes.object,
-    params: React.PropTypes.object,
-    docIndex: React.PropTypes.object,
+    content: PropTypes.string,
+    location: PropTypes.object,
+    params: PropTypes.object,
+    docIndex: PropTypes.object,
   };
 
   static fetchData(getState, dispatch, location) {
@@ -59,22 +58,20 @@ class Page extends React.Component {
         { gitLink && <a className="edit-github" href={gitLink}>在GitHub上修改这篇文档</a> }
         <section className="content">
           {
-            content ?
+            content &&
               <Marked uri={`/static/docs/${params.version}/`} scrollTo={hash} createHashLink>
                 {content}
               </Marked>
-              :
-              <NotFound />
           }
           <Row className="prevNextRow">
             {prev && <Col xs={3} md={3} mdOffset={9} xsOffset={7}>
               <Link
                 className="nextprevLink"
                 to={{
-                  pathname: prev.external || `${prev.mdlink}.html`,
+                  pathname: prev.external || `/docs/${params.version}/${prev.mdlink}.html`,
                   hash: '#content',
                 }}
-                target={prev.external ? '_blank' : '_self'}
+                target={prev.external && '_blank'}
               >
                 前一篇：{prev.subject}
               </Link>
@@ -83,10 +80,10 @@ class Page extends React.Component {
               <Link
                 className="nextprevLink"
                 to={{
-                  pathname: next.external || `${next.mdlink}.html`,
+                  pathname: next.external || `/docs/${params.version}/${next.mdlink}.html`,
                   hash: '#content',
                 }}
-                target={next.external ? '_blank' : '_self'}
+                target={next.external && '_blank'}
               >
                 后一篇：{next.subject}
               </Link>
