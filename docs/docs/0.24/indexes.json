@@ -1,0 +1,435 @@
+{
+    "contains": [
+        {
+            "group": "快速入门",
+            "contains": [
+                {
+                    "subject": "开始使用React Native",
+                    "mdlink": "getting-started"
+                },
+                {
+                    "subject": "在Linux上使用React Native",
+                    "mdlink": "getting-started-on-linux"
+                },
+                {
+                    "subject": "安卓环境配置",
+                    "mdlink": "android-setup"
+                },
+                {
+                    "subject": "Linux和Windows支持",
+                    "mdlink": "linux-windows-support"
+                },
+                {
+                    "subject": "新手引导",
+                    "mdlink": "tutorial"
+                }
+            ]
+        },
+        {
+            "group": "使用指南",
+            "contains": [
+                {
+                    "subject": "样式",
+                    "mdlink": "style"
+                },
+                {
+                    "subject": "图片",
+                    "mdlink": "images"
+                },
+                {
+                    "subject": "手势响应系统",
+                    "mdlink": "gesture-responder-system"
+                },
+                {
+                    "subject": "动画",
+                    "mdlink": "animations"
+                },
+                {
+                    "subject": "无障碍功能",
+                    "mdlink": "accessibility"
+                },
+                {
+                    "subject": "直接操作",
+                    "mdlink": "direct-manipulation"
+                },
+                {
+                    "subject": "调试",
+                    "mdlink": "debugging"
+                },
+                {
+                    "subject": "自动化测试",
+                    "mdlink": "testing"
+                },
+                {
+                    "subject": "JavaScript环境",
+                    "mdlink": "javascript-environment"
+                },
+                {
+                    "subject": "导航器对比",
+                    "mdlink": "navigator-comparison"
+                },
+                {
+                    "subject": "已知问题",
+                    "mdlink": "known-issues"
+                },
+                {
+                    "subject": "性能",
+                    "mdlink": "performance"
+                },
+                {
+                    "subject": "升级",
+                    "mdlink": "upgrading"
+                },
+                {
+                    "subject": "特定平台代码",
+                    "mdlink": "platform-specific-code"
+                }
+            ]
+        },
+        {
+            "group": "使用指南(iOS)",
+            "contains": [
+                {
+                    "subject": "原生模块",
+                    "mdlink": "native-modules-ios"
+                },
+                {
+                    "subject": "原生UI组件",
+                    "mdlink": "native-component-ios"
+                },
+                {
+                    "subject": "使用链接库",
+                    "mdlink": "linking-libraries-ios"
+                },
+                {
+                    "subject": "在设备上运行",
+                    "mdlink": "running-on-device-ios"
+                },
+                {
+                    "subject": "植入原生应用",
+                    "mdlink": "embedded-app-ios"
+                },
+                {
+                    "subject": "在原生和React Native间通信",
+                    "mdlink": "communication-ios"
+                }
+            ]
+        },
+        {
+            "group": "使用指南(Android)",
+            "contains": [
+                {
+                    "subject": "原生模块",
+                    "mdlink": "native-modules-android"
+                },
+                {
+                    "subject": "原生UI组件",
+                    "mdlink": "native-component-android"
+                },
+                {
+                    "subject": "在设备上运行",
+                    "mdlink": "running-on-device-android"
+                },
+                {
+                    "subject": "植入原生应用",
+                    "mdlink": "embedded-app-android"
+                },
+                {
+                    "subject": "生成已签名的APK",
+                    "mdlink": "signed-apk-android"
+                },
+                {
+                    "subject": "调试Android UI性能",
+                    "mdlink": "android-ui-performance"
+                },
+                {
+                    "subject": "从源代码编译React Native",
+                    "mdlink": "android-buildingfromsource"
+                }
+            ]
+        },
+        {
+            "group": "组件",
+            "contains": [
+                {
+                    "subject": "ActivityIndicatorIOS",
+                    "mdlink": "activityindicatorios"
+                },
+                {
+                    "subject": "DatePickerIOS",
+                    "mdlink": "datepickerios"
+                },
+                {
+                    "subject": "DrawerLayoutAndroid",
+                    "mdlink": "drawerlayoutandroid"
+                },
+                {
+                    "subject": "Image",
+                    "mdlink": "image"
+                },
+                {
+                    "subject": "ListView",
+                    "mdlink": "listview"
+                },
+                {
+                    "subject": "MapView",
+                    "mdlink": "mapview"
+                },
+                {
+                    "subject": "Modal",
+                    "mdlink": "modal"
+                },
+                {
+                    "subject": "Navigator",
+                    "mdlink": "navigator"
+                },
+                {
+                    "subject": "NavigatorIOS",
+                    "mdlink": "navigatorios"
+                },
+                {
+                    "subject": "Picker",
+                    "mdlink": "picker"
+                },
+                {
+                    "subject": "PickerIOS",
+                    "mdlink": "pickerios"
+                },
+                {
+                    "subject": "ProgressBarAndroid",
+                    "mdlink": "progressbarandroid"
+                },
+                {
+                    "subject": "ProgressViewIOS",
+                    "mdlink": "progressviewios"
+                },
+                {
+                    "subject": "RefreshControl",
+                    "mdlink": "refreshcontrol"
+                },
+                {
+                    "subject": "ScrollView",
+                    "mdlink": "scrollview"
+                },
+                {
+                    "subject": "SegmentedControlIOS",
+                    "mdlink": "segmentedcontrolios"
+                },
+                {
+                    "subject": "Slider",
+                    "mdlink": "slider"
+                },
+                {
+                    "subject": "SliderIOS",
+                    "mdlink": "sliderios"
+                },
+                {
+                    "subject": "StatusBar",
+                    "mdlink": "statusbar"
+                },
+                {
+                    "subject": "Switch",
+                    "mdlink": "switch"
+                },
+                {
+                    "subject": "TabBarIOS",
+                    "mdlink": "tabbarios"
+                },
+                {
+                    "subject": "TabBarIOS.Item",
+                    "mdlink": "tabbarios-item"
+                },
+                {
+                    "subject": "Text",
+                    "mdlink": "text"
+                },
+                {
+                    "subject": "TextInput",
+                    "mdlink": "textinput"
+                },
+                {
+                    "subject": "ToolbarAndroid",
+                    "mdlink": "toolbarandroid"
+                },
+                {
+                    "subject": "TouchableHighlight",
+                    "mdlink": "touchablehighlight"
+                },
+                {
+                    "subject": "TouchableNativeFeedback",
+                    "mdlink": "touchablenativefeedback"
+                },
+                {
+                    "subject": "TouchableOpacity",
+                    "mdlink": "touchableopacity"
+                },
+                {
+                    "subject": "TouchableWithoutFeedback",
+                    "mdlink": "touchablewithoutfeedback"
+                },
+                {
+                    "subject": "View",
+                    "mdlink": "view"
+                },
+                {
+                    "subject": "ViewPagerAndroid",
+                    "mdlink": "viewpagerandroid"
+                },
+                {
+                    "subject": "WebView",
+                    "mdlink": "webview"
+                }
+            ]
+        },
+        {
+            "group": "API",
+            "contains": [
+                {
+                    "subject": "ActionSheetIOS",
+                    "mdlink": "actionsheetios"
+                },
+                {
+                    "subject": "Alert",
+                    "mdlink": "alert"
+                },
+                {
+                    "subject": "AlertIOS",
+                    "mdlink": "alertios"
+                },
+                {
+                    "subject": "Animated",
+                    "mdlink": "animated"
+                },
+                {
+                    "subject": "AppRegistry",
+                    "mdlink": "appregistry"
+                },
+                {
+                    "subject": "AppState",
+                    "mdlink": "appstate"
+                },
+                {
+                    "subject": "AppStateIOS",
+                    "mdlink": "appstateios"
+                },
+                {
+                    "subject": "AsyncStorage",
+                    "mdlink": "asyncstorage"
+                },
+                {
+                    "subject": "BackAndroid",
+                    "mdlink": "backandroid"
+                },
+                {
+                    "subject": "CameraRoll",
+                    "mdlink": "cameraroll"
+                },
+                {
+                    "subject": "Clipboard",
+                    "mdlink": "clipboard"
+                },
+                {
+                    "subject": "DatePickerAndroid",
+                    "mdlink": "datepickerandroid"
+                },
+                {
+                    "subject": "Dimensions",
+                    "mdlink": "dimensions"
+                },
+                {
+                    "subject": "IntentAndroid",
+                    "mdlink": "intentandroid"
+                },
+                {
+                    "subject": "InteractionManager",
+                    "mdlink": "interactionmanager"
+                },
+                {
+                    "subject": "LayoutAnimation",
+                    "mdlink": "layoutanimation"
+                },
+                {
+                    "subject": "Linking",
+                    "mdlink": "linking"
+                },
+                {
+                    "subject": "LinkingIOS",
+                    "mdlink": "linkingios"
+                },
+                {
+                    "subject": "NativeMethodsMixin",
+                    "mdlink": "nativemethodsmixin"
+                },
+                {
+                    "subject": "NetInfo",
+                    "mdlink": "netinfo"
+                },
+                {
+                    "subject": "PanResponder",
+                    "mdlink": "panresponder"
+                },
+                {
+                    "subject": "PixelRatio",
+                    "mdlink": "pixelratio"
+                },
+                {
+                    "subject": "PushNotificationIOS",
+                    "mdlink": "pushnotificationios"
+                },
+                {
+                    "subject": "StatusBarIOS",
+                    "mdlink": "statusbarios"
+                },
+                {
+                    "subject": "StyleSheet",
+                    "mdlink": "stylesheet"
+                },
+                {
+                    "subject": "TimePickerAndroid",
+                    "mdlink": "timepickerandroid"
+                },
+                {
+                    "subject": "ToastAndroid",
+                    "mdlink": "toastandroid"
+                },
+                {
+                    "subject": "VibrationIOS",
+                    "mdlink": "vibrationios"
+                },
+                {
+                    "subject": "Vibration",
+                    "mdlink": "vibration"
+                }
+            ]
+        },
+        {
+            "group": "接口兼容(POLYFILLS)",
+            "contains": [
+                {
+                    "subject": "弹性盒(Flexbox)",
+                    "mdlink": "flexbox"
+                },
+                {
+                    "subject": "ShadowPropTypesIOS",
+                    "mdlink": "shadowproptypesios"
+                },
+                {
+                    "subject": "定位",
+                    "mdlink": "geolocation"
+                },
+                {
+                    "subject": "网络",
+                    "mdlink": "network"
+                },
+                {
+                    "subject": "定时器",
+                    "mdlink": "timers"
+                },
+                {
+                    "subject": "颜色",
+                    "mdlink": "colors"
+                }
+            ]
+        }
+    ]
+}
