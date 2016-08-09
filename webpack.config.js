@@ -2,83 +2,93 @@
  * Created by Yun on 2015-11-28.
  */
 
-const fs = require('fs');
+/* eslint-disable import/no-extraneous-dependencies, no-underscore-dangle */
+
+global.__SERVER__ = process.env.WEBPACK_CONFIG === 'server';
+global.__DEV__ = process.env.NODE_ENV !== 'production';
+
+process.env.BABEL_ENV = __SERVER__ ? 'server' : 'web';
+
 const path = require('path');
 const webpack = require('webpack');
 
 require('webpack-isomorphic-tools');
 
-const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
 
-const babelrc = fs.readFileSync('./.babelrc');
-let babelrcObject = {};
 
-const assetsPath = path.join(__dirname, __DEV__ ? 'build-debug' : 'build-release');
-const options = global.__OPTIONS__ || {};
+const autoprefixer = require('autoprefixer');
 
-try {
-  babelrcObject = JSON.parse(babelrc);
-} catch (err) {
-  console.error('==>     ERROR: Error parsing your .babelrc.');
-  throw err;
-}
-
-const babelLoaderQuery = Object.assign({},
-  babelrcObject,
-  __DEV__ && babelrcObject.env && babelrcObject.env.development,
-  babelrcObject.env && babelrcObject.env.web
+const assetsPath = path.join(__dirname,
+  'build',
+  __SERVER__ ? 'server' : 'web',
+  __DEV__ ? 'debug' : 'release'
 );
-delete babelLoaderQuery.env;
-
-const webpackRoot = 'http://' + options.webpackHost + ':' + options.webpackPort;
 
 function styleLoader(type) {
-  if (__DEV__) {
-    return 'style!css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version' +
-      (type ? ('!' + type + '?outputStyle=expanded&sourceMap') : '' );
+  const loaders = [
+    'style',
+    `css?${JSON.stringify({
+      importLoaders: 2,
+      sourceMap: true,
+    })}`,
+    'postcss',
+  ];
+
+  if (type) {
+    loaders.push(`type?${JSON.stringify({
+      outputStyle: 'expanded',
+      sourceMap: true,
+    })}`);
   }
-  return ExtractTextPlugin.extract('style', 'css!autoprefixer?browsers=last 2 version' +
-    (type ? ('!' + type + '?outputStyle=expanded&sourceMap=true&sourceMapContents=true') : ''));
+
+  if (__DEV__) {
+    return loaders;
+  }
+  return ExtractTextPlugin.extract(loaders[0], loaders.slice(1));
 }
 
 module.exports = {
-  devtool: __DEV__ && 'inline-source-map',
   context: __dirname,
   entry: {
-    'main': __DEV__ ? [
-      'webpack-hot-middleware/client?path=' + webpackRoot + '/__webpack_hmr',
-      './src/client.js',
+    index: (__DEV__ && !__SERVER__) ? [
+      'webpack-hot-middleware/client?path=/__webpack_hmr',
+      './src',
     ] : [
-      './src/client.js',
+      './src',
     ],
   },
   output: {
-    path: assetsPath,
-    filename: __DEV__ ? '[name]-[hash].js' : '[name]-[chunkhash].js',
-    chunkFilename: '[name]-[chunkhash].js',
-    publicPath: __DEV__ ? webpackRoot + '/build-debug/' : '/scripts/',
+    path: __DEV__ ? assetsPath : (`${assetsPath}/[hash]`),
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].chunk.js',
+    publicPath: __DEV__ ? '/scripts/' : '/scripts/[hash]/',
   },
+  postcss: () => [autoprefixer({ browsers: 'last 2 versions' })],
   module: {
-    preLoaders: [
-      //{ test: /\.js$/, exclude: /node_modules/, loader: 'eslint'},
-    ],
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel?' + JSON.stringify(babelLoaderQuery)]},
-      //{ test: /\.js$/, exclude: /node_modules/, loader: 'babel', query: babelLoaderQuery },
+      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel'] },
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.less$/, loader: styleLoader('less') },
       { test: /\.styl$/, loader: styleLoader('stylus') },
       { test: /\.scss$/, loader: styleLoader('sass') },
       { test: /\.css$/, loader: styleLoader() },
-      { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
+      {
+        test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=application/font-woff',
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=application/octet-stream',
+      },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' },
-      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
+      {
+        test: webpackIsomorphicToolsPlugin.regular_expression('images'),
+        loader: 'url-loader?limit=10240',
+      },
     ],
   },
   progress: true,
@@ -87,33 +97,25 @@ module.exports = {
       'src',
       'node_modules',
     ],
-    extensions: ['', '.json', '.js']
+    extensions: ['', __SERVER__ ? '.server.js' : '.web.js', '.json', '.js'],
   },
   plugins: [
     new webpack.DefinePlugin({
-      __CLIENT__: true,
-      __SERVER__: false,
-      __DEV__: !!__DEV__,
-      __DEVTOOLS__: !!options.showDevTool,
-      __OPTIONS__: {
-        'production': !__DEV__,
-      },
-      'process.env': {
-        // Useful to reduce the size of client-side libraries, e.g. react
-        NODE_ENV: __DEV__ ? JSON.stringify('development') : JSON.stringify('production'),
-      },
+      __CLIENT__: !__SERVER__,
+      __SERVER__,
+      __DEV__,
     }),
     webpackIsomorphicToolsPlugin.development(__DEV__),
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    })
+      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+    }),
   ].concat(__DEV__ ? [
     // hot reload
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
   ] : [
     new CleanPlugin([assetsPath]),
-    new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
+    new ExtractTextPlugin('[name].css', { allChunks: true }),
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
 
     // optimizations
@@ -121,8 +123,29 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false
+        warnings: false,
       },
     }),
   ]),
+
+  devServer: {
+    contentBase: './',
+    hot: true,
+    historyApiFallback: true,
+    proxy: {
+    },
+    quiet: false,
+    noInfo: false,
+    lazy: true,
+    filename: '[name].bundle.js',
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000,
+    },
+    publicPath: '/scripts/',
+    stats: { colors: true },
+    features: [
+      'magicHtml',
+    ],
+  },
 };

@@ -1,21 +1,23 @@
 {
-  "plugins": [
-    "transform-runtime",
-    "transform-class-properties",
-    "transform-object-rest-spread",
-    "transform-strict-mode",
-    "syntax-decorators"
-  ],
-  "presets": [
-    "es2015",
-    "react"
-  ],
   "env":{
-    "development":{
-
+    "server":{
+      "plugins": [
+        "transform-es2015-modules-commonjs",
+        "transform-es2015-destructuring",
+        "transform-react-jsx",
+        "transform-object-rest-spread",
+        "transform-strict-mode",
+        "transform-class-properties",
+        "transform-es2015-parameters"
+      ]
     },
     "web":{
-
+      "plugins": [
+      ],
+      "presets": [
+        "es2015",
+        "react"
+      ]
     }
   }
 }
