@@ -13,7 +13,8 @@ import {
 import './NavBar.less';
 import versions from '../../docs/versions.json';
 
-const currentVersion = versions.list.find(v => v.version === versions.current);
+import imageHot from './images/hot.png';
+import imageLogo from './images/header_logo.png';
 
 const linksInternal = [
   // {section: 'offdocs', href: 'https://facebook.github.io/react-native/docs/getting-started.html', text: '官方文档(英文)'},
@@ -48,24 +49,20 @@ export default class MyNavBar extends React.Component {
 
     const newTab = v.newTab !== null ? v.newTab : external;
 
-    const noop = () => {};
-
-    return (external || newTab) ? (
+    const item = (
       <NavItem
-        key={v.section}
-        onClick={v.onClick || noop}
-        href={v.href}
         target={newTab ? '_blank' : '_self'}
+        rel={newTab ? 'noopener noreferrer' : ''}
+        onClick={v.onClick}
       >
         {v.text}
-        {v.hot && <div className="hotSign"><img src={require('./images/hot.png')} /></div>}
+        {v.hot && <div className="hotSign"><img src={imageHot} alt="hot" /></div>}
       </NavItem>
-    ) : (
-      <LinkContainer to={v.href} onClick={v.onClick || noop} key={v.section} hash={v.hash}>
-        <NavItem>
-          {v.text}
-          {v.hot && <div className="hotSign"><img src={require('./images/hot.png')} /></div>}
-        </NavItem>
+    );
+
+    return (external || newTab) ? item : (
+      <LinkContainer to={v.href} onClick={v.onClick} key={v.section} hash={v.hash}>
+        {item}
       </LinkContainer>
     );
   }
@@ -82,13 +79,13 @@ export default class MyNavBar extends React.Component {
                 className="nav-home"
                 to={{ pathname: '/' }}
               >
-                <img src={require('./images/header_logo.png')} />
+                <img src={imageLogo} alt="logo" />
                 React Native
               </Link>
             </Navbar.Brand>
             <NavDropdown
               className="nav-version"
-              title={ this.props.params.version || versions.current }
+              title={this.props.params.version || versions.current}
               id="nav_version"
             >
               <MenuItem onSelect={this.goToReleaseNote}>
@@ -112,7 +109,7 @@ export default class MyNavBar extends React.Component {
             </Nav>
             <Nav pullRight>
               <NavItem>
-                <form className="nav-search-form" target="_blank" action="http://zhannei.baidu.com/cse/site">
+                <form className="nav-search-form" target="_blank" rel="noopener noreferrer" action="http://zhannei.baidu.com/cse/site">
                   <input className="nav-search" type="text" name="q" size="30" placeholder="搜索文档" />
                   <input type="hidden" name="cc" value="reactnative.cn" />
                 </form>
@@ -123,7 +120,7 @@ export default class MyNavBar extends React.Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <div className="navbar-placeholder"></div>
+        <div className="navbar-placeholder" />
       </div>
     );
   }

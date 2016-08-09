@@ -66,7 +66,7 @@ ${
 </html>`);
 });
 
-webpackIsomorphicTools.server(path.resolve(__dirname, '..'), ()=>{
+webpackIsomorphicTools.server(path.resolve(__dirname, '..'), () => {
   server.listen(port, host, (err) => {
     if (err) {
       console.error(err);

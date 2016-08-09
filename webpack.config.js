@@ -16,8 +16,10 @@ require('webpack-isomorphic-tools');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
+const isomorphicConfig = require('./webpack-isomorphic-tools');
 
+const webpackIsomorphicToolsPlugin =
+  new WebpackIsomorphicToolsPlugin(isomorphicConfig);
 
 const autoprefixer = require('autoprefixer');
 

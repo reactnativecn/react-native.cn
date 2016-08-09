@@ -2,7 +2,7 @@
  * Created by Yun on 2015-11-28.
  */
 
-/* eslint-disable import/no-extraneous-dependencies, global-require */
+/* eslint-disable import/no-extraneous-dependencies, global-require, no-underscore-dangle */
 
 const assert = require('assert');
 
