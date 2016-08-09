@@ -41,16 +41,12 @@ app.use((req, res) => {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
 ${
-    Object.keys(assets.styles).map(style =>
-    `    <link href="${assets.styles[style]}" media="screen, projection"
-                rel="stylesheet" />`).join('\n')
-}
-${
+  __DEV__ ?
     Object.keys(assets.styles).length === 0 && (
     `<style>
       ${
         Object.keys(assets.assets)
-          .map(key => ssets.assets[key])
+          .map(key => assets.assets[key])
           // eslint-disable-next-line no-underscore-dangle
           .filter(v => typeof v === 'object' && v._style)
           // eslint-disable-next-line no-underscore-dangle
@@ -58,12 +54,14 @@ ${
           .join('\n')
       }
     </style>`
-  )
+  ) : Object.keys(assets.styles).map(style =>
+      `    <link href="${assets.styles[style]}" media="screen, projection"
+                rel="stylesheet" />`).join('\n')
 }
     <script src="${assets.javascript.index}"></script>
   </head>
   <body>
-    <div id="container"></div>
+    <div id="content"></div>
   </body>
 </html>`);
 });

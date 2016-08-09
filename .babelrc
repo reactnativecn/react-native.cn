@@ -13,6 +13,7 @@
     },
     "web":{
       "plugins": [
+        "transform-class-properties"
       ],
       "presets": [
         "es2015",

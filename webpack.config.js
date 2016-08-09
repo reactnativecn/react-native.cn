@@ -38,7 +38,7 @@ function styleLoader(type) {
   ];
 
   if (type) {
-    loaders.push(`type?${JSON.stringify({
+    loaders.push(`${type}?${JSON.stringify({
       outputStyle: 'expanded',
       sourceMap: true,
     })}`);
@@ -71,10 +71,10 @@ module.exports = {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loaders: ['babel'] },
       { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.less$/, loader: styleLoader('less') },
-      { test: /\.styl$/, loader: styleLoader('stylus') },
-      { test: /\.scss$/, loader: styleLoader('sass') },
-      { test: /\.css$/, loader: styleLoader() },
+      { test: /\.less$/, loaders: styleLoader('less') },
+      { test: /\.styl$/, loaders: styleLoader('stylus') },
+      { test: /\.scss$/, loaders: styleLoader('sass') },
+      { test: /\.css$/, loaders: styleLoader() },
       {
         test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url?limit=10000&mimetype=application/font-woff',
@@ -104,9 +104,14 @@ module.exports = {
       __CLIENT__: !__SERVER__,
       __SERVER__,
       __DEV__,
+      'process.env': {
+        // Useful to reduce the size of client-side libraries, e.g. react
+        NODE_ENV: __DEV__ ? JSON.stringify('development') : JSON.stringify('production'),
+      },
     }),
     webpackIsomorphicToolsPlugin.development(__DEV__),
     new webpack.ProvidePlugin({
+      polyfill: 'babel-polyfill',
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
     }),
   ].concat(__DEV__ ? [
