@@ -29,44 +29,46 @@ if (__DEV__) {
   });
 }
 
-app.use((req, res) => {
-  const assets = webpackIsomorphicTools.assets();
+webpackIsomorphicTools.server(path.resolve(__dirname, '..'), () => {
+  require('./server/ssr').install(app);
 
-  // TODO: Server-Side-Rendering
+  app.use((req, res) => {
+    const assets = webpackIsomorphicTools.assets();
 
-  res.send(`<!doctype html>
+    res.send(`<!doctype html>
 <html>
   <head>
-    <title>Loading...</title>
+${
+    res.ssrMeta || '<title>Loading...</title>'
+}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
 ${
-  __DEV__ ?
-    Object.keys(assets.styles).length === 0 && (
-    `<style>
+      __DEV__ ?
+      Object.keys(assets.styles).length === 0 && (
+        `<style>
       ${
-        Object.keys(assets.assets)
-          .map(key => assets.assets[key])
-          // eslint-disable-next-line no-underscore-dangle
-          .filter(v => typeof v === 'object' && v._style)
-          // eslint-disable-next-line no-underscore-dangle
-          .map(v => v._style)
-          .join('\n')
-      }
+          Object.keys(assets.assets)
+            .map(key => assets.assets[key])
+            // eslint-disable-next-line no-underscore-dangle
+            .filter(v => typeof v === 'object' && v._style)
+            // eslint-disable-next-line no-underscore-dangle
+            .map(v => v._style)
+            .join('\n')
+          }
     </style>`
-  ) : Object.keys(assets.styles).map(style =>
-      `    <link href="${assets.styles[style]}" media="screen, projection"
+      ) : Object.keys(assets.styles).map(style =>
+        `    <link href="${assets.styles[style]}" media="screen, projection"
                 rel="stylesheet" />`).join('\n')
-}
-    <script src="${assets.javascript.index}"></script>
+      }
   </head>
   <body>
-    <div id="content"></div>
+    <div id="content">${res.ssrString || ''}</div>
+    <script src="${assets.javascript.index}" async></script>
   </body>
 </html>`);
-});
+  });
 
-webpackIsomorphicTools.server(path.resolve(__dirname, '..'), () => {
   server.listen(port, host, (err) => {
     if (err) {
       console.error(err);

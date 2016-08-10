@@ -53,6 +53,7 @@ export default class MyNavBar extends React.Component {
       <NavItem
         target={newTab ? '_blank' : '_self'}
         rel={newTab ? 'noopener noreferrer' : ''}
+        key={v.section}
         onClick={v.onClick}
       >
         {v.text}
