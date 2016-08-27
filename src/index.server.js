@@ -14,6 +14,8 @@ const webpackIsomorphicTools = new WebpackIsomorphicTools(require('../webpack-is
 const port = process.env.PORT || 8080;
 const host = process.env.HOST || 'localhost';
 
+const __DISABLE_SSR__ = process.env.DISABLE_SSR;
+
 const app = new Express();
 const server = new http.Server(app);
 
@@ -30,7 +32,9 @@ if (__DEV__) {
 }
 
 webpackIsomorphicTools.server(path.resolve(__dirname, '..'), () => {
-  require('./server/ssr').install(app);
+  if (!__DISABLE_SSR__) {
+    require('./server/ssr').install(app);
+  }
 
   app.use((req, res) => {
     const assets = webpackIsomorphicTools.assets();

@@ -15,5 +15,4 @@ const compiler = webpack(webpackConfig);
 
 exports.install = function install(app) {
   app.use(webpackDevMiddleware(compiler, webpackConfig.devServer));
-  app.use(webpackHotMiddleware(compiler));
 };

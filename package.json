@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev-server": "node bin/dev-server",
+    "webpack": "webpack",
     "test": "eslint ."
   },
   "repository": {

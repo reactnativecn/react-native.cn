@@ -5,8 +5,8 @@
 import React from 'react';
 
 import { Link } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap';
 import {
+  SafeAnchor,
   Navbar, Nav, NavItem, NavDropdown, MenuItem,
 } from 'react-bootstrap';
 
@@ -49,22 +49,18 @@ export default class MyNavBar extends React.Component {
 
     const newTab = v.newTab !== null ? v.newTab : external;
 
-    const item = (
+    return (
       <NavItem
-        target={newTab ? '_blank' : '_self'}
+        target={newTab ? '_blank' : undefined}
+        href={v.href}
         rel={newTab ? 'noopener noreferrer' : ''}
         key={v.section}
         onClick={v.onClick}
+        componentClass={external?SafeAnchor:props=><Link {...props} to={v.href}/>}
       >
         {v.text}
         {v.hot && <div className="hotSign"><img src={imageHot} alt="hot" /></div>}
       </NavItem>
-    );
-
-    return (external || newTab) ? item : (
-      <LinkContainer to={v.href} onClick={v.onClick} key={v.section} hash={v.hash}>
-        {item}
-      </LinkContainer>
     );
   }
   goToDoc = (version) =>
@@ -102,7 +98,7 @@ export default class MyNavBar extends React.Component {
             </NavDropdown>
             <Navbar.Toggle />
           </Navbar.Header>
-          <Navbar.Collapse eventKey={0}>
+          <Navbar.Collapse>
             <Nav>
               {
                 linksInternal.map(v => this.createLink(v))

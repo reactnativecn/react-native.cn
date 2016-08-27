@@ -55,13 +55,11 @@ function styleLoader(type) {
 module.exports = {
   context: __dirname,
   entry: {
-    index: (__DEV__ && !__SERVER__) ? [
-      'webpack-hot-middleware/client?path=/__webpack_hmr',
-      './src',
-    ] : [
+    index:[
       './src',
     ],
   },
+  devtool: "#inline-source-map",
   output: {
     path: __DEV__ ? assetsPath : (`${assetsPath}/[hash]`),
     filename: '[name].bundle.js',
@@ -118,7 +116,6 @@ module.exports = {
     }),
   ].concat(__DEV__ ? [
     // hot reload
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
   ] : [
     new CleanPlugin([assetsPath]),
@@ -137,7 +134,6 @@ module.exports = {
 
   devServer: {
     contentBase: './',
-    hot: true,
     historyApiFallback: true,
     proxy: {
     },
