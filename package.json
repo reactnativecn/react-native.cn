@@ -45,8 +45,10 @@
     "eslint-plugin-import": "^1.12.0",
     "eslint-plugin-jsx-a11y": "^2.0.1",
     "eslint-plugin-react": "^6.0.0",
+    "exports-loader": "^0.6.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
+    "imports-loader": "^0.6.5",
     "json-loader": "^0.5.4",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
@@ -58,7 +60,11 @@
     "webpack-hot-middleware": "^2.12.2"
   },
   "dependencies": {
+    "animated-scrollto": "^1.1.0",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
     "express": "^4.14.0",
+    "highlight.js": "^9.6.0",
     "piping": "^1.0.0-rc.3",
     "react": "^15.3.0",
     "react-bootstrap": "^0.30.2",
@@ -66,6 +72,7 @@
     "react-dom": "^15.3.0",
     "react-router": "^2.6.1",
     "react-router-bootstrap": "^0.23.1",
+    "urijs": "^1.18.1",
     "webpack-isomorphic-tools": "^2.5.6",
     "whatwg-fetch": "^1.0.0"
   }
