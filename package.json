@@ -27,6 +27,9 @@
     "autoprefixer": "^6.4.0",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
+    "babel-plugin-transform-async-to-generator": "^6.8.0",
     "babel-plugin-transform-class-properties": "^6.11.5",
     "babel-plugin-transform-es2015-destructuring": "^6.9.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.11.5",
@@ -61,8 +64,6 @@
   },
   "dependencies": {
     "animated-scrollto": "^1.1.0",
-    "babel-plugin-syntax-async-functions": "^6.13.0",
-    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
     "express": "^4.14.0",
     "highlight.js": "^9.6.0",
     "piping": "^1.0.0-rc.3",

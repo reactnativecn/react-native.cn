@@ -23,6 +23,13 @@ function render(req, res, next) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
       return;
     } else if (renderProps) {
+      const { routes } = renderProps;
+      for (let i = routes.length - 1; i >= 0; i--) {
+        if (routes[i].status) {
+          res.status(routes[i].status);
+          break;
+        }
+      }
       res.ssrString = renderToString(<RouterContext {...renderProps} />);
       res.ssrMeta = DocumentMeta.renderAsHTML();
     } else {

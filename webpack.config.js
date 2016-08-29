@@ -4,8 +4,8 @@
 
 /* eslint-disable import/no-extraneous-dependencies, no-underscore-dangle */
 
-global.__SERVER__ = process.env.WEBPACK_CONFIG === 'server';
-global.__DEV__ = process.env.NODE_ENV !== 'production';
+const __SERVER__ = process.env.WEBPACK_CONFIG === 'server';
+const __DEV__ = process.env.NODE_ENV !== 'production';
 
 process.env.BABEL_ENV = __SERVER__ ? 'server' : 'web';
 
@@ -59,7 +59,7 @@ module.exports = {
       './src',
     ],
   },
-  devtool: "#inline-source-map",
+  devtool: '#inline-source-map',
   output: {
     path: __DEV__ ? assetsPath : (`${assetsPath}/[hash]`),
     filename: '[name].bundle.js',

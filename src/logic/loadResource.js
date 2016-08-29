@@ -12,7 +12,6 @@ for (var k in resourceCache) {
 }
 
 export function getResource(key) {
-  console.log('getResource', key);
   if (resourceCache[key] === undefined) {
     throw new Error('getResource() called before requestResource!');
   }
@@ -20,7 +19,6 @@ export function getResource(key) {
 }
 
 export async function requestResource(key) {
-  console.log('requestResource', key);
   try {
     const resp = await fetch(URI.joinPaths('/assets', key).toString());
     if (resp.status !== 200) {
@@ -35,7 +33,6 @@ export async function requestResource(key) {
 }
 
 export function loadResource(key){
-  console.log('loadResource', key);
   if (fetching[key]) {
     return;
   }

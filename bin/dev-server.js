@@ -7,13 +7,15 @@
 const assert = require('assert');
 
 // define globals
+global.__CLIENT__ = false;
 global.__SERVER__ = true;
 global.__DEV__ = global.__DEV__ = process.env.NODE_ENV !== 'production';
 assert(__DEV__, 'Dev server should only run in development mode!');
 process.env.BABEL_ENV = 'server';
 
 // install babel register
-require('babel-register')();
+require('babel-register');
+require('babel-polyfill');
 
 // support '.server.js' extensions
 const old = require.extensions['.js'];

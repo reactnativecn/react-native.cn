@@ -4,6 +4,7 @@
 
 import Site from './Site';
 import Page from './Page';
+import NotFound from './NotFound';
 
 function onEnterFetchData(component) {
   return async function (nextState, replace, callback) {
@@ -22,5 +23,11 @@ export default {
       onEnter: onEnterFetchData(Page),
       markdown: 'about.md',
     },
+
+    {
+      path: '*',
+      component: NotFound,
+      status: 404,
+    }
   ],
 };
