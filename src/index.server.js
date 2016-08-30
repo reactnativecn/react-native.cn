@@ -68,6 +68,7 @@ ${
   </head>
   <body>
     <div id="content">${res.ssrString || ''}</div>
+    <script>window.resources=${JSON.stringify(res.ssrResources)}</script>
     <script src="${assets.javascript.index}" async></script>
   </body>
 </html>`);

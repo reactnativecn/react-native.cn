@@ -1,8 +1,9 @@
 
 import React from 'react';
 import Marked from '../components/Marked';
+import Container from '../components/Container';
 
-import { loadResource, getResource } from '../logic/loadResource';
+import { loadResources, getResource } from '../logic/loadResource';
 
 export default class Page extends React.Component {
   static propTypes = {
@@ -10,19 +11,18 @@ export default class Page extends React.Component {
     location: React.PropTypes.object,
   };
 
-  static async fetchData({location, routes}) {
-    const route = routes[routes.length-1];
+  static fetchData({ routes }) {
+    const route = routes[routes.length - 1];
     const markdown = route.markdown;
-    await loadResource(markdown);
+    return loadResources([`/static${markdown}`]);
   }
+  state = {};
 
   componentWillMount() {
     const { routes } = this.props;
-    const route = routes[routes.length-1];
+    const route = routes[routes.length - 1];
     const markdown = route.markdown;
-    this.setState({
-      data: getResource(markdown),
-    });
+    this.state.data = getResource(`/static${markdown}`);
   }
 
   render() {
@@ -31,10 +31,11 @@ export default class Page extends React.Component {
     const hash = location.hash && location.hash.substr(1);
     return (
       <section className="content">
-        <a className="anchor" name="content" />
-        <Marked uri={"/static/"} scrollTo={hash} createHashLink>
-          {data}
-        </Marked>
+        <Container>
+          <Marked uri={"/static/"} scrollTo={hash} createHashLink>
+            {data}
+          </Marked>
+        </Container>
       </section>
     );
   }

@@ -20,7 +20,7 @@ export function getResource(key) {
 
 export async function requestResource(key) {
   try {
-    const resp = await fetch(URI.joinPaths('/assets', key).toString());
+    const resp = await fetch(key);
     if (resp.status !== 200) {
       throw new Error('Network error.');
     }
@@ -33,10 +33,32 @@ export async function requestResource(key) {
 }
 
 export function loadResource(key){
+  if (resourceCache[key]) {
+    return resourceCache[key];
+  }
   if (fetching[key]) {
-    return;
+    return fetching[key];
   }
 
   fetching[key] = requestResource(key);
   return fetching[key];
+}
+
+export function loadResources(resource) {
+  const ret = {};
+  const jobs = [];
+  for (const k of resource) {
+    const v = loadResource(k);
+    if (v && typeof(v.then) === 'function') {
+      jobs.push(v.then(v=>{
+        ret[k] = v;
+      }));
+    } else {
+      ret[k] = loadResource(k);
+    }
+  }
+  if (jobs.length > 0) {
+    return Promise.all(jobs).then(()=>ret);
+  }
+  return ret;
 }

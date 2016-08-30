@@ -1,0 +1,144 @@
+.hideByDot {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.doNotChangeLine {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.edit-github {
+    margin-bottom: 5px;
+}
+
+.apiContainer {
+    .apiGroup {
+        .hideByDot;
+        list-style: none;
+
+        & > span {
+            font-family: proxima-nova, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        padding-bottom: 6px;
+    }
+
+    .apiSub {
+        margin-top: 6px;
+        font-family: proxima-nova, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+        padding-left: 0;
+
+        & > li {
+            list-style: none;
+            height: 20px;
+            line-height: 18px;
+            font-size: 12px;
+            .hideByDot;
+
+            & > a {
+                text-decoration: none;
+                color: #666;
+
+                &.active,&:hover {
+                    color: #0485A9;
+                }
+            }
+        }
+    }
+
+    .prevNextRow {
+        margin-top: 30px;
+    }
+
+    .nextprevLink {
+        .doNotChangeLine;
+        width: 48px;
+        color: blue;
+
+        &:hover {
+            color: #cc7a6f;
+        }
+        text-decoration: none;
+    }
+}
+
+.props {
+    background-color: hsl(198, 100%, 96%);
+    .prop {
+        margin: 0;
+        padding: 5px 10px;
+
+        &:nth-child(2n) {
+            background-color: hsl(198, 100%, 94%);
+        }
+
+        .propTitle {
+            font-weight: bold;
+            font-size: 16px;
+            .platform {
+                background-color: hsl(198, 100%, 87%);
+                border-radius: 5px;
+                margin-right: 5px;
+                padding: 0 5px;
+                font-size: 13px;
+                font-weight: normal;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+            }
+            .propType {
+                font-weight: normal;
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+.compactProps{
+    margin-left: 20px;
+}
+
+
+.color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    position: relative;
+    top: 5px;
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+}
+
+.deprecated {
+    margin-bottom: 24px;
+}
+
+.deprecatedTitle {
+    margin-bottom: 6px;
+    line-height: 18px;
+    font-weight: bold;
+    color: #ffa500;
+}
+
+//.deprecatedIcon {
+//    width: 18px;
+//    height: 18px;
+//    margin-right: 8px;
+//    vertical-align: top;
+//}
+//
+//.deprecatedMessage {
+//    margin-left: 26px;
+//}

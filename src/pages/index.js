@@ -6,11 +6,21 @@ import Site from './Site';
 import Page from './Page';
 import NotFound from './NotFound';
 
+import docsRoute from './docs';
+
 function onEnterFetchData(component) {
-  return async function (nextState, replace, callback) {
-    await component.fetchData(nextState);
+  return function (nextState, replace, callback) {
+    const stat = component.fetchData(nextState);
+    if (stat && typeof(stat.then) === 'function') {
+      stat.then(()=>callback()).catch(err=>{
+        if (__DEV__) {
+          console.error(err);
+        }
+      });
+      return;
+    }
     callback();
-  }
+  };
 }
 
 export default {
@@ -21,13 +31,15 @@ export default {
       path: 'about.html',
       component: Page,
       onEnter: onEnterFetchData(Page),
-      markdown: 'about.md',
+      markdown: '/about.md',
     },
+
+    docsRoute,
 
     {
       path: '*',
       component: NotFound,
       status: 404,
-    }
+    },
   ],
 };

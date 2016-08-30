@@ -11,12 +11,26 @@ import DocumentMeta from 'react-document-meta';
 
 import routeConfig from '../pages/index';
 
+function fetchData(state) {
+  const {routes} = state;
+  console.log(routes);
+  return Promise.all(routes.map(v=>v.component.fetchData?v.component.fetchData(state):null))
+    .then(arr => {
+      const ret = {};
+      arr.forEach(v => v && Object.assign(ret, v));
+      return ret;
+    });
+}
+
 function render(req, res, next) {
   match({
     location: req.url,
     routes: routeConfig,
   }, (err, redirectLocation, renderProps) => {
     if (err) {
+      if (__DEV__){
+        console.error(err);
+      }
       res.status(500);
       // Continue for client-side rendering.
     } else if (redirectLocation) {
@@ -30,8 +44,22 @@ function render(req, res, next) {
           break;
         }
       }
-      res.ssrString = renderToString(<RouterContext {...renderProps} />);
-      res.ssrMeta = DocumentMeta.renderAsHTML();
+      Promise.resolve(fetchData(renderProps)).then(resources => {
+        if (__DEV__) {
+          console.log('Resource loaded: ', resources);
+        }
+        res.ssrString = renderToString(<RouterContext {...renderProps} />);
+        res.ssrMeta = DocumentMeta.renderAsHTML();
+        res.ssrResources = resources;
+        next();
+      }).catch(err1 => {
+        if (__DEV__) {
+          console.error('Error occured: ', err1);
+        }
+        res.status(500);
+        next();
+      });
+      return;
     } else {
       res.status(404);
       // Continue for client-side rendering.

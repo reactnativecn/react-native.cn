@@ -81,7 +81,7 @@ export default class Marked extends React.Component {
       return '';
     }
     const options = this.props.options;
-    return marked(content, {
+    const markup = marked(content, {
       gfm: true,
       highlight: (code, lang) =>
         (lang && getLanguage(lang)) ? highlight(lang, code, true).value : highlightAuto(code).value,
@@ -91,6 +91,7 @@ export default class Marked extends React.Component {
       createHashLink: this.props.createHashLink,
       ...options,
     });
+    return `<a class="anchor" id="content"></a>${markup}`;
   }
 
   doScroll(props) {
