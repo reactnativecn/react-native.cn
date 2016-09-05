@@ -746,7 +746,7 @@ Now just create a release build of your native app from within Android Studio as
 
 </div>
 <script class="markdown-script">
-function display(type, value) {
+window.display = function (type, value) {
   var container = document.querySelector('.md-block').parentNode;
   container.className = 'display-' + type + '-' + value + ' ' +
     container.className.replace(RegExp('display-' + type + '-[a-z]+ ?'), '');

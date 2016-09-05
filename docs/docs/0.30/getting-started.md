@@ -721,7 +721,7 @@ react-native start
 
 </div>
 <script class="markdown-script">
-function display(type, value) {
+window.display = function (type, value) {
   var container = document.querySelector('.md-block').parentNode;
   container.className = 'display-' + type + '-' + value + ' ' +
     container.className.replace(RegExp('display-' + type + '-[a-z]+ ?'), '');
