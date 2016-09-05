@@ -13,9 +13,7 @@ import routeConfig from '../pages/index';
 
 function fetchData(state) {
   const {routes} = state;
-  console.log('Here');
   const jobs = routes.map(v=>(v.component && v.component.fetchData)?v.component.fetchData(state):null);
-  console.log(jobs);
   return Promise.all(jobs)
     .then(arr => {
       const ret = {};
@@ -46,7 +44,6 @@ function render(req, res, next) {
           break;
         }
       }
-      console.log('Here');
       Promise.resolve(fetchData(renderProps)).then(resources => {
         if (__DEV__) {
           console.log('Resource loaded: ', resources);

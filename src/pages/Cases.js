@@ -18,7 +18,7 @@ export default class Cases extends React.Component {
   static fetchData({ routes }) {
     const route = routes[routes.length - 1];
     const resource = route.resource;
-    return loadResource(`/static${resource}`, 'json');
+    return loadResource(`/static${resource}`);
   }
 
   state = {};
@@ -28,7 +28,7 @@ export default class Cases extends React.Component {
     const route = routes[routes.length - 1];
     const resource = route.resource;
     this.setState({
-      data: getResource(`/static${resource}`),
+      data: JSON.parse(getResource(`/static${resource}`)),
     });
   }
 

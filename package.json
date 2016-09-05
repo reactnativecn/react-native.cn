@@ -57,6 +57,7 @@
     "less-loader": "^2.2.3",
     "postcss-loader": "^0.9.1",
     "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
     "stylus-loader": "^2.3.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
