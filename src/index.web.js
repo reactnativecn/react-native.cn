@@ -4,13 +4,12 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'babel-polyfill';
-import 'bootstrap/less/bootstrap.less';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Router, browserHistory } from 'react-router';
 
+import './index.less';
 import routes from './pages';
 
 function render() {
