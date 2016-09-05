@@ -1,18 +1,18 @@
-Many mobile apps need to load resources from a remote URL. You may want to make a POST request to a REST API, or you may simply need to fetch a chunk of static content from another server.
+很多移动应用都需要从远程地址中获取数据或资源。你可能需要给某个REST API发起POST请求以提交用户数据，又或者可能仅仅需要从某个服务器上获取一些静态内容——以下就是你会用到的东西。新手可以对照这个[简短的视频教程](http://v.youku.com/v_show/id_XMTUyNTEwMTA5Ng==.html)加深理解。
 
 ## 使用Fetch
 
-React Native provides the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for your networking needs. Fetch will seem familiar if you have used `XMLHttpRequest` or other networking APIs before. You may refer to MDN's guide on [Using Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) for additional information.
+React Native提供了和web标准一致的[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)，用于满足开发者访问网络的需求。如果你之前使用过`XMLHttpRequest`(即俗称的ajax)或是其他的网络API，那么Fetch用起来将会相当容易上手。这篇文档只会列出Fetch的基本用法，并不会讲述太多细节，你可以使用你喜欢的搜索引擎去搜索`fetch api`关键字以了解更多信息。
 
 #### 发起网络请求
 
-In order to fetch content from an arbitrary URL, just pass the URL to fetch:
+要从任意地址获取内容的话，只需简单地将网址作为参数传递给fetch方法即可（fetch这个词本身也就是`获取`的意思）：
 
 ```js
 fetch('https://mywebsite.com/mydata.json')
 ```
 
-Fetch also takes an optional second argument that allows you to customize the HTTP request. You may want to specify additional headers, or make a POST request:
+Fetch还有可选的第二个参数，可以用来定制HTTP请求一些参数。你可以指定header参数，或是指定使用POST方法，又或是提交数据等等：
 
 ```js
 fetch('https://mywebsite.com/endpoint/', {
@@ -28,9 +28,9 @@ fetch('https://mywebsite.com/endpoint/', {
 })
 ```
 
-译注：如果你的服务器无法识别上面POST的数据格式，那么可以尝试传统的form格式，代码如下：
+译注：如果你的服务器无法识别上面POST的数据格式，那么可以尝试传统的form格式，示例如下：
 
-```javascript
+```js
 fetch('https://mywebsite.com/endpoint/', {
   method: 'POST',
   headers: {
@@ -40,13 +40,13 @@ fetch('https://mywebsite.com/endpoint/', {
 })
 ```
 
-Take a look at the [Fetch Request docs](https://developer.mozilla.org/en-US/docs/Web/API/Request) for a full list of properties.
+可以参考[Fetch请求文档](https://developer.mozilla.org/en-US/docs/Web/API/Request)来查看所有可用的参数。
 
 #### 处理服务器的响应数据
 
-The above examples show how you can make a request. In many cases, you will want to do something with the response.
+上面的例子演示了如何发起请求。很多情况下，你还需要处理服务器回复的数据。
 
-Networking is an inherently asynchronous operation. Fetch methods will return a  [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that make it straightforward to write code that works in an asynchronous manner:
+网络请求天然是一种异步操作（译注：同样的还有[asyncstorage](asyncstorage.html)，请不要再问怎样把异步变成同步！无论在语法层面怎么折腾，它们的异步本质是无法变更的。异步的意思是你应该趁这个时间去做点别的事情，比如显示loading，而不是让界面卡住傻等）。Fetch 方法会返回一个[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)，这种模式可以简化异步风格的代码（译注：同样的，如果你不了解promise，建议使用搜索引擎补课）： 
 
   ```js
   getMoviesFromApiAsync() {
@@ -61,11 +61,13 @@ Networking is an inherently asynchronous operation. Fetch methods will return a 
   }
   ```
 
-You can also use ES7's `async`/`await` syntax in React Native app:
+你也可以在React Native应用中使用ES7标准中的`async`/`await` 语法：
 
   ```js
+  // 注意这个方法前面有async关键字
   async getMoviesFromApi() {
     try {
+      // 注意这里的await语句，其所在的函数必须有async关键字声明
       let response = await fetch('http://facebook.github.io/react-native/movies.json');
       let responseJson = await response.json();
       return responseJson.movies;
@@ -75,14 +77,14 @@ You can also use ES7's `async`/`await` syntax in React Native app:
   }
   ```
 
-Don't forget to catch any errors that may be thrown by `fetch`, otherwise they will be dropped silently.
+别忘了catch住`fetch`可能抛出的异常，否则出错时你可能看不到任何提示。
 
-> By default, iOS will block any request that's not encrypted using SSL. If you need to fetch from a cleartext URL (one that begins with `http`) you will first need to add an App Transport Security exception. If you know ahead of time what domains you will need access to, it is more secure to add exceptions just for those domains; if the domains are not known until runtime you can [disable ATS completely](/react-native/docs/integration-with-existing-apps.html#app-transport-security). [See Apple's documentation for more information](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33).
+> 默认情况下，iOS会阻止所有非HTTPS的请求。如果你请求的接口是http协议，那么首先需要添加一个App Transport Securty的例外，或者干脆完全禁用ATS，详细可参考[这篇帖子](https://segmentfault.com/a/1190000002933776)。
 
 
 ### 使用其他的网络库
 
-React Native中已经内置了[XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)(也就是俗称的ajax)。 is built in to React Native. This means that you can use third party libraries such as [frisbee](https://github.com/niftylettuce/frisbee) or [axios](https://github.com/mzabriskie/axios) that depend on it, or you can use the XMLHttpRequest API directly if you prefer.
+React Native中已经内置了[XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)(也就是俗称的ajax)。一些基于XMLHttpRequest封装的第三方库也可以使用，例如[frisbee](https://github.com/niftylettuce/frisbee)或是[axios](https://github.com/mzabriskie/axios)等。但注意不能使用jQuery，因为jQuery中还使用了很多浏览器中才有而RN中没有的东西（所以也不是所有web中的ajax库都可以直接使用）。
 
 ```js
 var request = new XMLHttpRequest();
@@ -112,25 +114,25 @@ React Native还支持[WebSocket](https://developer.mozilla.org/en-US/docs/Web/AP
 var ws = new WebSocket('ws://host.com/path');
 
 ws.onopen = () => {
-  // connection opened
+  // 打开一个连接
 
-  ws.send('something'); // send a message
+  ws.send('something'); // 发送一个消息
 };
 
 ws.onmessage = (e) => {
-  // a message was received
+  // 接收到了一个消息
   console.log(e.data);
 };
 
 ws.onerror = (e) => {
-  // an error occurred
+  // 发生了一个错误
   console.log(e.message);
 };
 
 ws.onclose = (e) => {
-  // connection closed
+  // 连接被关闭了
   console.log(e.code, e.reason);
 };
 ```
 
-Your app can now display all sorts of data and you may soon need to organize this content into several screens. To manage the transition between these screens, you will need to learn about [navigators](using-navigators.html).
+现在你的应用已经可以从各种渠道获取数据了，那么接下来面临的问题多半就是如何在不同的页面间组织和串联内容了。要管理页面的跳转，你需要学习使用[导航器](using-navigators.html)。

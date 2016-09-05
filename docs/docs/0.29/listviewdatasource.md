@@ -2,7 +2,7 @@
 
 要更新datasource中的数据，请（每次都重新）调用`cloneWithRows`方法（如果用到了section，则对应`cloneWithRowsAndSections`方法）。数据源中的数据本身是不可修改的，所以请勿直接尝试修改。clone方法会自动提取新数据并进行逐行对比（使用rowHasChanged方法中的策略），这样ListView就知道哪些行需要重新渲染了。
 
-在下面这个例子中，一个组件在分块接受数据，这些数据由`_onDataArrived`方法中处理——将新数据拼接（concat）到旧数据尾部，同时使用clone方法更新DataSource。我们使用concat方法来修改`this._data`以创建新数组，注意不能使用push方法拼接数组。实现`_rowHasChanged`方法需要透彻了解行数据的结构，以便提供高效的比对策略。
+在下面这个例子中，一个组件在分块接受数据，这些数据由`_onDataArrived`方法处理——将新数据拼接（concat）到旧数据尾部，同时使用clone方法更新DataSource。我们使用concat方法来修改`this._data`以创建新数组，注意不能使用push方法拼接数组。实现`_rowHasChanged`方法需要透彻了解行数据的结构，以便提供高效的比对策略。
 
 ```javascript
 constructor(props) {
@@ -11,6 +11,7 @@ constructor(props) {
   this.state = {
     ds,
   };
+  this._data = []; 
 }
 
 _onDataArrived = (newData) => {

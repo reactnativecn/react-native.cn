@@ -192,7 +192,7 @@
                     "mdlink": "running-on-device-android"
                 },
                 {
-                    "subject": "生成已签名的APK",
+                    "subject": "打包APK",
                     "mdlink": "signed-apk-android"
                 },
                 {
@@ -223,6 +223,10 @@
                 {
                     "subject": "Image",
                     "mdlink": "image"
+                },
+                {
+                    "subject": "KeyboardAvoidingView",
+                    "mdlink": "keyboardavoidingview"
                 },
                 {
                     "subject": "ListView",
@@ -350,6 +354,10 @@
                     "mdlink": "actionsheetios"
                 },
                 {
+                    "subject": "AdSupportIOS",
+                    "mdlink": "adsupportios"
+                },
+                {
                     "subject": "Alert",
                     "mdlink": "alert"
                 },
@@ -394,8 +402,24 @@
                     "mdlink": "dimensions"
                 },
                 {
+                    "subject": "Easing",
+                    "mdlink": "easing"
+                },
+                {
                     "subject": "Geolocation",
                     "mdlink": "geolocation"
+                },
+                {
+                    "subject": "ImageEditor",
+                    "mdlink": "imageeditor"
+                },
+                {
+                    "subject": "ImagePickerIOS",
+                    "mdlink": "imagepickerios"
+                },
+                {
+                    "subject": "ImageStore",
+                    "mdlink": "imagestore"
                 },
                 {
                     "subject": "IntentAndroid",

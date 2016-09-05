@@ -22,6 +22,36 @@ renderImages() {
 ### 截图
 ![](img/components/image.png)
 
+### GIF and WebP support on Android
+
+By default, GIF and WebP are not supported on Android.
+You will need to add some optional modules in `android/app/build.gradle`, depending on the needs of your app.
+
+```
+dependencies {
+  // If your app supports Android versions before Ice Cream Sandwich (API level 14)
+  compile 'com.facebook.fresco:animated-base-support:0.11.0'
+
+  // For animated GIF support
+  compile 'com.facebook.fresco:animated-gif:0.11.0'
+
+  // For WebP support, including animated WebP
+  compile 'com.facebook.fresco:animated-webp:0.11.0'
+  compile 'com.facebook.fresco:webpsupport:0.11.0'
+
+  // For WebP support, without animations
+  compile 'com.facebook.fresco:webpsupport:0.11.0'
+}
+```
+
+Also, if you use GIF with ProGuard, you will need to add this rule in `proguard-rules.pro` :
+
+```
+-keep class com.facebook.imagepipeline.animated.factory.AnimatedFactoryImpl {
+  public AnimatedFactoryImpl(com.facebook.imagepipeline.bitmaps.PlatformBitmapFactory, com.facebook.imagepipeline.core.ExecutorSupplier);
+}
+```
+
 ### 属性
 
 <div class="props">
@@ -70,35 +100,72 @@ renderImages() {
         <h4 class="propTitle"><a class="anchor" name="style"></a>style <span class="propType">style</span> <a class="hash-link" href="#style">#</a></h4>
         <div class="compactProps">
             <div class="prop">
-                <h6 class="propTitle"><a href="layout-with-flexbox.html">Flexbox...</a></h6>
+                <h6 class="propTitle"><a href="layout-with-flexbox.html">布局Flexbox...</a></h6>
             </div>
             <div class="prop">
-                <h6 class="propTitle"><a href="transforms.html#proptypes">Transforms...</a></h6>
+                <h6 class="propTitle"><a href="shadow-props.html">阴影Shadow...</a></h6>
             </div>
+            <div class="prop">
+                <h6 class="propTitle"><a href="transforms.html">动画变换Transforms...</a></h6>
+            </div>
+			<div class="prop">
+				<h6 class="propTitle">backfaceVisibility <span class="propType">ReactPropTypes.oneOf(['visible', 'hidden'])</span> </h6>
+			</div>
             <div class="prop">
                 <h6 class="propTitle">resizeMode <span class="propType">Object.keys(ImageResizeMode)</span></h6>
             </div>
             <div class="prop">
-                <h6 class="propTitle">backgroundColor <span class="propType">string</span></h6>
+                <h6 class="propTitle">backgroundColor <span class="propType"><a href="colors.html">color</a></span></h6>
             </div>
+			<div class="prop">
+			    <h6 class="propTitle">borderBottomLeftRadius <span class="propType">ReactPropTypes.number</span></h6>
+			</div>
+			<div class="prop">
+			    <h6 class="propTitle">borderBottomRightRadius <span class="propType">ReactPropTypes.number</span></h6>
+			</div>
             <div class="prop">
-                <h6 class="propTitle">borderColor <span class="propType">string</span></h6>
-            </div>
-            <div class="prop">
-                <h6 class="propTitle">borderWidth <span class="propType">number</span></h6>
+                <h6 class="propTitle">borderColor <span class="propType"><a href="colors.html">color</a></h6>
             </div>
             <div class="prop">
                 <h6 class="propTitle">borderRadius <span class="propType">number</span></h6>
+            </div>
+			<div class="prop">
+			    <h6 class="propTitle">borderTopLeftRadius <span class="propType">ReactPropTypes.number</span></h6>
+			</div>
+			<div class="prop">
+			    <h6 class="propTitle">borderTopRightRadius <span class="propType">ReactPropTypes.number</span></h6>
+			</div>
+            <div class="prop">
+                <h6 class="propTitle">borderWidth <span class="propType">number</span></h6>
             </div>
             <div class="prop">
                 <h6 class="propTitle">overflow <span class="propType">enum('visible', 'hidden')</span></h6>
             </div>
             <div class="prop">
-                <h6 class="propTitle">tintColor <span class="propType">string</span></h6>
+                <h6 class="propTitle">tintColor <span class="propType"><a href="colors.html">color</a></span>
+				<div><p>为所有非透明的像素指定一个颜色</p></div>
+				</h6>
             </div>
             <div class="prop">
                 <h6 class="propTitle">opacity <span class="propType">number</span></h6>
             </div>
+			<div class="prop">
+			    <h6 class="propTitle"><span class="platform">android</span>overlayColor <span
+			            class="propType">ReactPropTypes.string</span>
+			        <div><p>When the image has rounded corners, specifying an overlayColor will
+			            cause the remaining space in the corners to be filled with a solid color.
+			            This is useful in cases which are not supported by the Android
+			            implementation of rounded corners:
+			            - Certain resize modes, such as 'contain'
+			            - Animated GIFs</p>
+			            <p>A typical way to use this prop is with images displayed on a solid
+			                background and setting the <code>overlayColor</code> to the same color
+			                as the background.</p>
+			            <p>For details of how this works under the hood, see
+			                <a href="http://frescolib.org/docs/rounded-corners-and-circles.html">http://frescolib.org/docs/rounded-corners-and-circles.html</a>
+			            </p></div>
+			    </h6>
+			</div>
         </div>
     </div>
     <div class="prop">
