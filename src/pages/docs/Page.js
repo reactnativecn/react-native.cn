@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router';
 import DocumentMeta from 'react-document-meta';
 import Marked from '../../components/Marked';
+import SNSComment from '../../components/SNSComment';
 import { loadResources, getResource } from '../../logic/loadResource';
 
 export default class Page extends React.Component {
@@ -103,7 +104,7 @@ export default class Page extends React.Component {
             </Col>}
           </Row>
         </section>
-        {/*<SNSComment threadKey={location.pathname} title={`${params.version}/${title}`} />*/}
+        <SNSComment threadKey={location.pathname} title={`${params.version}/${title}`} />
       </div>
     );
   }
