@@ -68,7 +68,7 @@ ${
   </head>
   <body>
     <div id="content">${res.ssrString || ''}</div>
-    <script>window.resources=${JSON.stringify(res.ssrResources).replace(/<\/script>/i, '<\\/script>')}</script>
+    <script>window.resources=${JSON.stringify(res.ssrResources || {}).replace(/<\/script>/i, '<\\/script>')}</script>
     <script>var duoshuoQuery = {short_name:"reactnative"}</script>
     <script src="http://static.duoshuo.com/embed.js"></script>
     <script src="${assets.javascript.index}" async></script>
