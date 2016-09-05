@@ -18,21 +18,21 @@ export function getResource(key) {
   return resourceCache[key];
 }
 
-export async function requestResource(key) {
+export async function requestResource(key, method = 'text') {
   try {
     const resp = await fetch(key);
     if (resp.status !== 200) {
       throw new Error('Network error.');
     }
-    const text = resourceCache[key] = await resp.text();
-    return text;
+    const ret = resourceCache[key] = await resp[method]();
+    return ret;
   } catch (err) {
     // When request error occured, request again next time.
     delete fetching[key];
   }
 }
 
-export function loadResource(key){
+export function loadResource(key, method = 'text'){
   if (resourceCache[key]) {
     return resourceCache[key];
   }
@@ -40,21 +40,21 @@ export function loadResource(key){
     return fetching[key];
   }
 
-  fetching[key] = requestResource(key);
+  fetching[key] = requestResource(key, method);
   return fetching[key];
 }
 
-export function loadResources(resource) {
+export function loadResources(resource, method = 'text') {
   const ret = {};
   const jobs = [];
   for (const k of resource) {
-    const v = loadResource(k);
+    const v = loadResource(k, method);
     if (v && typeof(v.then) === 'function') {
       jobs.push(v.then(v=>{
         ret[k] = v;
       }));
     } else {
-      ret[k] = loadResource(k);
+      ret[k] = loadResource(k, method);
     }
   }
   if (jobs.length > 0) {

@@ -6,7 +6,7 @@ import React from 'react';
 import QRCode from 'qrcode.react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Container from '../components/Container';
-import { loadResources, getResource } from '../logic/loadResource';
+import { loadResource, getResource } from '../logic/loadResource';
 import './Cases.styl';
 
 export default class Cases extends React.Component {
@@ -18,7 +18,7 @@ export default class Cases extends React.Component {
   static fetchData({ routes }) {
     const route = routes[routes.length - 1];
     const resource = route.resource;
-    return loadResources([`/static${resource}`]);
+    return loadResource(`/static${resource}`, 'json');
   }
 
   state = {};
@@ -28,7 +28,7 @@ export default class Cases extends React.Component {
     const route = routes[routes.length - 1];
     const resource = route.resource;
     this.setState({
-      data: JSON.parse(getResource(`/static${resource}`)),
+      data: getResource(`/static${resource}`),
     });
   }
 
