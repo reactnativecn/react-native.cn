@@ -9,6 +9,7 @@ import Container from '../../components/Container';
 import {Link} from 'react-router';
 import './docs.less';
 import Subjects from './Subjects.js';
+import { loadResources, getResource } from '../../logic/loadResource';
 
 export default class Site extends React.Component {
   static propTypes = {
@@ -20,10 +21,30 @@ export default class Site extends React.Component {
     params: React.PropTypes.object,
   };
 
-  static fetchData(nextState) {
-
+  static fetchData({ params }) {
+    const { version } = params;
+    return loadResources([`/static/docs/${version}/indexes.json`]);
   }
+
+  componentWillMount() {
+    this.loadData(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.loadData(nextProps);
+  }
+
+  loadData({ params }) {
+    const { version } = params;
+    this.setState({
+      docIndex: JSON.parse(getResource(`/static/docs/${version}/indexes.json`)),
+    });
+  }
+
   render() {
+    const { params } = this.props;
+    const { version } = params;
+    const {docIndex} = this.state;
     return (
       <section className="content">
         <Container>
@@ -31,16 +52,14 @@ export default class Site extends React.Component {
           <Row className="apiContainer">
             <Col className="mdContaint" xs={12} sm={8} md={9} mdPush={3} smPush={4}>
               <div className="mainText">
-                {this.props.children}
+                {React.cloneElement(this.props.children, {docIndex})}
               </div>
             </Col>
             <Col xs={12} sm={4} md={3} mdPull={9} smPull={8}>
-              {/*<Subjects params={this.props.params} docIndex={this.props.docIndex} />*/}
+              <Subjects version={version} docIndex={docIndex} />
             </Col>
           </Row>
         </Container>
-        <Link to="/docs/0.23">Goto 0.23</Link>
-        <Link to="/docs/0.22">Goto 0.22</Link>
       </section>
     );
   }

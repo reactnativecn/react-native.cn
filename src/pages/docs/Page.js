@@ -1,17 +1,12 @@
 
 import React, { PropTypes } from 'react';
-import Marked from '../../components/Marked';
-// import { fetchStaticContent} from '../../helpers/fetchStatic';
-import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router';
 import DocumentMeta from 'react-document-meta';
-import config from '../../options';
-import storage from '../../storage/storage';
-import SNSComment from '../../components/SNSComment';
-import { contentLoaded } from '../../redux/modules/content';
+import Marked from '../../components/Marked';
+import { loadResources, getResource } from '../../logic/loadResource';
 
-class Page extends React.Component {
+export default class Page extends React.Component {
   static propTypes = {
     content: PropTypes.string,
     location: PropTypes.object,
@@ -19,18 +14,37 @@ class Page extends React.Component {
     docIndex: PropTypes.object,
   };
 
-  static fetchData(getState, dispatch, location) {
-    return storage.load({
-      key: 'docContent',
-      id: location.pathname.replace(/\.html$/, ''),
-    }).then(data => dispatch(contentLoaded(data)));
+  static fetchData({ params }) {
+    const {version, doc} = params;
+    const markdown = `/static/docs/${version}/${doc}.md`;
+    return loadResources([markdown]);
   }
+
+  componentWillMount() {
+    this.loadData(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.params !== this.props.params) {
+      this.loadData(nextProps);
+    }
+  }
+
+  loadData({ params }) {
+    const { version, doc } = params;
+    const markdown = `/static/docs/${version}/${doc}.md`;
+    this.setState({
+      content: getResource(markdown),
+    });
+  }
+
   render() {
-    const { location, params, docIndex, content } = this.props;
+    const { location, params, docIndex } = this.props;
+    const {content} = this.state;
     let hash = location.hash;
     hash = hash && hash.substr(1);
 
-    const curId = params.docid.replace(/\.html$/, '');
+    const curId = params.doc;
 
     let indexes = docIndex.contains;
     indexes = indexes.reduce((prev, cur) => prev.concat(cur.contains), []);
@@ -50,8 +64,7 @@ class Page extends React.Component {
     return (
       <div>
         <DocumentMeta
-          {...config.app}
-          title={title ? `${title} - react native 中文网` : 'react native 中文网'}
+          title={title ? `${title} - React Native 中文网` : 'React Native 中文网'}
         />
         <a className="anchor" name="content" />
         <h1>{title}</h1>
@@ -90,12 +103,8 @@ class Page extends React.Component {
             </Col>}
           </Row>
         </section>
-        <SNSComment threadKey={location.pathname} title={`${params.version}/${title}`} />
+        {/*<SNSComment threadKey={location.pathname} title={`${params.version}/${title}`} />*/}
       </div>
     );
   }
 }
-export default connect(state => ({
-  content: state.content,
-  docIndex: state.docIndex,
-}))(Page);

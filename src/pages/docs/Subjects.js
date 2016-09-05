@@ -11,7 +11,7 @@ import './docs.less';
 export default class Subjects extends React.Component {
   static propTypes = {
     docIndex: React.PropTypes.object,
-    params: React.PropTypes.object,
+    version: React.PropTypes.string,
   };
 
   render() {
@@ -28,7 +28,7 @@ export default class Subjects extends React.Component {
                   <Link
                     activeClassName="active"
                     to={{
-                      pathname: u.external || `/docs/${this.props.params.version}/${u.mdlink}.html`,
+                      pathname: u.external || `/docs/${this.props.version}/${u.mdlink}.html`,
                       hash: '#content',
                     }}
                     target={u.external && '_blank'}

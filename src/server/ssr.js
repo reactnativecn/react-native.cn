@@ -13,8 +13,8 @@ import routeConfig from '../pages/index';
 
 function fetchData(state) {
   const {routes} = state;
-  console.log(routes);
-  return Promise.all(routes.map(v=>v.component.fetchData?v.component.fetchData(state):null))
+  console.log('Here');
+  return Promise.all(routes.map(v=>v.component && v.component.fetchData?v.component.fetchData(state):null))
     .then(arr => {
       const ret = {};
       arr.forEach(v => v && Object.assign(ret, v));
@@ -28,7 +28,7 @@ function render(req, res, next) {
     routes: routeConfig,
   }, (err, redirectLocation, renderProps) => {
     if (err) {
-      if (__DEV__){
+      if (__DEV__) {
         console.error(err);
       }
       res.status(500);

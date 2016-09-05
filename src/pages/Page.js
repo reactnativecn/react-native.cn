@@ -22,7 +22,9 @@ export default class Page extends React.Component {
     const { routes } = this.props;
     const route = routes[routes.length - 1];
     const markdown = route.markdown;
-    this.state.data = getResource(`/static${markdown}`);
+    this.setState({
+      data: getResource(`/static${markdown}`),
+    });
   }
 
   render() {
