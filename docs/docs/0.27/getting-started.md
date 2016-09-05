@@ -89,6 +89,13 @@ sudo chown -R `whoami` /usr/local
 brew install node
 ```
 
+安装完node后建议设置npm镜像以加速后面的过程（或使用科学上网工具）。
+
+```
+npm config set registry https://registry.npm.taobao.org --global
+npm config set disturl https://npm.taobao.org/dist --global
+```
+
 #### React Native的命令行工具（react-native-cli）
 
 React Native的命令行工具用于执行创建、初始化、更新项目、运行打包服务（packager）等任务。
@@ -309,12 +316,20 @@ sudo apt-get install -y nodejs
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 ```
 
+
 </div><div markdown class="md-block windows android">
 
 打开命令提示符窗口，使用Chocolatey来安装NodeJS.
 
 ```
 choco install nodejs.install
+```
+
+安装完node后建议设置npm镜像以加速后面的过程（或使用科学上网工具）。
+
+```
+npm config set registry https://registry.npm.taobao.org --global
+npm config set disturl https://npm.taobao.org/dist --global
 ```
 
 </div><div markdown class="md-block windows linux android">
@@ -327,7 +342,7 @@ React Native的命令行工具用于执行创建、初始化、更新项目、�
 npm install -g react-native-cli
 ```
 
-> 如果你遇到`EACCES: permission denied`权限错误，可以尝试运行下面的命令：
+> 如果你遇到`EACCES: permission denied`权限错误，可以尝试运行下面的命令（限linux系统）：
 > `sudo npm install -g react-native-cli`.
 
 #### Android Studio
@@ -681,7 +696,7 @@ react-native start
 
 </div><div markdown class="md-block mac ios android">
 
-## Common Followups
+## 接下来
 
 </div><div markdown class="md-block mac ios">
 

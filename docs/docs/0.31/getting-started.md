@@ -1,6 +1,6 @@
 欢迎使用React Native！这篇文档会帮助你搭建基本的React Native开发环境。如果你已经搭好了环境，那么可以尝试一下[编写Hello World](tutorial.html)。
 
-根本你所使用的操作系统、针对的目标平台不同，具体步骤有所不同。如果想同时开发iOS和Android也没问题，你只需要先选一个平台开始，另一个平台的环境搭建只是稍有不同。
+根据你所使用的操作系统、针对的目标平台不同，具体步骤有所不同。如果想同时开发iOS和Android也没问题，你只需要先选一个平台开始，另一个平台的环境搭建只是稍有不同。
 
 <div class="toggler">
 <style>
@@ -87,6 +87,13 @@ sudo chown -R `whoami` /usr/local
 
 ```
 brew install node
+```
+
+安装完node后建议设置npm镜像以加速后面的过程（或使用科学上网工具）。
+
+```
+npm config set registry https://registry.npm.taobao.org --global
+npm config set disturl https://npm.taobao.org/dist --global
 ```
 
 #### React Native的命令行工具（react-native-cli）
@@ -309,12 +316,20 @@ sudo apt-get install -y nodejs
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 ```
 
+
 </div><div markdown class="md-block windows android">
 
 打开命令提示符窗口，使用Chocolatey来安装NodeJS.
 
 ```
 choco install nodejs.install
+```
+
+安装完node后建议设置npm镜像以加速后面的过程（或使用科学上网工具）。
+
+```
+npm config set registry https://registry.npm.taobao.org --global
+npm config set disturl https://npm.taobao.org/dist --global
 ```
 
 </div><div markdown class="md-block windows linux android">
@@ -327,7 +342,7 @@ React Native的命令行工具用于执行创建、初始化、更新项目、�
 npm install -g react-native-cli
 ```
 
-> 如果你遇到`EACCES: permission denied`权限错误，可以尝试运行下面的命令：
+> 如果你遇到`EACCES: permission denied`权限错误，可以尝试运行下面的命令（限linux系统）：
 > `sudo npm install -g react-native-cli`.
 
 #### Android Studio

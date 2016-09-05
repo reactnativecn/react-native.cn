@@ -1,9 +1,17 @@
 {
-  "current": "0.22",
+  "current": "0.32",
   "list": [
-    { "version": "0.20" },
-    { "version": "0.21" },
     { "version": "0.22" },
+    { "version": "0.23" },
+    { "version": "0.24" },
+    { "version": "0.25" },
+    { "version": "0.26" },
+    { "version": "0.27" },
+    { "version": "0.28" },
+    { "version": "0.29" },
+    { "version": "0.30" },
+    { "version": "0.31" },
+    { "version": "0.32" },
     { "version": "next", "text": "未来版本" }
   ]
 }

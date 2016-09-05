@@ -9,9 +9,16 @@
 	{
 		"name": "牛读",
 		"desc": "技术资讯类聚合阅读器",
-		"ios": "https://itunes.apple.com/cn/app/niu-du-neoreader/id1111443079?l=cn&mt=8",
-		"android": "http://android.myapp.com/myapp/detail.htm?apkName=com.liteneo.reader",
+		"ios": "https://itunes.apple.com/cn/app/id1111443079",
+		"android": "http://a.app.qq.com/o/simple.jsp?pkgname=com.liteneo.reader",
 		"icon": "http://pp.myapp.com/ma_icon/0/icon_42308563_1468229339/256"
+	},
+	{
+		"name": "数独",
+		"desc": "重拾纯粹数独的乐趣",
+		"ios": "https://itunes.apple.com/cn/app/id1138612488",
+		"android": "http://a.app.qq.com/o/simple.jsp?pkgname=com.liteneo.sudoku",
+		"icon": "http://pp.myapp.com/ma_icon/0/icon_42308563_1470896044/256"
 	},
 	{
 		"name": "手赚助手",
@@ -152,5 +159,30 @@
 		"ios": "https://itunes.apple.com/cn/app/qq-kong-jian-ku-xuan-zhi-bo/id364183992?mt=8",
 		"android": "http://android.myapp.com/myapp/detail.htm?apkName=com.qzone",
 		"icon": "http://pp.myapp.com/ma_icon/0/icon_9959_1460036593/96"
+	},{
+		"name": "蜂房",
+		"desc": "名校老司机技能经验共享",
+		"ios": "https://itunes.apple.com/us/app/feng-fang/id1088841582?ls=1&mt=8",
+		"android": "http://a.app.qq.com/o/simple.jsp?pkgname=com.taskbee",
+		"icon": "http://7xn0s3.com1.z0.glb.clouddn.com/playstore-icon.png"
+	},{
+		"name": "大麦湾",
+		"desc": "电商平台,海外直购神器",
+		"ios": "https://itunes.apple.com/app/apple-store/id1041859777?pt=117780230&ct=website&mt=8",
+		"android": "http://android.myapp.com/myapp/detail.htm?apkName=com.damaiwan.dmapp",
+		"icon": "http://pp.myapp.com/ma_icon/0/icon_42306280_1471514591/96"
+	},
+	{
+		"name": "美图",
+		"desc": "收集各大模特平台的美图",
+		"ios": "https://appsto.re/cn/Hfzqeb.i",
+		"android": "",
+		"icon": "http://img2.yhwj168.com/1024.png"
+	},{
+		"name": "16直播",
+		"desc": "全新秀场直播，土豪离不开的直播，主播夜夜笙歌",
+		"ios": "",
+		"android": "http://zhushou.360.cn/detail/index/soft_id/3438248?recrefer=SE_D_16%E7%9B%B4%E6%92%AD",
+		"icon": "http://p17.qhimg.com/t012e5fe09adb1d0ffa.png"
 	}
 ]

@@ -67,7 +67,7 @@ CalendarManager.addEvent('Birthday Party', '4 Privet Drive, Surrey');
 在我们的`CalendarManager`例子里，我们需要把事件的时间交给原生方法。我们不能在桥接通道里传递Date对象，所以需要把日期转化成字符串或数字来传递。我们可以这么实现原生函数：
 
 ```objective-c
-RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(NSNumber *)secondsSinceUnixEpoch)
+RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(nonnull NSNumber *)secondsSinceUnixEpoch)
 {
   NSDate *date = [RCTConvert NSDate:secondsSinceUnixEpoch];
 }

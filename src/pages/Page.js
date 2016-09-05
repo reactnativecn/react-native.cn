@@ -9,6 +9,7 @@ export default class Page extends React.Component {
   static propTypes = {
     content: React.PropTypes.string,
     location: React.PropTypes.object,
+    routes: React.PropTypes.array,
   };
 
   static fetchData({ routes }) {
