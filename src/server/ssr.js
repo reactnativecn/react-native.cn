@@ -14,7 +14,9 @@ import routeConfig from '../pages/index';
 function fetchData(state) {
   const {routes} = state;
   console.log('Here');
-  return Promise.all(routes.map(v=>v.component && v.component.fetchData?v.component.fetchData(state):null))
+  const jobs = routes.map(v=>(v.component && v.component.fetchData)?v.component.fetchData(state):null);
+  console.log(jobs);
+  return Promise.all(jobs)
     .then(arr => {
       const ret = {};
       arr.forEach(v => v && Object.assign(ret, v));
@@ -44,6 +46,7 @@ function render(req, res, next) {
           break;
         }
       }
+      console.log('Here');
       Promise.resolve(fetchData(renderProps)).then(resources => {
         if (__DEV__) {
           console.log('Resource loaded: ', resources);
@@ -56,7 +59,7 @@ function render(req, res, next) {
         if (__DEV__) {
           console.error('Error occured: ', err1);
         }
-        res.status(500);
+        res.status(err1.code || 500);
         next();
       });
       return;

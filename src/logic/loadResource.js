@@ -15,26 +15,43 @@ export function getResource(key) {
   if (resourceCache[key] === undefined) {
     throw new Error('getResource() called before requestResource!');
   }
-  return resourceCache[key];
+  const ret = resourceCache[key];
+  if (ret.err) {
+    throw ret.err;
+  }
+  return ret.content;
+}
+
+export class RequestError extends Error {
+  constructor(code) {
+    super(`RequestError ${code}`);
+    this.code = code;
+  }
 }
 
 export async function requestResource(key) {
   try {
     const resp = await fetch(key);
     if (resp.status !== 200) {
-      throw new Error('Network error.');
+      throw new RequestError(resp.status);
     }
-    const text = resourceCache[key] = await resp.text();
-    return text;
+    const content = await resp.text();
+    resourceCache[key] = {
+      content,
+    }
   } catch (err) {
     // When request error occured, request again next time.
     delete fetching[key];
+
+    resourceCache[key] = {
+      err,
+    };
   }
 }
 
 export function loadResource(key){
   if (resourceCache[key]) {
-    return resourceCache[key];
+    return ;
   }
   if (fetching[key]) {
     return fetching[key];
@@ -45,20 +62,16 @@ export function loadResource(key){
 }
 
 export function loadResources(resource) {
-  const ret = {};
   const jobs = [];
   for (const k of resource) {
     const v = loadResource(k);
     if (v && typeof(v.then) === 'function') {
-      jobs.push(v.then(v=>{
-        ret[k] = v;
-      }));
+      jobs.push(v);
     } else {
-      ret[k] = loadResource(k);
+      loadResource(k);
     }
   }
   if (jobs.length > 0) {
-    return Promise.all(jobs).then(()=>ret);
+    return Promise.all(jobs).then(()=>undefined);
   }
-  return ret;
 }

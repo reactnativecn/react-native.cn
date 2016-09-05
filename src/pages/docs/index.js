@@ -7,6 +7,9 @@ import Page from './Page';
 import versions from '../../../docs/versions.json';
 
 function onEnterFetchData(component) {
+  if (__SERVER__) {
+    return undefined;
+  }
   return function (nextState, replace, callback) {
     const stat = component.fetchData(nextState);
     if (stat && typeof(stat.then) === 'function') {
@@ -18,6 +21,9 @@ function onEnterFetchData(component) {
 }
 
 function onChangeFetchData(component) {
+  if (__SERVER__) {
+    return undefined;
+  }
   return function (prevState, nextState, replace, callback) {
     const stat = component.fetchData(nextState);
     if (stat && typeof(stat.then) === 'function') {

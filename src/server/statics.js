@@ -6,5 +6,8 @@ import path from 'path';
 import Express from 'express';
 
 exports.install = function install(app) {
-  app.use('/static/', Express.static(path.join(__dirname, '../../docs')));
+  app.use('/static/', Express.static(path.join(__dirname, '../../docs')), (req, res)=>{
+    res.status(404);
+    res.end();
+  });
 };

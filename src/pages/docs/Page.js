@@ -1,6 +1,6 @@
 
 import React, { PropTypes } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Panel } from 'react-bootstrap';
 import { Link } from 'react-router';
 import DocumentMeta from 'react-document-meta';
 import Marked from '../../components/Marked';
@@ -34,14 +34,41 @@ export default class Page extends React.Component {
   loadData({ params }) {
     const { version, doc } = params;
     const markdown = `/static/docs/${version}/${doc}.md`;
-    this.setState({
-      content: getResource(markdown),
-    });
+    try {
+      this.setState({
+        err: null,
+        content: getResource(markdown),
+      });
+    } catch (err) {
+      this.setState({
+        err,
+        content: null,
+      });
+    }
   }
 
   render() {
     const { location, params, docIndex } = this.props;
-    const {content} = this.state;
+    const { content, err } = this.state;
+
+    if (err) {
+      if (err.code === 404) {
+        return (
+          <section className="content">
+            <Panel header="404 Not Found" bsStyle="danger">
+              ——你所寻找的页面已经不存在了。
+            </Panel>
+          </section>
+        );
+      }
+      return (
+        <section className="content">
+          <Panel header={`${err.code}`} bsStyle="danger">
+            发生了意外的错误
+          </Panel>
+        </section>
+      );
+    }
     let hash = location.hash;
     hash = hash && hash.substr(1);
 

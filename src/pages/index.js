@@ -9,6 +9,9 @@ import NotFound from './NotFound';
 import docsRoute from './docs';
 
 function onEnterFetchData(component) {
+  if (__SERVER__) {
+    return undefined;
+  }
   return function (nextState, replace, callback) {
     const stat = component.fetchData(nextState);
     if (stat && typeof(stat.then) === 'function') {
