@@ -4,11 +4,12 @@
 
 import URI from 'urijs';
 
-const resourceCache = window.resources || {};
+const resourceCache = {};
 const fetching = {};
 
-for (var k in resourceCache) {
-  fetching[k] = Promise.resolve(resourceCache[k]);
+for (var k in window.resources) {
+  resourceCache[k] = { content: window.resources[k] };
+  fetching[k] = Promise.resolve(window.resources[k]);
 }
 
 export function getResource(key) {
