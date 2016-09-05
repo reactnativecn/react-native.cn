@@ -4,6 +4,7 @@
 
 import Site from './Site';
 import Page from './Page';
+import Cases from './Cases';
 import NotFound from './NotFound';
 
 import docsRoute from './docs';
@@ -32,6 +33,12 @@ export default {
       component: Page,
       onEnter: onEnterFetchData(Page),
       markdown: '/about.md',
+    },
+    {
+      path: 'cases.html',
+      component: Cases,
+      onEnter: onEnterFetchData(Cases),
+      resource: '/cases/cases.json',
     },
 
     docsRoute,
