@@ -5,7 +5,7 @@
 /* eslint-disable import/no-extraneous-dependencies, no-underscore-dangle */
 
 const __SERVER__ = process.env.WEBPACK_CONFIG === 'server';
-const __DEV__ = process.env.NODE_ENV !== 'production';
+const __DEV__ = global.__DEV__ = process.env.NODE_ENV !== 'production';
 
 process.env.BABEL_ENV = __SERVER__ ? 'server' : 'web';
 

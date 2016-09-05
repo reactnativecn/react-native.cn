@@ -40,6 +40,6 @@ export default {
       path: '*',
       component: NotFound,
       status: 404,
-    },
+    }
   ],
 };
