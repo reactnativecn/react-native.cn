@@ -60,7 +60,7 @@ export default class Page extends React.Component {
     const title = content && curr && curr.subject || '';
 
     const gitLink = content && curr &&
-                      `https://github.com/reactnativecn/react-native-docs-cn/blob/master/docs/${params.version}/${curr.mdlink}.md`;
+                      `https://github.com/reactnativecn/react-native.cn/tree/next/docs/docs/${params.version}/${curr.mdlink}.md`;
 
     return (
       <div>
