@@ -2,27 +2,42 @@
  * Created by Yun on 2015-10-24.
  */
 
-import React from 'react';
-import { Link } from 'react-router';
+import React, { PropTypes, Component } from 'react';
+// import { Link } from 'react-router';
 
 import Marked from '../components/Marked';
 import Container from '../components/Container';
 import './Home.less';
+import CONSTANTS from '../constants';
+import { loadResources, getResource } from '../logic/loadResource';
 
-class Index extends React.Component {
+export default class Home extends Component {
   static propTypes = {
-    content: React.PropTypes.string,
-    location: React.PropTypes.object,
-    blogBasicList: React.PropTypes.object,
-    newsBasicList: React.PropTypes.object,
-    links: React.PropTypes.object,
+    content: PropTypes.string,
+    location: PropTypes.object,
+    routes: PropTypes.array,
   };
+
   static fetchData() {
+    return loadResources([
+      '/static/index.md',
+      `${CONSTANTS.bbs}/api/category/1`,
+      `${CONSTANTS.bbs}/api/category/3`,
+    ]);
+  }
+  state = {};
+
+  componentWillMount() {
+    this.setState({
+      content: getResource('/static/index.md'),
+      blogBasicList: JSON.parse(getResource(`${CONSTANTS.bbs}/api/category/3`)),
+      newsBasicList: JSON.parse(getResource(`${CONSTANTS.bbs}/api/category/1`)),
+    });
   }
   render() {
-    const { blogBasicList, location, content, newsBasicList, links } = this.props;
-    let hash = location.hash;
-    hash = hash && hash.substr(1);
+    const { location } = this.props;
+    const { blogBasicList, content, newsBasicList } = this.state;
+    const hash = location.hash && location.hash.substr(1);
 
     return (
       <div>
@@ -50,8 +65,8 @@ class Index extends React.Component {
                           dangerouslySetInnerHTML={{ __html: post.title }}
                         />
                         <span className="date">
-                          { post.timestampISO.split('T')[0] }
-                        </span>
+                        { post.timestampISO.split('T')[0] }
+                      </span>
                       </div>
                     );
                   })
@@ -68,8 +83,8 @@ class Index extends React.Component {
                           dangerouslySetInnerHTML={{ __html: post.title }}
                         />
                         <span className="date">
-                          { post.timestampISO.split('T')[0] }
-                        </span>
+                        { post.timestampISO.split('T')[0] }
+                      </span>
                       </div>
                     );
                   })
@@ -88,26 +103,20 @@ class Index extends React.Component {
                 开始使用React Native
               </a>
             </div>
-            <div className="friend-links">
-              友情链接：
-              {
-                links.index.map((l, i) =>
-                  <a key={i} href={l.href}>
-                    {l.text}
-                  </a>
-                )
-              }
-              <Link to={{ pathname: 'friendlink.html' }}>更多</Link>
-            </div>
+            {/*<div className="friend-links">*/}
+            {/*友情链接：*/}
+            {/*{*/}
+            {/*links.index.map((l, i) =>*/}
+            {/*<a key={i} href={l.href}>*/}
+            {/*{l.text}*/}
+            {/*</a>*/}
+            {/*)*/}
+            {/*}*/}
+            {/*<Link to={{ pathname: 'friendlink.html' }}>更多</Link>*/}
+            {/*</div>*/}
           </Container>
         </section>
       </div>
     );
   }
 }
-export default connect(state => ({
-  content: state.content,
-  blogBasicList: state.blogBasicList,
-  newsBasicList: state.newsBasicList,
-  links: state.links,
-}))(Index);

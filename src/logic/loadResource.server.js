@@ -4,6 +4,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import request from 'superagent';
 
 const resourceCache = {};
 
@@ -18,7 +19,7 @@ export class RequestError extends Error {
   }
 }
 
-export function loadResource(key){
+export async function loadResource(key){
   const m = /^\/(\w+)(\/.*)$/.exec(key);
   if (resourceCache[key] === undefined) {
     if (!m) {
@@ -31,6 +32,12 @@ export function loadResource(key){
       }
       const data = fs.readFileSync(fn, 'utf-8');
       resourceCache[key] = data;
+    } else if (m[1] === 'proxy') {
+      return request('GET', key.replace('/proxy/', 'http://'))
+        .then(
+          (res) => (resourceCache[key] = res.text),
+          (err) => Promise.reject(new RequestError(404))
+        );
     } else {
       return Promise.reject(new RequestError(404));
     }

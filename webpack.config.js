@@ -135,10 +135,26 @@ module.exports = {
   devServer: {
     contentBase: './',
     historyApiFallback: true,
-    proxy: {
-    },
+    proxy: [
+      {
+        path: '/proxy/**',
+        target: 'http://bbs.reactnative.cn',
+        secure: false,
+        changeOrigin: true,
+        pathRewrite: () => '',
+        router: req => req.url.replace('/proxy/', 'http://'),
+      },
+      // {
+      //   path: '/httpsproxy/**',
+      //   target: 'http://bbs.reactnative.cn',
+      //   secure: false,
+      //   changeOrigin: true,
+      //   pathRewrite: () => '',
+      //   router: req => req.url.replace('/proxy/', 'https://'),
+      // },
+    ],
     quiet: false,
-    noInfo: false,
+    noInfo: true,
     lazy: true,
     filename: '[name].bundle.js',
     watchOptions: {

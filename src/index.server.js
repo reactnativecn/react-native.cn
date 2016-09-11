@@ -22,6 +22,7 @@ const server = new http.Server(app);
 if (__DEV__) {
   require('./server/webpack').install(app);
   require('./server/statics').install(app);
+  require('./server/proxy').install(app);
 
   app.use((req, res, next) => {
     // Do not cache webpack stats: the script file would change since

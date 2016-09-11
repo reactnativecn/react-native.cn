@@ -14,6 +14,6 @@ import webpackConfig from '../../webpack.config.js';
 const compiler = webpack(webpackConfig);
 
 exports.install = function install(app) {
-  compiler.run(()=>{});
+  compiler.run(() => {});
   app.use(webpackDevMiddleware(compiler, webpackConfig.devServer));
 };

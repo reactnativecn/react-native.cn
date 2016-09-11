@@ -29,8 +29,8 @@ export default class Page extends React.Component {
   }
 
   render() {
-    const {location} = this.props;
-    const {data} = this.state;
+    const { location } = this.props;
+    const { data } = this.state;
     const hash = location.hash && location.hash.substr(1);
     return (
       <section className="content">

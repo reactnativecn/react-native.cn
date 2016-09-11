@@ -112,7 +112,10 @@ export default class Marked extends React.Component {
     const content = this.props.children;
     if (content && content.indexOf('markdown-script') !== -1) {
       setTimeout(() => {
-        eval(document.querySelector('.markdown-script').innerHTML);
+        var el = document.querySelector('.markdown-script');
+        if (el) {
+          eval(el.innerHTML);
+        }
       }, 0);
     }
   }
@@ -130,6 +133,7 @@ export default class Marked extends React.Component {
         dangerouslySetInnerHTML={{ __html: this.rawMarkup() }}
         ref={
           __CLIENT__ && (div => {
+            // TODO 跳进跳出文档时会触发两次
             this.checkScript();
             this.div = div;
             this.doScroll();

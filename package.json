@@ -76,6 +76,7 @@
     "react-dom": "^15.3.0",
     "react-router": "^2.6.1",
     "react-router-bootstrap": "^0.23.1",
+    "superagent": "^2.2.0",
     "urijs": "^1.18.1",
     "webpack-isomorphic-tools": "^2.5.6",
     "whatwg-fetch": "^1.0.0"
