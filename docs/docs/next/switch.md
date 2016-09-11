@@ -48,7 +48,7 @@
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="tintcolor"></a><span class="platform">ios</span>tintColor <span class="propType">ColorPropType</span> <a class="hash-link" href="#tintcolor">#</a></h4>
-		<div><p>关闭状态时的背景颜色。</p></div>
+		<div><p>关闭状态时的边框颜色。</p></div>
 	</div>
 </div>
 

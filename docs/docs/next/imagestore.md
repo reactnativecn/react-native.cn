@@ -5,18 +5,12 @@
         <h4 class="methodTitle"><a class="anchor" name="hasimagefortag"></a><span class="methodType">static </span>hasImageForTag<span
             class="methodType">(uri, callback)</span> <a class="hash-link"
                                                          href="#hasimagefortag">#</a></h4>
-        <div><p>Check if the ImageStore contains image data for the specified URI.
-            @platform ios</p></div>
+        <div><p>检查ImageStore中是否包含了指定URI的图片数据。目前仅限iOS。</p></div>
     </div>
     <div class="prop">
         <h4 class="methodTitle"><a class="anchor" name="removeimagefortag"></a><span class="methodType">static </span>removeImageForTag<span
             class="methodType">(uri)</span> <a class="hash-link" href="#removeimagefortag">#</a></h4>
-        <div><p>Delete an image from the ImageStore. Images are stored in memory and
-            must be manually removed when you are finished with them, otherwise they
-            will continue to use up RAM until the app is terminated. It is safe to
-            call <code>removeImageForTag()</code> without first calling <code>hasImageForTag()</code>, it
-            will simply fail silently.
-            @platform ios</p></div>
+        <div><p>从ImageStore中删除指定图片。存储在ImageStore中的图标必须手动删除，否则在应用退出之前将会一直占用内存。调用此删除方法并不需要先调用<code>hasImageForTag()</code>方法来检查，此方法会自动处理异常情况。目前仅限iOS。</p></div>
     </div>
     <div class="prop">
         <h4 class="methodTitle"><a class="anchor" name="addimagefrombase64"></a><span class="methodType">static </span>addImageFromBase64<span
@@ -24,7 +18,7 @@
             <a class="hash-link" href="#addimagefrombase64">#
             </a>
         </h4>
-        <div><p>Stores a base64-encoded image in the ImageStore, and returns a URI that
+        <div><p>在ImageStore中以base64编码格式存储一幅图片，并返回一个URI以便访问或显示此图片。 and returns a URI that
             can be used to access or display the image later. Images are stored in
             memory only, and must be manually deleted when you are finished with
             them by calling <code>removeImageForTag()</code>.</p>

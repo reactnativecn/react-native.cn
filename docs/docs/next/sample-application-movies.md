@@ -236,8 +236,7 @@ var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/maste
         this.setState({
           movies: responseData.movies,
         });
-      })
-      .done();
+      });
   }
 ```
 
@@ -357,8 +356,7 @@ import {
           dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
           loaded: true,
         });
-      })
-      .done();
+      });
   }
 ```
 
@@ -429,8 +427,7 @@ class SampleAppMovies extends Component {
           dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
           loaded: true,
         });
-      })
-      .done();
+      });
   }
 
   render() {
