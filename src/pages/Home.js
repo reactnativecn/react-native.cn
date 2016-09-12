@@ -3,7 +3,7 @@
  */
 
 import React, { PropTypes, Component } from 'react';
-// import { Link } from 'react-router';
+import { Link } from 'react-router';
 
 import Marked from '../components/Marked';
 import Container from '../components/Container';
@@ -13,7 +13,6 @@ import { loadResources, getResource } from '../logic/loadResource';
 
 export default class Home extends Component {
   static propTypes = {
-    content: PropTypes.string,
     location: PropTypes.object,
     routes: PropTypes.array,
   };
@@ -21,6 +20,7 @@ export default class Home extends Component {
   static fetchData() {
     return loadResources([
       '/static/index.md',
+      '/static/links/links.json',
       `${CONSTANTS.bbs}/api/category/1`,
       `${CONSTANTS.bbs}/api/category/3`,
     ]);
@@ -30,13 +30,14 @@ export default class Home extends Component {
   componentWillMount() {
     this.setState({
       content: getResource('/static/index.md'),
+      links: JSON.parse(getResource('/static/links/links.json')),
       blogBasicList: JSON.parse(getResource(`${CONSTANTS.bbs}/api/category/3`)),
       newsBasicList: JSON.parse(getResource(`${CONSTANTS.bbs}/api/category/1`)),
     });
   }
   render() {
     const { location } = this.props;
-    const { blogBasicList, content, newsBasicList } = this.state;
+    const { blogBasicList, content, newsBasicList, links } = this.state;
     const hash = location.hash && location.hash.substr(1);
 
     return (
@@ -103,17 +104,17 @@ export default class Home extends Component {
                 开始使用React Native
               </a>
             </div>
-            {/*<div className="friend-links">*/}
-            {/*友情链接：*/}
-            {/*{*/}
-            {/*links.index.map((l, i) =>*/}
-            {/*<a key={i} href={l.href}>*/}
-            {/*{l.text}*/}
-            {/*</a>*/}
-            {/*)*/}
-            {/*}*/}
-            {/*<Link to={{ pathname: 'friendlink.html' }}>更多</Link>*/}
-            {/*</div>*/}
+            <div className="friend-links">
+            友情链接：
+            {
+              links.index.map((l, i) =>
+                <a key={i} href={l.href}>
+                {l.text}
+                </a>
+              )
+            }
+            <Link to={{ pathname: 'friendlink.html' }}>更多</Link>
+            </div>
           </Container>
         </section>
       </div>

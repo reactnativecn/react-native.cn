@@ -5,11 +5,14 @@
 import Site from './Site';
 import Page from './Page';
 import Cases from './Cases';
-import NotFound from './NotFound';
+import Blog from './Blog';
+import Post from './Post';
 import Home from './Home';
+import FriendLink from './FriendLink';
 import Videos from './Videos';
 
 import docsRoute from './docs';
+import NotFound from './NotFound';
 
 function onEnterFetchData(component) {
   if (__SERVER__) {
@@ -47,20 +50,32 @@ export default {
       path: 'cases.html',
       component: Cases,
       onEnter: onEnterFetchData(Cases),
-      resource: '/cases/cases.json',
+    },
+    {
+      path: 'blog.html',
+      component: Blog,
+      onEnter: onEnterFetchData(Blog),
     },
     {
       path: 'videos.html',
       component: Videos,
       onEnter: onEnterFetchData(Videos),
     },
-
+    {
+      path: 'friendlink.html',
+      component: FriendLink,
+      onEnter: onEnterFetchData(FriendLink),
+    },
+    {
+      path: 'post/:tid',
+      component: Post,
+      onEnter: onEnterFetchData(Post),
+    },
     docsRoute,
-
     {
       path: '*',
       component: NotFound,
       status: 404,
-    }
+    },
   ],
 };

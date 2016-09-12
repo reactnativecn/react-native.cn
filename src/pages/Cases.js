@@ -10,25 +10,16 @@ import { loadResources, getResource } from '../logic/loadResource';
 import './Cases.styl';
 
 export default class Cases extends React.Component {
-  static propTypes = {
-    cases: React.PropTypes.array,
-    routes: React.PropTypes.array,
-  };
 
-  static fetchData({ routes }) {
-    const route = routes[routes.length - 1];
-    const resource = route.resource;
-    return loadResources([`/static${resource}`]);
+  static fetchData() {
+    return loadResources(['/static/cases/cases.json']);
   }
 
   state = {};
 
   componentWillMount() {
-    const { routes } = this.props;
-    const route = routes[routes.length - 1];
-    const resource = route.resource;
     this.setState({
-      data: JSON.parse(getResource(`/static${resource}`)),
+      data: JSON.parse(getResource('/static/cases/cases.json')),
     });
   }
 

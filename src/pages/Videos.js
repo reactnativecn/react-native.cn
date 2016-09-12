@@ -9,11 +9,6 @@ import { loadResources, getResource } from '../logic/loadResource';
 import './Videos.styl';
 
 export default class Videos extends Component {
-  static propTypes = {
-    content: PropTypes.string,
-    location: PropTypes.object,
-    routes: PropTypes.array,
-  };
 
   static fetchData() {
     return loadResources([

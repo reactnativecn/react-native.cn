@@ -12,8 +12,9 @@ import DocumentMeta from 'react-document-meta';
 import routeConfig from '../pages/index';
 
 function fetchData(state) {
-  const {routes} = state;
-  const jobs = routes.map(v=>(v.component && v.component.fetchData)?v.component.fetchData(state):null);
+  const { routes } = state;
+  const jobs = routes.map(v => (v.component && v.component.fetchData)
+    ? v.component.fetchData(state) : null);
   return Promise.all(jobs)
     .then(arr => {
       const ret = {};
