@@ -20,6 +20,8 @@ class Bananas extends Component {
 AppRegistry.registerComponent('Bananas', () => Bananas);
 ```
 
+译注：在iOS上使用http链接的图片地址可能不会显示，参见[这篇说明修改](https://segmentfault.com/a/1190000002933776)。
+
 请注意`{pic}`外围有一层括号，我们需要用括号来把`pic`这个变量嵌入到JSX语句中。括号的意思是括号内部为一个js变量或表达式，需要执行后取值。因此我们可以把任意合法的JavaScript表达式通过括号嵌入到JSX语句中。
 
 自定义的组件也可以使用`props`。通过在不同的场景使用不同的属性定制，可以尽量提高自定义组件的复用范畴。只需在`render`函数中引用`this.props`，然后按需处理即可。下面是一个例子：

@@ -31,7 +31,7 @@
 
 ### 红屏错误
 
-In-app errors are displayed in a full screen alert with a red background inside your app. This screen is known as a RedBox. You can use `console.error()` to manually trigger one.
+应用内的报错会以全屏红色显示在应用中（调试模式下），我们称为红屏（redbox）报错。你可以使用`console.error()`来手动触发红屏错误。
 
 ### 黄屏警告
 
