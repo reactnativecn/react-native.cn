@@ -1,5 +1,12 @@
 [
 	{
+		"name": "机友会",
+		"desc": "工程机械人自己的圈子",
+		"ios": "https://itunes.apple.com/us/app/ji-you-hui-gong-cheng-ji-xie/id1120532425?mt=8",
+		"android": "http://i.lmjx.net/",
+		"icon": "http://i.lmjx.net/icon.png"
+	},
+	{
 		"name": "百贷纵横",
 		"desc": "移动在线信贷服务平台",
 		"ios": "https://itunes.apple.com/us/app/bai-dai-zong-heng/id865391997?l=zh&ls=1&mt=8",
