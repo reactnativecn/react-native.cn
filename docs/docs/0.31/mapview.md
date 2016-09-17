@@ -1,4 +1,4 @@
-官方建议使用[react-native-maps](https://github.com/lelandrichardson/react-native-maps)代替此地图组件。
+官方建议使用[react-native-maps](https://github.com/airbnb/react-native-maps)代替此地图组件。
 
 ### 截图
 ![](img/components/mapview.png)

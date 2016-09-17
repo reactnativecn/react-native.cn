@@ -1,6 +1,6 @@
 ## 访问App内的开发菜单
 
-You can access the developer menu by shaking your device or by selecting "Shake Gesture" inside the Hardware menu in the iOS Simulator. You can also use the **`Command`**`⌘` + **`D`** keyboard shortcut when your app is running in the iPhone Simulator, or **`Command`**`⌘` + **`M`** when running in an Android emulator.
+你可以通过摇晃设备或是选择iOS模拟器的"Hardware"菜单中的"Shake Gesture"选项来打开开发菜单。另外，如果是在iOS模拟器中运行，还可以按下**`Command`**`⌘` + **`D`** 快捷键，Android模拟器对应的则是**`Command`**`⌘` + **`M`**（windows上可能是F1或者F2）。
 
 ![](img/DeveloperMenu.png)
 
@@ -8,90 +8,99 @@ You can access the developer menu by shaking your device or by selecting "Shake 
 
 ## 刷新JavaScript
 
-Instead of recompiling your app every time you make a change, you can reload your app's JavaScript code instantly. To do so, select "Reload" from the Developer Menu. You can also press **`Command`**`⌘` + **`R`** in the iOS Simulator, or press **`R`** twice on Android emulators.
+传统的原生应用开发中，每一次修改都需要重新编译，但在RN中你只需要刷新一下JavaScript代码，就能立刻看到变化。具体的操作就是在开发菜单中点击"Reload"选项。也可以在iOS模拟器中按下**`Command`**`⌘` + **`R`** ，Android模拟器上对应的则是按两下**`R`**。（注意，某些RN版本可能在windows中reload无效，请等待官方修复）
 
-> If the **`Command`**`⌘` + **`R`** keyboard shortcut does not seem to reload the iOS Simulator, go to the Hardware menu, select Keyboard, and make sure that "Connect Hardware Keyboard" is checked.
+> 如果在iOS模拟器中按下**`Command`**`⌘` + **`R`**没啥感觉，则注意检查Hardware菜单中，Keyboard选项下的"Connect Hardware Keyboard"是否被选中。
 
-### Automatic reloading
+### 自动刷新
 
-You can speed up your development times by having your app reload automatically any time your code changes. Automatic reloading can be enabled by selecting "Enable Live Reload" from the Developer Menu.
+选择开发菜单中的"Enable Live Reload"可以开启自动刷新，这样可以节省你开发中的时间。
 
-You may even go a step further and keep your app running as new versions of your files are injected into the JavaScript bundle automatically by enabling [Hot Reloading](https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html) from the Developer Menu. This will allow you to persist the app's state through reloads.
+更神奇的是，你还可以保持应用的当前运行状态，修改后的JavaScript文件会自动注入进来（就好比行驶中的汽车不用停下就能更换新的轮胎）。要实现这一特性只需开启开发菜单中的[Hot Reloading](https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html)选项。
 
-> There are some instances where hot reloading cannot be implemented perfectly. If you run into any issues, use a full reload to reset your app.
+> 某些情况下hot reload并不能顺利实施。如果碰到任何界面刷新上的问题，请尝试手动完全刷新。
 
-You will need to rebuild your app for changes to take effect in certain situations:
+但有些时候你必须要重新编译应用才能使修改生效：
 
-* You have added new resources to your native app's bundle, such as an image in `Images.xcassets` on iOS or the `res/drawable` folder on Android.
-* You have modified native code (Objective-C/Swift on iOS or Java/C++ on Android).
+* 增加了新的资源(比如给iOS的`Images.xcassets`或是Andorid的`res/drawable`文件夹添加了图片)
+* 更改了任何的原生代码（objective-c/swift/java）
 
 ## 应用内的错误与警告提示（红屏和黄屏）
 
-Errors and warnings are displayed inside your app in development builds.
+红屏或黄屏提示都只会在开发版本中显示，正式的离线包中是不会显示的。
 
-### Errors
+### 红屏错误
 
-In-app errors are displayed in a full screen alert with a red background inside your app. This screen is known as a RedBox. You can use `console.error()` to manually trigger one.
+应用内的报错会以全屏红色显示在应用中（调试模式下），我们称为红屏（red box）报错。你可以使用`console.error()`来手动触发红屏错误。
 
-### Warnings
+### 黄屏警告
 
-Warnings will be displayed on screen with a yellow background. These alerts are known as YellowBoxes. Click on the alerts to show more information or to dismiss them.
+应用内的警告会以全屏黄色显示在应用中（调试模式下），我们称为黄屏（yellow box）报错。点击警告可以查看详情或是忽略掉。
+和红屏报警类似，你可以使用`console.warn()`来手动触发黄屏警告。
+在默认情况下，开发模式中启用了黄屏警告。可以通过以下代码关闭：
+```js
+console.disableYellowBox = true;
+console.warn('YellowBox is disabled.');
+```
+你也可以通过代码屏蔽指定的警告，像下面这样设置一个数组：
+```js
+console.ignoredYellowBox = ['Warning: ...'];
+```
+数组中的字符串就是要屏蔽的警告的开头的内容。（例如上面的代码会屏蔽掉所有以Warning开头的警告内容）
 
-As with a RedBox, you can use `console.warn()` to trigger a YellowBox.
+> 红屏和黄屏在发布版（release/production）中都是自动禁用的。
 
-YellowBoxes can be disabled during development by using `console.disableYellowBox = true;`. Specific warnings can be ignored programmatically by setting an array of prefixes that should be ignored: `console.ignoredYellowBox = ['Warning: ...'];`
+## 访问控制台日志
 
-> RedBoxes and YellowBoxes are automatically disabled in release (production) builds.
-
-## Accessing console logs
-
-You can display the console logs for an iOS or Android app by using the following commands in a terminal while the app is running:
+在运行RN应用时，可以在终端中运行如下命令来查看控制台的日志：
 
 ```
 $ react-native log-ios
 $ react-native log-android
 ```
 
-You may also access these through `Debug → Open System Log...` in the iOS Simulator or by running `adb logcat *:S ReactNative:V ReactNativeJS:V` in a terminal while an Android app is running on a device or emulator.
+此外，你也可以在iOS模拟器的菜单中选择`Debug → Open System Log...`来查看。如果是Android应用，无论是运行在模拟器或是真机上，都可以通过在终端命令行里运行`adb logcat *:S ReactNative:V ReactNativeJS:V`命令来查看。
 
-## Chrome Developer Tools
+## Chrome开发者工具
 
-To debug the JavaScript code in Chrome, select "Debug JS Remotely" from the Developer Menu. This will open a new tab at <http://localhost:8081/debugger-ui>
+在开发者菜单中选择"Debug JS Remotely"选项，即可以开始在Chrome中调试JavaScript代码。点击这个选项的同时会自动打开调试页面 <http://localhost:8081/debugger-ui>.
 
-Select `Tools → Developer Tools` from the Chrome Menu to open the [Developer Tools](https://developer.chrome.com/devtools). You may also access the DevTools using keyboard shortcuts (**`Command`**`⌘` + **`Option`**`⌥` + **`I`** on Mac, **`Ctrl`** + **`Shift`** + **`I`** on Windows). You may also want to enable [Pause On Caught Exceptions](http://stackoverflow.com/questions/2233339/javascript-is-there-a-way-to-get-chrome-to-break-on-all-errors/17324511#17324511) for a better debugging experience.
+在Chrome的菜单中选择`Tools → Developer Tools`可以打开开发者工具，也可以通过键盘快捷键来打开（Mac上是**`Command`**`⌘` + **`Option`**`⌥` + **`I`**，Windows上是**`Ctrl`** + **`Shift`** + **`I`**或是F12）。打开[有异常时暂停（Pause On Caught Exceptions）](http://stackoverflow.com/questions/2233339/javascript-is-there-a-way-to-get-chrome-to-break-on-all-errors/17324511#17324511)选项，能够获得更好的开发体验。  
 
-> It is [currently not possible](https://github.com/facebook/react-devtools/issues/229) to use the "React" tab in the Chrome Developer Tools to inspect app widgets. You can use Nuclide's "React Native Inspector" as a workaround.
+__译注__：Chrome中并不能直接看到App的用户界面，而只能提供console的输出，以及在sources项中断点调试js脚本。
 
-### Debugging on a device with Chrome Developer Tools
+> [目前无法正常使用React开发插件](https://github.com/facebook/react-devtools/issues/229)（就是某些教程或截图上提到的Chrome开发工具上多出来的React选项），但这并不影响代码的调试。如果你需要像调试web页面那样查看RN应用的jsx结构，暂时只能使用Nuclide的"React Native Inspector"这一功能来代替。
 
-On iOS devices, open the file [`RCTWebSocketExecutor.m`](https://github.com/facebook/react-native/blob/master/Libraries/WebSocket/RCTWebSocketExecutor.m) and change "localhost" to the IP address of your computer, then select "Debug JS Remotely" from the Developer Menu.
+### 使用Chrome开发者工具来在设备上调试
 
-On Android 5.0+ devices connected via USB, you can use the [`adb` command line tool](http://developer.android.com/tools/help/adb.html) to setup port forwarding from the device to your computer:
+对于iOS真机来说，需要打开 [`RCTWebSocketExecutor.m`](https://github.com/facebook/react-native/blob/master/Libraries/WebSocket/RCTWebSocketExecutor.m)文件，然后将其中的"localhost"改为你的电脑的IP地址，最后启用开发者菜单中的"Debug JS Remotely"选项。
+
+对于Android 5.0+设备（包括模拟器）来说，将设备通过USB连接到电脑上后，可以使用[`adb`命令行工具](http://developer.android.com/tools/help/adb.html)来设定从设备到电脑的端口转发：
 
 `adb reverse tcp:8081 tcp:8081`
 
-Alternatively, select "Dev Settings" from the Developer Menu, then update the "Debug server host for device" setting to match the IP address of your computer.
+如果设备Android版本在5.0以下，则可以在开发者菜单中选择"Dev Settings - Debug server host for device"，然后在其中填入电脑的”IP地址:端口“。
 
-> If you run into any issues, it may be possible that one of your Chrome extensions is interacting in unexpected ways with the debugger. Try disabling all of your extensions and re-enabling them one-by-one until you find the problematic extension.
+> 如果在Chrome调试时遇到一些问题，那有可能是某些Chrome的插件引起的。试着禁用所有的插件，然后逐个启用，以确定是否某个插件影响到了调试。
 
-### Debugging using a custom JavaScript debugger
+### 使用自定义的JavaScript调试器来调试
 
-To use a custom JavaScript debugger in place of Chrome Developer Tools, set the `REACT_DEBUGGER` environment variable to a command that will start your custom debugger. You can then select "Debug JS Remotely" from the Developer Menu to start debugging.
+如果想用其他的JavaScript调试器来代替Chrome，可以设置一个名为`REACT_DEBUGGER`的环境变量，其值为启动自定义调试器的命令。调试的流程依然是从开发者菜单中的"Debug JS Remotely"选项开始。
 
-The debugger will receive a list of all project roots, separated by a space. For example, if you set `REACT_DEBUGGER="node /path/to/launchDebugger.js --port 2345 --type ReactNative"`, then the command `node /path/to/launchDebugger.js --port 2345 --type ReactNative /path/to/reactNative/app` will be used to start your debugger.
+被指定的调试器需要知道项目所在的目录（可以一次传递多个目录参数，以空格隔开）。例如，如果你设定了`REACT_DEBUGGER="node /某个路径/launchDebugger.js --port 2345 --type ReactNative"`，那么启动调试器的命令就应该是`node /某个路径/launchDebugger.js --port 2345 --type ReactNative /某个路径/你的RN项目目录`。
 
-> Custom debugger commands executed this way should be short-lived processes, and they shouldn't produce more than 200 kilobytes of output.
+> 以这种方式执行的调试器最好是一个短进程（short-lived processes），同时最好也不要有超过200k的文字输出。
 
-### Debugging with [Stetho](http://facebook.github.io/stetho/) on Android 
+### 在Android上使用[Stetho](http://facebook.github.io/stetho/)来调试 
 
-1. In ```android/app/build.gradle``` , add
+1. 在```android/app/build.gradle```文件中添加：
 
    ```gradle
    compile 'com.facebook.stetho:stetho:1.3.1'
    compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
    ```
 
-2. In ```android/app/src/main/java/com/{yourAppName}/MainApplication.java```, add the following imports : 
+2. 在```android/app/src/main/java/com/{yourAppName}/MainApplication.java```文件中添加： 
 
    ```java
    import com.facebook.react.modules.network.ReactCookieJarContainer;
@@ -102,7 +111,7 @@ The debugger will receive a list of all project roots, separated by a space. For
    import java.util.concurrent.TimeUnit;
    ```
 
-3. In ```android/app/src/main/java/com/{yourAppName}/MainApplication.java``` add the function:
+3. 在```android/app/src/main/java/com/{yourAppName}/MainApplication.java```文件中添加：
    ```java
    public void onCreate() {
          super.onCreate();
@@ -118,14 +127,14 @@ The debugger will receive a list of all project roots, separated by a space. For
    }
    ```
 
-4. Run  ```react-native run-android ```
+4. 运行```react-native run-android ```
 
-5. In a new chrome tab, open : ```chrome://inspect```, click on 'Inspect device' (the one followed by "Powered by Stetho")
+5. 打开一个新的Chrome选项卡，在地址栏中输入```chrome://inspect```并回车。在页面中选择'Inspect device' （标有"Powered by Stetho"字样）。
 
-## Debugging native code
+## 调试原生代码
 
-When working with native code (e.g. when writing native modules) you can launch the app from Android Studio or Xcode and take advantage of the debugging features (setup breakpoints, etc.) as you would in case of building a standard native app.
+在和原生代码打交道时（比如编写原生模块），可以直接从Android Studio或是Xcode中启动应用，并利用这些IDE的内置功能来调试（比如设置断点）。这一方面和开发原生应用并无二致。
  
-## Performance Monitor
+## 性能监测
 
-You can enable a performance overlay to help you debug performance problems by selecting "Perf Monitor" in the Developer Menu.
+你可以在开发者菜单中选择"Pref Monitor"选项以开启一个悬浮层，其中会显示应用的当前帧数。
