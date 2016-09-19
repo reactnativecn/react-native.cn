@@ -17,7 +17,7 @@
 
 ### 主线程 (也即UI线程) 帧率
 
-很多人会注意到，`NavigatorIOS`的性能要比Navigator好的多。原因就是它的切换动画是完全在主线程上执行的，因此不会被JavaScript线程上的掉帧所影响。（[阅读关于为何你仍然需要使用Navigator](navigator-comparison.html)）
+很多人会注意到，`NavigatorIOS`的性能要比Navigator好的多。原因就是它的切换动画是完全在主线程上执行的，因此不会被JavaScript线程上的掉帧所影响。（[阅读关于为何你仍然需要使用Navigator](using-navigators.html)）
 
 同样，当JavaScript线程卡住的时候，你仍然可以欢快的上下滚动ScrollView，因为ScrollView运行在主线程之上（尽管滚动事件会被分发到JS线程，但是接收这些事件对于滚动这个动作来说并不必要）。
 
