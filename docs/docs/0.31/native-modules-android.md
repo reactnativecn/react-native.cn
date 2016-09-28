@@ -278,32 +278,10 @@ WritableMap params = Arguments.createMap();
 sendEvent(reactContext, "keyboardWillShow", params);
 ```
 
-JavaScript模块可以通过`Subscribable`mixin的`addListenerOn`方法来接受事件。
+JavaScript模块可以通过使用`DeviceEventEmitter`模块来监听事件：
 
 ```js
-var { DeviceEventEmitter } = require('react-native');
-...
-
-var ScrollResponderMixin = {
-  mixins: [Subscribable.Mixin],
-
-
-  componentWillMount: function() {
-    ...
-    this.addListenerOn(DeviceEventEmitter,
-                       'keyboardWillShow',
-                       this.scrollResponderKeyboardWillShow);
-    ...
-  },
-  scrollResponderKeyboardWillShow:function(e: Event) {
-    this.keyboardWillOpenTo = e;
-    this.props.onKeyboardWillShow && this.props.onKeyboardWillShow(e);
-  },
-```
-
-你还可以直接使用`DeviceEventEmitter`模块来监听事件：
-
-```js
+import { DeviceEventEmitter } from 'react-native';
 ...
 componentWillMount: function() {
   DeviceEventEmitter.addListener('keyboardWillShow', function(e: Event) {
@@ -313,3 +291,125 @@ componentWillMount: function() {
 ...
 ```
 
+### Getting activity result from `startActivityForResult`
+
+You'll need to listen to `onActivityResult` if you want to get results from an activity you started with `startActivityForResult`. To do this, the you must extend `BaseActivityEventListener` or implement `ActivityEventListener`. The former is preferred as it is more resilient to API changes. Then, you need to register the listener in the module's constructor,
+
+```java
+reactContext.addActivityEventListener(mActivityResultListener);
+```
+
+Now you can listen to `onActivityResult` by implementing the following method:
+
+```java
+@Override
+public void onActivityResult(
+  final Activity activity,
+  final int requestCode,
+  final int resultCode,
+  final Intent intent) {
+  // Your logic here
+}
+```
+
+We will implement a simple image picker to demonstrate this. The image picker will expose the method `pickImage` to JavaScript, which will return the path of the image when called.
+
+```java
+public class ImagePickerModule extends ReactContextBaseJavaModule implements ActivityEventListener {
+
+  private static final int IMAGE_PICKER_REQUEST = 467081;
+  private static final String E_ACTIVITY_DOES_NOT_EXIST = "E_ACTIVITY_DOES_NOT_EXIST";
+  private static final String E_PICKER_CANCELLED = "E_PICKER_CANCELLED";
+  private static final String E_FAILED_TO_SHOW_PICKER = "E_FAILED_TO_SHOW_PICKER";
+  private static final String E_NO_IMAGE_DATA_FOUND = "E_NO_IMAGE_DATA_FOUND";
+
+  private Promise mPickerPromise;
+
+  public ImagePickerModule(ReactApplicationContext reactContext) {
+    super(reactContext);
+
+    // Add the listener for `onActivityResult`
+    reactContext.addActivityEventListener(this);
+  }
+
+  @Override
+  public String getName() {
+    return "ImagePickerModule";
+  }
+
+  @ReactMethod
+  public void pickImage(final Promise promise) {
+    Activity currentActivity = getCurrentActivity();
+
+    if (currentActivity == null) {
+      promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "Activity doesn't exist");
+      return;
+    }
+
+    // Store the promise to resolve/reject when picker returns data
+    mPickerPromise = promise;
+
+    try {
+      final Intent galleryIntent = new Intent(Intent.ACTION_PICK);
+
+      galleryIntent.setType("image/*");
+
+      final Intent chooserIntent = Intent.createChooser(galleryIntent, "Pick an image");
+
+      currentActivity.startActivityForResult(chooserIntent, IMAGE_PICKER_REQUEST);
+    } catch (Exception e) {
+      mPickerPromise.reject(E_FAILED_TO_SHOW_PICKER, e);
+      mPickerPromise = null;
+    }
+  }
+
+  // You can get the result here
+  @Override
+  public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
+    if (requestCode == IMAGE_PICKER_REQUEST) {
+      if (mPickerPromise != null) {
+        if (resultCode == Activity.RESULT_CANCELED) {
+          mPickerPromise.reject(E_PICKER_CANCELLED, "Image picker was cancelled");
+        } else if (resultCode == Activity.RESULT_OK) {
+          Uri uri = intent.getData();
+
+          if (uri == null) {
+            mPickerPromise.reject(E_NO_IMAGE_DATA_FOUND, "No image data found");
+          } else {
+            mPickerPromise.resolve(uri.toString());
+          }
+        }
+
+        mPickerPromise = null;
+      }
+    }
+  }
+}
+```
+
+### Listening to LifeCycle events
+
+Listening to the activity's LifeCycle events such as `onResume`, `onPause` etc. is very similar to how we implemented `ActivityEventListener`. The module must implement `LifecycleEventListener`. Then, you need to register a listener in the module's constructor,
+
+```java
+reactContext.addLifecycleEventListener(this);
+```
+
+Now you can listen to the activity's LifeCycle events by implementing the following methods:
+
+```java
+@Override
+public void onHostResume() {
+    // Activity `onResume`
+}
+
+@Override
+public void onHostPause() {
+    // Activity `onPause`
+}
+
+@Override
+public void onHostDestroy() {
+    // Activity `onDestroy`
+}
+```

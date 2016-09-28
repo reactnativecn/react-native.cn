@@ -41,7 +41,8 @@ RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
 现在从Javascript里可以这样调用这个方法：
 
 ```javascript
-var CalendarManager = require('react-native').NativeModules.CalendarManager;
+import { NativeModules } from 'react-native';
+var CalendarManager = NativeModules.CalendarManager;
 CalendarManager.addEvent('Birthday Party', '4 Privet Drive, Surrey');
 ```
 
@@ -240,6 +241,22 @@ RCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSe
 >
 > `methodQueue`方法会在模块被初始化的时候被执行一次，然后会被React Native的桥接机制保存下来，所以你不需要自己保存队列的引用，除非你希望在模块的其它地方使用它。但是，如果你希望在若干个模块中共享同一个队列，则需要自己保存并返回相同的队列实例；仅仅是返回相同名字的队列是不行的。
 
+## Depedency Injection
+The bridge initializes any registered RCTBridgeModules automatically, however you may wish to instantiate your own module instances (so you may inject dependencies, for example).
+ 
+You can do this by creating a class that implements the RTCBridgeDelegate Protocol, initializing an RTCBridge with the delegate as an argument and initialising a RTCRootView with the initialized bridge.
+ 
+```objective-c
+id<RCTBridgeDelegate> moduleInitialiser = [[classThatImplementsRTCBridgeDelegate alloc] init];
+ 
+RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:moduleInitialiser launchOptions:nil];
+ 
+RCTRootView *rootView = [[RCTRootView alloc]
+                        initWithBridge:bridge
+                            moduleName:kModuleName
+                     initialProperties:nil];
+```
+
 ## 导出常量
 
 原生模块可以导出一些常量，这些常量在JavaScript端随时都可以访问。用这种方法来传递一些静态数据，可以避免通过bridge进行一次来回交互。
@@ -325,7 +342,7 @@ RCT_EXPORT_METHOD(updateStatusBarAnimation:(UIStatusBarAnimation)animation
 在JavaScript中可以这样订阅事件：
 
 ```javascript
-var { NativeAppEventEmitter } = require('react-native');
+import { NativeAppEventEmitter } from 'react-native';
 
 var subscription = NativeAppEventEmitter.addListener(
   'EventReminder',

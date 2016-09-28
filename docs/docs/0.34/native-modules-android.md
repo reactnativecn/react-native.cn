@@ -278,32 +278,10 @@ WritableMap params = Arguments.createMap();
 sendEvent(reactContext, "keyboardWillShow", params);
 ```
 
-JavaScript模块可以通过`Subscribable`mixin的`addListenerOn`方法来接受事件。
+JavaScript模块可以通过使用`DeviceEventEmitter`模块来监听事件：
 
 ```js
-var { DeviceEventEmitter } = require('react-native');
-...
-
-var ScrollResponderMixin = {
-  mixins: [Subscribable.Mixin],
-
-
-  componentWillMount: function() {
-    ...
-    this.addListenerOn(DeviceEventEmitter,
-                       'keyboardWillShow',
-                       this.scrollResponderKeyboardWillShow);
-    ...
-  },
-  scrollResponderKeyboardWillShow:function(e: Event) {
-    this.keyboardWillOpenTo = e;
-    this.props.onKeyboardWillShow && this.props.onKeyboardWillShow(e);
-  },
-```
-
-你还可以直接使用`DeviceEventEmitter`模块来监听事件：
-
-```js
+import { DeviceEventEmitter } from 'react-native';
 ...
 componentWillMount: function() {
   DeviceEventEmitter.addListener('keyboardWillShow', function(e: Event) {

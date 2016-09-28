@@ -41,7 +41,8 @@ RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
 现在从Javascript里可以这样调用这个方法：
 
 ```javascript
-var CalendarManager = require('react-native').NativeModules.CalendarManager;
+import { NativeModules } from 'react-native';
+var CalendarManager = NativeModules.CalendarManager;
 CalendarManager.addEvent('Birthday Party', '4 Privet Drive, Surrey');
 ```
 
@@ -341,7 +342,7 @@ RCT_EXPORT_METHOD(updateStatusBarAnimation:(UIStatusBarAnimation)animation
 在JavaScript中可以这样订阅事件：
 
 ```javascript
-var { NativeAppEventEmitter } = require('react-native');
+import { NativeAppEventEmitter } from 'react-native';
 
 var subscription = NativeAppEventEmitter.addListener(
   'EventReminder',
