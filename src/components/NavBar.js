@@ -5,8 +5,8 @@
 import React from 'react';
 
 import { Link } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 import {
-  SafeAnchor,
   Navbar, Nav, NavItem, NavDropdown, MenuItem,
 } from 'react-bootstrap';
 
@@ -25,7 +25,7 @@ const linksInternal = [
   { section: 'videos', href: '/videos.html', text: '视频' },
   { section: 'bbs', href: 'http://bbs.reactnative.cn/', text: '讨论', hot: true, newTab: false },
   { section: 'update', href: 'http://update.reactnative.cn/', text: '热更新', hot: true, newTab: true },
-  { section: 'about', href: '/about.html', text: '关于', hash: '#content' },
+  { section: 'about', href: '/about.html', text: '关于' },
 ];
 const linksExternal = [
   { section: 'github', href: 'https://github.com/facebook/react-native', text: 'GitHub' },
@@ -40,6 +40,7 @@ export default class MyNavBar extends React.Component {
   static contextTypes = {
     router: React.PropTypes.object.isRequired,
   };
+  noop = () => {};
   createLink(v) {
     if (v.isHidden && v.isHidden()) {
       return null;
@@ -49,19 +50,40 @@ export default class MyNavBar extends React.Component {
 
     const newTab = v.newTab !== null ? v.newTab : external;
 
-    return (
+    return (external || newTab) ? (
       <NavItem
-        target={newTab ? '_blank' : undefined}
-        href={v.href}
-        rel={newTab ? 'noopener noreferrer' : ''}
         key={v.section}
         onClick={v.onClick}
-        componentClass={external?SafeAnchor:props=><Link {...props} to={v.href}/>}
+        href={v.href}
+        target={newTab && '_blank'}
       >
         {v.text}
         {v.hot && <div className="hotSign"><img src={imageHot} alt="hot" /></div>}
       </NavItem>
+    ) : (
+      <LinkContainer to={v.href} onClick={v.onClick || this.noop} key={v.section}>
+        <NavItem>
+          {v.text}
+          {v.hot && <div className="hotSign"><img src={imageHot} alt="hot" /></div>}
+        </NavItem>
+      </LinkContainer>
     );
+
+    // return (
+    //   <NavItem
+    //     target={newTab ? '_blank' : undefined}
+    //     href={v.href}
+    //     rel={newTab ? 'noopener noreferrer' : ''}
+    //     key={v.section}
+    //     onClick={v.onClick}
+    //     componentClass={external ? SafeAnchor
+    //       :
+    //       props => <Link {...props} to={v.href} />}
+    //   >
+    //     {v.text}
+    //     {v.hot && <div className="hotSign"><img src={imageHot} alt="hot" /></div>}
+    //   </NavItem>
+    // );
   }
   goToDoc = (version) =>
     () => this.context.router.push(`/docs/${version}/getting-started.html`);

@@ -4,17 +4,39 @@ import React, { PropTypes, Component } from 'react';
 import Container from '../components/Container';
 import './Blog.styl';
 import CONSTANTS from '../constants';
-import { loadResources, getResource } from '../logic/loadResource';
+import { loadResource, loadResources, getResource } from '../logic/loadResource';
 
 export default class Blog extends Component {
 
-  static async fetchData() {
-    const blogList = await loadResource(`${CONSTANTS.bbs}/api/category/3`);
-    return loadResources(blogList.topics.map(t => `${CONSTANTS.bbs}/api/topic/${t.tid}`));
+  static fetchData() {
+    const v = loadResource(`${CONSTANTS.bbs}/api/category/3`);
+    let blogList;
+    let data;
+    if (v && typeof v.then === 'function') {
+      return v.then(ret => {
+        data = ret;
+        blogList = JSON.parse(data);
+        return loadResources(blogList.topics.map(t => `${CONSTANTS.bbs}/api/topic/${t.tid}`))
+      }).then(map => {
+        if (map) {
+          map[`${CONSTANTS.bbs}/api/category/3`] = data;
+        }
+        return map;
+      });
+    } else {
+      blogList = JSON.parse(v);
+      return loadResources(blogList.topics.map(t => `${CONSTANTS.bbs}/api/topic/${t.tid}`));
+    }
   }
-  state = {
-    appendList: [],
-  };
+  state = {};
+  componentWillMount() {
+    const blogList = JSON.parse(getResource(`${CONSTANTS.bbs}/api/category/3`));
+    const blogDetailedList =
+      blogList.topics.map(t => JSON.parse(getResource(`${CONSTANTS.bbs}/api/topic/${t.tid}`)));
+    this.setState({
+      blogDetailedList,
+    });
+  }
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll);
   }
@@ -26,11 +48,12 @@ export default class Blog extends Component {
       this.fetchMore();
     }
   };
+  currentPage = 1;
   parseBlogBody = (rawBody, link) => {
     const endFlag = /<hr \/>([\s\S]*?)<hr \/>/;
     let parsedText = endFlag.exec(rawBody);
     parsedText = parsedText ? parsedText[1] : rawBody;
-    parsedText = parsedText.replace(/\/uploads\/file/g, `${config.bbs}/uploads/file`);
+    parsedText = parsedText.replace(/\/uploads\/file/g, `${CONSTANTS.bbs}/uploads/file`);
     return `${parsedText}<a href="${link}" class="more">[阅读全文]</a>`;
   };
   fetchMore = () => {
@@ -50,7 +73,7 @@ export default class Blog extends Component {
           return storage.getBatchData(blogList.topics.map(t => ({key: 'post', id: t.tid})))
             .then(blogs => {
               this.setState({
-                appendList: this.state.appendList.concat(blogs),
+                blogDetailedList: this.state.blogDetailedList.concat(blogs),
               });
               this.fetching = false;
             });
@@ -60,20 +83,13 @@ export default class Blog extends Component {
       }
     });
   }
-  componentWillMount() {
-    this.setState({
-      content: getResource('/static/index.md'),
-      blogBasicList: JSON.parse(getResource(`${CONSTANTS.bbs}/api/category/3`)),
-      newsBasicList: JSON.parse(getResource(`${CONSTANTS.bbs}/api/category/1`)),
-    });
-  }
   render() {
     const { blogDetailedList } = this.state;
-    let blogList = blogDetailedList.concat(this.state.appendList);
+    // const blogList = blogDetailedList.concat(this.state.appendList);
     return (
       <Container type="blog">
         {
-          blogList.map(topic => {
+          blogDetailedList.map(topic => {
             const post = topic.posts[0];
             return (
               <div className="post-list-item" key={post.tid}>
@@ -88,7 +104,7 @@ export default class Blog extends Component {
                     {' by '}
                     <a
                       target="_blank"
-                      href={`${config.bbs}/user/${post.user.username}`}
+                      href={`${CONSTANTS.bbs}/user/${post.user.username}`}
                     >
                       {post.user.username}
                     </a>

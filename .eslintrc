@@ -12,7 +12,8 @@
     "no-param-reassign": [2, { "props": false}],
     "no-console": 0,
     "import/no-unresolved": 0,
-    "react/jsx-filename-extension": 0
+    "react/jsx-filename-extension": 0,
+    "linebreak-style": 0
   },
   "plugins": [
     "react", "import"
