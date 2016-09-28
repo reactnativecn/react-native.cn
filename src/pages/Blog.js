@@ -6,17 +6,20 @@ import './Blog.styl';
 import CONSTANTS from '../constants';
 import { loadResource, loadResources, getResource } from '../logic/loadResource';
 
+const bbsListUrl = `${CONSTANTS.bbs}/api/category/3`;
+const getTopicUrl = tid => `${CONSTANTS.bbs}/api/topic/${tid}`;
+
 export default class Blog extends Component {
 
   static fetchData() {
-    const v = loadResource(`${CONSTANTS.bbs}/api/category/3`);
+    const v = loadResource(bbsListUrl);
     let blogList;
     let data;
     if (v && typeof v.then === 'function') {
       return v.then(ret => {
         data = ret;
         blogList = JSON.parse(data);
-        return loadResources(blogList.topics.map(t => `${CONSTANTS.bbs}/api/topic/${t.tid}`))
+        return loadResources(blogList.topics.map(t => getTopicUrl(t.tid)));
       }).then(map => {
         if (map) {
           map[`${CONSTANTS.bbs}/api/category/3`] = data;
@@ -25,14 +28,14 @@ export default class Blog extends Component {
       });
     } else {
       blogList = JSON.parse(v);
-      return loadResources(blogList.topics.map(t => `${CONSTANTS.bbs}/api/topic/${t.tid}`));
+      return loadResources(blogList.topics.map(t => getTopicUrl(t.tid)));
     }
   }
   state = {};
   componentWillMount() {
-    const blogList = JSON.parse(getResource(`${CONSTANTS.bbs}/api/category/3`));
+    const blogList = JSON.parse(getResource(bbsListUrl));
     const blogDetailedList =
-      blogList.topics.map(t => JSON.parse(getResource(`${CONSTANTS.bbs}/api/topic/${t.tid}`)));
+      blogList.topics.map(t => JSON.parse(getResource(getTopicUrl(t.tid))));
     this.setState({
       blogDetailedList,
     });
@@ -61,16 +64,18 @@ export default class Blog extends Component {
       return;
     }
     this.fetching = true;
-    storage.sync.blogList({
-      query: `?page=${this.currentPage + 1}`,
-      resolve: blogList => {
+    fetch(`${bbsListUrl}?page=${this.currentPage + 1}`)
+      .then(res => res.json())
+      .then(blogList => {
         if (blogList.topics) {
           const {currentPage, pageCount} = blogList.pagination;
           if (currentPage === pageCount) {
             this.fetchOver = true;
           }
           this.currentPage = currentPage;
-          return storage.getBatchData(blogList.topics.map(t => ({key: 'post', id: t.tid})))
+          const jobs =
+            blogList.topics.map(t => fetch(getTopicUrl(t.tid)).then(r => r.json()));
+          return Promise.all(jobs)
             .then(blogs => {
               this.setState({
                 blogDetailedList: this.state.blogDetailedList.concat(blogs),
@@ -80,9 +85,8 @@ export default class Blog extends Component {
         } else {
           this.fetchOver = true;
         }
-      }
-    });
-  }
+      });
+  };
   render() {
     const { blogDetailedList } = this.state;
     // const blogList = blogDetailedList.concat(this.state.appendList);

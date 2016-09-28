@@ -22,7 +22,7 @@ export default class Post extends Component {
 
   parseBlogBody = (rawBody, link) => {
     const parsedText = rawBody.replace(/\/uploads\/file/g, `${CONSTANTS.bbs}/uploads/file`);
-    return `${parsedText}<a href="${link}" class="more">[去论坛发表意见]</a>`;
+    return `${parsedText}<a href="//bbs.reactnative.cn/topic/${link}" class="more">[去论坛发表意见]</a>`;
   };
   componentWillMount() {
     const { location } = this.props;
@@ -62,7 +62,7 @@ export default class Post extends Component {
               <div
                 className="post"
                 dangerouslySetInnerHTML={{
-                  __html: this.parseBlogBody(body.content, `${CONSTANTS.bbs}/topic/${post.tid}`),
+                  __html: this.parseBlogBody(body.content, post.tid),
                 }}
               />
             </div>
