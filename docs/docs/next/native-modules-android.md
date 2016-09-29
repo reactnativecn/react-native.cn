@@ -291,7 +291,7 @@ componentWillMount: function() {
 ...
 ```
 
-### Getting activity result from `startActivityForResult`
+### 从`startActivityForResult`中获取结果
 
 You'll need to listen to `onActivityResult` if you want to get results from an activity you started with `startActivityForResult`. To do this, the you must extend `BaseActivityEventListener` or implement `ActivityEventListener`. The former is preferred as it is more resilient to API changes. Then, you need to register the listener in the module's constructor,
 
