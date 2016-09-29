@@ -34,7 +34,7 @@
 
 ## 核心概念
 
-React Native is great when you are starting a new mobile app from scratch. However, it also works well for adding a single view or user flow to existing native applications. With a few steps, you can add new React Native based features, screens, views, etc.
+如果你正准备从头开始制作一个新的应用，React Native is great when you are starting a new mobile app from scratch. However, it also works well for adding a single view or user flow to existing native applications. With a few steps, you can add new React Native based features, screens, views, etc.
 
 </div>
 <div markdown class="md-block objc swift">

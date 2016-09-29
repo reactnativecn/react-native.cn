@@ -450,6 +450,10 @@
                     "mdlink": "panresponder"
                 },
                 {
+                    "subject": "PermissionsAndroid",
+                    "mdlink": "permissionsandroid"
+                },
+                {
                     "subject": "PixelRatio",
                     "mdlink": "pixelratio"
                 },
