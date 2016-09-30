@@ -430,6 +430,10 @@
                     "mdlink": "interactionmanager"
                 },
                 {
+                    "subject": "Keyboard",
+                    "mdlink": "keyboard"
+                },
+                {
                     "subject": "LayoutAnimation",
                     "mdlink": "layoutanimation"
                 },
