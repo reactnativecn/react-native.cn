@@ -39,32 +39,32 @@
 </div>
 <div markdown class="md-block objc swift">
 
-The keys to integrating React Native components into your iOS application are to:
+把React Native组件植入到iOS应用中有如下几个要点：
 
-1. Understand what React Native components you want to integrate.
+1. 首先当然要了解你要植入的React Native组件。
 2. Create a `Podfile` with `subspec`s for all the React Native components you will need for your integration.
 3. Create your actual React Native components in JavaScript.
 4. Add a new event handler that creates a `RCTRootView` that points to your React Native component and its `AppRegistry` name that you defined in `index.ios.js`.
 5. Start the React Native server and run your native application.
 6. Optionally add more React Native components.
-7. [Debug](debugging.html).
+7. [调试](debugging.html)。
 8. Prepare for [deployment](running-on-device-ios.html) (e.g., via the `react-native-xcode.sh` script).
 9. Deploy and Profit!
 
 </div>
 <div markdown class="md-block android">
 
-The keys to integrating React Native components into your Android application are to:
+把React Native组件植入到Android应用中有如下几个要点：
 
-1. Understand what React Native components you want to integrate.
+1. 首先当然要了解你要植入的React Native组件。
 2. Install `react-native` in your Android application root directory to create `node_modules/` directory.
 3. Create your actual React Native components in JavaScript.
 4. Add `com.facebook.react:react-native:+` and a `maven` pointing to the `react-native` binaries in `node_nodules/` to your `build.gradle` file.
 4. Create a custom React Native specific `Activity` that creates a `ReactRootView`.
 5. Start the React Native server and run your native application.
 6. Optionally add more React Native components.
-7. [Debug](debugging.html).
-8. [Prepare](signed-apk-android.html) for [deployment](running-on-device-android.html).
+7. [调试](debugging.html).
+8. [打包](signed-apk-android.html)以备[发布](running-on-device-android.html).
 9. Deploy and Profit!
 
 </div>
@@ -75,24 +75,25 @@ The keys to integrating React Native components into your Android application ar
 </div>
 <div markdown class="md-block android">
 
-The [Android Getting Started guide](getting-started.html) will install the appropriate prerequisites (e.g., `npm`) for React Native on the Android target platform and your chosen development environment.
+[开发环境搭建教程](getting-started.html) will install the appropriate prerequisites (e.g., `npm`) for React Native on the Android target platform and your chosen development environment.
 
 </div>
 <div markdown class="md-block objc swift">
 
 ### 基础环境
 
-First, follow the [Getting Started guide](getting-started.html) for your development environment and the iOS target platform to install the prerequisites for React Native.
+First, follow the [开发环境搭建教程](getting-started.html) for your development environment and the iOS target platform to install the prerequisites for React Native.
 
 ### CocoaPods
 
-[CocoaPods](http://cocoapods.org) is a package management tool for iOS and Mac development. We use it to add the actual React Native framework code locally into your current project.
+[CocoaPods](http://cocoapods.org)是针对iOS和Mac开发的包管理工具。我们用它来把React Native框架的代码下载下来并添加到你当前的项目中。
 
 ```bash
 $ sudo gem install cocoapods
 ```
 
-> It is technically possible not to use CocoaPods, but this requires manual library and linker additions that overly complicates this process.
+> 从技术上来讲，我们完全可以跳过CocoaPods，但是这样一来我们就需要手工来完成很多配置项。CocoaPods可以帮我们完成这些繁琐的工作。
+
 
 ## 示例App
 
@@ -111,14 +112,14 @@ Assume the [app for integration](https://github.com/JoelMarcey/swift-2048) is a 
 
 ![Before RN Integration](img/react-native-existing-app-integration-ios-before.png)
 
-## Packag依赖
+## 依赖包
 
 React Native integration requires both the React and React Native node modules. The React Native Framework will provide the code to allow your application integration to happen.
 
 
 ### `package.json`
 
-We will add the package dependencies to a `package.json` file. Create this file in the root of your project if it does not exist.
+我们把具体的依赖包记录在`package.json`文件中。 file. Create this file in the root of your project if it does not exist.
 
 > Normally with React Native projects, you will put files like `package.json`, `index.ios.js`, etc. in the root directory of your project and then have your iOS specific native code in a subdirectory like `ios/` where your Xcode project is located (e.g., `.xcodeproj`).
 
@@ -162,9 +163,9 @@ Below is an example of what your `package.json` file should minimally contain.
 
 </div><div markdown class="md-block objc swift">
 
-### Packages Installation
+### 安装依赖包
 
-Install the React and React Native modules via the Node package manager. The Node modules will be installed into a `node_modules/` directory in the root of your project.
+使用npm（node包管理器，Node package manager）来安装React和React Native模块。 modules via the Node package manager. The Node modules will be installed into a `node_modules/` directory in the root of your project.
 
 ```bash
 # From the directory containing package.json project, install the modules
@@ -174,11 +175,11 @@ $ npm install
 
 ## React Native框架
 
-The React Native Framework was installed as Node module in your project [above](#package-dependencies). We will now install a CocoaPods `Podfile` with the components you want to use from the framework itself.
+React Native框架自身也是作为node模块安装到项目中的。 Framework was installed as Node module in your project [above](#package-dependencies). We will now install a CocoaPods `Podfile` with the components you want to use from the framework itself.
 
 ### Subspecs
 
-Before you integrate React Native into your application, you will want to decide what parts of the React Native Framework you would like to integrate. That is where `subspec`s come in. When you create your `Podfile`, you are going to specify React Native library dependencies that you will want installed so that your application can use those libraries. Each library will become a `subspec` in the `Podfile`.
+在你开始把React Native植入到你的应用中之前，首先要决定具体整合的是React Native框架中的哪些部分。而这就是`subspec`要做的工作。在创建`Podfile`文件的时候，就需要指定具体安装哪些React Native的依赖库。所指定的每一个库就都称为一个`subspect`。 into your application, you will want to decide what parts of the React Native Framework you would like to integrate. That is where `subspec`s come in. When you create your `Podfile`, you are going to specify React Native library dependencies that you will want installed so that your application can use those libraries. Each library will become a `subspec` in the `Podfile`.
 
 
 The list of supported `subspec`s are in [`node_modules/react-native/React.podspec`](https://github.com/facebook/react-native/blob/master/React.podspec). They are generally named by functionality. For example, you will generally always want the `Core` `subspec`. That will get you the `AppRegistry`, `StyleSheet`, `View` and other core React Native libraries. If you want to add the React Native `Text` library (e.g., for `<Text>` elements), then you will need the `RCTText` `subspec`. If you want the `Image` library (e.g., for `<Image>` elements), then you will need the `RCTImage` `subspec`.
@@ -194,7 +195,7 @@ The easiest way to create a `Podfile` is by using the CocoaPods `init` command i
 $ pod init
 ```
 
-The `Podfile` will be created and saved in the *iOS* directory (e.g., `ios/`) of your current project and will contain a boilerplate setup that you will tweak for your integration purposes. In the end, `Podfile` should look something similar to this:
+`Podfile` will be created and saved in the *iOS* directory (e.g., `ios/`) of your current project and will contain a boilerplate setup that you will tweak for your integration purposes. In the end, `Podfile` should look something similar to this:
 
 </div><div markdown class="md-block objc">
 
@@ -242,13 +243,13 @@ end
 
 #### Pod安装
 
-After you have created your `Podfile`, you are ready to install the React Native pod.
+创建好了`Podfile`后，就可以开始安装React Native pod了。
 
 ```bash
 $ pod install
 ```
 
-Your should see output such as:
+然后你应该可以看到类似下面的输出(译注：同样由于众所周知的网络原因，pod install的过程在国内非常不顺利，请自行配备稳定的翻墙工具，或是尝试一些[镜像源](https://www.baidu.com/s?ie=utf-8&f=3&rsv_bp=1&ch=2&tn=98010089_dg&wd=cocoapods%20%E9%95%9C%E5%83%8F&oq=cocoapods%E9%95%9C%E5%83%8F&rsv_pq=8fe4602600052d40&rsv_t=5d9fNEvNrqwcBS3rvMCKw0Cc%2FoW6XdW%2Bm4zks2nF3BxZ6cyWtJx1g%2F39Id6cUzeRTLM&rqlang=cn&rsv_enter=0&inputT=809&rsv_sug3=9&rsv_sug1=7&rsv_sug7=100&prefixsug=cocoapods%20%E9%95%9C%E5%83%8F&rsp=0&rsv_sug4=1010))：
 
 ```bash
 Analyzing dependencies
@@ -271,13 +272,13 @@ Pod installation complete! There are 3 dependencies from the Podfile and 1 total
 
 Now that we have a package foundation, we will actually modify the native application to integrate React Native into the application. For our 2048 app, we will add a "High Score" screen in React Native.
 
-### The React Native component
+### React Native组件
 
 The first bit of code we will write is the actual React Native code for the new "High Score" screen that will be integrated into our application.
 
-#### Create a `index.ios.js` file
+#### 创建一个`index.ios.js`文件
 
-First, create an empty `index.ios.js` file. For ease, I am doing this in the root of the project.
+首先创建一个空的`index.ios.js`文件。一般来说我们把它放置在项目根目录下。
 
 > `index.ios.js` is the starting point for React Native applications on iOS. And it is always required. It can be a small file that `require`s other file that are part of your React Native component or application, or it can contain all the code that is needed for it. In our case, we will just put everything in `index.ios.js`
 
@@ -286,9 +287,9 @@ First, create an empty `index.ios.js` file. For ease, I am doing this in the roo
 $ touch index.ios.js
 ```
 
-#### Add Your React Native Code
+#### 添加你自己的React Native代码
 
-In your `index.ios.js`, create your component. In our sample here, we will add simple `<Text>` component within a styled `<View>`
+在`index.ios.js`中添加你自己的组件。, create your component. In our sample here, we will add simple `<Text>` component within a styled `<View>`
 
 ```js
 'use strict';
@@ -356,7 +357,7 @@ You can add a new link on the main game menu to go to the "High Score" React Nat
 
 ![Event Path](img/react-native-add-react-native-integration-link.png)
 
-#### Event Handler
+#### 事件处理
 
 We will now add an event handler from the menu link. A method will be added to the main `ViewController` of your application. This is where `RCTRootView` comes into play.
 
@@ -479,14 +480,14 @@ Apple has blocked implicit cleartext HTTP resource loading. So we need to add th
 </dict>
 ```
 
-### Run the Packager
+### 运行Packager
 
 ```bash
 # From the root of your project, where the `node_modules` directory is located.
 $ npm start
 ```
 
-### Run the App
+### 运行应用
 
 If you are using Xcode or your favorite editor, build and run your native iOS application as normal. Alternatively, you can run the app from the command line using:
 
@@ -519,7 +520,7 @@ You can examine the code that added the React Native screen on [GitHub](https://
 
 </div><div markdown class="md-block android">
 
-## Add JS to your app
+## 在应用中添加JS代码
 
 In your app's root folder, run:
 
@@ -610,7 +611,6 @@ You need to add some native code in order to start the React Native runtime and 
 
 > If you are targetting Android version <5, use the `AppCompatActivity` class from the `com.android.support:appcompat` package instead of `Activity`.
 
-> If you find out later that your app crashes due to `Didn't find class "com.facebook.jni.IteratorHelper"` exception, uncomment the `setUseOldBridge` line. [See related issue on GitHub.](https://github.com/facebook/react-native/issues/8701)
  
 ```java
 public class MyReactActivity extends Activity implements DefaultHardwareBackBtnHandler {
@@ -629,7 +629,6 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
                 .addPackage(new MainReactPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
-                //.setUseOldBridge(true) // uncomment this line if your app crashes
                 .build();
         mReactRootView.startReactApplication(mReactInstanceManager, "HelloWorld", null);
 
@@ -734,7 +733,7 @@ Once you reach your React-powered activity inside the app, it should load the Ja
 
 ![Screenshot](img/EmbeddedAppAndroid.png)
 
-## Creating a release build in Android Studio
+## 在Android Studio中打包
 
 You can use Android Studio to create your release builds too! It’s as easy as creating release builds of your previously-existing native Android app. There’s just one additional step, which you’ll have to do before every release build. You need to execute the following to create a React Native bundle, which’ll be included with your native Android app:
 

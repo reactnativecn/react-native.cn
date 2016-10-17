@@ -117,6 +117,15 @@ value.interpolate({
    101|      0
    200|      0
 
+`interpolate`还支持到字符串的映射，从而可以实现颜色以及带有单位的值的动画变换。例如你可以像下面这样实现一个旋转动画：
+ 
+ ```javascript
+ value.interpolate({
+   inputRange: [0, 360],
+   outputRange: ['0deg', '360deg']
+ })
+ ```
+
 `interpolation`还支持任意的渐变函数，其中有很多已经在`Easing`类中定义了，包括二次、指数、贝塞尔等曲线以及step、bounce等方法。`interpolation`还支持限制输出区间`outputRange`。你可以通过设置`extrapolate`、`extrapolateLeft`或`extrapolateRight`属性来限制输出区间。默认值是`extend`（允许超出），不过你可以使用`clamp`选项来阻止输出值超过`outputRange`。
 
 #### 跟踪动态值

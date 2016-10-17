@@ -1,5 +1,5 @@
 {
-  "current": "0.34",
+  "current": "0.35",
   "list": [
     { "version": "0.23" },
     { "version": "0.24" },
@@ -13,6 +13,7 @@
     { "version": "0.32" },
     { "version": "0.33" },
     { "version": "0.34" },
+    { "version": "0.35" },
     { "version": "next", "text": "未来版本" }
   ]
 }

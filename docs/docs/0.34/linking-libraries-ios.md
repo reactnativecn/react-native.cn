@@ -27,7 +27,7 @@ $ npm install rnpm -g
 安装一个带原生依赖的库：  
 
 ```bash
-$ npm install <library-with-native-dependencies> --save
+$ npm install 某个带有原生依赖的库 --save
 ```
 
 **注意:** _这一步中`--save`或`--save-dev`参数是非常重要的。`rnpm`需要根据`package.json`文件中的`dependencies`和`devDependencies`记录来链接库。_
