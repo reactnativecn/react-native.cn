@@ -213,6 +213,10 @@
                     "mdlink": "activityindicator"
                 },
                 {
+                    "subject": "Button",
+                    "mdlink": "button"
+                },
+                {
                     "subject": "DatePickerIOS",
                     "mdlink": "datepickerios"
                 },
