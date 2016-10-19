@@ -28,6 +28,7 @@ configuration.plugins = configuration.plugins.concat
 
 		__DEV__       : false,
 		__CLIENT__      : true,
+		__SERVER__    : false,
 
 	}),
 
