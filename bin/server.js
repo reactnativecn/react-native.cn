@@ -1,6 +1,4 @@
-require('source-map-support/register')
-
-global.__DEV__ = true;
+global.__DEV__ = false;
 global.__CLIENT__ = false;
 global.__SERVER__ = true;
 const server = require('universal-webpack').server;

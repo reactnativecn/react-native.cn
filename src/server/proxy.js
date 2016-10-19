@@ -4,14 +4,24 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 
-
 import httpProxyMiddleware from 'http-proxy-middleware';
 
-import webpackConfig from '../../webpack.config.js';
-
+const configure = [
+  {
+    path: '/proxy/**',
+    target: 'http://bbs.reactnative.cn',
+    secure: false,
+    changeOrigin: true,
+    pathRewrite: () => '',
+    router: req => {
+      console.log(req.url.replace('/proxy/', 'http://'));
+      return req.url.replace('/proxy/', 'http://')
+    },
+  },
+];
 
 exports.install = function install(app) {
-  webpackConfig.devServer.proxy.forEach(proxyConfig => {
+  configure.forEach(proxyConfig => {
     const bypass = typeof proxyConfig.bypass === 'function';
     const context = proxyConfig.context || proxyConfig.path;
     const proxyMiddleware = httpProxyMiddleware(context, proxyConfig);

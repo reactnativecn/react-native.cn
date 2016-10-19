@@ -1,31 +1,15 @@
 {
-  "env":{
-    "server":{
-      "plugins": [
-        "syntax-async-functions",
-        "syntax-object-rest-spread",
-        "transform-es2015-modules-commonjs",
-        "transform-es2015-destructuring",
-        "transform-react-jsx",
-        "transform-object-rest-spread",
-        "transform-strict-mode",
-        "transform-class-properties",
-        "transform-es2015-parameters",
-        "transform-async-to-generator"
-      ]
-    },
-    "web":{
-      "plugins": [
-        "syntax-async-functions",
-        "syntax-object-rest-spread",
-        "transform-object-rest-spread",
-        "transform-class-properties",
-        "transform-async-to-generator"
-      ],
-      "presets": [
-        "es2015",
-        "react"
-      ]
-    }
-  }
+  "plugins": [
+    "transform-runtime",
+    "syntax-async-functions",
+    "syntax-object-rest-spread",
+    "transform-object-rest-spread",
+    "transform-class-properties",
+    "transform-async-to-generator"
+  ],
+  "presets": [
+    "es2015",
+    "react"
+  ]
+
 }
