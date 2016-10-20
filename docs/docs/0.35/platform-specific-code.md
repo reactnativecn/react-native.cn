@@ -36,7 +36,7 @@ React Native会根据运行平台的不同引入正确对应的组件。
 还有个实用的方法是Platform.select()，它可以以Platform.OS为key，从传入的对象中返回对应平台的值，见下面的示例：
 
 ```javascript
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 var styles = StyleSheet.create({
   container: {
@@ -72,7 +72,7 @@ var Component = Platform.select({
 React Native提供了一个检测当前运行平台的模块。如果组件只有一小部分代码需要依据平台定制，那么这个模块就可以派上用场。
 
 ```javascript
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 var styles = StyleSheet.create({
   height: (Platform.OS === 'ios') ? 200 : 100,
