@@ -36,7 +36,7 @@ React Native会根据运行平台的不同引入正确对应的组件。
 还有个实用的方法是Platform.select()，它可以以Platform.OS为key，从传入的对象中返回对应平台的值，见下面的示例：
 
 ```javascript
-var { Platform } = React;
+import { Platform } from 'react-native';
 
 var styles = StyleSheet.create({
   container: {
