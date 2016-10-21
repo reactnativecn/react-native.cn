@@ -2,6 +2,8 @@
 
 下面的示例代码创建了一个垂直滚动的`ScrollView`，其中还混杂了图片和文字组件。
 
+注：下面的这个`./img/favicon.png`并不实际存在，请自己准备图片素材，并改为相对应的正确路径，具体请参考[图片文档](images.html)。
+
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
 import{ AppRegistry, ScrollView, Image, Text, View } from 'react-native'
