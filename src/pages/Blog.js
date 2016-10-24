@@ -87,11 +87,19 @@ export default class Blog extends Component {
         }
       });
   };
+  renderAd(){
+    return (
+      <a href="http://mp.weixin.qq.com/s?__biz=MjM5NzI5MTIyNA==&mid=501650335&idx=1&sn=d2196fc8e8393d68643cccb94a72545b&chksm=3ece062809b98f3e6ef41cf13e0fd5ed6548b28d9b0c091e1559ec9f6f46e34800bb1489bfdf&scene=18#wechat_redirect">
+        <img src={require('./ad/dongfangyao.jpg')}/>
+      </a>
+    )
+  }
   render() {
     const { blogDetailedList } = this.state;
     // const blogList = blogDetailedList.concat(this.state.appendList);
     return (
       <Container type="blog">
+        {this.renderAd()}
         {
           blogDetailedList.map(topic => {
             const post = topic.posts[0];
