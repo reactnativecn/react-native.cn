@@ -14,11 +14,11 @@
 		"icon": "http://pp.myapp.com/ma_icon/0/icon_42308563_1468229339/256"
 	},
 	{
-		"name": "数独",
+		"name": "数独大师",
 		"desc": "重拾纯粹数独的乐趣",
 		"ios": "https://itunes.apple.com/cn/app/id1138612488",
 		"android": "http://a.app.qq.com/o/simple.jsp?pkgname=com.liteneo.sudoku",
-		"icon": "http://pp.myapp.com/ma_icon/0/icon_42308563_1470896044/256"
+		"icon": "http://pp.myapp.com/ma_icon/0/icon_42319279_1476151111/256"
 	},
 	{
 		"name": "手赚助手",
@@ -180,8 +180,8 @@
 		"icon": "http://img2.yhwj168.com/1024.png"
 	},{
 		"name": "16直播",
-		"desc": "全新秀场直播，土豪离不开的直播，主播夜夜笙歌",
-		"ios": "",
+		"desc": "土豪离不开的直播",
+		"ios": "https://itunes.apple.com/us/app/mei-nu-zha-jin-hua-zhi-bo/id1151272467?l=zh&ls=1&mt=8",
 		"android": "http://zhushou.360.cn/detail/index/soft_id/3438248?recrefer=SE_D_16%E7%9B%B4%E6%92%AD",
 		"icon": "http://p17.qhimg.com/t012e5fe09adb1d0ffa.png"
 	}
