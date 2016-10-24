@@ -38,7 +38,11 @@ function render() {
   }
 
   ReactDOM.render(
-    <Router routes={routes} history={browserHistory} onUpdate={()=>{ga('send', 'pageview');}} />,
+    <Router routes={routes} history={browserHistory} onUpdate={()=>{
+      if (!__DEV__){
+        ga('send', 'pageview');
+      }
+    }} />,
     dest
   );
 }
