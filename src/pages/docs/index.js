@@ -41,7 +41,7 @@ function directPage(nextState, replace, callback) {
   if (params.version && params.version.indexOf('.html') !== -1) {
     // http://reactnative.cn/docs/view.html
     replace(`/docs/${versions.current}/${params.version}`);
-  } else if (!params.version) {
+  } else if (!params.doc) {
     // http://reactnative.cn/docs/
     replace(`/docs/${params.version}/${docIndexPage}`);
   }
