@@ -180,8 +180,8 @@
 		"icon": "http://img2.yhwj168.com/1024.png"
 	},{
 		"name": "16直播",
-		"desc": "全新秀场直播，土豪离不开的直播，主播夜夜笙歌",
-		"ios": "",
+		"desc": "土豪离不开的直播",
+		"ios": "https://itunes.apple.com/us/app/mei-nu-zha-jin-hua-zhi-bo/id1151272467?l=zh&ls=1&mt=8",
 		"android": "http://zhushou.360.cn/detail/index/soft_id/3438248?recrefer=SE_D_16%E7%9B%B4%E6%92%AD",
 		"icon": "http://p17.qhimg.com/t012e5fe09adb1d0ffa.png"
 	}
