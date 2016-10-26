@@ -134,6 +134,33 @@ class SimpleNavigationApp extends Component {
 AppRegistry.registerComponent('SimpleNavigationApp', () => SimpleNavigationApp);
 ```
 
+对应的MyScene.js代码如下：
+```js
+import React, { Component, PropTypes } from 'react';
+import { View, Text, TouchableHighlight } from 'react-native';
+
+export default class MyScene extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    onForward: PropTypes.func.isRequired,
+    onBack: PropTypes.func.isRequired,
+  }
+  render() {
+    return (
+      <View>
+        <Text>Current Scene: { this.props.title }</Text>
+        <TouchableHighlight onPress={this.props.onForward}>
+          <Text>点我进入下一场景</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this.props.onBack}>
+          <Text>点我返回上一场景</Text>
+        </TouchableHighlight>	
+      </View>
+    )
+  }
+}
+```
+
 在这个例子中，`MyScene`通过`title`属性接受了路由对象中的title值。它还包含了两个可点击的组件`TouchableHighlight`，会在点击时分别调用通过props传入的`onForward`和`onBack`方法，而这两个方法各自调用了`navigator.push()`和`navigator.pop()`，从而实现了场景的变化。
 
 查看[Navigator API文档](navigator.html)来了解更多`Navigator`的信息。同时推荐你阅读[导航器对比](navigation.html)和论坛中的一个[详细教程](http://bbs.reactnative.cn/topic/20/)来加深理解。
