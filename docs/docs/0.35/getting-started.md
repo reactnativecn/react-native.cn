@@ -667,7 +667,7 @@ react-native run-android
 
 ### 手动运行Packager
 
-有个常见的问题是在你运行`react-native run-android`命令后，Packger可能不会自动运行。此时你可以手动启动它：
+有个常见的问题是在你运行`react-native run-android`命令后，Packager可能不会自动运行。此时你可以手动启动它：
 
 ```
 cd AwesomeProject

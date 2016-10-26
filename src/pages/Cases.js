@@ -36,7 +36,7 @@ export default class Cases extends React.Component {
           如果你想提交作品，或是要求修改、删除这里列出的应用，请提出
           <a
             target="_blank"
-            href="https://github.com/reactnativecn/react-native.cn/blob/master/docs/cases/cases.json"
+            href="https://github.com/reactnativecn/react-native.cn/blob/stable/docs/cases/cases.json"
           >
             Pull Request
           </a>

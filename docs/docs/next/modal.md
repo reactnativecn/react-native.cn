@@ -2,7 +2,55 @@ Modal组件可以用来覆盖包含React Native根视图的原生视图（如UIV
 
 在嵌入React Native的混合应用中可以使用Modal。Modal可以使你应用中RN编写的那部分内容覆盖在原生视图上显示。
 
-在从根视图开始就使用RN编写的应用中，你应该使用Navigator来代替Modal。通过一个最顶层的Navigator，你可以通过configureScene属性更加方便的控制如何将模态场景覆盖显示在你App其余的部分上。
+```js
+import React, { Component } from 'react';
+import { Modal, Text, TouchableHighlight, View } from 'react-native';
+
+class ModalExample extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {modalVisible: false};
+  }
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
+
+  render() {
+    return (
+      <View style={{marginTop: 22}}>
+        <Modal
+          animationType={"slide"}
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {alert("Modal has been closed.")}}
+          >
+         <View style={{marginTop: 22}}>
+          <View>
+            <Text>Hello World!</Text>
+
+            <TouchableHighlight onPress={() => {
+              this.setModalVisible(!this.state.modalVisible)
+            }}>
+              <Text>Hide Modal</Text>
+            </TouchableHighlight>
+
+          </View>
+         </View>
+        </Modal>
+
+        <TouchableHighlight onPress={() => {
+          this.setModalVisible(true)
+        }}>
+          <Text>Show Modal</Text>
+        </TouchableHighlight>
+
+      </View>
+    );
+  }
+}
+```
 
 ### 截图
 ![](img/components/modal.png)
@@ -20,17 +68,56 @@ Modal组件可以用来覆盖包含React Native根视图的原生视图（如UIV
         </div>
 	</div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="animated"></a>animationType  <span
-            class="propType">enum('none', 'slide', 'fade')</span> <a class="hash-link" href="#animationType ">#</a></h4>
+            class="propType">PropTypes.oneOf(['none', 'slide', 'fade'])</span> <a class="hash-link" href="#animationType ">#</a></h4>
+        <div>
+            <p>The <code>animationType</code> prop controls how the modal animates.</p>
+            <ul>
+            <li><code>slide</code> slides in from the bottom</li>
+            <li><code>fade</code> fades into view</li>
+            <li><code>none</code> appears without an animation</li>
+            </ul>
+        </div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onRequestClose"></a>onRequestClose <span
             class="propType">Platform.OS === 'android' ? PropTypes.func.isRequired : PropTypes.func</span> <a
-            class="hash-link" href="#onRequestClose">#</a></h4></div>
+            class="hash-link" href="#onRequestClose">#</a></h4>
+        <div>
+        <p>The <code>onRequestClose</code> prop allows passing a function that will be called once the modal has been dismissed.</p>
+        <p><em>On the Android platform, this is a required function.</em></p>
+        </div>
+    </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onShow"></a>onShow <span
-            class="propType">function</span> <a class="hash-link" href="#onShow">#</a></h4></div>
+            class="propType">function</span> <a class="hash-link" href="#onShow">#</a></h4>
+            <div>
+            <p>The <code>onShow</code> prop allows passing a function that will be called once the modal has been shown.</p>
+            </div>
+    </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="transparent"></a>transparent <span class="propType">bool</span>
-        <a class="hash-link" href="#transparent">#</a></h4></div>
+        <a class="hash-link" href="#transparent">#</a></h4>
+        <div>
+        <p>The <code>transparent</code> prop determines whether your modal will fill the entire view. Setting this to <code>true</code> will render the modal over a transparent background.</p>
+        </div>
+    </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="visible"></a>visible <span
-            class="propType">bool</span> <a class="hash-link" href="#visible">#</a></h4></div>
+            class="propType">bool</span> <a class="hash-link" href="#visible">#</a></h4>
+            <div><p>The <code>visible</code> prop determines whether your modal is visible.</p></div>
+    </div>
+    <div class="prop">
+	    <h4 class="propTitle"><a class="anchor" name="onorientationchange"></a><span class="platform">ios</span>onOrientationChange <span class="propType">PropTypes.func</span> 
+	    <a class="hash-link" href="#onorientationchange">#</a>
+	    </h4>
+	    <div><p>The <code>onOrientationChange</code> callback is called when the orientation changes while the modal is being displayed.
+		The orientation provided is only 'portrait' or 'landscape'. This callback is also called on initial render, regardless of the current orientation.</p>
+		</div>
+	</div>
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="supportedorientations"></a><span class="platform">ios</span>supportedOrientations <span class="propType">PropTypes.arrayOf(PropTypes.oneOf(['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right']))</span> 
+		<a class="hash-link" href="#supportedorientations">#</a>
+		</h4>
+		<div>
+			<p>The <code>supportedOrientations</code> prop allows the modal to be rotated to any of the specified orientations. On iOS, the modal is still restricted by what's specified in your app's Info.plist's UISupportedInterfaceOrientations field.</p>
+		</div>
+	</div>
 </div>
 
 ### 例子
