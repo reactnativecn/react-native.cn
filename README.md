@@ -8,7 +8,7 @@
 4. 在运行环境抛弃babel-register,改为预编译的babel方式
 
 ## 提交文档
-请访问[文档所在的仓库](https://github.com/reactnativecn/react-native.cn/tree/next/docs/docs)，fork后新建或修订文档，然后创建Pull Request。我们会在第一时间审阅。欢迎社区的朋友们踊跃贡献！
+请访问[文档所在的仓库](https://github.com/reactnativecn/react-native.cn/tree/stable/docs/docs)，fork后新建或修订文档，然后创建Pull Request。我们会在第一时间审阅。欢迎社区的朋友们踊跃贡献！
 
 ## 开发环境
 
