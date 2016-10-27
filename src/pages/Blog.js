@@ -87,9 +87,17 @@ export default class Blog extends Component {
         }
       });
   };
+  onAdClicked = () => {
+    if (!__DEV__) {
+      ga('send', 'event', 'ad', 'clicked', 'dongfangyao')
+    }
+  };
   renderAd(){
     return (
-      <a href="http://mp.weixin.qq.com/s?__biz=MjM5NzI5MTIyNA==&mid=501650335&idx=1&sn=d2196fc8e8393d68643cccb94a72545b&chksm=3ece062809b98f3e6ef41cf13e0fd5ed6548b28d9b0c091e1559ec9f6f46e34800bb1489bfdf&scene=18#wechat_redirect">
+      <a
+        href="http://mp.weixin.qq.com/s?__biz=MjM5NzI5MTIyNA==&mid=501650335&idx=1&sn=d2196fc8e8393d68643cccb94a72545b&chksm=3ece062809b98f3e6ef41cf13e0fd5ed6548b28d9b0c091e1559ec9f6f46e34800bb1489bfdf&scene=18#wechat_redirect"
+        onClick={this.onAdClicked}
+      >
         <img src={require('./ad/dongfangyao.jpg')}/>
       </a>
     )
@@ -100,7 +108,7 @@ export default class Blog extends Component {
     return (
       <Container type="blog">
         {this.renderAd()}
-        <div className="adhint">以上为赞助商推广内容，非本站提供</div>
+        <div className="pro-hint">以上为赞助商推广内容，非本站提供</div>
         {
           blogDetailedList.map(topic => {
             const post = topic.posts[0];

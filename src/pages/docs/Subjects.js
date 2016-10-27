@@ -14,6 +14,12 @@ export default class Subjects extends React.Component {
     version: React.PropTypes.string,
   };
 
+  onAdClicked = () => {
+    if (!__DEV__) {
+      ga('send', 'event', 'ad', 'clicked', 'dongfangyao')
+    }
+  };
+
   render() {
     const indexes = this.props.docIndex.contains;
 
@@ -40,6 +46,17 @@ export default class Subjects extends React.Component {
             </ul>
           </li>
         ))}
+        <li className="apiGroup proGroup" key="pro">
+          推广资源
+          <ul className="apiSub proSub">
+            <li>
+              <a
+                href="http://mp.weixin.qq.com/s?__biz=MjM5NzI5MTIyNA==&mid=501650335&idx=1&sn=d2196fc8e8393d68643cccb94a72545b&chksm=3ece062809b98f3e6ef41cf13e0fd5ed6548b28d9b0c091e1559ec9f6f46e34800bb1489bfdf&scene=18#wechat_redirect"
+                onClick={this.onAdClicked}
+              >东方耀系列视频教程</a>
+            </li>
+          </ul>
+        </li>
       </ul>
     );
   }
