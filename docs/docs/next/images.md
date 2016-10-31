@@ -122,6 +122,14 @@ return (
   </Image>
 );
 ```
+## iOS边框圆角的注意事项
+ 
+请注意下列边框圆角样式目前在iOS的图片组件上还不支持：
+ 
+* `borderTopLeftRadius`
+* `borderTopRightRadius`
+* `borderBottomLeftRadius`
+* `borderBottomRightRadius`
 
 ## 在主线程外解码图片
 
