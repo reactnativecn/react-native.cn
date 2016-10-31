@@ -2,6 +2,11 @@
  * Created by sunny on 30/10/2016.
  */
 
+import { EventEmitter } from 'fbemitter';
+
+const event = new EventEmitter;
+const emit = event.emit.bind(event);
+
 let s = __CLIENT__ && window.localStorage;
 try {
   s.setItem('test', '');
@@ -20,12 +25,15 @@ const load = s ? (key) => {
 } : noop;
 
 class ViewRecords {
-  videos = load('viewedvideos') || [];
-  blogs = load('viewedblogs') || [];
-  getSet = (key) => new Set(this[key]);
-  add = (key, value) => {
+  event = event;
+  videos = load('viewedvideos') || { viewed: [], left: true };
+  blogs = load('viewedblogs') ||  { viewed: [], left: true };
+  getSet = (key) => new Set(this[key].viewed);
+  add = (key, value, left) => {
     const records = this[key];
-    records.push(value);
+    records.viewed.push(value);
+    records.left = left;
+    emit('update', this);
     save(`viewed${key}`, records);
   };
 }

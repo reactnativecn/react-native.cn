@@ -9,6 +9,10 @@ import { loadResources, getResource } from '../logic/loadResource';
 import ViewRecords from '../components/ViewRecords';
 import './Videos.styl';
 
+const Video = ({video}) => {
+
+}
+
 export default class Videos extends Component {
 
   static fetchData() {
@@ -16,16 +20,22 @@ export default class Videos extends Component {
       `${CONSTANTS.youkuUrl}`,
     ]);
   }
-  state = {
-    viewed: ViewRecords.getSet('videos')
-  };
   componentWillMount() {
     this.setState({
       videos: JSON.parse(getResource(`${CONSTANTS.youkuUrl}`)),
+      viewed: { size: 0 }
+    });
+  }
+
+  componentDidMount() {
+    this.setState({
+      viewed: ViewRecords.getSet('videos')
     });
   }
   playVideo(link, id) {
-    ViewRecords.add('videos', id);
+    const { viewed, videos: { videos } } = this.state;
+    const left = videos.length - viewed.size - 1;
+    ViewRecords.add('videos', id, left);
     window.open(link);
     this.setState({
       viewed: ViewRecords.getSet('videos')

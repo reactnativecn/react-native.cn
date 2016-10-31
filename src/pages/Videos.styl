@@ -32,6 +32,18 @@
       font-size 14px
       height 30px
       width 210px
+      &:before
+        display inline-block
+        content ''
+        height 6px
+        width 6px
+        border-radius 100%
+        background #f50
+        box-shadow 0 0 0 1px #fff
+        margin-right 5px
+        vertical-align middle
+    &.viewed h3:before
+      display none
 
 @media screen and (max-width:800px)
   .container-videos
