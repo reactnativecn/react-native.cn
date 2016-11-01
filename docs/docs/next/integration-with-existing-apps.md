@@ -208,6 +208,7 @@ target 'NumberTileGame' do
   pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',
     'RCTText',
+    'RCTNetwork',
     'RCTWebSocket', # needed for debugging
     # Add any other subspecs you want to use in your project
   ]
@@ -232,6 +233,7 @@ target 'swift-2048' do
   pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',
     'RCTText',
+    'RCTNetwork',
     'RCTWebSocket', # needed for debugging
     # Add any other subspecs you want to use in your project
   ]
