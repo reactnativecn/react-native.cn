@@ -20,6 +20,11 @@
  </View>
 ```
 
+### 常量
+
+`currentHeight` (仅限Android)状态栏的当前高度。
+ 
+
 ### 属性
 
 <div class="props">
@@ -490,7 +495,7 @@ const examples = [{
   render() {
     return (
       <View>
-        <Text>Height: {StatusBar.currentHeight} pts</Text>
+        <Text>Height (Android only): {StatusBar.currentHeight} pts</Text>
       </View>
     );
   },
