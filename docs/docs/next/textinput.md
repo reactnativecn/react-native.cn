@@ -2,21 +2,87 @@ TextInput是一个允许用户在应用中通过键盘输入文本的基本组�
 
 最简单的用法就是丢一个`TextInput`到应用里，然后订阅它的`onChangeText`事件来读取用户的输入。它还有一些其它的事件，譬如`onSubmitEditing`和`onFocus`。一个简单的例子如下：
 
-```javascript
- <TextInput
-    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-    onChangeText={(text) => this.setState({text})}
-    value={this.state.text}
-  />
+```ReactNativeWebPlayer
+import React, { Component } from 'react';
+import { AppRegistry, TextInput } from 'react-native';
+
+class UselessTextInput extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { text: 'Useless Placeholder' };
+  }
+
+  render() {
+    return (
+      <TextInput
+        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        onChangeText={(text) => this.setState({text})}
+        value={this.state.text}
+      />
+    );
+  }
+}
+
+// App registration and rendering
+AppRegistry.registerComponent('AwesomeProject', () => UselessTextInput);
 ```
 
 注意有些属性仅在`multiline`为true或者为false的时候有效。此外，当`multiline=false`时，为元素的某一个边添加边框样式（例如：`borderBottomColor`，`borderLeftWidth`等）将不会生效。为了能够实现效果你可以使用一个`View`来包裹`TextInput`：
 
-``` javascript
-<View style={{ borderBottomColor: '#000000', borderBottomWidth: 1, }}>
-   <TextInput {...props} />
- </View>
+``` ReactNativeWebPlayer
+import React, { Component } from 'react';
+import { AppRegistry, View, TextInput } from 'react-native';
+
+class UselessTextInput extends Component {
+  render() {
+    return (
+      <TextInput
+        {...this.props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
+        editable = {true}
+        maxLength = {40}
+      />
+    );
+  }
+}
+
+class UselessTextInputMultiline extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: 'Useless Multiline Placeholder',
+    };
+  }
+
+  // If you type something in the text box that is a color, the background will change to that
+  // color.
+  render() {
+    return (
+     <View style={{
+       backgroundColor: this.state.text,
+       borderBottomColor: '#000000',
+       borderBottomWidth: 1 }}
+     >
+       <UselessTextInput
+         multiline = {true}
+         numberOfLines = {4}
+         onChangeText={(text) => this.setState({text})}
+         value={this.state.text}
+       />
+     </View>
+    );
+  }
+}
+
+// App registration and rendering
+AppRegistry.registerComponent(
+ 'AwesomeProject',
+ () => UselessTextInputMultiline
+);
 ```
+
+`TextInput` has by default a border at the bottom of its view. This border has its padding set by the background image provided by the system, and it cannot be changed. Solutions to avoid this is to either not set height explicitly, case in which the system will take care of displaying the border in the correct position, or to not display the border by setting `underlineColorAndroid` to transparent.
+
+Note that on Android performing text selection in input can change app's activity `windowSoftInputMode` param to `adjustResize`. This may cause issues with components that have position: 'absolute' while keyboard is active. To avoid this behavior either specify `windowSoftInputMode` in AndroidManifest.xml ( <https://developer.android.com/guide/topics/manifest/activity-element.html> ) or control this param programmatically with native code.
 
 ### 截图
 ![](img/components/textinput.png)
