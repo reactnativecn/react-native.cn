@@ -1,7 +1,4 @@
-注：`SliderIOS `现已过时，请使用跨平台的[`Slider`](slider.html)组件。 
-
-### 截图
-![](img/components/sliderios.png)
+用于选择一个范围值的组件。
 
 ### 属性
 
@@ -16,31 +13,31 @@
 		</div>
 	</div>
 	<div class="prop">
-	<h4 class="propTitle"><a class="anchor" name="maximumtrackimage"></a>maximumTrackImage <span class="propType">Image.propTypes.source</span> <a class="hash-link" href="#maximumtrackimage">#</a></h4>
+	<h4 class="propTitle"><a class="anchor" name="maximumtrackimage"></a><span class="platform">ios</span>maximumTrackImage <span class="propType">Image.propTypes.source</span> <a class="hash-link" href="#maximumtrackimage">#</a></h4>
 	<div><p>指定一个滑块右侧轨道背景图。仅支持静态图片。图片最左边的像素会被平铺直至填满轨道。</p></div></div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="maximumtracktintcolor"></a>maximumTrackTintColor <span class="propType">string</span> <a class="hash-link" href="#maximumtracktintcolor">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="maximumtracktintcolor"></a><span class="platform">ios</span>maximumTrackTintColor <span class="propType">string</span> <a class="hash-link" href="#maximumtracktintcolor">#</a></h4>
 		<div>
 			<p>滑块右侧轨道的颜色。默认为一个蓝色的渐变色。</p>
 		</div>
 	</div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="maximumvalue"></a>maximumValue <span class="propType">number</span> <a class="hash-link" href="#maximumvalue">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="maximumvalue"></a><span class="platform">ios</span>maximumValue <span class="propType">number</span> <a class="hash-link" href="#maximumvalue">#</a></h4>
 		<div>
 			<p>滑块的最大值（当滑块滑到最右端时表示的值）。默认为1。</p>
 		</div>
 	</div>
 	<div class="prop">
-	<h4 class="propTitle"><a class="anchor" name="minimumtrackimage"></a>minimumTrackImage <span class="propType">Image.propTypes.source</span> <a class="hash-link" href="#minimumtrackimage">#</a></h4>
+	<h4 class="propTitle"><a class="anchor" name="minimumtrackimage"></a><span class="platform">ios</span>minimumTrackImage <span class="propType">Image.propTypes.source</span> <a class="hash-link" href="#minimumtrackimage">#</a></h4>
 	<div><p>指定一个滑块左侧轨道背景图。仅支持静态图片。图片最右边的像素会被平铺直至填满轨道。</p></div></div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="minimumtracktintcolor"></a>minimumTrackTintColor <span class="propType">string</span> <a class="hash-link" href="#minimumtracktintcolor">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="minimumtracktintcolor"></a><span class="platform">ios</span>minimumTrackTintColor <span class="propType">string</span> <a class="hash-link" href="#minimumtracktintcolor">#</a></h4>
 		<div>
 			<p>滑块左侧轨道的颜色。默认为一个蓝色的渐变色。</p>
 		</div>
 	</div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="minimumvalue"></a>minimumValue <span class="propType">number</span> <a class="hash-link" href="#minimumvalue">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="minimumvalue"></a><span class="platform">ios</span>minimumValue <span class="propType">number</span> <a class="hash-link" href="#minimumvalue">#</a></h4>
 		<div>
 			<p>滑块的最小值（当滑块滑到最左侧时表示的值）。默认为0。</p>
 		</div>
@@ -95,16 +92,22 @@
 var React = require('react');
 var ReactNative = require('react-native');
 var {
-  SliderIOS,
+  Slider,
   Text,
   StyleSheet,
   View,
 } = ReactNative;
 
 var SliderExample = React.createClass({
-  getInitialState() {
+  getDefaultProps() {
     return {
       value: 0,
+    }
+  },
+
+  getInitialState() {
+    return {
+      value: this.props.value,
     };
   },
 
@@ -112,11 +115,35 @@ var SliderExample = React.createClass({
     return (
       <View>
         <Text style={styles.text} >
-          {this.state.value}
+          {this.state.value && +this.state.value.toFixed(3)}
         </Text>
-        <SliderIOS
+        <Slider
           {...this.props}
           onValueChange={(value) => this.setState({value: value})} />
+      </View>
+    );
+  }
+});
+
+var SlidingCompleteExample = React.createClass({
+  getInitialState() {
+    return {
+      slideCompletionValue: 0,
+      slideCompletionCount: 0,
+    };
+  },
+
+  render() {
+    return (
+      <View>
+        <SliderExample
+          {...this.props}
+          onSlidingComplete={(value) => this.setState({
+              slideCompletionValue: value,
+              slideCompletionCount: this.state.slideCompletionCount + 1})} />
+        <Text>
+          Completions: {this.state.slideCompletionCount} Value: {this.state.slideCompletionValue}
+        </Text>
       </View>
     );
   }
@@ -135,7 +162,7 @@ var styles = StyleSheet.create({
   },
 });
 
-exports.title = '<SliderIOS>';
+exports.title = '<Slider>';
 exports.displayName = 'SliderExample';
 exports.description = 'Slider input for numeric values';
 exports.examples = [
@@ -143,6 +170,12 @@ exports.examples = [
     title: 'Default settings',
     render(): ReactElement<any> {
       return <SliderExample />;
+    }
+  },
+  {
+    title: 'Initial value: 0.5',
+    render(): ReactElement<any> {
+      return <SliderExample value={0.5} />;
     }
   },
   {
@@ -163,7 +196,16 @@ exports.examples = [
     }
   },
   {
+    title: 'onSlidingComplete',
+    render(): ReactElement<any> {
+      return (
+        <SlidingCompleteExample />
+      );
+    }
+  },
+  {
     title: 'Custom min/max track tint color',
+    platform: 'ios',
     render(): ReactElement<any> {
       return (
         <SliderExample
@@ -175,18 +217,21 @@ exports.examples = [
   },
   {
     title: 'Custom thumb image',
+    platform: 'ios',
     render(): ReactElement<any> {
       return <SliderExample thumbImage={require('./uie_thumb_big.png')} />;
     }
   },
   {
     title: 'Custom track image',
+    platform: 'ios',
     render(): ReactElement<any> {
       return <SliderExample trackImage={require('./slider.png')} />;
     }
   },
   {
     title: 'Custom min/max track image',
+    platform: 'ios',
     render(): ReactElement<any> {
       return (
         <SliderExample
