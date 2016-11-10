@@ -1,4 +1,4 @@
-一个简单的跨平台的按钮组件。可以进行一些简单的定制。A basic button component that should render nicely on any platform. Supports a minimal level of customization.
+一个简单的跨平台的按钮组件。可以进行一些简单的定制。
 
 ![](img/components/buttonExample.png)
 
