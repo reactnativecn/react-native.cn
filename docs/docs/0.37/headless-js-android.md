@@ -23,7 +23,7 @@ module.exports = async (taskData) => {
 没错，我们还需要一些原生代码，但是请放心并不麻烦。你需要像下面这样继承`HeadlessJsTaskService`，然后覆盖`getTaskConfig`方法的实现：
 
 ```java
-public class MyTaskService extends FbHeadlessJsTaskService {
+public class MyTaskService extends HeadlessJsTaskService {
 
   @Override
   protected @Nullable HeadlessJsTaskConfig getTaskConfig(Intent intent) {
