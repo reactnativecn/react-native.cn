@@ -1,26 +1,26 @@
-Headless JS is a way to run tasks in JavaScript while your app is in the background. It can be used, for example, to sync fresh data, handle push notifications, or play music.
+Headless JS是一种使用js在后台执行任务的方法。它可以用来在后台同步数据、处理推送通知或是播放音乐等等。
 
-## The JS API
+## JS端的API
 
-A task is a simple async function that you register on `AppRegistry`, similar to registering React applications:
+首先我们要通过`AppRegistry`来注册一个async函数，这个函数我们称之为“任务”。注册方式类似在index.js中注册RN应用：
 
 ```js
 AppRegistry.registerHeadlessTask('SomeTaskName', () => require('SomeTaskName'));
 ```
 
-Then, in `SomeTaskName.js`:
+然后创建require对应的`SomeTaskName.js`文件:
 
 ```js
 module.exports = async (taskData) => {
-  // do stuff
+  // 要做的事情
 }
 ```
 
-You can do anything in your task as long as it doesn't touch UI: network requests, timers and so on. Once your task completes (i.e. the promise is resolved), React Native will go into "paused" mode (unless there are other tasks running, or there is a foreground app).
+你可以在任务中处理任何事情（网络请求、定时器等等），但唯独**不要涉及用户界面**！在任务完成后（例如在promise中调用resolve），RN会进入一个“暂停”模式，直到有新任务需要执行或者是应用回到前台。
 
-## The Java API
+## Java端的API
 
-Yes, this does still require some native code, but it's pretty thin. You need to extend `HeadlessJsTaskService` and override `getTaskConfig`, e.g.:
+没错，我们还需要一些原生代码，但是请放心并不麻烦。你需要像下面这样继承`HeadlessJsTaskService`，然后覆盖`getTaskConfig`方法的实现：
 
 ```java
 public class MyTaskService extends FbHeadlessJsTaskService {
@@ -39,11 +39,11 @@ public class MyTaskService extends FbHeadlessJsTaskService {
 }
 ```
 
-Now, whenever you [start your service][0], e.g. as a periodic task or in response to some system event / broadcast, JS will spin up, run your task, then spin down.
+好了，现在当你[启动服务时][0]（例如一个周期性的任务或是响应一些系统事件/广播），JS任务就会开始执行。
 
-## Caveats
+## 注意事项
 
-* By default, your app will crash if you try to run a task while the app is in the foreground. This is to prevent developers from shooting themselves in the foot by doing a lot of work in a task and slowing the UI. There is a way around this.
-* If you start your service from a `BroadcastReceiver`, make sure to call `HeadlessJsTaskService.acquireWakelockNow()` before returning from `onReceive()`.
+* 默认情况下，如果应用正在前台运行时尝试执行任务，那么应用会崩溃。这是为了防止开发者在任务中处理太多逻辑而拖慢用户界面。
+* 如果你是通过`BroadcastReceiver`来启动的服务，那么谨记在从`onReceive()`返回之前要调用`HeadlessJsTaskService.acquireWakelockNow()`。
 
 [0]: https://developer.android.com/reference/android/content/Context.html#startService(android.content.Intent)
