@@ -83,7 +83,7 @@ sudo chown -R `whoami` /usr/local
 
 使用Homebrew来安装[Node.js](https://nodejs.org/).
 
-> React Native需要NodeJS 4.0或更高版本。本文发布时Homebrew默认安装的是6.x版本，完全满足要求。 
+> React Native需要NodeJS 4.0或更高版本。本文发布时Homebrew默认安装的是最新版本，一般都满足要求。 
 
 ```
 brew install node
@@ -318,7 +318,7 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node
 
 </div><div markdown class="md-block windows android">
 
-打开命令提示符窗口，使用Chocolatey来安装NodeJS.
+打开命令提示符窗口，使用Chocolatey来安装NodeJS。注意，目前已知Node 7.1版本在windows上无法正常工作，请注意避开这个版本！
 
 ```
 choco install nodejs.install
