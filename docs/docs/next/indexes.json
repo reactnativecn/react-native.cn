@@ -466,6 +466,10 @@
                     "mdlink": "pushnotificationios"
                 },
                 {
+                    "subject": "Share",
+                    "mdlink": "share"
+                },
+                {
                     "subject": "StyleSheet",
                     "mdlink": "stylesheet"
                 },
