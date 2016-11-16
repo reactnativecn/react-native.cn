@@ -1,12 +1,8 @@
 有时候我们需要直接改动组件并触发局部的刷新，但不使用state或是props。譬如在浏览器中使用React库，有时候会需要直接修改一个DOM节点，而在手机App中操作View时也会碰到同样的情况。在React Native中，`setNativeProps`就是等价于直接操作DOM节点的方法。  
+
 > 什么时候使用setNativeProps呢？在（不得不）频繁刷新而又遇到了性能瓶颈的时候。 
 >
-> 直接操作组件并不是应该经常使用的工具。一般来说只是用来创建连续的动画，同
-> 时避免渲染组件结构和同步太多视图变化所带来的的大量开销。`setNativeProps`
-> 是一个“简单粗暴”的方法，它直接在底层（DOM、UIView等）而不是React组件中
-> 记录state，这样会使代码逻辑难以理清。所以在使用这个方法之前，请尽量先尝试
-> 用`setState`和[shouldComponentUpdate](http://facebook.github.io/react/docs/advanced-performance.html#shouldcomponentupdate-in-action)方法来解决
-> 问题。
+> 直接操作组件并不是应该经常使用的工具。一般来说只是用来创建连续的动画，同时避免渲染组件结构和同步太多视图变化所带来的大量开销。`setNativeProps`是一个“简单粗暴”的方法，它直接在底层（DOM、UIView等）而不是React组件中记录state，这样会使代码逻辑难以理清。所以在使用这个方法之前，请尽量先尝试用`setState`和[shouldComponentUpdate](http://facebook.github.io/react/docs/advanced-performance.html#shouldcomponentupdate-in-action)方法来解决问题。
 
 ## setNativeProps与TouchableOpacity
 

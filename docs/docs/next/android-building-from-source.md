@@ -91,16 +91,17 @@ dependencies {
 ## 让第三方模块使用你的分支
 如果你使用第三方的React Native模块，你需要重写它们的依赖以避免它们仍然打包官方的预编译库。否则当你编译时会报错-`Error: more than one library with package name 'com.facebook.react'.`（错误：有几个重名的'com.facebook.react'的包）
 
-修改你的`android/app/build.gradle`文件，替换`compile project(':react-native-custom-module')`为以下内容：
+修改你的`android/app/build.gradle`文件，添加如下内容：
 
 ```
-compile(project(':react-native-custom-module')) {
+configurations.all {
     exclude group: 'com.facebook.react', module: 'react-native'
 }
 ```
+
 # 在Android Studio中构建您的项目
 
-在Android Studio欢迎页中选择`Import project`，随后选择您应用所在的文件夹
+在Android Studio欢迎页中选择`Import project`，随后选择您应用所在的文件夹。
 
 您还需要使用_Run_按钮(__译注__：Android Studio中绿色的运行按钮)来在设备上运行您的app，此外Android Studio不会自动开启服务，你还需要通过`npm start`来启动。
 
