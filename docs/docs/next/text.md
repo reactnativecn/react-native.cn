@@ -32,9 +32,21 @@ var styles = StyleSheet.create({
 
 <div class="props">
   <div class="prop">
+    <h4 class="propTitle"><a class="anchor" name="adjustsfontsizetofit"></a><span class="platform">ios</span>adjustsFontSizeToFit  <span class="propType">bool</span> <a class="hash-link" href="#adjustsfontsizetofit">#</a></h4>
+    <div>
+      <p>指定字体是否随着给定样式的限制而自动缩放。</p>
+    </div>
+  </div>
+  <div class="prop">
     <h4 class="propTitle"><a class="anchor" name="allowfontscaling"></a><span class="platform">ios</span>allowFontScaling <span class="propType">bool</span> <a class="hash-link" href="#allowfontscaling">#</a></h4>
     <div>
       <p>控制字体是否要根据iOS的“文本大小”辅助选项来进行缩放。</p>
+    </div>
+  </div>
+  <div class="prop">
+    <h4 class="propTitle"><a class="anchor" name="minimumfontscale"></a><span class="platform">ios</span>minimumFontScale <span class="propType">bool</span> <a class="hash-link" href="#minimumfontscale">#</a></h4>
+    <div>
+      <p>当adjustsFontSizeToFit开启时，指定最小的缩放比（即不能低于这个值）。可设定的值为0.01 - 1.0</p>
     </div>
   </div>
   <div class="prop">
@@ -51,9 +63,21 @@ var styles = StyleSheet.create({
     </div>
   </div>
   <div class="prop">
+    <h4 class="propTitle"><a class="anchor" name="onlongpress"></a>onLongPress <span class="propType">function</span> <a class="hash-link" href="#onlongpress">#</a></h4>
+    <div>
+      <p>当文本被长按以后调用此回调函数。</p>
+    </div>
+  </div>
+  <div class="prop">
     <h4 class="propTitle"><a class="anchor" name="onpress"></a>onPress <span class="propType">function</span> <a class="hash-link" href="#onpress">#</a></h4>
     <div>
       <p>当文本被点击以后调用此回调函数。</p>
+    </div>
+  </div>
+  <div class="prop">
+    <h4 class="propTitle"><a class="anchor" name="selectable"></a>selectable <span class="propType">function</span> <a class="hash-link" href="#selectable">#</a></h4>
+    <div>
+      <p>决定用户是否可以长按选择文本，以便复制和粘贴。</p>
     </div>
   </div>
   <div class="prop">
