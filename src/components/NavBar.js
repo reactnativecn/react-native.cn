@@ -77,9 +77,7 @@ export default class MyNavBar extends React.Component {
     });
   };
   componentDidMount() {
-    this.setState({
-      viewRecords: ViewRecords
-    });
+    ViewRecords.updateVideosLeft();
   }
   goToDoc = (version) =>
     () => this.context.router.push(`/docs/${version}/getting-started.html`);

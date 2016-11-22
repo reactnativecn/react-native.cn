@@ -4,6 +4,7 @@
 
 import { EventEmitter } from 'fbemitter';
 import { loadResource } from '../logic/loadResource';
+import CONSTANTS from '../constants';
 
 const event = new EventEmitter;
 const emit = event.emit.bind(event);
@@ -26,18 +27,22 @@ const load = s ? (key) => {
 } : noop;
 
 class ViewRecords {
-  constructor() {
-    if (s) {
-      loadResource(`${CONSTANTS.youkuUrl}`)
-        .then(resp => {
-          const { videos } = JSON.parse(resp);
-          const viewed = this.getSet('videos');
-          // const left = videos.length - viewed.size - 1;
-          const left = videos.filter(v => !viewed.has(v.id)).length;
-          this.add('videos', undefined, left);
-        })
+  updateVideosLeft = async () => {
+    const ret = loadResource(`${CONSTANTS.youkuUrl}`);
+    if (ret && ret.then) {
+      ret.then(resp => this.filterVideosLeft(resp));
+    } else {
+      this.filterVideosLeft(ret);
     }
-  }
+  };
+  filterVideosLeft = (data) => {
+    const { videos } = JSON.parse(data);
+    const viewed = this.getSet('videos');
+    // const left = videos.length - viewed.size - 1;
+    const left = videos.filter(v => !viewed.has(v.id)).length;
+    console.log('videos left:', left);
+    this.add('videos', undefined, left);
+  };
   event = event;
   videos = load('viewedvideos') || { viewed: [], left: true };
   blogs = load('viewedblogs') ||  { viewed: [], left: true };
