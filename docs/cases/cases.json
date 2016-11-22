@@ -21,13 +21,6 @@
 		"icon": "http://pp.myapp.com/ma_icon/0/icon_42319279_1476151111/256"
 	},
 	{
-		"name": "手赚助手",
-		"desc": "手机赚钱app",
-		"ios": "",
-		"android": "http://www.shouzhuanzhushou.com.cn",
-		"icon": "http://www.shouzhuanzhushou.com.cn:8081/res/img/shouzhuan-175.png"
-	},
-	{
 		"name": "鱼多多",
 		"desc": "钓鱼",
 		"ios": "https://itunes.apple.com/us/app/yu-duo-duo-guo-nei-du-jia/id1025292262?mt=8",
@@ -132,13 +125,6 @@
 		"ios": "https://itunes.apple.com/cn/app/id1047180157",
 		"android": "",
 		"icon": "http://a3.mzstatic.com/us/r30/Purple69/v4/37/25/86/3725864d-f577-8a7a-4d8d-e5657bcc062b/icon175x175.png"
-	},
-	{
-		"name": "干货分享",
-		"desc": "程序员的神器,你懂得",
-		"github": "https://github.com/zhongjie-chen/rn_rank",
-		"android": "http://apk.gfan.com/Product/App1099977.html",
-		"icon": "https://github.com/zhongjie-chen/rn_rank/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
 	},
 	{
 		"name": "电猴",
