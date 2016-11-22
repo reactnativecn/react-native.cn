@@ -136,7 +136,7 @@ export default class MyNavBar extends React.Component {
           </Navbar.Collapse>
         </Navbar>
         <div className="navbar-placeholder" />
-        <Subscribe target={ViewRecords.event} eventName="update" listener={this.updateViewRecords}/>
+        <Subscribe target={ViewRecords.event} eventName="update" listener={this.updateViewRecords} />
       </div>
     );
   }

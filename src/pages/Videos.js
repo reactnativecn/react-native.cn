@@ -9,10 +9,6 @@ import { loadResources, getResource } from '../logic/loadResource';
 import ViewRecords from '../components/ViewRecords';
 import './Videos.styl';
 
-const Video = ({video}) => {
-
-}
-
 export default class Videos extends Component {
 
   static fetchData() {
