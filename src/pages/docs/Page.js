@@ -64,7 +64,7 @@ export default class Page extends React.Component {
       return (
         <section className="content">
           <Panel header={`${err.code}`} bsStyle="danger">
-            发生了意外的错误
+            发生了意外的错误。如果你使用的是Safari浏览器，请尝试禁用所有的扩展（extension）。目前已知迅雷扩展的脚本存在bug，会打断页面脚本的执行。
           </Panel>
         </section>
       );
