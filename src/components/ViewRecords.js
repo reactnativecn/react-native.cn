@@ -44,7 +44,7 @@ class ViewRecords {
     const viewed = this.getSet(key);
     // const left = videos.length - viewed.size - 1;
     const left = data.filter(item => !viewed.has(item.id)).length;
-    console.log(`${key} left:, ${left}`);
+    console.log(`${key} left: ${left}`);
     return left;
   };
   event = event;
