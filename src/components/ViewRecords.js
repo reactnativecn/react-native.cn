@@ -30,18 +30,22 @@ class ViewRecords {
   updateVideosLeft = async () => {
     const ret = loadResource(`${CONSTANTS.youkuUrl}`);
     if (ret && ret.then) {
-      ret.then(resp => this.filterVideosLeft(resp));
+      ret.then(resp => {
+        const left = this.checkLeft('videos', JSON.parse(resp).videos);
+        this.add('videos', undefined, left);
+      });
     } else {
-      this.filterVideosLeft(ret);
+      const left = this.checkLeft('videos', JSON.parse(ret).videos);
+      this.add('videos', undefined, left);
     }
   };
-  filterVideosLeft = (data) => {
-    const { videos } = JSON.parse(data);
-    const viewed = this.getSet('videos');
+  checkLeft = (key, data) => {
+    // const { videos } = JSON.parse(data);
+    const viewed = this.getSet(key);
     // const left = videos.length - viewed.size - 1;
-    const left = videos.filter(v => !viewed.has(v.id)).length;
-    console.log('videos left:', left);
-    this.add('videos', undefined, left);
+    const left = data.filter(item => !viewed.has(item.id)).length;
+    console.log(`${key} left:, ${left}`);
+    return left;
   };
   event = event;
   videos = load('viewedvideos') || { viewed: [], left: true };

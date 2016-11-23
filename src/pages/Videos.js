@@ -19,7 +19,7 @@ export default class Videos extends Component {
   componentWillMount() {
     this.setState({
       videos: JSON.parse(getResource(`${CONSTANTS.youkuUrl}`)),
-      viewed: { size: 0 }
+      viewed: null,
     });
   }
 
@@ -29,10 +29,10 @@ export default class Videos extends Component {
     });
   }
   playVideo(link, id) {
-    const { viewed, videos: { videos } } = this.state;
-    const left = videos.length - viewed.size - 1;
-    ViewRecords.add('videos', id, left);
     window.open(link);
+    const { videos: { videos } } = this.state;
+    const left = ViewRecords.checkLeft('videos', videos);
+    ViewRecords.add('videos', id, left);
     this.setState({
       viewed: ViewRecords.getSet('videos')
     });
@@ -65,7 +65,7 @@ export default class Videos extends Component {
       <Container type="videos">
         {videos && videos.map(v =>
           <a
-            className={'video ' + (viewed.size && viewed.has(v.id) && 'viewed' || '')}
+            className={'video ' + ((__SERVER__ || viewed && viewed.has(v.id)) && 'viewed' || '')}
             target="_blank"
             key={v.id}
             onClick={() => this.playVideo(v.link, v.id)}
