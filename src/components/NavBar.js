@@ -12,26 +12,27 @@ import {
 
 import './NavBar.less';
 import versions from '../../docs/versions.json';
+import ViewRecords from './ViewRecords';
+import Subscribe from './Subscribe';
 
-import imageHot from './images/hot.png';
+// import imageHot from './images/hot.png';
 import imageLogo from './images/header_logo.png';
 
 const linksInternal = [
-  // {section: 'offdocs', href: 'https://facebook.github.io/react-native/docs/getting-started.html', text: '官方文档(英文)'},
-  // {section: 'releases', href: 'https://github.com/facebook/react-native/releases', text: '版本'},
   { section: 'docs', href: `/docs/${versions.current}/getting-started.html`, text: '文档' },
   { section: 'cases', href: '/cases.html', text: '案例' },
   { section: 'blog', href: '/blog.html', text: '博客' },
-  { section: 'videos', href: '/videos.html', text: '视频' },
+  { section: 'videos', href: '/videos.html', text: '视频', checkViewed: 'videos' },
   { section: 'bbs', href: 'http://bbs.reactnative.cn/', text: '讨论', hot: true, newTab: false },
   { section: 'update', href: 'http://update.reactnative.cn/', text: '热更新', hot: true, newTab: true },
   { section: 'about', href: '/about.html', text: '关于' },
 ];
 const linksExternal = [
   { section: 'github', href: 'https://github.com/facebook/react-native', text: 'GitHub' },
-  // {section: 'react', href: 'http://facebook.github.io/react-native', text: 'in English'},
 ];
 
+
+const Badge = () => <sup className="nav-badge" />
 
 export default class MyNavBar extends React.Component {
   static propTypes = {
@@ -45,7 +46,7 @@ export default class MyNavBar extends React.Component {
     if (v.isHidden && v.isHidden()) {
       return null;
     }
-
+    const { viewRecords } = this.state;
     const external = /^\w+:/.test(v.href);
 
     const newTab = v.newTab !== null ? v.newTab : external;
@@ -58,32 +59,25 @@ export default class MyNavBar extends React.Component {
         target={newTab && '_blank'}
       >
         {v.text}
-        {v.hot && <div className="hotSign"><img src={imageHot} alt="hot" /></div>}
+        {/*{v.hot && <div className="hotSign"><img src={imageHot} alt="hot" /></div>}*/}
       </NavItem>
     ) : (
       <LinkContainer to={v.href} onClick={v.onClick || this.noop} key={v.section}>
         <NavItem>
           {v.text}
-          {v.hot && <div className="hotSign"><img src={imageHot} alt="hot" /></div>}
+          {viewRecords && v.checkViewed && !!viewRecords[v.checkViewed].left && <Badge />}
         </NavItem>
       </LinkContainer>
     );
-
-    // return (
-    //   <NavItem
-    //     target={newTab ? '_blank' : undefined}
-    //     href={v.href}
-    //     rel={newTab ? 'noopener noreferrer' : ''}
-    //     key={v.section}
-    //     onClick={v.onClick}
-    //     componentClass={external ? SafeAnchor
-    //       :
-    //       props => <Link {...props} to={v.href} />}
-    //   >
-    //     {v.text}
-    //     {v.hot && <div className="hotSign"><img src={imageHot} alt="hot" /></div>}
-    //   </NavItem>
-    // );
+  }
+  state = {};
+  updateViewRecords = (viewRecords) => {
+    this.setState({
+      viewRecords
+    });
+  };
+  componentDidMount() {
+    ViewRecords.updateVideosLeft();
   }
   goToDoc = (version) =>
     () => this.context.router.push(`/docs/${version}/getting-started.html`);
@@ -140,6 +134,7 @@ export default class MyNavBar extends React.Component {
           </Navbar.Collapse>
         </Navbar>
         <div className="navbar-placeholder" />
+        <Subscribe target={ViewRecords.event} eventName="update" listener={this.updateViewRecords} />
       </div>
     );
   }

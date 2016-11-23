@@ -64,7 +64,7 @@ export default class Page extends React.Component {
       return (
         <section className="content">
           <Panel header={`${err.code}`} bsStyle="danger">
-            发生了意外的错误
+            发生了意外的错误。
           </Panel>
         </section>
       );

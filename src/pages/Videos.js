@@ -6,6 +6,7 @@ import React, { PropTypes, Component } from 'react';
 import Container from '../components/Container';
 import CONSTANTS from '../constants';
 import { loadResources, getResource } from '../logic/loadResource';
+import ViewRecords from '../components/ViewRecords';
 import './Videos.styl';
 
 export default class Videos extends Component {
@@ -15,11 +16,25 @@ export default class Videos extends Component {
       `${CONSTANTS.youkuUrl}`,
     ]);
   }
-  state = {};
-
   componentWillMount() {
     this.setState({
       videos: JSON.parse(getResource(`${CONSTANTS.youkuUrl}`)),
+      viewed: null,
+    });
+  }
+
+  componentDidMount() {
+    this.setState({
+      viewed: ViewRecords.getSet('videos')
+    });
+  }
+  playVideo(link, id) {
+    window.open(link);
+    const { videos: { videos } } = this.state;
+    const left = ViewRecords.checkLeft('videos', videos);
+    ViewRecords.add('videos', id, left);
+    this.setState({
+      viewed: ViewRecords.getSet('videos')
     });
   }
   // videos:
@@ -45,11 +60,16 @@ export default class Videos extends Component {
   //   ischannel: 0,
   //   tags: 'reACT,Native' }]
   render() {
-    const { videos } = this.state.videos;
+    const { viewed, videos: { videos } } = this.state;
     return (
       <Container type="videos">
         {videos && videos.map(v =>
-          <a className="video" href={v.link} target="_blank" key={v.id}>
+          <a
+            className={'video ' + ((__SERVER__ || viewed && viewed.has(v.id)) && 'viewed' || '')}
+            target="_blank"
+            key={v.id}
+            onClick={() => this.playVideo(v.link, v.id)}
+          >
             <img src={v.thumbnail} alt={v.title} />
             <span className="v-time">{`${Math.floor(v.duration / 60)}:${v.duration % 60}`}</span>
             <div className="v-overlay" />
