@@ -117,7 +117,11 @@ var configuration =
 		extensions: ['', '.json', '.js']
 	},
 
-	plugins: []
+	plugins: [
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
+	]
 }
 
 module.exports = configuration
