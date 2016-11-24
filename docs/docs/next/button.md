@@ -23,7 +23,7 @@
         <div><p>用于给残障人士显示的文本（比如读屏器软件可能会读取这一内容）</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="color"></a>color <span class="propType"><a
-            href="docs/colors.html">color</a></span> <a class="hash-link" href="#color">#</a></h4>
+            href="colors.html">color</a></span> <a class="hash-link" href="#color">#</a></h4>
         <div><p>文本的颜色(iOS)，或是按钮的背景色(Android)</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="disabled"></a>disabled <span
