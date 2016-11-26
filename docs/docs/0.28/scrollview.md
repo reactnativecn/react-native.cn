@@ -88,10 +88,10 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 		<h4 class="propTitle"><a class="anchor" name="style"></a>style <span class="propType">style</span> <a class="hash-link" href="#style">#</a></h4>
 		<div class="compactProps">
 			<div class="prop">
-				<h6 class="propTitle"><a href="flexbox.html#proptypes">Flexbox...</a></h6>
+				<h6 class="propTitle"><a href="layout-with-flexbox.html">Flexbox...</a></h6>
 			</div>
 			<div class="prop">
-				<h6 class="propTitle"><a href="shadowproptypesios。html#style">ShadowPropTypesIOS#style...</a></h6>
+				<h6 class="propTitle"><a href="shadow-props.html">ShadowProp#style...</a></h6>
 			</div>
 			<div class="prop">
 				<h6 class="propTitle"><a href="transforms.html#proptypes">Transforms...</a></h6>
@@ -285,7 +285,7 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 		</div>
 	</div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="scrollenabled"></a><span class="platform">ios</span>scrollEnabled <span class="propType">bool</span> <a class="hash-link" href="#scrollenabled">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="scrollenabled"></a>scrollEnabled <span class="propType">bool</span> <a class="hash-link" href="#scrollenabled">#</a></h4>
 		<div>
 			<p>当值为false的时候，内容不能滚动，默认值为true。</p>
 		</div>
