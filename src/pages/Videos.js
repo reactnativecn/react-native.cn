@@ -70,7 +70,7 @@ export default class Videos extends Component {
             key={v.id}
             onClick={() => this.playVideo(v.link, v.id)}
           >
-            <img src={v.thumbnail} alt={v.title} />
+            <img src={v.thumbnail.replace('http:', '')} alt={v.title} />
             <span className="v-time">{`${Math.floor(v.duration / 60)}:${v.duration % 60}`}</span>
             <div className="v-overlay" />
             <h3>{v.title}</h3>
