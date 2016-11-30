@@ -33,7 +33,7 @@ async function requestCameraPermission() {
     <div class="prop">
         <h4 class="methodTitle">
         <a class="anchor" name="constructor"></a>constructor
-        <span class="methodType">(0)</span>
+        <span class="methodType">()</span>
         <a class="hash-link" href="permissionsandroid.html#constructor">#</a>
         </h4>
     </div>

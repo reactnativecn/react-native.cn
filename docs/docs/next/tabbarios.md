@@ -24,6 +24,12 @@
 			<p>当前被选中的标签图标的颜色。</p>
 		</div>
 	</div>
+  <div class="prop">
+    <h4 class="propTitle"><a class="anchor" name="unselecteditemtintcolor"></a>unselectedItemTintColor <span class="propType">string</span> <a class="hash-link" href="#unselecteditemtintcolor">#</a></h4>
+    <div>
+      <p>当前没有被选中的标签图标的颜色。仅在iOS 10及以上版本有效</p>
+    </div>
+  </div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="translucent"></a>translucent <span class="propType">bool</span> <a class="hash-link" href="#translucent">#</a></h4>
 		<div>

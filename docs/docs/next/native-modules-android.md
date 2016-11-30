@@ -293,13 +293,13 @@ componentWillMount: function() {
 
 ### 从`startActivityForResult`中获取结果
 
-You'll need to listen to `onActivityResult` if you want to get results from an activity you started with `startActivityForResult`. To do this, the you must extend `BaseActivityEventListener` or implement `ActivityEventListener`. The former is preferred as it is more resilient to API changes. Then, you need to register the listener in the module's constructor,
+如果你使用`startActivityForResult`调起了一个activity并想从其中获取返回结果，那么你需要监听`onActivityResult`事件。具体的做法是继承`BaseActivityEventListener`或是实现`ActivityEventListener`。我们推荐前一种做法，因为它相对来说不太会受到API变更的影响。然后你需要在模块的构造函数中注册这一监听事件。
 
 ```java
 reactContext.addActivityEventListener(mActivityResultListener);
 ```
 
-Now you can listen to `onActivityResult` by implementing the following method:
+现在你可以通过重写下面的方法来实现对`onActivityResult`的监听：
 
 ```java
 @Override
@@ -308,7 +308,7 @@ public void onActivityResult(
   final int requestCode,
   final int resultCode,
   final Intent intent) {
-  // Your logic here
+  // 在这里实现你自己的逻辑
 }
 ```
 
@@ -389,7 +389,7 @@ public class ImagePickerModule extends ReactContextBaseJavaModule {
 }
 ```
 
-### Listening to LifeCycle events
+### 监听生命周期事件
 
 Listening to the activity's LifeCycle events such as `onResume`, `onPause` etc. is very similar to how we implemented `ActivityEventListener`. The module must implement `LifecycleEventListener`. Then, you need to register a listener in the module's constructor,
 

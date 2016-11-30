@@ -69,7 +69,7 @@ __译注__：Mixin属于ES5语法，对于ES6代码来说，无法直接使用Mi
 ```js
 import React,{
   Component
-} from 'react-native';
+} from 'react';
 
 export default class Hello extends Component {
   componentDidMount() {
