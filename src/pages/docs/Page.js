@@ -89,6 +89,8 @@ export default class Page extends React.Component {
     const gitLink = content && curr &&
                       `https://github.com/reactnativecn/react-native.cn/tree/stable/docs/docs/${params.version}/${curr.mdlink}.md`;
 
+    const donationLink = '/about.html#%E6%8D%90%E5%8A%A9';
+
     return (
       <div>
         <DocumentMeta
@@ -96,7 +98,10 @@ export default class Page extends React.Component {
         />
         <a className="anchor" name="content" />
         <h1>{title}</h1>
-        { gitLink && <a className="edit-github" href={gitLink}>在GitHub上修改这篇文档</a> }
+        <div className="doc-extra-links">
+          { gitLink && <a className="doc-edit-github" href={gitLink}>在GitHub上修改这篇文档</a> }
+          <a className="doc-donation" href={donationLink}>支持我们</a>
+        </div>
         <section className="content">
           {
             content &&
