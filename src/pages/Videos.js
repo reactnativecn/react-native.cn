@@ -63,7 +63,7 @@ export default class Videos extends Component {
     const { viewed, videos: { videos } } = this.state;
     return (
       <Container type="videos">
-        {videos && videos.map(v =>
+        {videos && videos.filter(v => v.public_type && v.public_type === 'all').map(v =>
           <a
             className={'video ' + ((__SERVER__ || viewed && viewed.has(v.id)) && 'viewed' || '')}
             target="_blank"
