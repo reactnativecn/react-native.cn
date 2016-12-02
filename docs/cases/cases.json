@@ -176,5 +176,11 @@
 		"ios": "http://a.app.qq.com/o/simple.jsp?pkgname=com.shuidao.daotiantoc",
 		"android": "http://a.app.qq.com/o/simple.jsp?pkgname=com.shuidao.daotiantoc",
 		"icon": "http://7xotda.com1.z0.glb.clouddn.com/show_img.png"
+	},{
+		"name": "宝点理财",
+		"desc": "互联网金融理财产品",
+		"ios": "https://itunes.apple.com/cn/app/id1017177170?mt=8",
+		"android": "http://www.bao.cn/download/android/baodian.apk",
+		"icon": "http://is5.mzstatic.com/image/thumb/Purple71/v4/be/7e/a9/be7ea9b1-7384-a8e0-7476-5790505c09de/source/175x175bb.jpg"
 	}
 ]
