@@ -151,7 +151,7 @@ Android Studio包含了运行和测试React Native应用所需的Android SDK和�
 
 ![platforms](img/react-native-android-studio-android-sdk-platforms.png)
 
-- 在`SDK Tools`窗口中，选择`Show Package Details`，然后在`Android SDK Build Tools`中勾选`Android SDK Build-Tools 23.0.1`。（必须是这个版本）
+- 在`SDK Tools`窗口中，选择`Show Package Details`，然后在`Android SDK Build Tools`中勾选`Android SDK Build-Tools 23.0.1`。（RN工程默认是这个版本，如果你的build-tools不是这个版本，则需要在RN工程目录下修改android/app/build.gradle中到相关项。）
 
 ![build tools](img/react-native-android-studio-android-sdk-build-tools.png)
 
@@ -656,8 +656,8 @@ react-native run-android
 </div><div markdown class="md-block windows linux android">
 
 ## 测试安装
-
 ```
+npm config set registry https://registry.npm.taobao.org #this command will accelarate the later initial
 react-native init AwesomeProject
 cd AwesomeProject
 react-native run-android
