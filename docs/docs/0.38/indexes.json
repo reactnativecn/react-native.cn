@@ -470,12 +470,12 @@
                     "mdlink": "share"
                 },
                 {
-                    "subject": "Systrace",
-                    "mdlink": "systrace"
-                },
-                {
                     "subject": "StyleSheet",
                     "mdlink": "stylesheet"
+                },
+                {
+                    "subject": "Systrace",
+                    "mdlink": "systrace"
                 },
                 {
                     "subject": "TimePickerAndroid",
