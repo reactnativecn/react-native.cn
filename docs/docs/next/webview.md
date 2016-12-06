@@ -21,6 +21,20 @@
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="contentinset"></a>contentInset <span class="propType">{top: number, left: number, bottom: number, right: number}</span> <a class="hash-link" href="#contentinset">#</a></h4>
 	</div>
+  <div class="prop">
+    <h4 class="propTitle"><a class="anchor" name="datadetectortypes"></a><span class="platform">ios</span>dataDetectorTypes <span class="propType">enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all'), [object Object]</span> <a class="hash-link" href="#datadetectortypes">#</a></h4><div>
+    <p>探测网页中某些特殊数据类型，自动生成可点击的链接，默认情况下仅允许探测电话号码。</p><p>你可以指定探测下述类型中的一种，或者使用数组来指定多个类型。</p>
+    <p><code>dataDetectorTypes</code>的可选值：</p>
+    <ul>
+      <li><code>'phoneNumber'</code></li>
+      <li><code>'link'</code></li>
+      <li><code>'address'</code></li>
+      <li><code>'calendarEvent'</code></li>
+      <li><code>'none'</code></li>
+      <li><code>'all'</code></li>
+    </ul>
+    </div>
+  </div>
 	<div class="prop"><h4 class="propTitle"><a class="anchor" name="decelerationrate"></a><span class="platform">ios</span>decelerationRate
     <span class="propType">ScrollView.propTypes.decelerationRate</span> <a class="hash-link" href="#decelerationrate">#</a></h4>
     <div><p>指定一个浮点数，用于设置在用户停止触摸之后，此视图应以多快的速度停止滚动。也可以指定预设的字符串值，如<code>"normal"</code>和<code>"fast"</code>，分别对应<code>UIScrollViewDecelerationRateNormal</code> 和<code>UIScrollViewDecelerationRateFast</code>。
@@ -29,13 +43,13 @@
         <li>Fast（较快速度）: 0.9 (iOS WebView的默认值)</li>
         </ul>
         </p></div>
-</div>
+  </div>
 	<div class="prop"><h4 class="propTitle"><a class="anchor" name="domstorageenabled"></a><span
         class="platform">android</span>domStorageEnabled <span class="propType">bool</span> <a class="hash-link"
                                                                                                href="#domstorageenabled">#</a>
-</h4>
+  </h4>
     <div><p>仅限Android平台。指定是否开启DOM本地存储。</p></div>
-</div>
+  </div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="html"></a>html <span class="propType">string</span> <a class="hash-link" href="#html">#</a></h4>
 		<div class="deprecated"><div class="deprecatedTitle"><span>已过期</span></div><div class="deprecatedMessage"><div><p>请使用<code>source</code> 属性代替。</p></div></div></div>
@@ -49,7 +63,7 @@
 	<div class="prop">
 	<h4 class="propTitle"><a class="anchor" name="mediaplaybackrequiresuseraction"></a>mediaPlaybackRequiresUserAction <span class="propType">bool</span> <a class="hash-link" href="#mediaplaybackrequiresuseraction">#</a></h4>
 	<div>
-		<p>设置页面中的HTML5音视频是否需要在用户点击后再开始播放。默认值为<code>false</code>.</p>
+		<p>设置页面中的HTML5音视频是否需要在用户点击后再开始播放。默认值为<code>true</code>.</p>
 	</div>
 	</div>
 	<div class="prop"><h4 class="propTitle"><a class="anchor" name="onerror"></a>onError <span
@@ -68,6 +82,15 @@
 	    <a class="hash-link" href="#onloadstart">#</a></h4>
 	    <div><p>加载开始时调用。</p></div>
 	</div>
+  <div class="prop"><h4 class="propTitle"><a class="anchor" name="onmessage"></a>onMessage <span class="propType">function</span> 
+    <a class="hash-link" href="#onmessage">#</a></h4>
+    <div>
+      <p>在webview内部的网页中调用<code>window.postMessage</code>方法时可以触发此属性对应的函数，从而实现网页和RN之间的数据交换。
+  设置此属性的同时会在webview中注入一个<code>postMessage</code>的全局函数并覆盖可能已经存在的同名实现。</p>
+      <p>网页端的<code>window.postMessage</code>只发送一个参数<code>data</code>，此参数封装在RN端的event对象中，即<code>event.nativeEvent.data</code>。<code>data</code>
+  只能是一个字符串。</p>
+    </div>
+  </div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="javascriptenabled"></a><span class="platform">android</span>javaScriptEnabled <span class="propType">bool</span> <a class="hash-link" href="#javascriptenabled">#</a></h4>
 		<div>

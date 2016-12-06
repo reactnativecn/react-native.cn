@@ -33,7 +33,7 @@ MYAPP_RELEASE_KEY_PASSWORD=*****
 
 > 一旦你在Play Store发布了你的应用，如果想修改签名，就必须用一个不同的包名来重新发布你的应用（这样也会丢失所有的下载数和评分）。所以请务必备份好你的密钥库和密码。
 
-_提示：如果你不想以明文方式保存密码，同时你使用的是macOS系统，那么你也可以把密码[保存到钥匙串（Keychain）中](https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/)。这样一来你就可以省略掉上面配置中的后两行（即MYAPP_RELEASE_STORE_PASSWORD和MYAPP_RELEASE_KEY_PASSWORD）。_
+提示：如果你不想以明文方式保存密码，同时你使用的是macOS系统，那么你也可以把密码[保存到钥匙串（Keychain）中](https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/)。这样一来你就可以省略掉上面配置中的后两行（即MYAPP_RELEASE_STORE_PASSWORD和MYAPP_RELEASE_KEY_PASSWORD）。
 
 
 ### 添加签名到项目的gradle配置文件
@@ -92,7 +92,7 @@ $ cd android && ./gradlew installRelease
 
 Proguard是一个Java字节码混淆压缩工具，它可以移除掉React Native Java（和它的依赖库中）中没有被使用到的部分，最终有效的减少APK的大小。
 
-_**重要**：启用Proguard之后，你必须再次全面地测试你的应用。Proguard有时候需要为你引入的每个原生库做一些额外的配置。参见`app/proguard-rules.pro`文件。_
+**重要**：启用Proguard之后，你必须再次全面地测试你的应用。Proguard有时候需要为你引入的每个原生库做一些额外的配置。参见`app/proguard-rules.pro`文件。
 
 要启用Proguard，设置`minifyEnabled`选项为`true`：
 
