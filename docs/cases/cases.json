@@ -182,5 +182,13 @@
 		"ios": "https://itunes.apple.com/cn/app/id1017177170?mt=8",
 		"android": "http://www.bao.cn/download/android/baodian.apk",
 		"icon": "http://is5.mzstatic.com/image/thumb/Purple71/v4/be/7e/a9/be7ea9b1-7384-a8e0-7476-5790505c09de/source/175x175bb.jpg"
+	},
+	{
+		"name": "爱米粒",
+		"desc": "整形美容社区＋直播",
+		"ios": "https://itunes.apple.com/us/app/ai-mi-li/id1178550356?ls=1&mt=8",
+		"android": "http://www.haokan.com/",
+		"icon": "http://www.haokan.com/img/icon.png"
 	}
+	
 ]
