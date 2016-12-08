@@ -1,5 +1,12 @@
 [
 	{
+		"name": "爱米粒",
+		"desc": "整形美容社区＋直播",
+		"ios": "https://itunes.apple.com/us/app/ai-mi-li/id1178550356?ls=1&mt=8",
+		"android": "http://www.haokan.com/",
+		"icon": "http://www.haokan.com/img/icon.png"
+	},
+	{
 		"name": "百贷纵横",
 		"desc": "移动在线信贷服务平台",
 		"ios": "https://itunes.apple.com/us/app/bai-dai-zong-heng/id865391997?l=zh&ls=1&mt=8",
