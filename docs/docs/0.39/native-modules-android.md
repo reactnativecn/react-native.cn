@@ -312,7 +312,7 @@ public void onActivityResult(
 }
 ```
 
-下面我们写一个简单的图片选择器来实践一下。The image picker will expose the method `pickImage` to JavaScript, which will return the path of the image when called.
+下面我们写一个简单的图片选择器来实践一下。这个图片选择器会把`pickImage`方法暴露给JavaScript，而这个方法在调用时就会把图片的路径返回到JS端。
 
 ```java
 public class ImagePickerModule extends ReactContextBaseJavaModule {
@@ -391,13 +391,13 @@ public class ImagePickerModule extends ReactContextBaseJavaModule {
 
 ### 监听生命周期事件
 
-Listening to the activity's LifeCycle events such as `onResume`, `onPause` etc. is very similar to how we implemented `ActivityEventListener`. The module must implement `LifecycleEventListener`. Then, you need to register a listener in the module's constructor,
+监听activity的生命周期事件（比如`onResume`, `onPause`等等）和我们在前面实现 `ActivityEventListener`的做法类似。模块必须实现`LifecycleEventListener`，然后需要在构造函数中注册一个监听函数：
 
 ```java
 reactContext.addLifecycleEventListener(this);
 ```
 
-Now you can listen to the activity's LifeCycle events by implementing the following methods:
+现在你可以通过实现下列方法来监听activity的生命周期事件了：
 
 ```java
 @Override

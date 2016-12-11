@@ -8,7 +8,7 @@
 
 * Android SDK version 23 (编译SDK版本号在[build.gradle](https://github.com/facebook/react-native/blob/master/ReactAndroid/build.gradle)中可以找到)
 * SDK build tools version 23.0.1(编译工具版本号在[build.gradle](https://github.com/facebook/react-native/blob/master/ReactAndroid/build.gradle)中可以找到)
-* Local Maven repository for Support Libraries（之前叫做Android Support Repository） >= 17 (Android Support Library所需的模块)
+* Android Support Repository >= 17 
 * Android NDK(下载及解压指南看[这里](http://developer.android.com/ndk/downloads/index.html))
 
 将Gradle指向你的安卓SDK: 设置`$ANDROID_SDK`和`$ANDORID_NDK`为对应的目录，或者按照以下内容在react-native根目录下创建local.properties文件（注意：windows下需要使用反双斜杠）。
@@ -53,7 +53,7 @@ npm install --save github:facebook/react-native#master
 ...
     dependencies {
         classpath 'com.android.tools.build:gradle:1.3.1'
-        classpath 'de.undercouch:gradle-download-task:2.0.0'
+        classpath 'de.undercouch:gradle-download-task:3.1.2'
 
         // 注意：不要把你的应用的依赖放在这里；
         // 它们应该放在各自模块的build.gradle文件中
