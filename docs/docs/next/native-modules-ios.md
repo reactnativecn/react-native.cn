@@ -13,6 +13,7 @@
 ```objective-c
 // CalendarManager.h
 #import "RCTBridgeModule.h"
+#import "RCTLog.h"
 
 @interface CalendarManager : NSObject <RCTBridgeModule>
 @end

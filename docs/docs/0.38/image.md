@@ -22,29 +22,28 @@ renderImages() {
 ### 截图
 ![](img/components/image.png)
 
-### GIF and WebP support on Android
+### 在Android上支持GIF和WebP格式图片
 
-By default, GIF and WebP are not supported on Android.
-You will need to add some optional modules in `android/app/build.gradle`, depending on the needs of your app.
+默认情况下Android是不支持GIF和WebP格式的。你需要在`android/app/build.gradle`文件中根据需要手动添加以下模块：
 
 ```
 dependencies {
-  // If your app supports Android versions before Ice Cream Sandwich (API level 14)
+  // 如果你需要支持Android4.0(API level 14)之前的版本
   compile 'com.facebook.fresco:animated-base-support:0.11.0'
 
-  // For animated GIF support
+  // 如果你需要支持GIF动图
   compile 'com.facebook.fresco:animated-gif:0.11.0'
 
-  // For WebP support, including animated WebP
+  // 如果你需要支持WebP格式，包括WebP动图
   compile 'com.facebook.fresco:animated-webp:0.11.0'
   compile 'com.facebook.fresco:webpsupport:0.11.0'
 
-  // For WebP support, without animations
+  // 如果只需要支持WebP格式而不需要动图
   compile 'com.facebook.fresco:webpsupport:0.11.0'
 }
 ```
 
-Also, if you use GIF with ProGuard, you will need to add this rule in `proguard-rules.pro` :
+如果你在使用GIF的同时还使用了ProGuard，那么需要在`proguard-rules.pro`中添加如下规则 :
 
 ```
 -keep class com.facebook.imagepipeline.animated.factory.AnimatedFactoryImpl {
@@ -80,13 +79,15 @@ Also, if you use GIF with ProGuard, you will need to add this rule in `proguard-
         </div>
     </div>
     <div class="prop">
-        <h4 class="propTitle"><a class="anchor" name="resizemode"></a>resizeMode <span class="propType">enum('cover', 'contain', 'stretch')</span> <a class="hash-link" href="#resizemode">#</a></h4>
+        <h4 class="propTitle"><a class="anchor" name="resizemode"></a>resizeMode <span class="propType">enum('cover', 'contain', 'stretch', 'repeat', 'center')</span> <a class="hash-link" href="#resizemode">#</a></h4>
         <div>
             <p>决定当组件尺寸和图片尺寸不成比例的时候如何调整图片的大小。</p>
             <ul>
             <li><p><code>cover</code>: 在保持图片宽高比的前提下缩放图片，直到宽度和高度都大于等于容器视图的尺寸（如果容器有padding内衬的话，则相应减去）。__译注__：这样图片完全覆盖甚至超出容器，容器中不留任何空白。</p></li>
-			  <li><p><code>contain</code>: 在保持图片宽高比的前提下缩放图片，直到宽度和高度都小于等于容器视图的尺寸（如果容器有padding内衬的话，则相应减去）。__译注__：这样图片完全被包裹在容器中，容器中可能留有空白</p></li>
-			  <li><p><code>stretch</code>: 拉伸图片且不维持宽高比，直到宽高都刚好填满容器。</p></li>
+		        <li><p><code>contain</code>: 在保持图片宽高比的前提下缩放图片，直到宽度和高度都小于等于容器视图的尺寸（如果容器有padding内衬的话，则相应减去）。__译注__：这样图片完全被包裹在容器中，容器中可能留有空白</p></li>
+		        <li><p><code>stretch</code>: 拉伸图片且不维持宽高比，直到宽高都刚好填满容器。</p></li>
+            <li><p><code>repeat</code>: Repeat the image to cover the frame of the view. The image will keep it's size and aspect ratio. (iOS only)</p></li>
+            <li><p><code>center</code>: 居中不拉伸。</p></li>
 			  </ul>
         </div>
     </div>
@@ -174,6 +175,27 @@ Also, if you use GIF with ProGuard, you will need to add this rule in `proguard-
             <p>一个唯一的资源标识符，用来在自动测试脚本中标识这个元素。</p>
         </div>
     </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="resizemethod"></a><span class="platform">android</span>resizeMethod
+        <span class="propType">enum('auto', 'resize', 'scale')</span> <a class="hash-link"
+                                                                         href="#resizemethod">#</a></h4>
+        <div><p>The mechanism that should be used to resize the image when the image's dimensions
+            differ from the image view's dimensions. Defaults to <code>auto</code>.</p>
+            <ul>
+                <li><p><code>auto</code>: Use heuristics to pick between <code>resize</code> and <code>scale</code>.</p>
+                </li>
+                <li><p><code>resize</code>: A software operation which changes the encoded image in memory before it
+                    gets decoded. This should be used instead of <code>scale</code> when the image is much larger
+                    than the view.</p></li>
+                <li><p><code>scale</code>: The image gets drawn downscaled or upscaled. Compared to <code>resize</code>,
+                    <code>scale</code> is
+                    faster (usually hardware accelerated) and produces higher quality images. This
+                    should be used if the image is smaller than the view. It should also be used if the
+                    image is slightly bigger than the view.</p></li>
+            </ul>
+            <p>More details about <code>resize</code> and <code>scale</code> can be found at <a
+                    href="http://frescolib.org/docs/resizing-rotating.html">http://frescolib.org/docs/resizing-rotating.html</a>.
+            </p></div>
+    </div>
     <div class="prop">
         <h4 class="propTitle"><a class="anchor" name="accessibilitylabel"></a><span class="platform">ios</span>accessibilityLabel <span class="propType">string</span> <a class="hash-link" href="#accessibilitylabel">#</a></h4>
         <div>
@@ -199,10 +221,23 @@ Also, if you use GIF with ProGuard, you will need to add this rule in `proguard-
             <p>当图片被缩放的时候，capInsets指定的角上的尺寸会被固定而不进行缩放，而中间和边上其他的部分则会被拉伸。这在制作一些可变大小的圆角按钮、阴影、以及其它资源的时候非常有用（译注：这就是常说的九宫格或者.9图。了解更多信息，可以参见<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIImage_Class/index.html#//apple_ref/occ/instm/UIImage/resizableImageWithCapInsets" target="_blank">苹果官方文档</a></p>
         </div>
     </div>
-    <div class="prop">
-        <h4 class="propTitle"><a class="anchor" name="defaultsource"></a><span class="platform">ios</span>defaultSource <span class="propType">{uri: string}</span> <a class="hash-link" href="#defaultsource">#</a></h4>
-        <div>
-            <p>一个静态图片，当最终的图片正在下载的过程中时显示（loading背景图）。</p>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="defaultsource"></a><span class="platform">ios</span>defaultSource
+        <span class="propType">{uri: string, width: number, height: number, scale: number}, number</span> <a
+                class="hash-link" href="#defaultsource">#</a></h4>
+        <div><p>A static image to display while loading the image source.</p>
+            <ul>
+                <li><code>uri</code> - a string representing the resource identifier for the image, which
+                    should be either a local file path or the name of a static image resource
+                    (which should be wrapped in the <code>require('./path/to/image.png')</code> function).
+                </li>
+                <li><code>width</code>, <code>height</code> - can be specified if known at build time, in which case
+                    these will be used to set the default <code>&lt;Image/&gt;</code> component dimensions.
+                </li>
+                <li><code>scale</code> - used to indicate the scale factor of the image. Defaults to 1.0 if
+                    unspecified, meaning that one image pixel equates to one display point / DIP.
+                </li>
+                <li><code>number</code> - Opaque type returned by something like <code>require('./image.jpg')</code>.</li>
+            </ul>
         </div>
     </div>
     <div class="prop">
@@ -210,6 +245,12 @@ Also, if you use GIF with ProGuard, you will need to add this rule in `proguard-
         <div>
             <p>当加载错误的时候调用此回调函数，参数为<code>{nativeEvent: {error}}</code></p>
         </div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="onpartialload"></a><span class="platform">ios</span>onPartialLoad
+        <span class="propType">function</span> <a class="hash-link" href="#onpartialload">#</a></h4>
+        <div><p>Invoked when a partial load of the image is complete. The definition of
+            what constitutes a "partial load" is loader specific though this is meant
+            for progressive JPEG loads.</p></div>
     </div>
     <div class="prop">
         <h4 class="propTitle"><a class="anchor" name="onprogress"></a><span class="platform">ios</span>onProgress <span class="propType">function</span> <a class="hash-link" href="#onprogress">#</a></h4>
@@ -253,7 +294,7 @@ var {
 var base64Icon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAABLCAQAAACSR7JhAAADtUlEQVR4Ac3YA2Bj6QLH0XPT1Fzbtm29tW3btm3bfLZtv7e2ObZnms7d8Uw098tuetPzrxv8wiISrtVudrG2JXQZ4VOv+qUfmqCGGl1mqLhoA52oZlb0mrjsnhKpgeUNEs91Z0pd1kvihA3ULGVHiQO2narKSHKkEMulm9VgUyE60s1aWoMQUbpZOWE+kaqs4eLEjdIlZTcFZB0ndc1+lhB1lZrIuk5P2aib1NBpZaL+JaOGIt0ls47SKzLC7CqrlGF6RZ09HGoNy1lYl2aRSWL5GuzqWU1KafRdoRp0iOQEiDzgZPnG6DbldcomadViflnl/cL93tOoVbsOLVM2jylvdWjXolWX1hmfZbGR/wjypDjFLSZIRov09BgYmtUqPQPlQrPapecLgTIy0jMgPKtTeob2zWtrGH3xvjUkPCtNg/tm1rjwrMa+mdUkPd3hWbH0jArPGiU9ufCsNNWFZ40wpwn+62/66R2RUtoso1OB34tnLOcy7YB1fUdc9e0q3yru8PGM773vXsuZ5YIZX+5xmHwHGVvlrGPN6ZSiP1smOsMMde40wKv2VmwPPVXNut4sVpUreZiLBHi0qln/VQeI/LTMYXpsJtFiclUN+5HVZazim+Ky+7sAvxWnvjXrJFneVtLWLyPJu9K3cXLWeOlbMTlrIelbMDlrLenrjEQOtIF+fuI9xRp9ZBFp6+b6WT8RrxEpdK64BuvHgDk+vUy+b5hYk6zfyfs051gRoNO1usU12WWRWL73/MMEy9pMi9qIrR4ZpV16Rrvduxazmy1FSvuFXRkqTnE7m2kdb5U8xGjLw/spRr1uTov4uOgQE+0N/DvFrG/Jt7i/FzwxbA9kDanhf2w+t4V97G8lrT7wc08aA2QNUkuTfW/KimT01wdlfK4yEw030VfT0RtZbzjeMprNq8m8tnSTASrTLti64oBNdpmMQm0eEwvfPwRbUBywG5TzjPCsdwk3IeAXjQblLCoXnDVeoAz6SfJNk5TTzytCNZk/POtTSV40NwOFWzw86wNJRpubpXsn60NJFlHeqlYRbslqZm2jnEZ3qcSKgm0kTli3zZVS7y/iivZTweYXJ26Y+RTbV1zh3hYkgyFGSTKPfRVbRqWWVReaxYeSLarYv1Qqsmh1s95S7G+eEWK0f3jYKTbV6bOwepjfhtafsvUsqrQvrGC8YhmnO9cSCk3yuY984F1vesdHYhWJ5FvASlacshUsajFt2mUM9pqzvKGcyNJW0arTKN1GGGzQlH0tXwLDgQTurS8eIQAAAABJRU5ErkJggg==';
 
 var ImageCapInsetsExample = require('./ImageCapInsetsExample');
-const IMAGE_PREFETCH_URL = 'http://facebook.github.io/origami/public/images/blog-hero.jpg?r=1&t=' + Date.now();
+const IMAGE_PREFETCH_URL = 'http://origami.design/public/images/bird-logo.png?r=1&t=' + Date.now();
 var prefetchTask = Image.prefetch(IMAGE_PREFETCH_URL);
 
 var NetworkImageCallbackExample = React.createClass({
@@ -278,7 +319,15 @@ var NetworkImageCallbackExample = React.createClass({
           source={this.props.source}
           style={[styles.base, {overflow: 'visible'}]}
           onLoadStart={() => this._loadEventFired(`✔ onLoadStart (+${new Date() - mountTime}ms)`)}
-          onLoad={() => this._loadEventFired(`✔ onLoad (+${new Date() - mountTime}ms)`)}
+          onLoad={(event) => {
+            // Currently this image source feature is only available on iOS.
+            if (event.nativeEvent.source) {
+              const url = event.nativeEvent.source.url;
+              this._loadEventFired(`✔ onLoad (+${new Date() - mountTime}ms) for URL ${url}`);
+            } else {
+              this._loadEventFired(`✔ onLoad (+${new Date() - mountTime}ms)`);
+            }
+          }}
           onLoadEnd={() => {
             this._loadEventFired(`✔ onLoadEnd (+${new Date() - mountTime}ms)`);
             this.setState({startLoadPrefetched: true}, () => {
@@ -295,7 +344,15 @@ var NetworkImageCallbackExample = React.createClass({
             source={this.props.prefetchedSource}
             style={[styles.base, {overflow: 'visible'}]}
             onLoadStart={() => this._loadEventFired(`✔ (prefetched) onLoadStart (+${new Date() - mountTime}ms)`)}
-            onLoad={() => this._loadEventFired(`✔ (prefetched) onLoad (+${new Date() - mountTime}ms)`)}
+            onLoad={(event) => {
+              // Currently this image source feature is only available on iOS.
+              if (event.nativeEvent.source) {
+                const url = event.nativeEvent.source.url;
+                this._loadEventFired(`✔ (prefetched) onLoad (+${new Date() - mountTime}ms) for URL ${url}`);
+              } else {
+                this._loadEventFired(`✔ (prefetched) onLoad (+${new Date() - mountTime}ms)`);
+              }
+            }}
             onLoadEnd={() => this._loadEventFired(`✔ (prefetched) onLoadEnd (+${new Date() - mountTime}ms)`)}
           />
           : null}
@@ -382,7 +439,7 @@ var MultipleSourcesExample = React.createClass({
   },
   render: function() {
     return (
-      <View style={styles.container}>
+      <View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text
             style={styles.touchableText}
@@ -397,13 +454,13 @@ var MultipleSourcesExample = React.createClass({
         </View>
         <Text>Container image size: {this.state.width}x{this.state.height} </Text>
         <View
-          style={[styles.imageContainer, {height: this.state.height, width: this.state.width}]} >
+          style={{height: this.state.height, width: this.state.width}} >
           <Image
             style={{flex: 1}}
             source={[
-              {uri: 'http://facebook.github.io/react/img/logo_small.png', width: 38, height: 38},
-              {uri: 'http://facebook.github.io/react/img/logo_small_2x.png', width: 76, height: 76},
-              {uri: 'http://facebook.github.io/react/img/logo_og.png', width: 400, height: 400}
+              {uri: 'https://facebook.github.io/react/img/logo_small.png', width: 38, height: 38},
+              {uri: 'https://facebook.github.io/react/img/logo_small_2x.png', width: 76, height: 76},
+              {uri: 'https://facebook.github.io/react/img/logo_og.png', width: 400, height: 400}
             ]}
           />
         </View>
@@ -443,7 +500,7 @@ exports.examples = [
     render: function() {
       return (
         <Image
-          source={{uri: 'http://facebook.github.io/react/img/logo_og.png'}}
+          source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
           style={styles.base}
         />
       );
@@ -468,7 +525,7 @@ exports.examples = [
     title: 'Image Loading Events',
     render: function() {
       return (
-        <NetworkImageCallbackExample source={{uri: 'http://facebook.github.io/origami/public/images/blog-hero.jpg?r=1&t=' + Date.now()}}
+        <NetworkImageCallbackExample source={{uri: 'http://origami.design/public/images/bird-logo.png?r=1&t=' + Date.now()}}
           prefetchedSource={{uri: IMAGE_PREFETCH_URL}}/>
       );
     },
@@ -477,7 +534,7 @@ exports.examples = [
     title: 'Error Handler',
     render: function() {
       return (
-        <NetworkImageExample source={{uri: 'http://TYPO_ERROR_facebook.github.io/react/img/logo_og.png'}} />
+        <NetworkImageExample source={{uri: 'https://TYPO_ERROR_facebook.github.io/react/img/logo_og.png'}} />
       );
     },
     platform: 'ios',
@@ -486,7 +543,7 @@ exports.examples = [
     title: 'Image Download Progress',
     render: function() {
       return (
-        <NetworkImageExample source={{uri: 'http://facebook.github.io/origami/public/images/blog-hero.jpg?r=1'}}/>
+        <NetworkImageExample source={{uri: 'http://origami.design/public/images/bird-logo.png?r=1'}}/>
       );
     },
     platform: 'ios',
@@ -498,7 +555,7 @@ exports.examples = [
       return (
         <Image
           defaultSource={require('./bunny.png')}
-          source={{uri: 'http://facebook.github.io/origami/public/images/birds.jpg'}}
+          source={{uri: 'https://facebook.github.io/origami/public/images/birds.jpg'}}
           style={styles.base}
         />
       );
@@ -722,6 +779,18 @@ exports.examples = [
                     source={image}
                   />
                 </View>
+                { Platform.OS === 'ios' ?
+                  <View style={styles.leftMargin}>
+                    <Text style={[styles.resizeModeText]}>
+                      Repeat
+                    </Text>
+                    <Image
+                      style={styles.resizeMode}
+                      resizeMode={Image.resizeMode.repeat}
+                      source={image}
+                    />
+                  </View>
+                : null }
                 { Platform.OS === 'android' ?
                   <View style={styles.leftMargin}>
                     <Text style={[styles.resizeModeText]}>
@@ -748,7 +817,7 @@ exports.examples = [
       return (
         <Image
           style={styles.gif}
-          source={{uri: 'http://38.media.tumblr.com/9e9bd08c6e2d10561dd1fb4197df4c4e/tumblr_mfqekpMktw1rn90umo1_500.gif'}}
+          source={{uri: 'https://38.media.tumblr.com/9e9bd08c6e2d10561dd1fb4197df4c4e/tumblr_mfqekpMktw1rn90umo1_500.gif'}}
         />
       );
     },
@@ -792,12 +861,54 @@ exports.examples = [
     render: function() {
       return <MultipleSourcesExample />;
     },
-    platform: 'android',
+  },
+  {
+    title: 'Legacy local image',
+    description:
+      'Images shipped with the native bundle, but not managed ' +
+      'by the JS packager',
+    render: function() {
+      return (
+        <Image
+          source={{uri: 'legacy_image', width: 120, height: 120}}
+        />
+      );
+    },
+  },
+  {
+    title: 'Bundled images',
+    description:
+      'Images shipped in a separate native bundle',
+    render: function() {
+      return (
+        <View style={{flexDirection: 'row'}}>
+          <Image
+            source={{
+              url: 'ImageInBundle',
+              bundle: 'UIExplorerBundle',
+              width: 100,
+              height: 100,
+            }}
+            style={{borderColor: 'yellow', borderWidth: 4}}
+          />
+          <Image
+            source={{
+              url: 'ImageInAssetCatalog',
+              bundle: 'UIExplorerBundle',
+              width: 100,
+              height: 100,
+            }}
+            style={{marginLeft: 10, borderColor: 'blue', borderWidth: 4}}
+          />
+        </View>
+      );
+    },
+    platform: 'ios',
   },
 ];
 
-var fullImage = {uri: 'http://facebook.github.io/react/img/logo_og.png'};
-var smallImage = {uri: 'http://facebook.github.io/react/img/logo_small_2x.png'};
+var fullImage = {uri: 'https://facebook.github.io/react/img/logo_og.png'};
+var smallImage = {uri: 'https://facebook.github.io/react/img/logo_small_2x.png'};
 
 var styles = StyleSheet.create({
   base: {

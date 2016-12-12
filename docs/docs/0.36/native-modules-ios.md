@@ -13,6 +13,7 @@
 ```objective-c
 // CalendarManager.h
 #import "RCTBridgeModule.h"
+#import "RCTLog.h"
 
 @interface CalendarManager : NSObject <RCTBridgeModule>
 @end
@@ -241,10 +242,10 @@ RCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSe
 >
 > `methodQueue`方法会在模块被初始化的时候被执行一次，然后会被React Native的桥接机制保存下来，所以你不需要自己保存队列的引用，除非你希望在模块的其它地方使用它。但是，如果你希望在若干个模块中共享同一个队列，则需要自己保存并返回相同的队列实例；仅仅是返回相同名字的队列是不行的。
 
-## Depedency Injection
-The bridge initializes any registered RCTBridgeModules automatically, however you may wish to instantiate your own module instances (so you may inject dependencies, for example).
+## 依赖注入
+bridge会自动注册实现了`RCTBridgeModule`协议的模块，但是你可能也希望能够初始化自定义的模块实例（这样可以注入依赖）。
  
-You can do this by creating a class that implements the RTCBridgeDelegate Protocol, initializing an RTCBridge with the delegate as an argument and initialising a RTCRootView with the initialized bridge.
+要实现这个功能，你需要实现`RTCBridgeDelegate`协议，初始化`RTCBridge`，并且在初始化方法里指定代理。然后用初始化好的`RTCBridge`实例初始化一个`RTCRootView`。
  
 ```objective-c
 id<RCTBridgeDelegate> moduleInitialiser = [[classThatImplementsRTCBridgeDelegate alloc] init];

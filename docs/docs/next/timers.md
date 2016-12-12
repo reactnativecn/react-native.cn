@@ -65,7 +65,7 @@ var Component = React.createClass({
 
 我们强烈建议您使用react-timer-mixin提供的`this.setTimeout(...)`来代替`setTimeout(...)`。这可以规避许多难以排查的BUG。  
 
-__译注__：Mixin属于ES5语法，对于ES6代码来说，无法直接使用Mixin。如果你的项目是用ES6代码编写，同时又使用了计时器，那么你只需铭记`在unmount组件时清除（clearTimeout/clearInterval）所有用到的定时器`，那么也可以实现和TimerMixin同样的效果。例如：
+__译注__：Mixin属于ES5语法，对于ES6代码来说，__无法直接使用Mixin__。如果你的项目是用ES6代码编写，同时又使用了计时器，那么你只需铭记`在unmount组件时清除（clearTimeout/clearInterval）所有用到的定时器`，那么也可以实现和TimerMixin同样的效果。例如：
 ```js
 import React,{
   Component
