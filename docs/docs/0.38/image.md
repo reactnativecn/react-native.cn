@@ -86,7 +86,7 @@ dependencies {
             <li><p><code>cover</code>: 在保持图片宽高比的前提下缩放图片，直到宽度和高度都大于等于容器视图的尺寸（如果容器有padding内衬的话，则相应减去）。__译注__：这样图片完全覆盖甚至超出容器，容器中不留任何空白。</p></li>
 		        <li><p><code>contain</code>: 在保持图片宽高比的前提下缩放图片，直到宽度和高度都小于等于容器视图的尺寸（如果容器有padding内衬的话，则相应减去）。__译注__：这样图片完全被包裹在容器中，容器中可能留有空白</p></li>
 		        <li><p><code>stretch</code>: 拉伸图片且不维持宽高比，直到宽高都刚好填满容器。</p></li>
-            <li><p><code>repeat</code>: Repeat the image to cover the frame of the view. The image will keep it's size and aspect ratio. (iOS only)</p></li>
+            <li><p><code>repeat</code>: 重复平铺图片直到填满容器。图片会维持原始尺寸。仅iOS可用。</p></li>
             <li><p><code>center</code>: 居中不拉伸。</p></li>
 			  </ul>
         </div>
@@ -158,11 +158,11 @@ dependencies {
 			            This is useful in cases which are not supported by the Android
 			            implementation of rounded corners:
 			            - Certain resize modes, such as 'contain'
-			            - Animated GIFs</p>
+			            - GIF动画</p>
 			            <p>A typical way to use this prop is with images displayed on a solid
 			                background and setting the <code>overlayColor</code> to the same color
 			                as the background.</p>
-			            <p>For details of how this works under the hood, see
+			            <p>详细说明可参考
 			                <a href="http://frescolib.org/docs/rounded-corners-and-circles.html">http://frescolib.org/docs/rounded-corners-and-circles.html</a>
 			            </p></div>
 			    </h6>
@@ -192,7 +192,7 @@ dependencies {
                     should be used if the image is smaller than the view. It should also be used if the
                     image is slightly bigger than the view.</p></li>
             </ul>
-            <p>More details about <code>resize</code> and <code>scale</code> can be found at <a
+            <p>关于<code>resize</code>和<code>scale</code>的详细说明请参考<a
                     href="http://frescolib.org/docs/resizing-rotating.html">http://frescolib.org/docs/resizing-rotating.html</a>.
             </p></div>
     </div>
@@ -224,7 +224,7 @@ dependencies {
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="defaultsource"></a><span class="platform">ios</span>defaultSource
         <span class="propType">{uri: string, width: number, height: number, scale: number}, number</span> <a
                 class="hash-link" href="#defaultsource">#</a></h4>
-        <div><p>A static image to display while loading the image source.</p>
+        <div><p>在读取图片时默认显示的加载提示图片</p>
             <ul>
                 <li><code>uri</code> - a string representing the resource identifier for the image, which
                     should be either a local file path or the name of a static image resource
@@ -248,9 +248,7 @@ dependencies {
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onpartialload"></a><span class="platform">ios</span>onPartialLoad
         <span class="propType">function</span> <a class="hash-link" href="#onpartialload">#</a></h4>
-        <div><p>Invoked when a partial load of the image is complete. The definition of
-            what constitutes a "partial load" is loader specific though this is meant
-            for progressive JPEG loads.</p></div>
+        <div><p>如果图片本身支持逐步加载，则逐步加载的过程中会调用此方法。“逐步加载”的具体定义与具体的标准和实现有关。</p></div>
     </div>
     <div class="prop">
         <h4 class="propTitle"><a class="anchor" name="onprogress"></a><span class="platform">ios</span>onProgress <span class="propType">function</span> <a class="hash-link" href="#onprogress">#</a></h4>

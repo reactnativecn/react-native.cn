@@ -34,13 +34,13 @@
         </div>
     </div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="sharedaction"></a><span
-            class="methodType">static </span>sharedAction<span class="methodType">(0)</span> <a class="hash-link"
+            class="methodType">static </span>sharedAction<span class="methodType">()</span> <a class="hash-link"
                                                                                                 href="#sharedaction">#</a>
     </h4>
         <div><p>The content was successfully shared.</p></div>
     </div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="dismissedaction"></a><span class="methodType">static </span>dismissedAction<span
-            class="methodType">(0)</span> <a class="hash-link" href="#dismissedaction">#</a></h4>
+            class="methodType">()</span> <a class="hash-link" href="#dismissedaction">#</a></h4>
         <div><p>The dialog has been dismissed.
             @platform ios</p></div>
     </div>

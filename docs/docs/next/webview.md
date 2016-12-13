@@ -146,7 +146,7 @@
 	        <span class="platform">android</span>userAgent
 	        <span class="propType">string</span> <a class="hash-link" href="#useragent">#</a>
 	    </h4>
-	    <div><p>为WebView设置user-agent字符串标识。这一字符串也可以在原生端用WebViewConfig来设置,但js端的设置会覆盖原生端的设置。</p></div>
+	    <div><p>为WebView设置user-agent字符串标识。这一字符串也可以在原生端用WebViewConfig来设置，但js端的设置会覆盖原生端的设置。</p></div>
 	</div>
 </div>
 

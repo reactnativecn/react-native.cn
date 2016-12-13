@@ -663,6 +663,7 @@ cd AwesomeProject
 react-native run-android
 ```
 
+__Windows用户请注意，请不要在命令行默认的System32目录中init项目！会有各种权限限制导致不能运行！__
 </div><div markdown class="md-block windows linux android">
 
 ### 手动运行Packager

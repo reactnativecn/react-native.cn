@@ -11,7 +11,7 @@
         <div><p>beginEvent/endEvent for starting and then ending a profile within the same call stack frame</p></div>
     </div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="endevent"></a><span
-            class="methodType">static </span>endEvent<span class="methodType">(0)</span> <a class="hash-link"
+            class="methodType">static </span>endEvent<span class="methodType">()</span> <a class="hash-link"
                                                                                             href="#endevent">#</a>
     </h4></div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="beginasyncevent"></a><span class="methodType">static </span>beginAsyncEvent<span
@@ -37,7 +37,7 @@
             therefore async variant of profiling is used</p></div>
     </div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="swizzlejson"></a><span
-            class="methodType">static </span>swizzleJSON<span class="methodType">(0)</span> <a class="hash-link"
+            class="methodType">static </span>swizzleJSON<span class="methodType">()</span> <a class="hash-link"
                                                                                                href="#swizzlejson">#</a>
     </h4>
         <div><p>This is not called by default due to perf overhead but it's useful

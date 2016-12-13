@@ -44,9 +44,9 @@
 1. 首先当然要了解你要植入的React Native组件。
 2. 创建一个`Podfile`，在其中以`subspec`的形式填写所有你要植入的React Native的组件。
 3. 创建js文件，编写React Native组件的js代码。
-4. Add a new event handler that creates a `RCTRootView` that points to your React Native component and its `AppRegistry` name that you defined in `index.ios.js`.
-5. Start the React Native server and run your native application.
-6. Optionally add more React Native components.
+4. 添加一个事件处理函数，用于创建一个`RCTRootView`。这个`RCTRootView`正是用来承载你的React Native组件的，而且它必须对应你在`index.ios.js`中使用`AppRegistry`注册的模块名字。
+5. 启动React Native的Packager服务，运行应用。
+6. 根据需要添加更多React Native的组件。
 7. [调试](debugging.html)。
 8. 准备[部署发布](running-on-device-ios.html) （比如可以利用`react-native-xcode.sh`脚本）。
 9. 发布应用，升职加薪，走向人生巅峰！😘
@@ -59,13 +59,13 @@
 1. 首先当然要了解你要植入的React Native组件。
 2. 在Android项目根目录中使用npm来安装`react-native` ，这样同时会创建一个`node_modules/`的目录。
 3. 创建js文件，编写React Native组件的js代码。
-4. Add `com.facebook.react:react-native:+` and a `maven` pointing to the `react-native` binaries in `node_nodules/` to your `build.gradle` file.
-4. Create a custom React Native specific `Activity` that creates a `ReactRootView`.
-5. Start the React Native server and run your native application.
-6. Optionally add more React Native components.
-7. 在真机上[运行](running-on-device-android.html)、[调试](debugging.html)。
-8. [打包](signed-apk-android.html)。
-9. 发布应用，升职加薪，走向人生巅峰！😘
+4. 在`build.gradle`文件中添加`com.facebook.react:react-native:+`，以及一个指向`node_nodules/`目录中的`react-native`预编译库的`maven`路径。
+5. 创建一个React Native专属的`Activity`，在其中再创建`ReactRootView`。
+6. 启动React Native的Packager服务，运行应用。
+7. 根据需要添加更多React Native的组件。
+8. 在真机上[运行](running-on-device-android.html)、[调试](debugging.html)。
+9. [打包](signed-apk-android.html)。
+10. 发布应用，升职加薪，走向人生巅峰！😘
 
 </div>
 <div markdown class="md-block objc swift android">
@@ -100,12 +100,12 @@ $ sudo gem install cocoapods
 </div>
 <div markdown class="md-block objc">
 
-在本教程中我们用于[示范的app](https://github.com/JoelMarcey/iOS-2048)是一个[2048](https://en.wikipedia.org/wiki/2048_(video_game)类型的游戏。 Here is what the main menu of the native application looks like without React Native.
+在本教程中我们用于[示范的app](https://github.com/JoelMarcey/iOS-2048)是一个[2048](https://en.wikipedia.org/wiki/2048_(video_game)类型的游戏。 下面是这个游戏还没有植入React Native时的主界面：
 
 </div>
 <div markdown class="md-block swift">
 
-在本教程中我们用于[示范的app](https://github.com/JoelMarcey/swift-2048)是一个[2048](https://en.wikipedia.org/wiki/2048_(video_game)类型的游戏。 Here is what the main menu of the native application looks like without React Native.
+在本教程中我们用于[示范的app](https://github.com/JoelMarcey/swift-2048)是一个[2048](https://en.wikipedia.org/wiki/2048_(video_game)类型的游戏。下面是这个游戏还没有植入React Native时的主界面： 
 
 </div>
 <div markdown class="md-block objc swift">
@@ -114,18 +114,17 @@ $ sudo gem install cocoapods
 
 ## 依赖包
 
-React Native的植入过程同时需要React和React Native两个node依赖包。 integration requires both the React and React Native node modules. The React Native Framework will provide the code to allow your application integration to happen.
-
+React Native的植入过程同时需要React和React Native两个node依赖包。
 
 ### `package.json`
 
 我们把具体的依赖包记录在`package.json`文件中。如果项目根目录中没有这个文件，那就自己创建一个。
 
-> Normally with React Native projects, you will put files like `package.json`, `index.ios.js`, etc. in the root directory of your project and then have your iOS specific native code in a subdirectory like `ios/` where your Xcode project is located (e.g., `.xcodeproj`).
+> 对于一个典型的React Native项目来说，一般`package.json`和`index.ios.js`等文件会放在项目的根目录下。而iOS相关的原生代码会放在一个名为`ios/`的子目录中,这里也同时放着你的Xcode项目文件（`.xcodeproj`）。
 
-Below is an example of what your `package.json` file should minimally contain.
+下面是一个最简单的`package.json`的内容示例。
 
-> Version numbers will vary according to your needs. Normally the latest versions for both [React](https://github.com/facebook/react/releases) and [React Native](https://github.com/facebook/react/releases) will be sufficient.
+> 示例中的`version`字段没有太大意义（除非你要把你的项目发布到npm仓库）。`scripts`中是用于启动packager服务的命令。dependencies中的react和react-native的版本取决于你的具体需求。一般来说我们推荐使用最新版本。你可以使用`npm info react`和`npm info react-native`来查看当前的最新版本。另外，react-native对react的版本有严格要求，高于或低于某个范围都不可以。本文无法在这里列出所有react native和对应的react版本要求，只能提醒读者先尝试执行npm install，然后注意观察安装过程中的报错信息，例如`require react@某.某.某版本, but none was installed`，然后根据这样的提示，执行`npm i -S react@某.某.某版本`。
 
 </div><div markdown class="md-block objc">
 
@@ -138,8 +137,8 @@ Below is an example of what your `package.json` file should minimally contain.
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "react": "15.0.2",
-    "react-native": "0.26.1"
+    "react": "15.4.1",
+    "react-native": "0.39.2"
   }
 }
 ```
@@ -155,8 +154,8 @@ Below is an example of what your `package.json` file should minimally contain.
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "react": "15.0.2",
-    "react-native": "0.26.1"
+    "react": "15.4.1",
+    "react-native": "0.39.2"
   }
 }
 ```
@@ -165,11 +164,10 @@ Below is an example of what your `package.json` file should minimally contain.
 
 ### 安装依赖包
 
-使用npm（node包管理器，Node package manager）来安装React和React Native模块。 modules via the Node package manager. The Node modules will be installed into a `node_modules/` directory in the root of your project.
+使用npm（node包管理器，Node package manager）来安装React和React Native模块。这些模块会被安装到项目根目录下的`node_modules/`目录中。
+在包含有package.json文件的目录（一般也就是项目根目录）中运行下列命令来安装：
 
 ```bash
-# From the directory containing package.json project, install the modules
-# The modules will be installed in node_modules/
 $ npm install
 ```
 
@@ -191,7 +189,7 @@ After you have used Node to install the React and React Native frameworks into t
 The easiest way to create a `Podfile` is by using the CocoaPods `init` command in the native iOS code directory of your project:
 
 ```bash
-## In the directory where your native iOS code is located (e.g., where your `.xcodeproj` file is located)
+## 在iOS原生代码所在的目录中（也就是`.xcodeproj`文件所在的目录）运行：
 $ pod init
 ```
 

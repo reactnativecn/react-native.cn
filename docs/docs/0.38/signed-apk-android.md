@@ -15,7 +15,7 @@ Android要求所有应用都有一个数字签名才会被允许安装在用户�
 ### 设置gradle变量
 
 1. 把`my-release-key.keystore`文件放到你工程中的`android/app`文件夹下。
-2. 编辑`~/.gradle/gradle.properties`，添加如下的代码（注意把其中的`****`替换为相应密码）
+2. 编辑`~/.gradle/gradle.properties`（没有这个文件你就创建一个），添加如下的代码（注意把其中的`****`替换为相应密码）
 
 **注意：~表示用户目录，比如windows上可能是`C:\Users\用户名`，而mac上可能是`/Users/用户名`。**
 
@@ -33,7 +33,7 @@ MYAPP_RELEASE_KEY_PASSWORD=*****
 
 > 一旦你在Play Store发布了你的应用，如果想修改签名，就必须用一个不同的包名来重新发布你的应用（这样也会丢失所有的下载数和评分）。所以请务必备份好你的密钥库和密码。
 
-_提示：如果你不想以明文方式保存密码，同时你使用的是macOS系统，那么你也可以把密码[保存到钥匙串（Keychain）中](https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/)。这样一来你就可以省略掉上面配置中的后两行（即MYAPP_RELEASE_STORE_PASSWORD和MYAPP_RELEASE_KEY_PASSWORD）。_
+提示：如果你不想以明文方式保存密码，同时你使用的是macOS系统，那么你也可以把密码[保存到钥匙串（Keychain）中](https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/)。这样一来你就可以省略掉上面配置中的后两行（即MYAPP_RELEASE_STORE_PASSWORD和MYAPP_RELEASE_KEY_PASSWORD）。
 
 
 ### 添加签名到项目的gradle配置文件
@@ -71,7 +71,7 @@ android {
 $ cd android && ./gradlew assembleRelease
 ```
 
-译注：cd android表示进入android目录（如果你已经在android目录中了那就不用输入了）。`./gradlew assembleRelease`在macOS和Linux系统中表示执行当前目录下的名为gradlew的脚本文件，运行参数为assembleRelease，注意这个`./`不可省略；而在windows命令行下则需要去掉'./'。
+译注：cd android表示进入android目录（如果你已经在android目录中了那就不用输入了）。`./gradlew assembleRelease`在macOS和Linux系统中表示执行当前目录下的名为gradlew的脚本文件，运行参数为assembleRelease，注意这个`./`不可省略；而在windows命令行下则需要去掉`./`。
 
 Gradle的`assembleRelease`参数会把所有用到的JavaScript代码都打包到一起，然后内置到APK包中。如果你想调整下这个行为（比如js代码以及静态资源打包的默认文件名或是目录结构等），可以看看`android/app/build.gradle`文件，然后琢磨下应该怎么修改以满足你的需求。 
 
@@ -92,7 +92,7 @@ $ cd android && ./gradlew installRelease
 
 Proguard是一个Java字节码混淆压缩工具，它可以移除掉React Native Java（和它的依赖库中）中没有被使用到的部分，最终有效的减少APK的大小。
 
-_**重要**：启用Proguard之后，你必须再次全面地测试你的应用。Proguard有时候需要为你引入的每个原生库做一些额外的配置。参见`app/proguard-rules.pro`文件。_
+**重要**：启用Proguard之后，你必须再次全面地测试你的应用。Proguard有时候需要为你引入的每个原生库做一些额外的配置。参见`app/proguard-rules.pro`文件。
 
 要启用Proguard，设置`minifyEnabled`选项为`true`：
 
