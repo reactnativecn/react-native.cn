@@ -179,11 +179,11 @@ React Native框架整体是作为node模块安装到项目中的。下一步我�
 
 在你开始把React Native植入到你的应用中之前，首先要决定具体整合的是React Native框架中的哪些部分。而这就是`subspec`要做的工作。在创建`Podfile`文件的时候，需要指定具体安装哪些React Native的依赖库。所指定的每一个库就称为一个`subspec`。
 
-可用的`subspec`都列在[`node_modules/react-native/React.podspec`](https://github.com/facebook/react-native/blob/master/React.podspec)中，基本都是按其功能命名的。一般来说你首先需要添加`Core`，这一`subspec`包含了必须的`AppRegistry`、`StyleSheet`、`View`以及其他的一些React Native核心库。 If you want to add the React Native `Text` library (e.g., for `<Text>` elements), then you will need the `RCTText` `subspec`. If you want the `Image` library (e.g., for `<Image>` elements), then you will need the `RCTImage` `subspec`.
+可用的`subspec`都列在[`node_modules/react-native/React.podspec`](https://github.com/facebook/react-native/blob/master/React.podspec)中，基本都是按其功能命名的。一般来说你首先需要添加`Core`，这一`subspec`包含了必须的`AppRegistry`、`StyleSheet`、`View`以及其他的一些React Native核心库。如果你想使用React Native的`Text`库（即`<Text>`组件），那就需要添加`RCTText`的`subspec`。同理，`Image`需要加入`RCTImage`，等等。
 
 #### Podfile
 
-After you have used Node to install the React and React Native frameworks into the `node_modules` directory, and you have decided on what React Native elements you want to integrate, you are ready to create your `Podfile` so you can install those components for use in your application.
+在React和React Native模块成功安装到`node_modules`目录之后，你就可以开始创建`Podfile`以便选择所需的组件安装到应用中。
 
 创建`Podfile`的最简单的方式就是在iOS原生代码所在的目录中使用CocoaPods的`init`命令：
 
@@ -192,22 +192,22 @@ After you have used Node to install the React and React Native frameworks into t
 $ pod init
 ```
 
-`Podfile` will be created and saved in the *iOS* directory (e.g., `ios/`) of your current project and will contain a boilerplate setup that you will tweak for your integration purposes. In the end, `Podfile` should look something similar to this:
+`Podfile`会创建在执行命令的目录中。你需要调整其内容以满足你的植入需求。调整后的`Podfile`的内容看起来类似下面这样：
 
 </div><div markdown class="md-block objc">
 
 ```
-# The target name is most likely the name of your project.
+# target的名字一般与你的项目名字相同
 target 'NumberTileGame' do
 
-  # Your 'node_modules' directory is probably in the root of your project,
-  # but if not, adjust the `:path` accordingly
+  # 'node_modules'目录一般位于根目录中
+  # 但是如果你的结构不同，那你就要根据实际路径修改下面的`:path`
   pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',
     'RCTText',
     'RCTNetwork',
-    'RCTWebSocket', # needed for debugging
-    # Add any other subspecs you want to use in your project
+    'RCTWebSocket', # 这个模块是用于调试功能的
+    # 在这里继续添加你所需要的模块
   ]
 
 end
@@ -218,21 +218,21 @@ end
 ```
 source 'https://github.com/CocoaPods/Specs.git'
 
-# Required for Swift apps
+# 对于Swift应用来说下面两句是必须的
 platform :ios, '8.0'
 use_frameworks!
 
-# The target name is most likely the name of your project.
+# target的名字一般与你的项目名字相同
 target 'swift-2048' do
 
-  # Your 'node_modules' directory is probably in the root of your project,
-  # but if not, adjust the `:path` accordingly
+  # 'node_modules'目录一般位于根目录中
+  # 但是如果你的结构不同，那你就要根据实际路径修改下面的`:path`
   pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',
     'RCTText',
     'RCTNetwork',
-    'RCTWebSocket', # needed for debugging
-    # Add any other subspecs you want to use in your project
+    'RCTWebSocket', # 这个模块是用于调试功能的
+    # 在这里继续添加你所需要的模块
   ]
 
 end
@@ -263,17 +263,17 @@ Pod installation complete! There are 3 dependencies from the Podfile and 1 total
 
 </div><div markdown class="md-block swift">
 
-> 如果你看到类似"*The `swift-2048 [Debug]` target overrides the `FRAMEWORK_SEARCH_PATHS` build setting defined in `Pods/Target Support Files/Pods-swift-2048/Pods-swift-2048.debug.xcconfig`. This can lead to problems with the CocoaPods installation*"的警告， then make sure the `Framework Search Paths` in `Build Settings` for both `Debug` and `Release` only contain `$(inherited)`.
+> 如果你看到类似"*The `swift-2048 [Debug]` target overrides the `FRAMEWORK_SEARCH_PATHS` build setting defined in `Pods/Target Support Files/Pods-swift-2048/Pods-swift-2048.debug.xcconfig`. This can lead to problems with the CocoaPods installation*"的警告，请查看Xcode的`Build Settings`中的`Framework Search Paths`选项，确保其中的`Debug`和`Release`都只包含`$(inherited)`。
 
 </div><div markdown class="md-block objc swift">
 
 ## 代码集成
 
-现在Now that we have a package foundation, we will actually modify the native application to integrate React Native into the application. For our 2048 app, we will add a "High Score" screen in React Native.
+现在我们已经准备好了所有依赖，可以开始着手修改原生代码来把React Native真正植入到应用中了。在我们的2048示例中，首先尝试添加一个显示有"High Score"（得分排行榜）的React Native页面。
 
 ### React Native组件
 
-The first bit of code we will write is the actual React Native code for the new "High Score" screen that will be integrated into our application.
+我们首先要写的是"High Score"（得分排行榜）的JavaScript端的代码。
 
 #### 创建一个`index.ios.js`文件
 
