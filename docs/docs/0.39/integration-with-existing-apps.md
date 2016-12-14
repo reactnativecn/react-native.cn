@@ -173,23 +173,22 @@ $ npm install
 
 ## React Native框架
 
-React Native框架自身也是作为node模块安装到项目中的。 Framework was installed as Node module in your project [above](#package-dependencies). We will now install a CocoaPods `Podfile` with the components you want to use from the framework itself.
+React Native框架整体是作为node模块安装到项目中的。下一步我们需要在CocoaPods的`Podfile`中指定我们所需要使用的组件。 
 
 ### Subspecs
 
-在你开始把React Native植入到你的应用中之前，首先要决定具体整合的是React Native框架中的哪些部分。而这就是`subspec`要做的工作。在创建`Podfile`文件的时候，就需要指定具体安装哪些React Native的依赖库。所指定的每一个库就都称为一个`subspec`。 into your application, you will want to decide what parts of the React Native Framework you would like to integrate. That is where `subspec`s come in. When you create your `Podfile`, you are going to specify React Native library dependencies that you will want installed so that your application can use those libraries. Each library will become a `subspec` in the `Podfile`.
+在你开始把React Native植入到你的应用中之前，首先要决定具体整合的是React Native框架中的哪些部分。而这就是`subspec`要做的工作。在创建`Podfile`文件的时候，需要指定具体安装哪些React Native的依赖库。所指定的每一个库就称为一个`subspec`。
 
-
-The list of supported `subspec`s are in [`node_modules/react-native/React.podspec`](https://github.com/facebook/react-native/blob/master/React.podspec). They are generally named by functionality. For example, you will generally always want the `Core` `subspec`. That will get you the `AppRegistry`, `StyleSheet`, `View` and other core React Native libraries. If you want to add the React Native `Text` library (e.g., for `<Text>` elements), then you will need the `RCTText` `subspec`. If you want the `Image` library (e.g., for `<Image>` elements), then you will need the `RCTImage` `subspec`.
+可用的`subspec`都列在[`node_modules/react-native/React.podspec`](https://github.com/facebook/react-native/blob/master/React.podspec)中，基本都是按其功能命名的。一般来说你首先需要添加`Core`，这一`subspec`包含了必须的`AppRegistry`、`StyleSheet`、`View`以及其他的一些React Native核心库。 If you want to add the React Native `Text` library (e.g., for `<Text>` elements), then you will need the `RCTText` `subspec`. If you want the `Image` library (e.g., for `<Image>` elements), then you will need the `RCTImage` `subspec`.
 
 #### Podfile
 
 After you have used Node to install the React and React Native frameworks into the `node_modules` directory, and you have decided on what React Native elements you want to integrate, you are ready to create your `Podfile` so you can install those components for use in your application.
 
-The easiest way to create a `Podfile` is by using the CocoaPods `init` command in the native iOS code directory of your project:
+创建`Podfile`的最简单的方式就是在iOS原生代码所在的目录中使用CocoaPods的`init`命令：
 
 ```bash
-## 在iOS原生代码所在的目录中（也就是`.xcodeproj`文件所在的目录）运行：
+## 在iOS原生代码所在的目录中（也就是`.xcodeproj`文件所在的目录）执行：
 $ pod init
 ```
 
@@ -270,7 +269,7 @@ Pod installation complete! There are 3 dependencies from the Podfile and 1 total
 
 ## 代码集成
 
-Now that we have a package foundation, we will actually modify the native application to integrate React Native into the application. For our 2048 app, we will add a "High Score" screen in React Native.
+现在Now that we have a package foundation, we will actually modify the native application to integrate React Native into the application. For our 2048 app, we will add a "High Score" screen in React Native.
 
 ### React Native组件
 
@@ -280,10 +279,10 @@ The first bit of code we will write is the actual React Native code for the new 
 
 首先创建一个空的`index.ios.js`文件。一般来说我们把它放置在项目根目录下。
 
-> `index.ios.js`是React Native应用在iOS上的入口文件。 is the starting point for React Native applications on iOS. And it is always required. It can be a small file that `require`s other file that are part of your React Native component or application, or it can contain all the code that is needed for it. In our case, we will just put everything in `index.ios.js`
+> `index.ios.js`是React Native应用在iOS上的入口文件。而且它是不可或缺的！它可以是个很简单的文件，简单到可以只包含一行`require/import`导入语句。 is the starting point for React Native applications on iOS. And it is always required. It can be a small file that `require`s other file that are part of your React Native component or application, or it can contain all the code that is needed for it. In our case, we will just put everything in `index.ios.js`
 
 ```bash
-# In root of your project
+# 在项目根目录执行以下命令创建文件：
 $ touch index.ios.js
 ```
 
@@ -343,7 +342,7 @@ const styles = StyleSheet.create({
 AppRegistry.registerComponent('RNHighScores', () => RNHighScores);
 ```
 
-> `RNHighScores`是整体js模块（即你所有的js代码）的名称 is the name of your module that will be used when you add a view to React Native from within your iOS application.
+> `RNHighScores`是整体js模块（即你所有的js代码）的名称。你在iOS原生代码中添加React Native视图时会用到这个名称。
 
 ## The Magic: `RCTRootView`
 
@@ -367,13 +366,13 @@ We will, for debugging purposes, log that the event handler was invoked. Then, w
 
 </div><div markdown class="md-block objc">
 
-First `import` the `RCTRootView` library.
+首先导入`RCTRootView`的头文件。
 
 ```
 #import "RCTRootView.h"
 ```
 
-> The `initialProperties` are here for illustration purposes so we have some data for our high score screen. In our React Native component, we will use `this.props` to get access to that data.
+> 这里的`initialProperties` are here for illustration purposes so we have some data for our high score screen. In our React Native component, we will use `this.props` to get access to that data.
 
 ```
 - (IBAction)highScoreButtonPressed:(id)sender {
@@ -489,10 +488,10 @@ $ npm start
 
 ### 运行应用
 
-If you are using Xcode or your favorite editor, build and run your native iOS application as normal. Alternatively, you can run the app from the command line using:
+如果你使用的是Xcode，那么照常编译和运行应用即可。如果你没有使用Xcode（但是你仍然必须安装Xcode），则可以在命令行中使用以下命令来运行应用：
 
 ```bash
-# From the root of your project
+# 在项目的根目录中执行：
 $ react-native run-ios
 ```
 
@@ -532,7 +531,7 @@ This creates a node module for your app and adds the `react-native` npm dependen
 
     "start": "node node_modules/react-native/local-cli/cli.js start"
 
-Copy & paste the following code to `index.android.js` in your root folder — it's a barebones React Native app:
+首先在项目根目录中创建`index.android.js`文件，然后将下面的代码复制粘贴进来：
 
 ```js
 'use strict';
@@ -726,7 +725,7 @@ That's it, your activity is ready to run some JavaScript code.
 
 ## 运行你的应用
 
-To run your app, you need to first start the development server. To do this, simply run the following command in your root folder:
+运行应用首先需要启动开发服务器（Packager）。你只需在项目根目录中执行以下命令即可：
 
     $ npm start
 
@@ -740,7 +739,7 @@ Once you reach your React-powered activity inside the app, it should load the Ja
 
 ## 在Android Studio中打包
 
-You can use Android Studio to create your release builds too! It’s as easy as creating release builds of your previously-existing native Android app. There’s just one additional step, which you’ll have to do before every release build. You need to execute the following to create a React Native bundle, which’ll be included with your native Android app:
+你也可以使用Android Studio来打包！You can use Android Studio to create your release builds too! It’s as easy as creating release builds of your previously-existing native Android app. There’s just one additional step, which you’ll have to do before every release build. You need to execute the following to create a React Native bundle, which’ll be included with your native Android app:
 
     $ react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/com/your-company-name/app-package-name/src/main/assets/index.android.bundle --assets-dest android/com/your-company-name/app-package-name/src/main/res/
 

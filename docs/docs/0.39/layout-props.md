@@ -61,8 +61,8 @@
         <a class="hash-link" href="#flex">#</a></h4>
         <div><p>In React Native <code>flex</code> does not work the same way that it does in CSS.
             <code>flex</code> is a number rather than a string, and it works
-            according to the <code>css-layout</code> library
-            at <a href="https://github.com/facebook/css-layout">https://github.com/facebook/css-layout</a>.</p>
+            according to the <code>yoga</code> library
+            at <a href="https://github.com/facebook/yoga">https://github.com/facebook/yoga</a>.</p>
             <p> When <code>flex</code> is a positive number, it makes the component flexible
                 and it will be sized proportional to its flex value. So a
                 component with <code>flex</code> set to 2 will take twice the space as a
@@ -262,7 +262,7 @@
             <p> If you want to position a child relative to something
                 that is not its parent, just don't use styles for that. Use the
                 component tree.</p>
-            <p> See <a href="https://github.com/facebook/css-layout">https://github.com/facebook/css-layout</a>
+            <p> See <a href="https://github.com/facebook/yoga">https://github.com/facebook/yoga</a>
                 for more details on how <code>position</code> differs between React Native
                 and CSS.</p></div>
     </div>

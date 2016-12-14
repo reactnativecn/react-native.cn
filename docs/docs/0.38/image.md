@@ -178,19 +178,13 @@ dependencies {
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="resizemethod"></a><span class="platform">android</span>resizeMethod
         <span class="propType">enum('auto', 'resize', 'scale')</span> <a class="hash-link"
                                                                          href="#resizemethod">#</a></h4>
-        <div><p>The mechanism that should be used to resize the image when the image's dimensions
-            differ from the image view's dimensions. Defaults to <code>auto</code>.</p>
+        <div><p>当图片实际尺寸和容器样式尺寸不一致时，决定以怎样的策略来调整图片的尺寸。默认值为<code>auto</code>。</p>
             <ul>
-                <li><p><code>auto</code>: Use heuristics to pick between <code>resize</code> and <code>scale</code>.</p>
+                <li><p><code>auto</code>：使用启发式算法来在<code>resize</code>和<code>scale</code>中自动决定。</p>
                 </li>
-                <li><p><code>resize</code>: A software operation which changes the encoded image in memory before it
-                    gets decoded. This should be used instead of <code>scale</code> when the image is much larger
-                    than the view.</p></li>
-                <li><p><code>scale</code>: The image gets drawn downscaled or upscaled. Compared to <code>resize</code>,
-                    <code>scale</code> is
-                    faster (usually hardware accelerated) and produces higher quality images. This
-                    should be used if the image is smaller than the view. It should also be used if the
-                    image is slightly bigger than the view.</p></li>
+                <li><p><code>resize</code>： 在图片解码之前，使用软件算法对其在内存中的数据进行修改。当图片尺寸比容器尺寸大得多时，应该优先使用此选项。</p></li>
+                <li><p><code>scale</code>：对图片进行缩放。和<code>resize</code>相比，
+                    <code>scale</code>速度更快（一般有硬件加速），而且图片质量更优。在图片尺寸比容器尺寸小或者只是稍大一点时，应该优先使用此选项。</p></li>
             </ul>
             <p>关于<code>resize</code>和<code>scale</code>的详细说明请参考<a
                     href="http://frescolib.org/docs/resizing-rotating.html">http://frescolib.org/docs/resizing-rotating.html</a>.

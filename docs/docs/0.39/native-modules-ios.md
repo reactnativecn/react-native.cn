@@ -166,6 +166,10 @@ CalendarManager.findEvents((error, events) => {
 
 如果你想传递一个更接近`Error`类型的对象给Javascript，可以用[`RCTUtils.h`](https://github.com/facebook/react-native/blob/master/React/Base/RCTUtils.h)提供的`RCTMakeError`函数。现在它仅仅是发送了一个和Error结构一样的dictionary给Javascript，但我们考虑在将来版本里让它产生一个真正的`Error`对象。
 
+> **注意**
+>
+> 如果你传递了回调函数，那么在原生端就必须执行它（如果传递了两个，比如onSuccess和onFail，那么执行其中一个即可），否则会导致内存泄漏。
+
 ## Promises
 
 __译注__：这一部分涉及到较新的js语法和特性，不熟悉的读者建议先阅读ES6的相关书籍和文档。
