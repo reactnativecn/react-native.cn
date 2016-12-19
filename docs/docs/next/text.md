@@ -32,7 +32,7 @@ var styles = StyleSheet.create({
 
 <div class="props">
   <div class="prop">
-    <h4 class="propTitle"><a class="anchor" name="adjustsfontsizetofit"></a><span class="platform">ios</span>adjustsFontSizeToFit  <span class="propType">bool</span> <a class="hash-link" href="#adjustsfontsizetofit">#</a></h4>
+    <h4 class="propTitle"><a class="anchor" name="adjustsfontsizetofit"></a>adjustsFontSizeToFit  <span class="propType">bool</span> <a class="hash-link" href="#adjustsfontsizetofit">#</a></h4>
     <div>
       <p>指定字体是否随着给定样式的限制而自动缩放。</p>
     </div>

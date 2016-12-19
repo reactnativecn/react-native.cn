@@ -279,7 +279,7 @@ Pod installation complete! There are 3 dependencies from the Podfile and 1 total
 
 首先创建一个空的`index.ios.js`文件。一般来说我们把它放置在项目根目录下。
 
-> `index.ios.js`是React Native应用在iOS上的入口文件。而且它是不可或缺的！它可以是个很简单的文件，简单到可以只包含一行`require/import`导入语句。 is the starting point for React Native applications on iOS. And it is always required. It can be a small file that `require`s other file that are part of your React Native component or application, or it can contain all the code that is needed for it. In our case, we will just put everything in `index.ios.js`
+> `index.ios.js`是React Native应用在iOS上的入口文件。而且它是不可或缺的！它可以是个很简单的文件，简单到可以只包含一行`require/import`导入语句。本教程中为了简单示范，把全部的代码都写到了`index.ios.js`里（当然实际开发中我们并不推荐这样做）。
 
 ```bash
 # 在项目根目录执行以下命令创建文件：
@@ -311,7 +311,7 @@ class RNHighScores extends React.Component {
         <Text style={styles.highScoresTitle}>
           2048 High Scores!
         </Text>
-        <Text style={styles.scores}>
+        <Text style={styles.scores}>    
           {contents}
         </Text>
       </View>

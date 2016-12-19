@@ -153,15 +153,10 @@ dependencies {
 			<div class="prop">
 			    <h6 class="propTitle"><span class="platform">android</span>overlayColor <span
 			            class="propType">ReactPropTypes.string</span>
-			        <div><p>When the image has rounded corners, specifying an overlayColor will
-			            cause the remaining space in the corners to be filled with a solid color.
-			            This is useful in cases which are not supported by the Android
-			            implementation of rounded corners:
-			            - Certain resize modes, such as 'contain'
+			        <div><p>当图片有圆角的时候，指定一个颜色用于填充圆角处的空白。虽然一般情况下圆角处是透明的，但在某些情况下，Android并不支持圆角透明，比如：
+			            - 某些resize模式比如'contain'
 			            - GIF动画</p>
-			            <p>A typical way to use this prop is with images displayed on a solid
-			                background and setting the <code>overlayColor</code> to the same color
-			                as the background.</p>
+			            <p>常见的用法就是在不能圆角透明时，设置<code>overlayColor</code>和背景色一致。</p>
 			            <p>详细说明可参考
 			                <a href="http://frescolib.org/docs/rounded-corners-and-circles.html">http://frescolib.org/docs/rounded-corners-and-circles.html</a>
 			            </p></div>
@@ -220,17 +215,13 @@ dependencies {
                 class="hash-link" href="#defaultsource">#</a></h4>
         <div><p>在读取图片时默认显示的加载提示图片</p>
             <ul>
-                <li><code>uri</code> - a string representing the resource identifier for the image, which
-                    should be either a local file path or the name of a static image resource
-                    (which should be wrapped in the <code>require('./path/to/image.png')</code> function).
+                <li><code>uri</code> - 是一个表示图片的资源标识的字符串，它可以是一个http地址或是一个本地文件路径（使用<code>require(相对路径)</code>来引用）。
                 </li>
-                <li><code>width</code>, <code>height</code> - can be specified if known at build time, in which case
-                    these will be used to set the default <code>&lt;Image/&gt;</code> component dimensions.
+                <li><code>width</code>, <code>height</code> - 如果你知道图片的尺寸，那么可以在这里指定。这一尺寸会被用作<code>&lt;Image/&gt;</code>组件的默认尺寸。
                 </li>
-                <li><code>scale</code> - used to indicate the scale factor of the image. Defaults to 1.0 if
-                    unspecified, meaning that one image pixel equates to one display point / DIP.
+                <li><code>scale</code> - 图片的缩放系数。默认是1.0，意味着每一个图片像素都对应一个设备独立像素（DIP）。
                 </li>
-                <li><code>number</code> - Opaque type returned by something like <code>require('./image.jpg')</code>.</li>
+                <li><code>number</code> - 本地图片引用语法<code>require('./image.jpg')</code>所返回的内部资源id。</li>
             </ul>
         </div>
     </div>
