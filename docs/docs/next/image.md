@@ -154,8 +154,11 @@ dependencies {
 			    <h6 class="propTitle"><span class="platform">android</span>overlayColor <span
 			            class="propType">ReactPropTypes.string</span>
 			        <div><p>当图片有圆角的时候，指定一个颜色用于填充圆角处的空白。虽然一般情况下圆角处是透明的，但在某些情况下，Android并不支持圆角透明，比如：
-			            - 某些resize模式比如'contain'
-			            - GIF动画</p>
+                        <ul>
+			            <li>某些resize模式比如<code>'contain'</code></li>
+			            <li>GIF动画</li>
+                        </p>
+                        </ul>
 			            <p>常见的用法就是在不能圆角透明时，设置<code>overlayColor</code>和背景色一致。</p>
 			            <p>详细说明可参考
 			                <a href="http://frescolib.org/docs/rounded-corners-and-circles.html">http://frescolib.org/docs/rounded-corners-and-circles.html</a>

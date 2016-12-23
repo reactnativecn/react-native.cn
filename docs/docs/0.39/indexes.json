@@ -159,7 +159,7 @@
                     "mdlink": "native-component-ios"
                 },
                 {
-                    "subject": "使用链接库",
+                    "subject": "链接原生库",
                     "mdlink": "linking-libraries-ios"
                 },
                 {

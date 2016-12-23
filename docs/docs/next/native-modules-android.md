@@ -206,6 +206,8 @@ __译注__：这一部分涉及到较新的js语法和特性，不熟悉的读�
 我们把上面的代码用promise来代替回调进行重构：
 
 ```java
+import com.facebook.react.bridge.Promise;
+
 public class UIManagerModule extends ReactContextBaseJavaModule {
 
 ...
