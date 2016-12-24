@@ -24,7 +24,7 @@ UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationE
 				<li><code>update</code>, 配置被更新的视图的动画。(参阅 <code>Anim</code> 类型)</li>
 			</ul>
 			<p>@param onAnimationDidEnd 当动画结束的时候被调用。只在iOS设备上支持。</p>
-			<p>@param onError 当动画残生错误的时候被调用。只在iOS设备上支持。</p>
+			<p>@param onError 当动画产生错误的时候被调用。只在iOS设备上支持。</p>
 		</div>
 	</div>
 	<div class="prop">
