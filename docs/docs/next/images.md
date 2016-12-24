@@ -68,8 +68,7 @@ var icon = this.props.active ? require('./my-icon-active.png') : require('./my-i
 
 ## 网络图片
 
-很多要在App中显示的图片并不能在编译的时候获得，又或者有时候需要动态载入来减少打包后的二进制文件的大小。这些时候，与静态资源不同的是，`你需要手动指定图片的尺寸`。
-
+很多要在App中显示的图片并不能在编译的时候获得，又或者有时候需要动态载入来减少打包后的二进制文件的大小。这些时候，与静态资源不同的是，`你需要手动指定图片的尺寸`。需要注意的是，在你的IOS 9以上的设备中因为App Transport Security的存在，它会拒绝所有不通过HTTPS发送的HTTP请求，导致图片无法显示。所以访问非https的地址需要在Info.plist进行ATS设置，配置方法：打开Info.plist文件，在`App Transport Security Settings`下新建条目`Allow Arbitrary Loads`，属性为Boolean,值为YES.
 ```javascript
 // 正确
 <Image source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
