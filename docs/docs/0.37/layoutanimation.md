@@ -3,6 +3,13 @@
 
 一个常用的调用此API的办法是调用`LayoutAnimation.configureNext`，然后调用`setState`。
 
+
+注意：目前如果要在**Android**上使用LayoutAnimation，那么还需要在`UIManager`中明确启用：
+```javascript
+UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+```
+
+
 ### 方法
 
 <div class="props">
@@ -17,7 +24,7 @@
 				<li><code>update</code>, 配置被更新的视图的动画。(参阅 <code>Anim</code> 类型)</li>
 			</ul>
 			<p>@param onAnimationDidEnd 当动画结束的时候被调用。只在iOS设备上支持。</p>
-			<p>@param onError 当动画残生错误的时候被调用。只在iOS设备上支持。</p>
+			<p>@param onError 当动画产生错误的时候被调用。只在iOS设备上支持。</p>
 		</div>
 	</div>
 	<div class="prop">
