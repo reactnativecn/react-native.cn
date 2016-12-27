@@ -1,14 +1,11 @@
 <div class="props">
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="alignitems"></a>alignItems <span class="propType">enum('flex-start', 'flex-end', 'center', 'stretch')</span>
         <a class="hash-link" href="#alignitems">#</a></h4>
-        <div><p><code>alignItems</code>决定了子元素在次轴方向的排列方式。例如若子元素本来是沿着竖直方向排列的（即主轴竖直，次轴水平），则<code>alignItems</code>决定了它们在水平方向的排列方式。此样式和CSS中的<code>align-items</code>表现一致，默认值为stretch。访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items">https://developer.mozilla.org/en-US/docs/Web/CSS/align-items</a>来进一步了解。</p></div>
+        <div><p><code>alignItems</code>决定了子元素在次轴方向的排列方式（此样式设置在父元素上）。例如若子元素本来是沿着竖直方向排列的（即主轴竖直，次轴水平），则<code>alignItems</code>决定了它们在水平方向的排列方式。此样式和CSS中的<code>align-items</code>表现一致，默认值为stretch。访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items">https://developer.mozilla.org/en-US/docs/Web/CSS/align-items</a>来进一步了解。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="alignself"></a>alignSelf <span class="propType">enum('auto', 'flex-start', 'flex-end', 'center', 'stretch')</span>
         <a class="hash-link" href="#alignself">#</a></h4>
-        <div><p><code>alignSelf</code> controls how a child aligns in the cross direction,
-            overriding the <code>alignItems</code> of the parent. It works like <code>align-self</code>
-            in CSS (default: auto)。
-            访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-self">https://developer.mozilla.org/en-US/docs/Web/CSS/align-self</a>来进一步了解。</p></div>
+        <div><p><code>alignSelf</code>决定了元素在父元素的次轴方向的排列方式（此样式设置在子元素上），其值会覆盖父元素的<code>alignItems</code>的值。其表现和CSS上的<code>align-self</code>一直（默认值为auto）。访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-self">https://developer.mozilla.org/en-US/docs/Web/CSS/align-self</a>来进一步了解。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="borderbottomwidth"></a>borderBottomWidth <span
             class="propType">number</span> <a class="hash-link" href="#borderbottomwidth">#</a>
@@ -34,10 +31,8 @@
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="bottom"></a>bottom <span
             class="propType">number</span> <a class="hash-link" href="#bottom">#</a></h4>
-        <div><p><code>bottom</code> is the number of logical pixels to offset the bottom edge of
-            this component.</p>
-            <p> It works similarly to <code>bottom</code> in CSS, but in React Native you must
-                use logical pixel units, rather than percents, ems, or any of that.</p>
+        <div><p><code>bottom</code>值是指将本组件定位到距离底部多少个逻辑像素（底部的定义取决于<code>position</code>属性）。</p>
+            <p>它的表现和CSS上的<code>bottom</code>类似，但注意在React Native上只能使用逻辑像素值（数字单位），而不能使用百分比、em或是任何其他单位。</p>
             <p>访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/bottom">https://developer.mozilla.org/en-US/docs/Web/CSS/bottom</a>来进一步了解<code>bottom</code>是如何影响布局的。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="flex"></a>flex <span class="propType">number</span>
@@ -94,11 +89,9 @@
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="left"></a>left <span class="propType">number</span>
         <a class="hash-link" href="#left">#</a></h4>
-        <div><p><code>left</code> is the number of logical pixels to offset the left edge of
-            this component.</p>
-            <p> It works similarly to <code>left</code> in CSS, but in React Native you must
-                use logical pixel units, rather than percents, ems, or any of that.</p>
-            <p>访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/left">https://developer.mozilla.org/en-US/docs/Web/CSS/left</a>来进一步了解<code>left</code>是如何影响布局的。 </p></div>
+        <div><p><code>left</code>值是指将本组件定位到距离左边多少个逻辑像素（左边的定义取决于<code>position</code>属性）。</p>
+            <p>它的表现和CSS上的<code>left</code>类似，但注意在React Native上只能使用逻辑像素值（数字单位），而不能使用百分比、em或是任何其他单位。</p>
+            <p>访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/left">https://developer.mozilla.org/en-US/docs/Web/CSS/left</a>来进一步了解<code>left</code>是如何影响布局的。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="margin"></a>margin <span
             class="propType">number</span> <a class="hash-link" href="#margin">#</a></h4>
@@ -210,22 +203,18 @@
             <p> If you want to position a child relative to something
                 that is not its parent, just don't use styles for that. Use the
                 component tree.</p>
-            <p>访问<a href="https://github.com/facebook/yoga">https://facebook.github.io/yoga/docs/absolute-position/</a>来进一步了解<code>position</code>在React Native和CSS中的差异。</p></div>
+            <p>访问<a href="https://facebook.github.io/yoga/docs/absolute-position/">https://facebook.github.io/yoga/docs/absolute-position/</a>来进一步了解<code>position</code>在React Native和CSS中的差异。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="right"></a>right <span
             class="propType">number</span> <a class="hash-link" href="#right">#</a></h4>
-        <div><p><code>right</code> is the number of logical pixels to offset the right edge of
-            this component.</p>
-            <p> It works similarly to <code>right</code> in CSS, but in React Native you must
-                use logical pixel units, rather than percents, ems, or any of that.</p>
+        <div><p><code>right</code>值是指将本组件定位到距离右边多少个逻辑像素（右边的定义取决于<code>position</code>属性）。</p>
+            <p>它的表现和CSS上的<code>right</code>类似，但注意在React Native上只能使用逻辑像素值（数字单位），而不能使用百分比、em或是任何其他单位。</p>
             <p>访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/right">https://developer.mozilla.org/en-US/docs/Web/CSS/right</a>来进一步了解<code>right</code>是如何影响布局的。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="top"></a>top <span class="propType">number</span> <a
             class="hash-link" href="#top">#</a></h4>
-        <div><p><code>top</code> is the number of logical pixels to offset the top edge of
-            this component.</p>
-            <p> It works similarly to <code>top</code> in CSS, but in React Native you must
-                use logical pixel units, rather than percents, ems, or any of that.</p>
+        <div><p><code>top</code>值是指将本组件定位到距离顶部多少个逻辑像素（顶部的定义取决于<code>position</code>属性）。</p>
+            <p>它的表现和CSS上的<code>top</code>类似，但注意在React Native上只能使用逻辑像素值（数字单位），而不能使用百分比、em或是任何其他单位。</p>
             <p>访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/top">https://developer.mozilla.org/en-US/docs/Web/CSS/top</a>来进一步了解<code>top</code>是如何影响布局的。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="width"></a>width <span
