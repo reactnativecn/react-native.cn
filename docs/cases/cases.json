@@ -1,5 +1,12 @@
 [
 	{
+		"name": "在球场",
+		"desc": "找到你的最佳球场拍档",
+		"ios": "https://www.zaiqiuchang.com/",
+		"android": "https://www.zaiqiuchang.com/",
+		"icon": "http://zqc.oss-cn-shanghai.aliyuncs.com/icon/zqc-icon-400.png"
+	},
+	{
 		"name": "百贷纵横",
 		"desc": "移动在线信贷服务平台",
 		"ios": "https://itunes.apple.com/us/app/bai-dai-zong-heng/id865391997?l=zh&ls=1&mt=8",
