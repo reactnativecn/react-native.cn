@@ -107,8 +107,8 @@ export default class Blog extends Component {
     // const blogList = blogDetailedList.concat(this.state.appendList);
     return (
       <Container type="blog">
-        {this.renderAd()}
-        <div className="pro-hint">以上为赞助商推广内容，非本站提供</div>
+        {/*{this.renderAd()}*/}
+        {/*<div className="pro-hint">以上为赞助商推广内容，非本站提供</div>*/}
         {
           blogDetailedList.map(topic => {
             const post = topic.posts[0];
