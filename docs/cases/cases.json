@@ -21,13 +21,6 @@
 		"icon": "http://pp.myapp.com/ma_icon/0/icon_42319279_1476151111/256"
 	},
 	{
-		"name": "手赚助手",
-		"desc": "手机赚钱app",
-		"ios": "",
-		"android": "http://www.shouzhuanzhushou.com.cn",
-		"icon": "http://www.shouzhuanzhushou.com.cn:8081/res/img/shouzhuan-175.png"
-	},
-	{
 		"name": "鱼多多",
 		"desc": "钓鱼",
 		"ios": "https://itunes.apple.com/us/app/yu-duo-duo-guo-nei-du-jia/id1025292262?mt=8",
@@ -134,13 +127,6 @@
 		"icon": "http://a3.mzstatic.com/us/r30/Purple69/v4/37/25/86/3725864d-f577-8a7a-4d8d-e5657bcc062b/icon175x175.png"
 	},
 	{
-		"name": "干货分享",
-		"desc": "程序员的神器,你懂得",
-		"github": "https://github.com/zhongjie-chen/rn_rank",
-		"android": "http://apk.gfan.com/Product/App1099977.html",
-		"icon": "https://github.com/zhongjie-chen/rn_rank/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
-	},
-	{
 		"name": "电猴",
 		"desc": "电商人的求职招聘平台",
 		"ios": "https://itunes.apple.com/us/app/dian-hou/id982413222?l=zh&ls=1&mt=8",
@@ -153,19 +139,22 @@
 		"ios": "",
 		"android": "http://www.wandoujia.com/apps/com.reading",
 		"icon": "http://7xr0xq.com1.z0.glb.clouddn.com/Reading_Logo.png"
-	},{
+	},
+  {
 		"name": "QQ空间",
 		"desc": "分享生活，留住感动",
 		"ios": "https://itunes.apple.com/cn/app/qq-kong-jian-ku-xuan-zhi-bo/id364183992?mt=8",
 		"android": "http://android.myapp.com/myapp/detail.htm?apkName=com.qzone",
 		"icon": "http://pp.myapp.com/ma_icon/0/icon_9959_1460036593/96"
-	},{
+	},
+  {
 		"name": "蜂房",
 		"desc": "名校老司机技能经验共享",
 		"ios": "https://itunes.apple.com/us/app/feng-fang/id1088841582?ls=1&mt=8",
 		"android": "http://a.app.qq.com/o/simple.jsp?pkgname=com.taskbee",
 		"icon": "http://7xn0s3.com1.z0.glb.clouddn.com/playstore-icon.png"
-	},{
+	},
+  {
 		"name": "大麦湾",
 		"desc": "电商平台,海外直购神器",
 		"ios": "https://itunes.apple.com/app/apple-store/id1041859777?pt=117780230&ct=website&mt=8",
@@ -186,11 +175,33 @@
 		"android": "http://zhushou.360.cn/detail/index/soft_id/3438248?recrefer=SE_D_16%E7%9B%B4%E6%92%AD",
 		"icon": "http://p17.qhimg.com/t012e5fe09adb1d0ffa.png"
 	},
-	{
+  {
+		"name": "水稻汽车",
+		"desc": "平价放心的超级4S店",
+		"ios": "http://a.app.qq.com/o/simple.jsp?pkgname=com.shuidao.daotiantoc",
+		"android": "http://a.app.qq.com/o/simple.jsp?pkgname=com.shuidao.daotiantoc",
+		"icon": "http://7xotda.com1.z0.glb.clouddn.com/show_img.png"
+	},
+  {
+		"name": "宝点理财",
+		"desc": "互联网金融理财产品",
+		"ios": "https://itunes.apple.com/cn/app/id1017177170?mt=8",
+		"android": "http://www.bao.cn/download/android/baodian.apk",
+		"icon": "http://is5.mzstatic.com/image/thumb/Purple71/v4/be/7e/a9/be7ea9b1-7384-a8e0-7476-5790505c09de/source/175x175bb.jpg"
+	},
+  {
+		"name": "爱米粒",
+		"desc": "整形美容社区＋直播",
+		"ios": "https://itunes.apple.com/us/app/ai-mi-li/id1178550356?ls=1&mt=8",
+		"android": "http://www.haokan.com/",
+		"icon": "http://www.haokan.com/img/icon.png"
+	},
+  {
 		"name": "在球场",
 		"desc": "找到你的最佳球场拍档",
 		"ios": "https://www.zaiqiuchang.com/",
 		"android": "https://www.zaiqiuchang.com/",
 		"icon": "https://zqc.cdn.zaiqiuchang.com/icon/zqc-icon.png?x-oss-process=style/middle"
 	}
+	
 ]

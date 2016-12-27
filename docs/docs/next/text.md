@@ -32,9 +32,21 @@ var styles = StyleSheet.create({
 
 <div class="props">
   <div class="prop">
+    <h4 class="propTitle"><a class="anchor" name="adjustsfontsizetofit"></a>adjustsFontSizeToFit  <span class="propType">bool</span> <a class="hash-link" href="#adjustsfontsizetofit">#</a></h4>
+    <div>
+      <p>指定字体是否随着给定样式的限制而自动缩放。</p>
+    </div>
+  </div>
+  <div class="prop">
     <h4 class="propTitle"><a class="anchor" name="allowfontscaling"></a><span class="platform">ios</span>allowFontScaling <span class="propType">bool</span> <a class="hash-link" href="#allowfontscaling">#</a></h4>
     <div>
       <p>控制字体是否要根据iOS的“文本大小”辅助选项来进行缩放。</p>
+    </div>
+  </div>
+  <div class="prop">
+    <h4 class="propTitle"><a class="anchor" name="minimumfontscale"></a><span class="platform">ios</span>minimumFontScale <span class="propType">bool</span> <a class="hash-link" href="#minimumfontscale">#</a></h4>
+    <div>
+      <p>当adjustsFontSizeToFit开启时，指定最小的缩放比（即不能低于这个值）。可设定的值为0.01 - 1.0</p>
     </div>
   </div>
   <div class="prop">
@@ -51,66 +63,73 @@ var styles = StyleSheet.create({
     </div>
   </div>
   <div class="prop">
+    <h4 class="propTitle"><a class="anchor" name="onlongpress"></a>onLongPress <span class="propType">function</span> <a class="hash-link" href="#onlongpress">#</a></h4>
+    <div>
+      <p>当文本被长按以后调用此回调函数。</p>
+    </div>
+  </div>
+  <div class="prop">
     <h4 class="propTitle"><a class="anchor" name="onpress"></a>onPress <span class="propType">function</span> <a class="hash-link" href="#onpress">#</a></h4>
     <div>
       <p>当文本被点击以后调用此回调函数。</p>
     </div>
   </div>
   <div class="prop">
-    <h4 class="propTitle"><a class="anchor" name="style"></a>style <span class="propType">style</span> <a class="hash-link" href="#style">#</a></h4>
+    <h4 class="propTitle"><a class="anchor" name="selectable"></a>selectable <span class="propType">function</span> <a class="hash-link" href="#selectable">#</a></h4>
+    <div>
+      <p>决定用户是否可以长按选择文本，以便复制和粘贴。</p>
+    </div>
+  </div><div class="prop"><h4 class="propTitle"><a class="anchor" name="style"></a>style <span class="propType">style</span> <a
+        class="hash-link" href="#style">#</a></h4>
     <div class="compactProps">
-    <div class="prop">
-      <h6 class="propTitle"><a href="view.html#style">View#style...</a></h6>
+        <div class="prop"><h6 class="propTitle"><a href="view.html#style">View#style...</a></h6></div>
+        <div class="prop"><h6 class="propTitle">color <span class="propType"><a href="colors.html">color</a></span>
+        </h6></div>
+        <div class="prop"><h6 class="propTitle">fontFamily <span class="propType">string</span></h6></div>
+        <div class="prop"><h6 class="propTitle">fontSize <span class="propType">number</span></h6></div>
+        <div class="prop"><h6 class="propTitle">fontStyle <span class="propType">enum('normal', 'italic')</span></h6>
+        </div>
+        <div class="prop">
+            <h6 class="propTitle">fontWeight <span class="propType">enum('normal', 'bold', '100', '200', '300', '400', '500', '600', '700', '800', '900')</span>
+                <div><p>指定字体的粗细。大多数字体都支持'normal'和'bold'值。并非所有字体都支持所有的数字值。如果某个值不支持，则会自动选择最接近的值。</p></div>
+            </h6>
+        </div>
+        <div class="prop"><h6 class="propTitle">lineHeight <span class="propType">number</span></h6></div>
+        <div class="prop">
+            <h6 class="propTitle">textAlign <span
+                    class="propType">enum('auto', 'left', 'right', 'center', 'justify')</span>
+                <div><p>指定文本的对齐方式。其中'justify'值仅iOS支持，在Android上会变为<code>left</code></p></div>
+            </h6>
+        </div>
+        <div class="prop"><h6 class="propTitle">textDecorationLine <span class="propType">enum('none', 'underline', 'line-through', 'underline line-through')</span>
+        </h6></div>
+        <div class="prop"><h6 class="propTitle">textShadowColor <span class="propType"><a
+                href="colors.html">color</a></span></h6></div>
+        <div class="prop"><h6 class="propTitle">textShadowOffset <span
+                class="propType">{width: number, height: number}</span></h6></div>
+        <div class="prop"><h6 class="propTitle">textShadowRadius <span class="propType">number</span></h6></div>
+        <div class="prop">
+            <h6 class="propTitle"><span class="platform">android</span>includeFontPadding <span
+                    class="propType">bool</span>
+                <div><p>Android在默认情况下会为文字额外保留一些padding，以便留出空间摆放上标或是下标的文字。对于某些字体来说，这些额外的padding可能会导致文字难以垂直居中。如果你把<code>textAlignVertical</code>设置为<code>center</code>之后，文字看起来依然不在正中间，那么可以尝试将本属性设置为<code>false</code>.
+                </p></div>
+            </h6>
+        </div>
+        <div class="prop"><h6 class="propTitle"><span class="platform">android</span>textAlignVertical <span
+                class="propType">enum('auto', 'top', 'bottom', 'center')</span></h6></div>
+        <div class="prop"><h6 class="propTitle"><span class="platform">ios</span>fontVariant <span
+                class="propType"><span>[enum('small-caps', 'oldstyle-nums', 'lining-nums', 'tabular-nums', 'proportional-nums')]</span></span>
+        </h6></div>
+        <div class="prop"><h6 class="propTitle"><span class="platform">ios</span>letterSpacing <span class="propType">number</span>
+        </h6></div>
+        <div class="prop"><h6 class="propTitle"><span class="platform">ios</span>textDecorationColor <span
+                class="propType"><a href="colors.html">color</a></span></h6></div>
+        <div class="prop"><h6 class="propTitle"><span class="platform">ios</span>textDecorationStyle <span
+                class="propType">enum('solid', 'double', 'dotted', 'dashed')</span></h6></div>
+        <div class="prop"><h6 class="propTitle"><span class="platform">ios</span>writingDirection <span
+                class="propType">enum('auto', 'ltr', 'rtl')</span></h6></div>
     </div>
-    <div class="prop">
-      <h6 class="propTitle">color <span class="propType">string</span></h6>
-    </div>
-    <div class="prop">
-      <h6 class="propTitle">fontFamily <span class="propType">string</span></h6>
-    </div>
-    <div class="prop">
-      <h6 class="propTitle">fontSize <span class="propType">number</span></h6>
-    </div>
-    <div class="prop">
-      <h6 class="propTitle">fontStyle <span class="propType">enum('normal', 'italic')</span></h6>
-    </div>
-    <div class="prop">
-      <h6 class="propTitle">fontWeight <span class="propType">enum("normal", 'bold', '100', '200', '300', '400', '500', '600', '700', '800', '900')</span></h6>
-	    <div>
-	      <p>指定字体的粗细。大多数字体都支持'normal'和'bold'值。并非所有字体都支持所有的数字值。如果某个值不支持，则会自动选择最接近的值。</p>
-	    </div>
-    </div>
-    <div class="prop">
-      <h6 class="propTitle">letterSpacing <span class="propType">number</span></h6>
-    </div>
-    <div class="prop">
-      <h6 class="propTitle">lineHeight <span class="propType">number</span></h6>
-    </div>
-    <div class="prop">
-      <h6 class="propTitle">textAlign <span class="propType">enum("auto", 'left', 'right', 'center', 'justify')</span></h6>
-	    <div>
-	      <p>指定文本的对齐方式。其中'justify'值仅iOS支持。</p>
-	    </div>
-    </div>
-    <div class="prop">
-      <h6 class="propTitle"><span class="platform">android</span>textAlignVertical <span class="propType">enum('auto', 'top', 'bottom', 'center')</span></h6>
-    </div>
-    <div class="prop">
-      <h6 class="propTitle"><span class="platform">ios</span>letterSpacing <span class="propType">number</span></h6>
-    </div>
-    <div class="prop">
-      <h6 class="propTitle"><span class="platform">ios</span>textDecorationColor <span class="propType">string</span></h6>
-    </div>
-    <div class="prop">
-      <h6 class="propTitle">textDecorationLine <span class="propType">enum("none", 'underline', 'line-through', 'underline line-through')</span></h6>
-    </div>
-    <div class="prop">
-      <h6 class="propTitle"><span class="platform">ios</span>textDecorationStyle <span class="propType">enum("solid", 'double', 'dotted', 'dashed')</span></h6>
-    </div>
-    <div class="prop">
-      <h6 class="propTitle"><span class="platform">ios</span>writingDirection <span class="propType">enum("auto", 'ltr', 'rtl')</span></h6></div>
-    </div>
-  </div>
+</div>
   <div class="prop">
     <h4 class="propTitle"><a class="anchor" name="testid"></a>testID <span class="propType">string</span> <a class="hash-link" href="#testid">#</a></h4>
     <div>
