@@ -29,6 +29,13 @@ try {
                 <li><code>date</code> (<code>Date</code>对象或毫秒时间戳) - 默认显示的日期</li>
                 <li><code>minDate</code> (<code>Date</code>对象或毫秒时间戳) - 可选的最小日期</li>
                 <li><code>maxDate</code> (<code>Date</code>对象或毫秒时间戳) - 可选的最大日期</li>
+                <li><code>mode</code> (<code>(enum('calendar', 'spinner', 'default')</code>) -  设置选择器的模式：
+                    <ul>
+                    <li><code>calendar</code>: Show a date picker in calendar mode.</li>
+                    <li><code>spinner</code>: Show a date picker in spinner mode.</li>
+                    <li><code>default</code>: Show a default native date picker(spinner/calendar) based on android versions.</li>
+                    </ul>
+                </li>
             </p>
             <p>在用户选好日期后返回一个Promise，回调参数为一个对象，其中包含有<code>action</code>, <code>year</code>,
                 <code>month</code> (0-11),

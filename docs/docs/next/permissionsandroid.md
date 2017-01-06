@@ -17,7 +17,7 @@ async function requestCameraPermission() {
                    '然后你就可以拍出酷炫的皂片啦。'
       }
     )
-    if (granted) {
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
       console.log("现在你获得摄像头权限了")
     } else {
       console.log("用户并不屌你")
@@ -53,4 +53,11 @@ async function requestCameraPermission() {
             <p>其中rationale参数是可选的，其结构为包含<code>title</code>和<code>message</code>)的对象。此方法会和系统协商，是弹出系统内置的权限申请对话框，还是显示rationale中的信息以向用户进行解释。具体原理请参阅android官方文档
                 (<a href="https://developer.android.com/training/permissions/requesting.html#explain">https://developer.android.com/training/permissions/requesting.html#explain</a>)。</p></div>
     </div>
+    <div class="prop">
+	    <h4 class="methodTitle"><a class="anchor" name="requestmultiple"></a>requestMultiple<span class="methodType">(permissions)</span> 
+	    <a class="hash-link" href="#requestmultiple">#</a></h4>
+	    <div><p>Prompts the user to enable multiple permissions in the same dialog and
+returns an object with the permissions as keys and strings as values
+indicating whether the user allowed or denied the request</p></div>
+	</div>
 </div>
