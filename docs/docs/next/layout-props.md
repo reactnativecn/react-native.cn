@@ -38,10 +38,15 @@
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="flex"></a>flex <span class="propType">number</span>
         <a class="hash-link" href="#flex">#</a></h4>
         <div><p>在React Native中<code>flex</code>的表现和CSS有些区别。
+<<<<<<< Updated upstream
             <code>flex</code> is a number rather than a string, and it works
             according to the <code>yoga</code> library
             at <a href="https://github.com/facebook/yoga">https://github.com/facebook/yoga</a>.</p>
             <p> When <code>flex</code> is a positive number, it makes the component flexible
+=======
+            <code>flex</code>在RN中只能为整数值，其具体表现请参考<code>yoga引擎库</code>的文档，其网址是<a href="https://github.com/facebook/yoga">https://github.com/facebook/yoga</a></p>
+            <p>当<code>flex</code>取正整数值时， is a positive number, it makes the component flexible
+>>>>>>> Stashed changes
                 and it will be sized proportional to its flex value. So a
                 component with <code>flex</code> set to 2 will take twice the space as a
                 component with <code>flex</code> set to 1.</p>
@@ -75,7 +80,7 @@
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="height"></a>height <span
             class="propType">number</span> <a class="hash-link" href="#height">#</a></h4>
-        <div><p><code>height</code> sets the height of this component.</p>
+        <div><p><code>height</code>用于设置组件的高度。</p>
             <p> It works similarly to <code>height</code> in CSS, but in React Native you
                 must use logical pixel units, rather than percents, ems, or any of that.访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/height">https://developer.mozilla.org/en-US/docs/Web/CSS/height</a>来进一步了解。</p></div>
     </div>
@@ -219,7 +224,7 @@
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="width"></a>width <span
             class="propType">number</span> <a class="hash-link" href="#width">#</a></h4>
-        <div><p><code>width</code> sets the width of this component.</p>
+        <div><p><code>width</code>用于设置组件的宽度。</p>
             <p> It works similarly to <code>width</code> in CSS, but in React Native you
                 must use logical pixel units, rather than percents, ems, or any of that.访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/width">https://developer.mozilla.org/en-US/docs/Web/CSS/width</a>来进一步了解。</p></div>
     </div>

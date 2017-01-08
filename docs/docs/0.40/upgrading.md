@@ -2,6 +2,7 @@
 
 __译注__：[更新日志点这里查看](http://bbs.reactnative.cn/category/1)
 
+<<<<<<< Updated upstream
 
 ## 基于Git的自动合并更新
 
@@ -86,6 +87,8 @@ $ react-native-git-upgrade X.Y.Z
 
 如果上面的自动升级流程有问题，那么你可以尝试一下下面的老的升级方案。
 
+=======
+>>>>>>> Stashed changes
 ## 1. 更新`react-native`的node依赖包
 
 请去下面的网址查看`react-native`的npm包的最新版本，或使用`npm info react-native`命令查看。

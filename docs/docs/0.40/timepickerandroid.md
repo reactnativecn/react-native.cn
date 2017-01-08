@@ -8,7 +8,11 @@ try {
     minute: 0,
     is24Hour: false, // 会显示为'2 PM'
   });
+<<<<<<< Updated upstream
   if (action !== TimePickerAndroid.dismissedAction) {
+=======
+  if (action !== DatePickerAndroid.dismissedAction) {
+>>>>>>> Stashed changes
     // 这里开始可以处理用户选好的时分两个参数：hour (0-23), minute (0-59)
   }
 } catch ({code, message}) {

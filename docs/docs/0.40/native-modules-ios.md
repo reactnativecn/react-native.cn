@@ -12,8 +12,13 @@
 
 ```objective-c
 // CalendarManager.h
+<<<<<<< Updated upstream
 #import "RCTBridgeModule.h"
 #import "RCTLog.h"
+=======
+#import <React/RCTBridgeModule.h>
+#import <React/RCTLog.h>
+>>>>>>> Stashed changes
 
 @interface CalendarManager : NSObject <RCTBridgeModule>
 @end
@@ -110,7 +115,11 @@ CalendarManager.addEvent('Birthday Party', '4 Privet Drive, Surrey', date.toISOS
 随着`CalendarManager.addEvent`方法变得越来越复杂，参数的个数越来越多，其中有一些可能是可选的参数。在这种情况下我们应该考虑修改我们的API，用一个dictionary来存放所有的事件参数，像这样：
 
 ```objective-c
+<<<<<<< Updated upstream
 #import "RCTConvert.h"
+=======
+#import <React/RCTConvert.h>
+>>>>>>> Stashed changes
 
 RCT_EXPORT_METHOD(addEvent:(NSString *)name details:(NSDictionary *)details)
 {
@@ -327,8 +336,13 @@ RCT_EXPORT_METHOD(updateStatusBarAnimation:(UIStatusBarAnimation)animation
 即使没有被JavaScript调用，本地模块也可以给JavaScript发送事件通知。最直接的方式是使用`eventDispatcher`:
 
 ```objective-c
+<<<<<<< Updated upstream
 #import "RCTBridge.h"
 #import "RCTEventDispatcher.h"
+=======
+#import <React/RCTBridge.h>
+#import <React/RCTEventDispatcher.h>
+>>>>>>> Stashed changes
 
 @implementation CalendarManager
 
@@ -385,7 +399,11 @@ class CalendarManager: NSObject {
 
 ```objc
 // CalendarManagerBridge.m
+<<<<<<< Updated upstream
 #import "RCTBridgeModule.h"
+=======
+#import <React/RCTBridgeModule.h>
+>>>>>>> Stashed changes
 
 @interface RCT_EXTERN_MODULE(CalendarManager, NSObject)
 
@@ -394,11 +412,19 @@ RCT_EXTERN_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(
 @end
 ```
 
+<<<<<<< Updated upstream
 请注意，一旦你[在IOS中混用2种语言](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html), 你还需要一个额外的桥接头文件，称作“bridging header”，用来导出Objective-C文件给Swift。如果你是通过Xcode菜单中的`File>New File`来创建的Swift文件，Xcode会自动为你创建这个头文件。在这个头文件中，你需要引入`RCTBridgeModule.h`。
 
 ```objc
 // CalendarManager-Bridging-Header.h
 #import "RCTBridgeModule.h"
+=======
+请注意，一旦你[在IOS中混用2种语言](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html), 那就还需要一个额外的桥接头文件，称作“bridging header”，用来导出Objective-C文件给Swift。如果你是通过Xcode菜单中的`File>New File`来创建的Swift文件，Xcode会自动为你创建这个头文件。在这个头文件中，你需要引入`RCTBridgeModule.h`。
+
+```objc
+// CalendarManager-Bridging-Header.h
+#import <React/RCTBridgeModule.h>
+>>>>>>> Stashed changes
 ```
 
 同样的，你也可以使用`RCT_EXTERN_REMAP_MODULE`和`RCT_EXTERN_REMAP_METHOD`来改变导出模块和方法的JavaScript调用名称。
