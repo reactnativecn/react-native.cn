@@ -5,11 +5,7 @@
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="alignself"></a>alignSelf <span class="propType">enum('auto', 'flex-start', 'flex-end', 'center', 'stretch')</span>
         <a class="hash-link" href="#alignself">#</a></h4>
-<<<<<<< Updated upstream
         <div><p><code>alignSelf</code>决定了元素在父元素的次轴方向的排列方式（此样式设置在子元素上），其值会覆盖父元素的<code>alignItems</code>的值。其表现和CSS上的<code>align-self</code>一致（默认值为auto）。访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-self">https://developer.mozilla.org/en-US/docs/Web/CSS/align-self</a>来进一步了解。</p></div>
-=======
-        <div><p><code>alignSelf</code>决定了元素在父元素的次轴方向的排列方式（此样式设置在子元素上），其值会覆盖父元素的<code>alignItems</code>的值。其表现和CSS上的<code>align-self</code>一直（默认值为auto）。访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-self">https://developer.mozilla.org/en-US/docs/Web/CSS/align-self</a>来进一步了解。</p></div>
->>>>>>> Stashed changes
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="borderbottomwidth"></a>borderBottomWidth <span
             class="propType">number</span> <a class="hash-link" href="#borderbottomwidth">#</a>
@@ -84,11 +80,7 @@
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="height"></a>height <span
             class="propType">number</span> <a class="hash-link" href="#height">#</a></h4>
-<<<<<<< Updated upstream
-        <div><p><code>height</code> sets the height of this component.</p>
-=======
         <div><p><code>height</code>用于设置组件的高度。</p>
->>>>>>> Stashed changes
             <p> It works similarly to <code>height</code> in CSS, but in React Native you
                 must use logical pixel units, rather than percents, ems, or any of that.访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/height">https://developer.mozilla.org/en-US/docs/Web/CSS/height</a>来进一步了解。</p></div>
     </div>
@@ -232,11 +224,7 @@
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="width"></a>width <span
             class="propType">number</span> <a class="hash-link" href="#width">#</a></h4>
-<<<<<<< Updated upstream
-        <div><p><code>width</code> sets the width of this component.</p>
-=======
         <div><p><code>width</code>用于设置组件的宽度。</p>
->>>>>>> Stashed changes
             <p> It works similarly to <code>width</code> in CSS, but in React Native you
                 must use logical pixel units, rather than percents, ems, or any of that.访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/width">https://developer.mozilla.org/en-US/docs/Web/CSS/width</a>来进一步了解。</p></div>
     </div>

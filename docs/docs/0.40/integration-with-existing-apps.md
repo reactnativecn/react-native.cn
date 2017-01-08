@@ -721,7 +721,6 @@ public boolean onKeyUp(int keyCode, KeyEvent event) {
 }
 ```
 
-<<<<<<< Updated upstream
 现在activity已就绪，可以运行一些JavaScript代码了。
 
 ### 配置权限以便开发中的红屏错误能正确显示
@@ -753,9 +752,6 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 
-=======
-That's it, your activity is ready to run some JavaScript code.
->>>>>>> Stashed changes
 
 ## 运行你的应用
 
