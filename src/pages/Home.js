@@ -10,6 +10,7 @@ import Container from '../components/Container';
 import './Home.less';
 import CONSTANTS from '../constants';
 import { loadResources, getResource } from '../logic/loadResource';
+import ads from '../../docs/ads/ads';
 
 export default class Home extends Component {
   static propTypes = {
@@ -35,6 +36,27 @@ export default class Home extends Component {
       newsBasicList: JSON.parse(getResource(`${CONSTANTS.bbs}/api/category/1`)),
     });
   }
+  onAdClicked = (gainfo) => {
+    if (!__DEV__) {
+      ga('send', 'event', 'ad', 'clicked', gainfo)
+    }
+  };
+  renderBanner(data) {
+    const { banner: { img, text, link, gainfo } } = data;
+    return (
+      <div className="vip">
+        <a
+          href={link}
+          onClick={() => this.onAdClicked(gainfo)}
+        >
+          <img
+            title={text}
+            src={img}
+          />
+        </a>
+      </div>
+    )
+  }
   render() {
     const { location } = this.props;
     const { blogBasicList, content, newsBasicList, links } = this.state;
@@ -45,14 +67,15 @@ export default class Home extends Component {
         <div className="hero">
           <div className="wrap">
             <div className="text"><h1>React Native 中文网</h1></div>
-            <div className="minitext">
-              <p>最专业的翻译，最及时的资讯，最火爆的社区</p>
-              <p>使用前沿的JAVASCRIPT为IOS、ANDROID编写跨平台原生APP</p>
-            </div>
+            {/*<div className="minitext">*/}
+              {/*<p>最专业的翻译，最及时的资讯，最火爆的社区</p>*/}
+              {/*<p>使用前沿的JAVASCRIPT为IOS、ANDROID编写跨平台原生APP</p>*/}
+            {/*</div>*/}
           </div>
         </div>
         <section className="content">
           <Container>
+            {ads.index && this.renderBanner(ads.index)}
             <a className="anchor" name="content" />
             <div className="news">
               <div className="news-list">

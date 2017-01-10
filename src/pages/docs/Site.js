@@ -11,6 +11,7 @@ import './docs.less';
 import Subjects from './Subjects.js';
 import { loadResources, getResource } from '../../logic/loadResource';
 
+import ads from '../../../docs/ads/ads';
 export default class Site extends React.Component {
   static propTypes = {
     children: React.PropTypes.oneOfType([
@@ -41,6 +42,27 @@ export default class Site extends React.Component {
     });
   }
 
+  onAdClicked = (gainfo) => {
+    if (!__DEV__) {
+      ga('send', 'event', 'ad', 'clicked', gainfo)
+    }
+  };
+  renderBanner(data) {
+    const { banner: { img, text, link, gainfo } } = data;
+    return (
+      <div className="vip">
+        <a
+          href={link}
+          onClick={() => this.onAdClicked(gainfo)}
+        >
+          <img
+            title={text}
+            src={img}
+          />
+        </a>
+      </div>
+    )
+  }
   render() {
     const { params } = this.props;
     const { version } = params;
@@ -59,6 +81,7 @@ export default class Site extends React.Component {
               <Subjects version={version} docIndex={docIndex} />
             </Col>
           </Row>
+          {ads.docs && this.renderBanner(ads.docs)}
         </Container>
       </section>
     );

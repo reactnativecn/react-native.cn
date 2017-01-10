@@ -6,6 +6,8 @@ import './Blog.styl';
 import CONSTANTS from '../constants';
 import { loadResource, loadResources, getResource } from '../logic/loadResource';
 
+import ads from '../../docs/ads/ads';
+
 const bbsListUrl = `${CONSTANTS.bbs}/api/category/3`;
 const getTopicUrl = tid => `${CONSTANTS.bbs}/api/topic/${tid}`;
 
@@ -87,19 +89,25 @@ export default class Blog extends Component {
         }
       });
   };
-  onAdClicked = () => {
+  onAdClicked = (gainfo) => {
     if (!__DEV__) {
-      ga('send', 'event', 'ad', 'clicked', 'dongfangyao')
+      ga('send', 'event', 'ad', 'clicked', gainfo)
     }
   };
-  renderAd(){
+  renderBanner(data) {
+    const { banner: { img, text, link, gainfo } } = data;
     return (
-      <a
-        href="http://mp.weixin.qq.com/s?__biz=MjM5NzI5MTIyNA==&mid=501650335&idx=1&sn=d2196fc8e8393d68643cccb94a72545b&chksm=3ece062809b98f3e6ef41cf13e0fd5ed6548b28d9b0c091e1559ec9f6f46e34800bb1489bfdf&scene=18#wechat_redirect"
-        onClick={this.onAdClicked}
-      >
-        <img src={require('./ad/dongfangyao.jpg')}/>
-      </a>
+      <div className="vip">
+        <a
+          href={link}
+          onClick={() => this.onAdClicked(gainfo)}
+        >
+          <img
+            title={text}
+            src={img}
+          />
+        </a>
+      </div>
     )
   }
   render() {
@@ -107,7 +115,7 @@ export default class Blog extends Component {
     // const blogList = blogDetailedList.concat(this.state.appendList);
     return (
       <Container type="blog">
-        {/*{this.renderAd()}*/}
+        {ads.blog && this.renderBanner(ads.blog)}
         {/*<div className="pro-hint">以上为赞助商推广内容，非本站提供</div>*/}
         {
           blogDetailedList.map(topic => {
