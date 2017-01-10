@@ -360,6 +360,37 @@ subscription.remove();
 
 更多的给JavaScript发送事件的例子，参见[`RCTLocationObserver`](https://github.com/facebook/react-native/blob/master/Libraries/Geolocation/RCTLocationObserver.m).
 
+## 优化无监听处理的事件
+
+如果你发送了一个事件却没有任何监听处理，则会因此收到一个资源警告。要优化因此带来的额外开销，你可以在你的`RCTEventEmitter`子类中覆盖`startObserving`和`stopObserving`方法。
+
+```objective-c
+@implementation CalendarManager
+{
+  bool hasListeners;
+}
+
+// 在添加第一个监听函数时触发
+-(void)startObserving { 
+    hasListeners = YES;
+    // Set up any upstream listeners or background tasks as necessary
+}
+
+// Will be called when this module's last listener is removed, or on dealloc.
+-(void)stopObserving { 
+    hasListeners = NO;
+    // Remove upstream listeners, stop unnecessary background tasks
+}
+
+- (void)calendarEventReminderReceived:(NSNotification *)notification
+{
+  NSString *eventName = notification.userInfo[@"name"];
+  if (hasListeners) { // Only send events if anyone is listening
+    [self sendEventWithName:@"EventReminder" body:@{@"name": eventName}];
+  }
+}
+```
+
 ## 从Swift导出
 
 Swift不支持宏，所以从Swift向React Native导出类和函数需要多做一些设置，但是大致与Objective-C是相同的。
