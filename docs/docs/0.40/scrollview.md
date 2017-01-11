@@ -45,10 +45,16 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 		</div>
 	</div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="keyboardshouldpersisttaps"></a>keyboardShouldPersistTaps <span class="propType">bool</span> <a class="hash-link" href="#keyboardshouldpersisttaps">#</a></h4>
-		<div>
-			<p>当此属性为false的时候，在软键盘激活之后，点击焦点文本输入框以外的地方，键盘就会隐藏。如果为true，滚动视图不会响应点击操作，并且键盘不会自动消失。默认值为false。</p>
-		</div>
+		<h4 class="propTitle"><a class="anchor" name="keyboardshouldpersisttaps"></a>keyboardShouldPersistTaps <span class="propType">enum('always', 'never', 'handled', false, true)</span> <a class="hash-link" href="#keyboardshouldpersisttaps">#</a></h4>
+		<div><p>如果当前界面有软键盘，那么点击scrollview后是否收起键盘，取决于本属性的设置。（译注：很多人反应TextInput无法自动失去焦点/需要点击多次切换到其他组件等等问题，其关键都是需要将TextInput放到ScrollView中再设置本属性）</p>
+		<ul>
+			<li><code>'never'</code>（默认值），点击TextInput以外的子组件会使当前的软键盘收起。此时子元素不会收到点击事件。</li>
+			<li><code>'always'</code>，键盘不会自动收起，ScrollView也不会捕捉点击事件，但子组件可以捕获。</li>
+			<li><code>'handled'</code>，当点击事件被子组件捕获时，键盘不会自动收起。这样切换TextInput时键盘可以保持状态。多数带有TextInput的情况下你应该选择此项。</li>
+			<li><code>false</code>，已过期，请使用'never'代替。</li>
+			<li><code>true</code>，已过期，请使用'always'代替。</li>
+		</ul>
+	</div>
 	</div>
 	<div class="prop"><h4 class="propTitle"><a class="anchor" name="oncontentsizechange"></a>onContentSizeChange <span
 	        class="propType">function</span> <a class="hash-link" href="#oncontentsizechange">#</a></h4>
