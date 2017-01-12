@@ -196,12 +196,19 @@
 		"android": "http://www.haokan.com/",
 		"icon": "http://www.haokan.com/img/icon.png"
 	},
-  {
+  	{
 		"name": "在球场",
 		"desc": "找到你的最佳球场拍档",
 		"ios": "https://www.zaiqiuchang.com/",
 		"android": "https://www.zaiqiuchang.com/",
 		"icon": "https://zqc.cdn.zaiqiuchang.com/icon/zqc-icon.png?x-oss-process=style/middle"
+	},
+	{
+		"name": "BIGTIGER.ME",
+		"desc": "大连一前端的个人博客",
+		"ios": "https://itunes.apple.com/cn/app/bigtiger.me/id1147944464?mt=8",
+		"android": "",
+		"icon": "http://www.bigtiger.me/wp-content/uploads/2016/08/180.png"
 	}
 	
 ]
