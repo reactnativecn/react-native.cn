@@ -202,6 +202,14 @@
 		"ios": "https://www.zaiqiuchang.com/",
 		"android": "https://www.zaiqiuchang.com/",
 		"icon": "https://zqc.cdn.zaiqiuchang.com/icon/zqc-icon.png?x-oss-process=style/middle"
+	},
+	{
+	        "name": "撩车友",
+		"desc": "打造最健全的车友平台",
+		"ios": "https://itunes.apple.com/cn/app/liao-che-you/id1191396071?l=en&mt=8",
+		"android": "http://sj.qq.com/myapp/detail.htm?apkName=com.sanyuanse",
+		"icon": "http://img.youcyou.com/logo.png"
+	
 	}
 	
 ]
