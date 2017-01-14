@@ -46,6 +46,7 @@ export default class Home extends Component {
     return (
       <div className="vip">
         <a
+          target="_blank"
           href={link}
           onClick={() => this.onAdClicked(gainfo)}
         >

@@ -1,124 +1,133 @@
 .hero {
-    background: #05A5D1;
-    //padding: 50px 0;
-    padding: 10px 0;
-    color: #FDF3E7;
-    font-weight: 300;
+  background: #05A5D1;
+  //padding: 50px 0;
+  padding: 10px 0;
+  color: #FDF3E7;
+  font-weight: 300;
 
-    .text h1 {
-        //font-size: 64px;
-        font-size: 48px;
-        //line-height: 1.7;
-        line-height: 1.6;
-        text-align: center;
-    }
+  .text h1 {
+    //font-size: 64px;
+    font-size: 48px;
+    //line-height: 1.7;
+    line-height: 1.6;
+    text-align: center;
+  }
 
-    .minitext {
-        font-size: 16px;
-        text-align: center;
-        text-transform: uppercase;
-    }
+  .minitext {
+    font-size: 16px;
+    text-align: center;
+    text-transform: uppercase;
+  }
 
-    strong {
-        font-weight: normal;
-    }
+  strong {
+    font-weight: normal;
+  }
+}
+
+.vip {
+  img {
+    width: 100%;
+  }
 }
 
 .buttons-unit {
-    text-align: center;
-    margin: 40px 0;
+  text-align: center;
+  margin: 40px 0;
 
-    .btn-primary.btn-start {
-        background: #05A5D1;
-        border: 0;
+  .btn-primary.btn-start {
+    background: #05A5D1;
+    border: 0;
 
-        &:hover {
-            background: #05b2df;
-        }
+    &:hover {
+      background: #05b2df;
     }
+  }
 }
+
 .news {
-    margin: 10px 0;
-    .news-list {
-        width: 50%;
-        display: inline-block;
-        .news-list-item {
-            padding: 0 20px;
-            height: 30px;
-            line-height: 30px;
-            font-size: 14px;
-            overflow: hidden;
-            a {
-                text-decoration: none;
-                &:visited {
-                    color: #999;
-                }
-                &:hover {
-                    color: #f00;
-                }
-            }
-            .date {
-                font-size: 12px;
-                float: right;
-            }
-            &:hover {
-                border: #d5d4d4 1px solid;
-            }
+  margin: 10px 0;
+  .news-list {
+    width: 50%;
+    display: inline-block;
+    .news-list-item {
+      padding: 0 20px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 14px;
+      overflow: hidden;
+      a {
+        text-decoration: none;
+        &:visited {
+          color: #999;
         }
+        &:hover {
+          color: #f00;
+        }
+      }
+      .date {
+        font-size: 12px;
+        float: right;
+      }
+      &:hover {
+        border: #d5d4d4 1px solid;
+      }
     }
+  }
 }
+
 .friend-links {
-    a {
-        display: inline-block;
-        margin-right: 10px;
-    }
+  a {
+    display: inline-block;
+    margin-right: 10px;
+  }
 
 }
-@media screen and (max-width:600px) {
-    .hero {
-        padding: 15px 0!important;
 
-        .text h1 {
-            font-size: 26px!important;
-        }
+@media screen and (max-width: 600px) {
+  .hero {
+    padding: 15px 0 !important;
 
-        .minitext {
-            font-size: 14px!important;
-        }
+    .text h1 {
+      font-size: 26px !important;
     }
 
-    h2 {
-        font-size: 22px!important;
+    .minitext {
+      font-size: 14px !important;
     }
+  }
 
-    .news {
-        .news-list {
-            width: 100%;
-            display: block;
-            .news-list-item {
-                padding: 0 3%;
-                height: 40px;
-                line-height: 40px;
-                font-size: 14px;
-                overflow: hidden;
-                a {
-                    text-decoration: none;
-                    &:visited {
-                        color: #999;
-                    }
-                    &:hover {
-                        color: #f00;
-                    }
-                }
-                .date {
-                    font-size: 12px;
-                    float: right;
-                }
-                &:hover {
-                    border: #d5d4d4 1px solid;
-                }
-            }
+  h2 {
+    font-size: 22px !important;
+  }
+
+  .news {
+    .news-list {
+      width: 100%;
+      display: block;
+      .news-list-item {
+        padding: 0 3%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+        overflow: hidden;
+        a {
+          text-decoration: none;
+          &:visited {
+            color: #999;
+          }
+          &:hover {
+            color: #f00;
+          }
         }
+        .date {
+          font-size: 12px;
+          float: right;
+        }
+        &:hover {
+          border: #d5d4d4 1px solid;
+        }
+      }
     }
+  }
 }
 
