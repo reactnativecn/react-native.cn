@@ -209,6 +209,12 @@
 		"ios": "https://itunes.apple.com/cn/app/bigtiger.me/id1147944464?mt=8",
 		"android": "",
 		"icon": "http://www.bigtiger.me/wp-content/uploads/2016/08/180.png"
-	}
-	
+	},
+	{
+		"name": "撩车友",
+		"desc": "打造最健全的车友平台",
+		"ios": "https://itunes.apple.com/cn/app/liao-che-you/id1191396071?l=en&mt=8",
+		"android": "http://sj.qq.com/myapp/detail.htm?apkName=com.sanyuanse",
+		"icon": "http://img.youcyou.com/logo.png"				
+	}	
 ]
