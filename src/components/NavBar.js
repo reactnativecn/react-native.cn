@@ -15,16 +15,17 @@ import versions from '../../docs/versions.json';
 import ViewRecords from './ViewRecords';
 import Subscribe from './Subscribe';
 
-// import imageHot from './images/hot.png';
+import imageHot from './images/hot.png';
 import imageLogo from './images/header_logo.png';
 
 const linksInternal = [
   { section: 'docs', href: `/docs/${versions.current}/getting-started.html`, text: '文档' },
+  { section: '115live', href: '/post/3311', text: '1.15直播', hot: true },
   { section: 'cases', href: '/cases.html', text: '案例' },
   { section: 'blog', href: '/blog.html', text: '博客' },
   { section: 'videos', href: '/videos.html', text: '视频', checkViewed: 'videos' },
-  { section: 'bbs', href: 'http://bbs.reactnative.cn/', text: '讨论', hot: true, newTab: false },
-  { section: 'update', href: 'http://update.reactnative.cn/', text: '热更新', hot: true, newTab: true },
+  { section: 'bbs', href: 'http://bbs.reactnative.cn/', text: '讨论', newTab: true },
+  { section: 'update', href: 'http://update.reactnative.cn/', text: '热更新', newTab: true },
   { section: 'about', href: '/about.html', text: '关于' },
 ];
 const linksExternal = [
@@ -59,13 +60,14 @@ export default class MyNavBar extends React.Component {
         target={newTab && '_blank'}
       >
         {v.text}
-        {/*{v.hot && <div className="hotSign"><img src={imageHot} alt="hot" /></div>}*/}
+        {v.hot && <div className="hotSign"><img src={imageHot} alt="hot" /></div>}
       </NavItem>
     ) : (
       <LinkContainer to={v.href} onClick={v.onClick || this.noop} key={v.section}>
         <NavItem>
           {v.text}
           {viewRecords && v.checkViewed && !!viewRecords[v.checkViewed].left && <Badge />}
+          {v.hot && <div className="hotSign"><img src={imageHot} alt="hot" /></div>}
         </NavItem>
       </LinkContainer>
     );

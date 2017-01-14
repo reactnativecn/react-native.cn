@@ -7,6 +7,7 @@ import Marked from '../../components/Marked';
 import SNSComment from '../../components/SNSComment';
 import { loadResources, getResource } from '../../logic/loadResource';
 
+import ads from '../../../docs/ads/ads';
 export default class Page extends React.Component {
   static propTypes = {
     content: PropTypes.string,
@@ -47,6 +48,29 @@ export default class Page extends React.Component {
     }
   }
 
+
+  onAdClicked = (gainfo) => {
+    if (!__DEV__) {
+      ga('send', 'event', 'ad', 'clicked', gainfo)
+    }
+  };
+  renderBanner(data) {
+    const { banner: { img, text, link, gainfo } } = data;
+    return (
+      <div className="vip">
+        <a
+          target="_blank"
+          href={link}
+          onClick={() => this.onAdClicked(gainfo)}
+        >
+          <img
+            title={text}
+            src={img}
+          />
+        </a>
+      </div>
+    )
+  }
   render() {
     const { location, params, docIndex } = this.props;
     const { content, err } = this.state;
@@ -136,6 +160,7 @@ export default class Page extends React.Component {
             </Col>}
           </Row>
         </section>
+        {ads.docs && this.renderBanner(ads.docs)}
         <SNSComment threadKey={location.pathname} title={`${params.version}/${title}`} />
       </div>
     );
