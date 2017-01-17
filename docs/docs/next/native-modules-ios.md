@@ -324,49 +324,32 @@ RCT_EXPORT_METHOD(updateStatusBarAnimation:(UIStatusBarAnimation)animation
 
 ## 给Javascript发送事件
 
-即使没有被JavaScript调用，本地模块也可以给JavaScript发送事件通知。目前推荐的方式是继承`RCTEventEmitter`类，实现`suppportEvents`方法然后调用`self sendEventWithName`，如下：
+即使没有被JavaScript调用，本地模块也可以给JavaScript发送事件通知。最直接的方式是使用`eventDispatcher`:
 
 ```objective-c
-// CalendarManager.h
-#import <React/RCTBridgeModule.h>
-#import <React/RCTEventEmitter.h>
-
-@interface CalendarManager : RCTEventEmitter <RCTBridgeModule>
-
-@end
-```  
-
-```objective-c
-// CalendarManager.m
-#import "CalendarManager.h"
+#import <React/RCTBridge.h>
+#import <React/RCTEventDispatcher.h>
 
 @implementation CalendarManager
 
-RCT_EXPORT_MODULE();
-
-- (NSArray<NSString *> *)supportedEvents
-{
-  return @[@"EventReminder"];
-}
+@synthesize bridge = _bridge;
 
 - (void)calendarEventReminderReceived:(NSNotification *)notification
 {
   NSString *eventName = notification.userInfo[@"name"];
-  [self sendEventWithName:@"EventReminder" body:@{@"name": eventName}];
+  [self.bridge.eventDispatcher sendAppEventWithName:@"EventReminder"
+                                               body:@{@"name": eventName}];
 }
 
 @end
 ```
 
-JS端可以在模块中创建一个新的NativeEventEmitter实例来订阅事件：
+在JavaScript中可以这样订阅事件：
 
-```
-import { NativeEventEmitter, NativeModules } from 'react-native';
-const { CalendarManager } = NativeModules;
+```javascript
+import { NativeAppEventEmitter } from 'react-native';
 
-const calendarManagerEmitter = new NativeEventEmitter(CalendarManager);
-
-const subscription = calendarManagerEmitter.addListener(
+var subscription = NativeAppEventEmitter.addListener(
   'EventReminder',
   (reminder) => console.log(reminder.name)
 );
@@ -376,6 +359,37 @@ subscription.remove();
 ```
 
 更多的给JavaScript发送事件的例子，参见[`RCTLocationObserver`](https://github.com/facebook/react-native/blob/master/Libraries/Geolocation/RCTLocationObserver.m).
+
+## 优化无监听处理的事件
+
+如果你发送了一个事件却没有任何监听处理，则会因此收到一个资源警告。要优化因此带来的额外开销，你可以在你的`RCTEventEmitter`子类中覆盖`startObserving`和`stopObserving`方法。
+
+```objective-c
+@implementation CalendarManager
+{
+  bool hasListeners;
+}
+
+// 在添加第一个监听函数时触发
+-(void)startObserving { 
+    hasListeners = YES;
+    // Set up any upstream listeners or background tasks as necessary
+}
+
+// Will be called when this module's last listener is removed, or on dealloc.
+-(void)stopObserving { 
+    hasListeners = NO;
+    // Remove upstream listeners, stop unnecessary background tasks
+}
+
+- (void)calendarEventReminderReceived:(NSNotification *)notification
+{
+  NSString *eventName = notification.userInfo[@"name"];
+  if (hasListeners) { // Only send events if anyone is listening
+    [self sendEventWithName:@"EventReminder" body:@{@"name": eventName}];
+  }
+}
+```
 
 ## 从Swift导出
 

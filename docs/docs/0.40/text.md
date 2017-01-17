@@ -38,7 +38,7 @@ var styles = StyleSheet.create({
     </div>
   </div>
   <div class="prop">
-    <h4 class="propTitle"><a class="anchor" name="allowfontscaling"></a><span class="platform">ios</span>allowFontScaling <span class="propType">bool</span> <a class="hash-link" href="#allowfontscaling">#</a></h4>
+    <h4 class="propTitle"><a class="anchor" name="allowfontscaling"></a>allowFontScaling <span class="propType">bool</span> <a class="hash-link" href="#allowfontscaling">#</a></h4>
     <div>
       <p>控制字体是否要根据iOS的“文本大小”辅助选项来进行缩放。</p>
     </div>
