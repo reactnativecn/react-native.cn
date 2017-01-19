@@ -634,7 +634,10 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, "HelloWorld", null);
+                
+        // 注意这里的HelloWorld必须对应“index.android.js”中的
+        // “AppRegistry.registerComponent()”的第一个参数
+        mReactRootView.startReactApplication(mReactInstanceManager, "HelloWorld", null);  
 
         setContentView(mReactRootView);
     }
@@ -646,7 +649,7 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
 }
 ```
 
-> If you are using a starter kit for React Native, replace the "HelloWorld" string with the one in your index.android.js file (it’s the first argument to the `AppRegistry.registerComponent()` method).
+> 如果你的项目名字不是叫“HelloWorld”，则需要将“index.android.js”中的“AppRegistry.registerComponent()”方法中的第一个参数替换为对应的名字。
 
 If you are using Android Studio, use `Alt + Enter` to add all missing imports in your MyReactActivity class. Be careful to use your package’s `BuildConfig` and not the one from the `...facebook...` package.
  
