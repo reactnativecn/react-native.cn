@@ -215,6 +215,13 @@
 		"desc": "打造最健全的车友平台",
 		"ios": "https://itunes.apple.com/cn/app/liao-che-you/id1191396071?l=en&mt=8",
 		"android": "http://sj.qq.com/myapp/detail.htm?apkName=com.sanyuanse",
-		"icon": "http://img.youcyou.com/logo.png"				
-	}	
+		"icon": "http://img.youcyou.com/logo.png"
+	},
+  {
+		"name": "红包圈",
+		"desc": "红包交友同城聊天应用",
+		"ios": "https://itunes.apple.com/cn/app/hong-bao-quan-hong-bao-jiao/id1193509121?mt=8",
+		"android": "http://h5.down.bwgame.com.cn/redpackage.apk",
+		"icon": "http://ohg9m5uoq.bkt.clouddn.com/1024.png"
+  }
 ]
