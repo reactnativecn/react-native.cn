@@ -20,7 +20,7 @@ import imageLogo from './images/header_logo.png';
 
 const linksInternal = [
   { section: 'docs', href: `/docs/${versions.current}/getting-started.html`, text: '文档' },
-  { section: '115live', href: '/post/3311', text: '1.15直播', hot: true },
+  { section: '122live', href: '/post/3337', text: '1.22直播', hot: true },
   { section: 'cases', href: '/cases.html', text: '案例' },
   { section: 'blog', href: '/blog.html', text: '博客' },
   { section: 'videos', href: '/videos.html', text: '视频', checkViewed: 'videos' },
