@@ -104,7 +104,7 @@ request.open('GET', 'https://mywebsite.com/endpoint/');
 request.send();
 ```
 
-> 需要注意的是，安全机制与网页环境有所不同：在应用中你可以访问任何网站，没有[跨域](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing)的限制。
+> 需要注意的是，安全机制与网页环境有所不同，没有[CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing)的这个概念。
 
 ## WebSocket支持
 
