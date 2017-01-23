@@ -45,7 +45,7 @@ export default class Post extends Component {
                 <a
                   className="post-title"
                   target="_blank"
-                  href={`${CONSTANTS.bbs}/topic/${body.tid}`}
+                  href={`//bbs.reactnative.cn/topic/${body.tid}`}
                   dangerouslySetInnerHTML={{ __html: post.title }}
                 />
                 <div className="meta">
