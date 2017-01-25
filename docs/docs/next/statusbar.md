@@ -22,7 +22,7 @@
 
 ### 常量
 
-`currentHeight` (仅限Android)状态栏的当前高度。
+`currentHeight` 状态栏的当前高度。
  
 
 ### 属性
@@ -495,11 +495,10 @@ const examples = [{
   render() {
     return (
       <View>
-        <Text>Height (Android only): {StatusBar.currentHeight} pts</Text>
+        <Text>Height: {StatusBar.currentHeight} pts</Text>
       </View>
     );
-  },
-  platform: 'android',
+  }
 }];
 
 exports.examples = examples;
