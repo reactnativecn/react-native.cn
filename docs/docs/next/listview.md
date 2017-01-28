@@ -150,8 +150,14 @@ ListView还支持一些高级特性，譬如给每段/组(section)数据添加�
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="scrollto"></a>scrollTo<span class="propType">(...args)</span>
         <a class="hash-link" href="#scrollto">#</a></h4>
         <div><p>滚动到指定的x, y偏移处，可以指定是否加上过渡动画。</p>
-            <p>参考 <a href="scrollview#scrollto">ScrollView#scrollTo</a>.</p></div>
+            <p>参考 <a href="scrollview.html#scrollto">ScrollView#scrollTo</a>.</p></div>
     </div>
+    <div class="prop"><h4 class="methodTitle"><a class="anchor" name="scrolltoend"></a>scrollToEnd<span class="methodType">(options?)</span> <a class="hash-link" href="#scrolltoend">#</a></h4>
+    	<div>
+    	<p>滚动到视图底部（水平方向的视图则滚动到最右边）。</p><p>加上动画参数 <code>scrollToEnd({animated: true})</code>则启用平滑滚动动画，或是调用
+<code>scrollToEnd({animated: false})</code>来立即跳转。如果不使用参数，则<code>animated</code>选项默认启用。</p>
+		</div>
+	</div>
 </div>
 
 
