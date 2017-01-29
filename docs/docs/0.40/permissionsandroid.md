@@ -56,8 +56,6 @@ async function requestCameraPermission() {
     <div class="prop">
 	    <h4 class="methodTitle"><a class="anchor" name="requestmultiple"></a>requestMultiple<span class="methodType">(permissions)</span> 
 	    <a class="hash-link" href="#requestmultiple">#</a></h4>
-	    <div><p>Prompts the user to enable multiple permissions in the same dialog and
-returns an object with the permissions as keys and strings as values
-indicating whether the user allowed or denied the request</p></div>
+	    <div><p>在一个弹出框中向用户请求多个权限。返回值为一个object，key为各权限名称，对应值为用户授权与否。</p></div>
 	</div>
 </div>
