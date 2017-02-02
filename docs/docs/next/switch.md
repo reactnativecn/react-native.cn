@@ -39,16 +39,16 @@
 		</div>
 	</div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="ontintcolor"></a><span class="platform">ios</span>onTintColor <span class="propType">ColorPropType</span> <a class="hash-link" href="#ontintcolor">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="ontintcolor"></a>onTintColor <span class="propType">ColorPropType</span> <a class="hash-link" href="#ontintcolor">#</a></h4>
 		<div><p>开启状态时的背景颜色。</p></div>
 	</div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="thumbtintcolor"></a><span class="platform">ios</span>thumbTintColor <span class="propType">ColorPropType</span> <a class="hash-link" href="#thumbtintcolor">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="thumbtintcolor"></a>thumbTintColor <span class="propType">ColorPropType</span> <a class="hash-link" href="#thumbtintcolor">#</a></h4>
 		<div><p>开关上圆形按钮的背景颜色。</p></div>
 	</div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="tintcolor"></a><span class="platform">ios</span>tintColor <span class="propType">ColorPropType</span> <a class="hash-link" href="#tintcolor">#</a></h4>
-		<div><p>关闭状态时的边框颜色。</p></div>
+		<h4 class="propTitle"><a class="anchor" name="tintcolor"></a>tintColor <span class="propType">ColorPropType</span> <a class="hash-link" href="#tintcolor">#</a></h4>
+		<div><p>关闭状态时的边框颜色(iOS)或背景颜色(Android)。</p></div>
 	</div>
 </div>
 

@@ -16,7 +16,7 @@
 	<h4 class="propTitle"><a class="anchor" name="maximumtrackimage"></a><span class="platform">ios</span>maximumTrackImage <span class="propType">Image.propTypes.source</span> <a class="hash-link" href="#maximumtrackimage">#</a></h4>
 	<div><p>指定一个滑块右侧轨道背景图。仅支持静态图片。图片最左边的像素会被平铺直至填满轨道。</p></div></div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="maximumtracktintcolor"></a><span class="platform">ios</span>maximumTrackTintColor <span class="propType">string</span> <a class="hash-link" href="#maximumtracktintcolor">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="maximumtracktintcolor"></a>maximumTrackTintColor <span class="propType">string</span> <a class="hash-link" href="#maximumtracktintcolor">#</a></h4>
 		<div>
 			<p>滑块右侧轨道的颜色。默认为一个蓝色的渐变色。</p>
 		</div>
@@ -31,7 +31,7 @@
 	<h4 class="propTitle"><a class="anchor" name="minimumtrackimage"></a><span class="platform">ios</span>minimumTrackImage <span class="propType">Image.propTypes.source</span> <a class="hash-link" href="#minimumtrackimage">#</a></h4>
 	<div><p>指定一个滑块左侧轨道背景图。仅支持静态图片。图片最右边的像素会被平铺直至填满轨道。</p></div></div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="minimumtracktintcolor"></a><span class="platform">ios</span>minimumTrackTintColor <span class="propType">string</span> <a class="hash-link" href="#minimumtracktintcolor">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="minimumtracktintcolor"></a>minimumTrackTintColor <span class="propType">string</span> <a class="hash-link" href="#minimumtracktintcolor">#</a></h4>
 		<div>
 			<p>滑块左侧轨道的颜色。默认为一个蓝色的渐变色。</p>
 		</div>
@@ -67,6 +67,12 @@
 		<h4 class="propTitle"><a class="anchor" name="thumbimage"></a>thumbImage <span class="propType">Image.propTypes.source</span> <a class="hash-link" href="#thumbimage">#</a></h4>
 		<div>
 			<p>给滑块设置一张图片。只支持静态图片。</p>
+		</div>
+	</div>	
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="thumbtintcolor"></a> <span class="platform">android</span>thumbTintColor <span class="propType">ColorPropType</span> <a class="hash-link" href="#thumbtintcolor">#</a></h4>
+		<div>
+			<p>Color of the foreground switch grip.</p>
 		</div>
 	</div>	
 	<div class="prop">
