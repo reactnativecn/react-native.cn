@@ -157,7 +157,7 @@ Android Studio包含了运行和测试React Native应用所需的Android SDK和�
 
 #### ANDROID_HOME环境变量
 
-确保`ANDROID_HOME`环境变量正确地指向了你安装的Android SDK的路径。具体的做法是把下面的命令加入到`~/.bash_profile`文件中：(__译注__：~表示用户目录，即`/Users/你的用户名/`，而小数点开头的文件在Finder中是隐藏的，并且这个文件有可能并不存在。请在终端下使用`sudo vi ~/.bash_profile`命令创建或编辑。如不熟悉vi操作，请点击[这里](http://www.eepw.com.cn/article/48018.htm)学习）  
+确保`ANDROID_HOME`环境变量正确地指向了你安装的Android SDK的路径。具体的做法是把下面的命令加入到`~/.bash_profile`文件中：(__译注__：~表示用户目录，即`/Users/你的用户名/`，而小数点开头的文件在Finder中是隐藏的，并且这个文件有可能并不存在。请在终端下使用`vi ~/.bash_profile`命令创建或编辑。如不熟悉vi操作，请点击[这里](http://www.eepw.com.cn/article/48018.htm)学习）  
 
 ```
 # 如果你不是通过Android Studio安装的sdk，则其路径可能不同，请自行确定清楚。
@@ -172,7 +172,8 @@ source ~/.bash_profile
 
 可以使用`echo $ANDROID_HOME`检查此变量是否已正确设置。
 
-</div><div markdown class="md-block mac ios android">
+</div>
+<div markdown class="md-block mac ios android">
 
 ### 推荐安装的工具
 
@@ -203,10 +204,6 @@ brew install flow
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 ```
 
-#### Gradle Daemon
-
-开启[Gradle Daemon](https://docs.gradle.org/2.9/userguide/gradle_daemon.html)可以极大地提升java代码的增量编译速度。
-
 ### 其他可选的安装项
 
 #### Git
@@ -234,7 +231,7 @@ brew install git
 
 比起Android Studio自带的原装模拟器，Genymotion是一个性能更好的选择，但它只对个人用户免费。
 
-1. 下载和安装[Genymotion](https://www.genymotion.com/)（译注：你需要先注册登录，然后才能找到免费下载的链接！另外，genymotion需要依赖VirtualBox虚拟机，下载选项中提供了包含VirtualBox和不包含的选项，请按需选择）。
+1. 下载和安装[Genymotion](https://www.genymotion.com/download)（genymotion需要依赖VirtualBox虚拟机，下载选项中提供了包含VirtualBox和不包含的选项，请按需选择）。
 2. 打开Genymotion。如果你还没有安装VirtualBox，则此时会提示你安装。
 3. 创建一个新模拟器并启动。
 4. 启动React Native应用后，可以按下⌘+M来打开开发者菜单。
@@ -491,25 +488,29 @@ sudo make install
 npm install -g flow-bin
 ```
 
-</div><div markdown class="md-block windows linux android">
+</div>
+<div markdown class="md-block mac windows linux android">
 
 #### Gradle Daemon
 
 开启[Gradle Daemon](https://docs.gradle.org/2.9/userguide/gradle_daemon.html)可以极大地提升java代码的增量编译速度。
 
-</div><div markdown class="md-block mac linux android">
+</div>
+<div markdown class="md-block mac linux android">
 
 ```
 touch ~/.gradle/gradle.properties && echo "org.gradle.daemon=true" >> ~/.gradle/gradle.properties
 ```
 
-</div><div markdown class="md-block windows android">
+</div>
+<div markdown class="md-block windows android">
 
 ```
 (if not exist "%USERPROFILE%/.gradle" mkdir "%USERPROFILE%/.gradle") && (echo org.gradle.daemon=true >> "%USERPROFILE%/.gradle/gradle.properties")
 ```
 
-</div><div markdown class="md-block linux android">
+</div>
+<div markdown class="md-block linux android">
 
 #### Android模拟器加速器
 
@@ -583,7 +584,7 @@ choco install git
 
 比起Android Studio自带的原装模拟器，Genymotion是一个性能更好的选择，但它只对个人用户免费。
 
-1. 下载和安装[Genymotion](https://www.genymotion.com/)（译注：你需要先注册登录，然后才能找到免费下载的链接！另外，genymotion需要依赖VirtualBox虚拟机，下载选项中提供了包含VirtualBox和不包含的选项，请按需选择）。
+1. 下载和安装[Genymotion](https://www.genymotion.com/download)（genymotion需要依赖VirtualBox虚拟机，下载选项中提供了包含VirtualBox和不包含的选项，请按需选择）。
 2. 打开Genymotion。如果你还没有安装VirtualBox，则此时会提示你安装。
 3. 创建一个新模拟器并启动。
 4. 启动React Native应用后，可以按下F1来打开开发者菜单。
