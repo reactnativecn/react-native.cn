@@ -139,7 +139,6 @@ export default class Page extends React.Component {
                 className="nextprevLink"
                 to={{
                   pathname: prev.external || `/docs/${params.version}/${prev.mdlink}.html`,
-                  hash: '#content',
                 }}
                 target={prev.external && '_blank'}
               >
@@ -151,7 +150,6 @@ export default class Page extends React.Component {
                 className="nextprevLink"
                 to={{
                   pathname: next.external || `/docs/${params.version}/${next.mdlink}.html`,
-                  hash: '#content',
                 }}
                 target={next.external && '_blank'}
               >
