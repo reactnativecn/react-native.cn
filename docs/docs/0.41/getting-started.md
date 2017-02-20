@@ -236,38 +236,8 @@ brew install git
 3. 创建一个新模拟器并启动。
 4. 启动React Native应用后，可以按下⌘+M来打开开发者菜单。
 
-### 常见问题
-
-#### 安装Android Studio时无法创建虚拟设备
-
-某些版本的Android Studio可能存在一个[已知的bug](https://code.google.com/p/android/issues/detail?id=207563)，导致在安装时无法创建虚拟设备。安装过程中可能看到如下报错：
-
-```
-Creating Android virtual device
-Unable to create a virtual device: Unable to create Android virtual device
-```
-
-如果你碰到了这个问题，可以运行`android avd`来手工创建虚拟设备。
-
-![avd](img/react-native-android-studio-avd.png)
-
-然后在AVD管理器（AVD Manager）窗口中选择新设备并点击`Start...`来启动。
-
-#### Shell命令无响应的异常
-
-如果你碰到了下面这样的异常）：
-
-```
-Execution failed for task ':app:installDebug'.
-  com.android.builder.testing.api.DeviceException: com.android.ddmlib.ShellCommandUnresponsiveException
-```
-
-试着将`项目目录/android/build.gradle`中的Gradle版本改为1.2.3。
-
-
-<!-- ######### LINUX and WINDOWS for ANDROID ##################### -->
-
-</div><div markdown class="md-block linux windows android">
+</div>
+<div markdown class="md-block linux windows android">
 
 ## 安装
 
@@ -594,7 +564,6 @@ choco install git
 #### Visual Studio Emulator for Android
 
 [Visual Studio Emulator for Android](https://www.visualstudio.com/zh-cn/features/msft-android-emulator-vs.aspx#中国 (简体中文))是利用了Hyper-V技术进行硬件加速的免费android模拟器。也是Android Studio自带的原装模拟器之外的一个很好的选择。而且你并不需要安装Visual Studio。
-
 在用于React Native开发前，需要先在注册表中进行一些修改：
 
 1. 打开运行命令（按下Windows+R键）
@@ -604,7 +573,8 @@ choco install git
 5. 名称设为`Path`
 6. 双击`Path`，将其值设为你的Android SDK的路径。（例如`C:\Program Files\Android\sdk`）
 
-</div><div markdown class="md-block mac ios android">
+</div>
+<div markdown class="md-block mac ios android">
 
 ## 测试安装
 
@@ -676,11 +646,8 @@ cd AwesomeProject
 react-native start
 ```
 
-</div><div markdown class="md-block windows android">
-
-如果你碰到了`ERROR  Watcher took too long to load`的报错，请尝试将[这个文件](https://github.com/facebook/react-native/blob/5fa33f3d07f8595a188f6fe04d6168a6ede1e721/packager/react-packager/src/DependencyResolver/FileWatcher/index.js#L16)中的MAX_WAIT_TIME值改得更大一些 (文件在`node_modules/react-native/`目录下)。
-
-</div><div markdown class="md-block windows linux android">
+</div>
+<div markdown class="md-block windows linux android">
 
 ### 修改项目
 
