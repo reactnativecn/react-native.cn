@@ -151,13 +151,13 @@ Android Studio包含了运行和测试React Native应用所需的Android SDK和�
 
 ![platforms](img/react-native-android-studio-android-sdk-platforms.png)
 
-- 在`SDK Tools`窗口中，选择`Show Package Details`，然后在`Android SDK Build Tools`中勾选`Android SDK Build-Tools 23.0.1`。（必须是这个版本）
+- 在`SDK Tools`窗口中，选择`Show Package Details`，然后在`Android SDK Build Tools`中勾选`Android SDK Build-Tools 23.0.1`（必须是这个版本）。然后还要勾选最底部的`Android Support Repository`.
 
 ![build tools](img/react-native-android-studio-android-sdk-build-tools.png)
 
 #### ANDROID_HOME环境变量
 
-确保`ANDROID_HOME`环境变量正确地指向了你安装的Android SDK的路径。具体的做法是把下面的命令加入到`~/.bash_profile`文件中：(__译注__：~表示用户目录，即`/Users/你的用户名/`，而小数点开头的文件在Finder中是隐藏的，并且这个文件有可能并不存在。请在终端下使用`sudo vi ~/.bash_profile`命令创建或编辑。如不熟悉vi操作，请点击[这里](http://www.eepw.com.cn/article/48018.htm)学习）  
+确保`ANDROID_HOME`环境变量正确地指向了你安装的Android SDK的路径。具体的做法是把下面的命令加入到`~/.bash_profile`文件中：(__译注__：~表示用户目录，即`/Users/你的用户名/`，而小数点开头的文件在Finder中是隐藏的，并且这个文件有可能并不存在。请在终端下使用`vi ~/.bash_profile`命令创建或编辑。如不熟悉vi操作，请点击[这里](http://www.eepw.com.cn/article/48018.htm)学习）  
 
 ```
 # 如果你不是通过Android Studio安装的sdk，则其路径可能不同，请自行确定清楚。
@@ -172,7 +172,8 @@ source ~/.bash_profile
 
 可以使用`echo $ANDROID_HOME`检查此变量是否已正确设置。
 
-</div><div markdown class="md-block mac ios android">
+</div>
+<div markdown class="md-block mac ios android">
 
 ### 推荐安装的工具
 
@@ -203,10 +204,6 @@ brew install flow
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 ```
 
-#### Gradle Daemon
-
-开启[Gradle Daemon](https://docs.gradle.org/2.9/userguide/gradle_daemon.html)可以极大地提升java代码的增量编译速度。
-
 ### 其他可选的安装项
 
 #### Git
@@ -234,43 +231,13 @@ brew install git
 
 比起Android Studio自带的原装模拟器，Genymotion是一个性能更好的选择，但它只对个人用户免费。
 
-1. 下载和安装[Genymotion](https://www.genymotion.com/)（译注：你需要先注册登录，然后才能找到免费下载的链接！另外，genymotion需要依赖VirtualBox虚拟机，下载选项中提供了包含VirtualBox和不包含的选项，请按需选择）。
+1. 下载和安装[Genymotion](https://www.genymotion.com/download)（genymotion需要依赖VirtualBox虚拟机，下载选项中提供了包含VirtualBox和不包含的选项，请按需选择）。
 2. 打开Genymotion。如果你还没有安装VirtualBox，则此时会提示你安装。
 3. 创建一个新模拟器并启动。
 4. 启动React Native应用后，可以按下⌘+M来打开开发者菜单。
 
-### 常见问题
-
-#### 安装Android Studio时无法创建虚拟设备
-
-某些版本的Android Studio可能存在一个[已知的bug](https://code.google.com/p/android/issues/detail?id=207563)，导致在安装时无法创建虚拟设备。安装过程中可能看到如下报错：
-
-```
-Creating Android virtual device
-Unable to create a virtual device: Unable to create Android virtual device
-```
-
-如果你碰到了这个问题，可以运行`android avd`来手工创建虚拟设备。
-
-![avd](img/react-native-android-studio-avd.png)
-
-然后在AVD管理器（AVD Manager）窗口中选择新设备并点击`Start...`来启动。
-
-#### Shell命令无响应的异常
-
-如果你碰到了下面这样的异常）：
-
-```
-Execution failed for task ':app:installDebug'.
-  com.android.builder.testing.api.DeviceException: com.android.ddmlib.ShellCommandUnresponsiveException
-```
-
-试着将`项目目录/android/build.gradle`中的Gradle版本改为1.2.3。
-
-
-<!-- ######### LINUX and WINDOWS for ANDROID ##################### -->
-
-</div><div markdown class="md-block linux windows android">
+</div>
+<div markdown class="md-block linux windows android">
 
 ## 安装
 
@@ -412,7 +379,7 @@ Android Studio包含了运行和测试React Native应用所需的Android SDK和�
 
 </div><div markdown class="md-block windows linux android">
 
-- 在`SDK Tools`窗口中，选择`Show Package Details`，然后在`Android SDK Build Tools`中勾选`Android SDK Build-Tools 23.0.1`。（必须是这个版本）
+- 在`SDK Tools`窗口中，选择`Show Package Details`，然后在`Android SDK Build Tools`中勾选`Android SDK Build-Tools 23.0.1`（必须是这个版本）。然后还要勾选最底部的`Android Support Repository`.
 
 </div><div markdown class="md-block linux android">
 
@@ -491,25 +458,29 @@ sudo make install
 npm install -g flow-bin
 ```
 
-</div><div markdown class="md-block windows linux android">
+</div>
+<div markdown class="md-block mac windows linux android">
 
 #### Gradle Daemon
 
 开启[Gradle Daemon](https://docs.gradle.org/2.9/userguide/gradle_daemon.html)可以极大地提升java代码的增量编译速度。
 
-</div><div markdown class="md-block mac linux android">
+</div>
+<div markdown class="md-block mac linux android">
 
 ```
 touch ~/.gradle/gradle.properties && echo "org.gradle.daemon=true" >> ~/.gradle/gradle.properties
 ```
 
-</div><div markdown class="md-block windows android">
+</div>
+<div markdown class="md-block windows android">
 
 ```
 (if not exist "%USERPROFILE%/.gradle" mkdir "%USERPROFILE%/.gradle") && (echo org.gradle.daemon=true >> "%USERPROFILE%/.gradle/gradle.properties")
 ```
 
-</div><div markdown class="md-block linux android">
+</div>
+<div markdown class="md-block linux android">
 
 #### Android模拟器加速器
 
@@ -583,7 +554,7 @@ choco install git
 
 比起Android Studio自带的原装模拟器，Genymotion是一个性能更好的选择，但它只对个人用户免费。
 
-1. 下载和安装[Genymotion](https://www.genymotion.com/)（译注：你需要先注册登录，然后才能找到免费下载的链接！另外，genymotion需要依赖VirtualBox虚拟机，下载选项中提供了包含VirtualBox和不包含的选项，请按需选择）。
+1. 下载和安装[Genymotion](https://www.genymotion.com/download)（genymotion需要依赖VirtualBox虚拟机，下载选项中提供了包含VirtualBox和不包含的选项，请按需选择）。
 2. 打开Genymotion。如果你还没有安装VirtualBox，则此时会提示你安装。
 3. 创建一个新模拟器并启动。
 4. 启动React Native应用后，可以按下F1来打开开发者菜单。
@@ -593,7 +564,6 @@ choco install git
 #### Visual Studio Emulator for Android
 
 [Visual Studio Emulator for Android](https://www.visualstudio.com/zh-cn/features/msft-android-emulator-vs.aspx#中国 (简体中文))是利用了Hyper-V技术进行硬件加速的免费android模拟器。也是Android Studio自带的原装模拟器之外的一个很好的选择。而且你并不需要安装Visual Studio。
-
 在用于React Native开发前，需要先在注册表中进行一些修改：
 
 1. 打开运行命令（按下Windows+R键）
@@ -603,7 +573,8 @@ choco install git
 5. 名称设为`Path`
 6. 双击`Path`，将其值设为你的Android SDK的路径。（例如`C:\Program Files\Android\sdk`）
 
-</div><div markdown class="md-block mac ios android">
+</div>
+<div markdown class="md-block mac ios android">
 
 ## 测试安装
 
@@ -675,11 +646,8 @@ cd AwesomeProject
 react-native start
 ```
 
-</div><div markdown class="md-block windows android">
-
-如果你碰到了`ERROR  Watcher took too long to load`的报错，请尝试将[这个文件](https://github.com/facebook/react-native/blob/5fa33f3d07f8595a188f6fe04d6168a6ede1e721/packager/react-packager/src/DependencyResolver/FileWatcher/index.js#L16)中的MAX_WAIT_TIME值改得更大一些 (文件在`node_modules/react-native/`目录下)。
-
-</div><div markdown class="md-block windows linux android">
+</div>
+<div markdown class="md-block windows linux android">
 
 ### 修改项目
 
