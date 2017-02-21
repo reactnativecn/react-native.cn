@@ -47,8 +47,8 @@
     </h4>
         <div><p>指定状态栏是否透明。设置为true时，应用会在状态栏之下绘制（即所谓“沉浸式”——被状态栏遮住一部分）。常和带有半透明背景色的状态栏搭配使用。</p></div>
     </div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="barstyle"></a><span class="platform">ios</span>barStyle
-        <span class="propType">enum('default', 'light-content')</span> <a class="hash-link" href="#barstyle">#</a></h4>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="barstyle"></a>barStyle
+        <span class="propType">enum('default', 'light-content', 'dark-content')</span> <a class="hash-link" href="#barstyle">#</a></h4>
         <div><p>设置状态栏文本的颜色。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="networkactivityindicatorvisible"></a><span
