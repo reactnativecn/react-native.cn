@@ -35,6 +35,7 @@ export default class Subjects extends React.Component {
                     activeClassName="active"
                     to={{
                       pathname: u.external || `/docs/${this.props.version}/${u.mdlink}.html`,
+                      hash: '#content',
                     }}
                     target={u.external && '_blank'}
                   >
