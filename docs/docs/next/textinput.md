@@ -1,6 +1,6 @@
 TextInput是一个允许用户在应用中通过键盘输入文本的基本组件。本组件的属性提供了多种特性的配置，譬如自动完成、自动大小写、占位文字，以及多种不同的键盘类型（如纯数字键盘）等等。
 
-最简单的用法就是丢一个`TextInput`到应用里，然后订阅它的`onChangeText`事件来读取用户的输入。它还有一些其它的事件，譬如`onSubmitEditing`和`onFocus`。一个简单的例子如下：
+最简单的用法就是丢一个`TextInput`到应用里，然后订阅它的`onChangeText`事件来读取用户的输入。注意，从TextInput里取值这就是目前唯一的做法！即使用`onChangeText`写入state，然后从this.state中取出值。它还有一些其它的事件，譬如`onSubmitEditing`和`onFocus`。一个简单的例子如下：
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
@@ -37,7 +37,7 @@ class UselessTextInput extends Component {
   render() {
     return (
       <TextInput
-        {...this.props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
+        {...this.props} // 将父组件传递来的所有props传递给TextInput;比如下面的multiline和numberOfLines
         editable = {true}
         maxLength = {40}
       />
@@ -53,8 +53,7 @@ class UselessTextInputMultiline extends Component {
     };
   }
 
-  // If you type something in the text box that is a color, the background will change to that
-  // color.
+  // 你可以试着输入一种颜色，比如red，那么这个red就会作用到View的背景色样式上
   render() {
     return (
      <View style={{
@@ -80,9 +79,12 @@ AppRegistry.registerComponent(
 );
 ```
 
-`TextInput` has by default a border at the bottom of its view. This border has its padding set by the background image provided by the system, and it cannot be changed. Solutions to avoid this is to either not set height explicitly, case in which the system will take care of displaying the border in the correct position, or to not display the border by setting `underlineColorAndroid` to transparent.
+`TextInput`在安卓上默认有一个底边框，同时会有一些padding。如果要想使其看起来和iOS上尽量一致，则需要设置`padding: 0`，同时设置`underlineColorAndroid={transparent}`来去掉底边框。
 
-Note that on Android performing text selection in input can change app's activity `windowSoftInputMode` param to `adjustResize`. This may cause issues with components that have position: 'absolute' while keyboard is active. To avoid this behavior either specify `windowSoftInputMode` in AndroidManifest.xml ( <https://developer.android.com/guide/topics/manifest/activity-element.html> ) or control this param programmatically with native code.
+又，在安卓上如果设置multiline = {true}，文本默认会垂直居中，可设置`textAlignVertical: top`样式来使其居顶显示。
+
+又又，在安卓上长按选择文本会导致`windowSoftInputMode`设置变为`adjustResize`，这样可能导致绝对定位的元素被键盘给顶起来。要解决这一问题你需要在AndroidManifest.xml中明确指定合适的`windowSoftInputMode`( <https://developer.android.com/guide/topics/manifest/activity-element.html> )值，或是自己监听事件来处理布局变化。
+
 
 ### 截图
 ![](img/components/textinput.png)
@@ -118,6 +120,12 @@ Note that on Android performing text selection in input can change app's activit
         <h4 class="propTitle"><a class="anchor" name="bluronsubmit"></a>blurOnSubmit <span class="propType">bool</span> <a class="hash-link" href="#bluronsubmit">#</a></h4>
         <div>
             <p>如果为true，文本框会在提交的时候失焦。对于单行输入框默认值为true，多行则为false。注意：对于多行输入框来说，如果将blurOnSubmit设为true，则在按下回车键时就会失去焦点同时触发onSubmitEditing事件，而不会换行。</p>
+        </div>
+    </div>
+    <div class="prop">
+        <h4 class="propTitle"><a class="anchor" name="carethidden"></a>caretHidden <span class="propType">bool</span> <a class="hash-link" href="#carethidden">#</a></h4>
+        <div>
+            <p>如果为true，则隐藏光标。默认值为false</p>
         </div>
     </div>
     <div class="prop">
@@ -194,6 +202,20 @@ Note that on Android performing text selection in input can change app's activit
         </div>
     </div>
     <div class="prop">
+    	<h4 class="propTitle"><a class="anchor" name="onscroll"></a>onScroll <span class="propType">function</span> <a class="hash-link" href="#onscroll">#</a></h4>
+    	<div>
+    		<p>Invoked on content scroll with <code>{ nativeEvent: { contentOffset: { x, y } } }</code>.
+    		May also contain other properties from ScrollEvent but on Android contentSize is not provided for performance reasons.</p>
+		</div>
+	</div>
+    <div class="prop">
+    	<h4 class="propTitle"><a class="anchor" name="onselectionchange"></a>onSelectionChange <span class="propType">function</span> <a class="hash-link" href="#onselectionchange">#</a></h4>
+    	<div>
+    		<p>Callback that is called when the text input selection is changed. This will be called with
+				<code>{ nativeEvent: { selection: { start, end } } }</code>.</p>
+		</div>
+	</div>
+    <div class="prop">
         <h4 class="propTitle"><a class="anchor" name="onsubmitediting"></a>onSubmitEditing <span class="propType">function</span> <a class="hash-link" href="#onsubmitediting">#</a></h4>
         <div>
             <p>此回调函数当软键盘的`确定`/`提交`按钮被按下的时候调用此函数。如果<code>multiline={true}</code>，此属性不可用。</p>
@@ -206,10 +228,37 @@ Note that on Android performing text selection in input can change app's activit
         </div>
     </div>
     <div class="prop">
-        <h4 class="propTitle"><a class="anchor" name="placeholdertextcolor"></a>placeholderTextColor <span class="propType">string</span> <a class="hash-link" href="#placeholdertextcolor">#</a></h4>
+        <h4 class="propTitle"><a class="anchor" name="placeholdertextcolor"></a>placeholderTextColor <span class="propType"><a href="colors.html">color</a></span> <a class="hash-link" href="#placeholdertextcolor">#</a></h4>
         <div>
             <p>占位字符串显示的文字颜色。</p>
         </div>
+    </div>
+    <div class="prop">
+        <h4 class="propTitle"><a class="anchor" name="returnkeytype"></a><span class="platform">ios</span>returnKeyType <span class="propType">enum('done', 'go', 'next', 'search', 'send', 'none', 'previous', 'default', 'emergency-call', 'google', 'join', 'route', 'yahoo')</span> <a class="hash-link" href="#returnkeytype">#</a></h4>
+        <div><p>决定“确定”按钮显示的内容。 On Android you can also use
+<code>returnKeyLabel</code>.</p><p><em>Cross platform</em></p><p>The following values work across platforms:</p>
+		<ul>
+			<li><code>done</code></li>
+			<li><code>go</code></li>
+			<li><code>next</code></li>
+			<li><code>search</code></li>
+			<li><code>send</code></li>
+		</ul>
+		<p><em>Android Only</em></p><p>The following values work on Android only:</p>
+		<ul>
+			<li><code>none</code></li>
+			<li><code>previous</code></li>
+		</ul>
+		<p><em>iOS Only</em></p><p>The following values work on iOS only:</p>
+		<ul>
+			<li><code>default</code></li>
+			<li><code>emergency-call</code></li>
+			<li><code>google</code></li>
+			<li><code>join</code></li>
+			<li><code>route</code></li>
+			<li><code>yahoo</code></li>
+			</ul>
+		</div>
     </div>
     <div class="prop">
         <h4 class="propTitle"><a class="anchor" name="securetextentry"></a>secureTextEntry <span class="propType">bool</span> <a class="hash-link" href="#securetextentry">#</a></h4>
@@ -224,10 +273,16 @@ Note that on Android performing text selection in input can change app's activit
         </div>
     </div>
     <div class="prop">
-	<h4 class="propTitle"><a class="anchor" name="selectioncolor"></a>selectionColor <span class="propType">string</span> <a class="hash-link" href="#selectioncolor">#</a></h4>
-	<div>
-	    <p>设置输入框高亮时的颜色（在iOS上还包括光标）</p>
+    	<h4 class="propTitle"><a class="anchor" name="selection"></a>selection <span class="propType">{start: number, end: number}</span> <a class="hash-link" href="#selection">#</a></h4>
+    	<div>
+    		<p>The start and end of the text input's selection. Set start and end to the same value to position the cursor.</p>
+		</div>
 	</div>
+    <div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="selectioncolor"></a>selectionColor <span class="propType"><a href="colors.html">color</a></span> <a class="hash-link" href="#selectioncolor">#</a></h4>
+		<div>
+		    <p>设置输入框高亮时的颜色（在iOS上还包括光标）</p>
+		</div>
 	</div>
     <div class="prop">
         <h4 class="propTitle"><a class="anchor" name="style"></a>style <span class="propType"><a href="text.html#style">Text#style</a></span> <a class="hash-link" href="#style">#</a></h4>
@@ -242,6 +297,33 @@ Note that on Android performing text selection in input can change app's activit
             <p>TextInput是一个受约束的(Controlled)的组件，意味着如果提供了value属性，原生值会被强制与value属性保持一致。在大部分情况下这都工作的很好，不过有些情况下会导致一些闪烁现象——一个常见的原因就是通过不改变value来阻止用户进行编辑。如果你希望阻止用户输入，可以考虑设置<code>editable={false}</code>；如果你是希望限制输入的长度，可以考虑设置<code>maxLength</code>属性，这两个属性都不会导致闪烁。</p>
         </div>
     </div>
+    <div class="prop">
+    	<h4 class="propTitle"><a class="anchor" name="disablefullscreenui"></a><span class="platform">android</span>disableFullscreenUI <span class="propType">bool</span> <a class="hash-link" href="#disablefullscreenui">#</a></h4>
+    	<div>
+    	<p>When <code>false</code>, if there is a small amount of space available around a text input
+			(e.g. landscape orientation on a phone), the OS may choose to have the user edit
+			the text inside of a full screen text input mode. When <code>true</code>, this feature is
+			disabled and users will always edit the text directly inside of the text input.
+			Defaults to <code>false</code>.</p>
+		</div>
+	</div>
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="inlineimageleft"></a><span class="platform">android</span>inlineImageLeft <span class="propType">string</span> <a class="hash-link" href="#inlineimageleft">#</a></h4>
+		<div><p>If defined, the provided image resource will be rendered on the left.</p></div>
+	</div>
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="inlineimagepadding"></a><span class="platform">android</span>inlineImagePadding <span class="propType">number</span> <a class="hash-link" href="#inlineimagepadding">#</a></h4>
+		<div><p>Padding between the inline image, if any, and the text input itself.</p></div>
+	</div>
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="returnkeylabel"></a><span class="platform">android</span>returnKeyLabel <span class="propType">string</span> <a class="hash-link" href="#returnkeylabel">#</a></h4>
+		<div><p>Sets the return key to the label. Use it instead of <code>returnKeyType</code>.</p></div>
+	</div>
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="textbreakstrategy"></a><span class="platform">android</span>textBreakStrategy <span class="propType">enum('simple', 'highQuality', 'balanced')</span> <a class="hash-link" href="#textbreakstrategy">#</a></h4>
+		<div><p>Set text break strategy on Android API Level 23+, possible values are <code>simple</code>, <code>highQuality</code>, <code>balanced</code>
+The default value is <code>simple</code>.</p></div>
+	</div>
     <div class="prop">
         <h4 class="propTitle"><a class="anchor" name="clearbuttonmode"></a><span class="platform">ios</span>clearButtonMode <span class="propType">enum('never', 'while-editing', 'unless-editing', 'always')</span> <a class="hash-link" href="#clearbuttonmode">#</a></h4>
         <div>
@@ -261,6 +343,19 @@ Note that on Android performing text selection in input can change app's activit
         </div>
     </div>
     <div class="prop">
+    	<h4 class="propTitle"><a class="anchor" name="datadetectortypes"></a><span class="platform">ios</span>dataDetectorTypes <span class="propType">enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all'), [object Object]</span> <a class="hash-link" href="#datadetectortypes">#</a></h4>
+    	<div>
+    		<p>Determines the types of data converted to clickable URLs in the text input. Only valid if <code>multiline={true}</code> and <code>editable={false}</code>. By default no data types are detected.</p><p>You can provide one type or an array of many types.</p><p>Possible values for <code>dataDetectorTypes</code> are:</p>
+			<ul>
+				<li><code>'phoneNumber'</code></li>
+				<li><code>'link'</code></li>
+				<li><code>'address'</code></li>
+				<li><code>'calendarEvent'</code></li>
+				<li><code>'none'</code></li><li><code>'all'</code></li>
+			</ul>
+		</div>
+	</div>
+    <div class="prop">
         <h4 class="propTitle"><a class="anchor" name="keyboardappearance"></a><span class="platform">ios</span>keyboardAppearance <span class="propType">enum('default', 'light', 'dark')</span> <a class="hash-link" href="#keyboardappearance">#</a></h4>
         <div>
             <p>指定键盘的颜色。</p>
@@ -269,19 +364,13 @@ Note that on Android performing text selection in input can change app's activit
     <div class="prop">
         <h4 class="propTitle"><a class="anchor" name="onkeypress"></a><span class="platform">ios</span>onKeyPress <span class="propType">function</span> <a class="hash-link" href="#onkeypress">#</a></h4>
         <div>
-            <p>当一个键被按下的时候调用此回调。被按下的键会作为参数传递给回调函数。会在onChange之前调用。</p>
-        </div>
-    </div>
-    <div class="prop">
-        <h4 class="propTitle"><a class="anchor" name="returnkeytype"></a><span class="platform">ios</span>returnKeyType <span class="propType">enum('default', 'go', 'google', 'join', 'next', 'route', 'search', 'send', 'yahoo', 'done', 'emergency-call')</span> <a class="hash-link" href="#returnkeytype">#</a></h4>
-        <div>
-            <p>决定“确定”按钮显示的内容。</p>
+            <p>当一个键被按下的时候调用此回调。传递给回调函数的参数为<code>{ nativeEvent: { key: keyValue } }</code>，其中keyValue即为被按下的键。会在onChange之前调用。</p>
         </div>
     </div>
     <div class="prop">
         <h4 class="propTitle"><a class="anchor" name="selectionstate"></a><span class="platform">ios</span>selectionState <span class="propType">DocumentSelectionState</span> <a class="hash-link" href="#selectionstate">#</a></h4>
         <div>
-            <p>参见DocumentSelectionState.js，可以控制一个文档中哪段文字被选中的状态。</p>
+            <p>参见<a href="https://github.com/facebook/react-native/blob/master/Libraries/vendor/document/selection/DocumentSelectionState.js">DocumentSelectionState.js</a>，可以控制一个文档中哪段文字被选中的状态。</p>
         </div>
     </div>
     <div class="prop">
@@ -296,6 +385,10 @@ Note that on Android performing text selection in input can change app's activit
             <p>文本框的下划线颜色(译注：如果要去掉文本框的边框，请将此属性设为透明transparent)。</p>
         </div>
     </div>
+    <div class="prop">
+    	<h4 class="propTitle"><a class="anchor" name="spellcheck"></a><span class="platform">ios</span>spellCheck <span class="propType">bool</span> <a class="hash-link" href="#spellcheck">#</a></h4>
+    	<div><p>如果设置为<code>false</code>，则禁用拼写检查的样式（比如错误拼写的单词下的红线）。默认值继承自<code>autoCorrect</code>.</p></div>
+	</div>
 </div>
 
 
@@ -328,8 +421,8 @@ var {
   StyleSheet,
 } = ReactNative;
 
-var WithLabel = React.createClass({
-  render: function() {
+class WithLabel extends React.Component {
+  render() {
     return (
       <View style={styles.labelContainer}>
         <View style={styles.label}>
@@ -338,20 +431,18 @@ var WithLabel = React.createClass({
         {this.props.children}
       </View>
     );
-  },
-});
+  }
+}
 
-var TextEventsExample = React.createClass({
-  getInitialState: function() {
-    return {
-      curText: '<No Event>',
-      prevText: '<No Event>',
-      prev2Text: '<No Event>',
-      prev3Text: '<No Event>',
-    };
-  },
+class TextEventsExample extends React.Component {
+  state = {
+    curText: '<No Event>',
+    prevText: '<No Event>',
+    prev2Text: '<No Event>',
+    prev3Text: '<No Event>',
+  };
 
-  updateText: function(text) {
+  updateText = (text) => {
     this.setState((state) => {
       return {
         curText: text,
@@ -360,9 +451,9 @@ var TextEventsExample = React.createClass({
         prev3Text: state.prev2Text,
       };
     });
-  },
+  };
 
-  render: function() {
+  render() {
     return (
       <View>
         <TextInput
@@ -399,25 +490,28 @@ var TextEventsExample = React.createClass({
       </View>
     );
   }
-});
+}
 
 class AutoExpandingTextInput extends React.Component {
   state: any;
 
   constructor(props) {
     super(props);
-    this.state = {text: '', height: 0};
+    this.state = {
+      text: 'React Native enables you to build world-class application experiences on native platforms using a consistent developer experience based on JavaScript and React. The focus of React Native is on developer efficiency across all the platforms you care about — learn once, write anywhere. Facebook uses React Native in multiple production apps and will continue investing in React Native.',
+      height: 0,
+    };
   }
   render() {
     return (
       <TextInput
         {...this.props}
         multiline={true}
-        onChange={(event) => {
-          this.setState({
-            text: event.nativeEvent.text,
-            height: event.nativeEvent.contentSize.height,
-          });
+        onChangeText={(text) => {
+          this.setState({text});
+        }}
+        onContentSizeChange={(event) => {
+          this.setState({height: event.nativeEvent.contentSize.height});
         }}
         style={[styles.default, {height: Math.max(35, this.state.height)}]}
         value={this.state.text}
@@ -536,12 +630,12 @@ class TokenizedTextExample extends React.Component {
   }
 }
 
-var BlurOnSubmitExample = React.createClass({
-  focusNextField(nextField) {
+class BlurOnSubmitExample extends React.Component {
+  focusNextField = (nextField) => {
     this.refs[nextField].focus();
-  },
+  };
 
-  render: function() {
+  render() {
     return (
       <View>
         <TextInput
@@ -588,7 +682,94 @@ var BlurOnSubmitExample = React.createClass({
       </View>
     );
   }
-});
+}
+
+type SelectionExampleState = {
+  selection: {
+    start: number;
+    end?: number;
+  };
+  value: string;
+};
+
+class SelectionExample extends React.Component {
+  state: SelectionExampleState;
+
+  _textInput: any;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selection: {start: 0, end: 0},
+      value: props.value
+    };
+  }
+
+  onSelectionChange({nativeEvent: {selection}}) {
+    this.setState({selection});
+  }
+
+  getRandomPosition() {
+    var length = this.state.value.length;
+    return Math.round(Math.random() * length);
+  }
+
+  select(start, end) {
+    this._textInput.focus();
+    this.setState({selection: {start, end}});
+  }
+
+  selectRandom() {
+    var positions = [this.getRandomPosition(), this.getRandomPosition()].sort();
+    this.select(...positions);
+  }
+
+  placeAt(position) {
+    this.select(position, position);
+  }
+
+  placeAtRandom() {
+    this.placeAt(this.getRandomPosition());
+  }
+
+  render() {
+    var length = this.state.value.length;
+
+    return (
+      <View>
+        <TextInput
+          multiline={this.props.multiline}
+          onChangeText={(value) => this.setState({value})}
+          onSelectionChange={this.onSelectionChange.bind(this)}
+          ref={textInput => (this._textInput = textInput)}
+          selection={this.state.selection}
+          style={this.props.style}
+          value={this.state.value}
+        />
+        <View>
+          <Text>
+            selection = {JSON.stringify(this.state.selection)}
+          </Text>
+          <Text onPress={this.placeAt.bind(this, 0)}>
+            Place at Start (0, 0)
+          </Text>
+          <Text onPress={this.placeAt.bind(this, length)}>
+            Place at End ({length}, {length})
+          </Text>
+          <Text onPress={this.placeAtRandom.bind(this)}>
+            Place at Random
+          </Text>
+          <Text onPress={this.select.bind(this, 0, length)}>
+            Select All
+          </Text>
+          <Text onPress={this.selectRandom.bind(this)}>
+            Select Random
+          </Text>
+        </View>
+      </View>
+    );
+  }
+}
 
 var styles = StyleSheet.create({
   page: {
@@ -828,7 +1009,7 @@ exports.examples = [
       return (
         <View>
           <WithLabel label="true">
-            <TextInput password={true} style={styles.default} defaultValue="abc" />
+            <TextInput secureTextEntry={true} style={styles.default} defaultValue="abc" />
           </WithLabel>
         </View>
       );
@@ -836,7 +1017,7 @@ exports.examples = [
   },
   {
     title: 'Event handling',
-    render: function(): ReactElement { return <TextEventsExample />; },
+    render: function(): React.Element<any> { return <TextEventsExample />; },
   },
   {
     title: 'Colored input text',
@@ -934,7 +1115,7 @@ exports.examples = [
   },
   {
     title: 'Blur on submit',
-    render: function(): ReactElement { return <BlurOnSubmitExample />; },
+    render: function(): React.Element<any> { return <BlurOnSubmitExample />; },
   },
   {
     title: 'Multiline blur on submit',
@@ -974,10 +1155,23 @@ exports.examples = [
             style={[styles.multiline, styles.multilineWithFontStyles]}
           />
           <TextInput
+            placeholder="multiline text input with max length"
+            maxLength={5}
+            multiline={true}
+            style={styles.multiline}
+          />
+          <TextInput
             placeholder="uneditable multiline text input"
             editable={false}
             multiline={true}
             style={styles.multiline}
+          />
+          <TextInput
+            defaultValue="uneditable multiline text input with phone number detection: 88888888."
+            editable={false}
+            multiline={true}
+            style={styles.multiline}
+            dataDetectorTypes="phoneNumber"
           />
           <TextInput
             placeholder="multiline with children"
@@ -1011,6 +1205,60 @@ exports.examples = [
       return <TokenizedTextExample />;
     }
   },
+  {
+    title: 'Text selection & cursor placement',
+    render: function() {
+      return (
+        <View>
+          <SelectionExample
+            style={styles.default}
+            value="text selection can be changed"
+          />
+          <SelectionExample
+            multiline
+            style={styles.multiline}
+            value={"multiline text selection\ncan also be changed"}
+          />
+        </View>
+      );
+    }
+  },
+  {
+    title: 'TextInput maxLength',
+    render: function() {
+      return (
+        <View>
+          <WithLabel label="maxLength: 5">
+            <TextInput
+              maxLength={5}
+              style={styles.default}
+            />
+          </WithLabel>
+          <WithLabel label="maxLength: 5 with placeholder">
+            <TextInput
+              maxLength={5}
+              placeholder="ZIP code entry"
+              style={styles.default}
+            />
+          </WithLabel>
+          <WithLabel label="maxLength: 5 with default value already set">
+            <TextInput
+              maxLength={5}
+              defaultValue="94025"
+              style={styles.default}
+            />
+          </WithLabel>
+          <WithLabel label="maxLength: 5 with very long default value already set">
+            <TextInput
+              maxLength={5}
+              defaultValue="9402512345"
+              style={styles.default}
+            />
+          </WithLabel>
+        </View>
+      );
+    }
+  },
 ];
 ```
 
@@ -1028,16 +1276,14 @@ var {
   StyleSheet,
 } = ReactNative;
 
-var TextEventsExample = React.createClass({
-  getInitialState: function() {
-    return {
-      curText: '<No Event>',
-      prevText: '<No Event>',
-      prev2Text: '<No Event>',
-    };
-  },
+class TextEventsExample extends React.Component {
+  state = {
+    curText: '<No Event>',
+    prevText: '<No Event>',
+    prev2Text: '<No Event>',
+  };
 
-  updateText: function(text) {
+  updateText = (text) => {
     this.setState((state) => {
       return {
         curText: text,
@@ -1045,9 +1291,9 @@ var TextEventsExample = React.createClass({
         prev2Text: state.prevText,
       };
     });
-  },
+  };
 
-  render: function() {
+  render() {
     return (
       <View>
         <TextInput
@@ -1075,23 +1321,26 @@ var TextEventsExample = React.createClass({
       </View>
     );
   }
-});
+}
 
 class AutoExpandingTextInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {text: '', height: 0};
+    this.state = {
+      text: 'React Native enables you to build world-class application experiences on native platforms using a consistent developer experience based on JavaScript and React. The focus of React Native is on developer efficiency across all the platforms you care about — learn once, write anywhere. Facebook uses React Native in multiple production apps and will continue investing in React Native.',
+      height: 0,
+    };
   }
   render() {
     return (
       <TextInput
         {...this.props}
         multiline={true}
-        onChange={(event) => {
-          this.setState({
-            text: event.nativeEvent.text,
-            height: event.nativeEvent.contentSize.height,
-          });
+        onContentSizeChange={(event) => {
+          this.setState({height: event.nativeEvent.contentSize.height});
+        }}
+        onChangeText={(text) => {
+          this.setState({text});
         }}
         style={[styles.default, {height: Math.max(35, this.state.height)}]}
         value={this.state.text}
@@ -1183,12 +1432,12 @@ class TokenizedTextExample extends React.Component {
   }
 }
 
-var BlurOnSubmitExample = React.createClass({
-  focusNextField(nextField) {
+class BlurOnSubmitExample extends React.Component {
+  focusNextField = (nextField) => {
     this.refs[nextField].focus();
-  },
+  };
 
-  render: function() {
+  render() {
     return (
       <View>
         <TextInput
@@ -1235,7 +1484,111 @@ var BlurOnSubmitExample = React.createClass({
       </View>
     );
   }
-});
+}
+
+class ToggleDefaultPaddingExample extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {hasPadding: false};
+  }
+  render() {
+    return (
+      <View>
+        <TextInput style={this.state.hasPadding ? { padding: 0 } : null}/>
+        <Text onPress={() => this.setState({hasPadding: !this.state.hasPadding})}>
+          Toggle padding
+        </Text>
+      </View>
+    );
+  }
+}
+
+type SelectionExampleState = {
+  selection: {
+    start: number;
+    end: number;
+  };
+  value: string;
+};
+
+class SelectionExample extends React.Component {
+  state: SelectionExampleState;
+
+  _textInput: any;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selection: {start: 0, end: 0},
+      value: props.value
+    };
+  }
+
+  onSelectionChange({nativeEvent: {selection}}) {
+    this.setState({selection});
+  }
+
+  getRandomPosition() {
+    var length = this.state.value.length;
+    return Math.round(Math.random() * length);
+  }
+
+  select(start, end) {
+    this._textInput.focus();
+    this.setState({selection: {start, end}});
+  }
+
+  selectRandom() {
+    var positions = [this.getRandomPosition(), this.getRandomPosition()].sort();
+    this.select(...positions);
+  }
+
+  placeAt(position) {
+    this.select(position, position);
+  }
+
+  placeAtRandom() {
+    this.placeAt(this.getRandomPosition());
+  }
+
+  render() {
+    var length = this.state.value.length;
+
+    return (
+      <View>
+        <TextInput
+          multiline={this.props.multiline}
+          onChangeText={(value) => this.setState({value})}
+          onSelectionChange={this.onSelectionChange.bind(this)}
+          ref={textInput => (this._textInput = textInput)}
+          selection={this.state.selection}
+          style={this.props.style}
+          value={this.state.value}
+        />
+        <View>
+          <Text>
+            selection = {JSON.stringify(this.state.selection)}
+          </Text>
+          <Text onPress={this.placeAt.bind(this, 0)}>
+            Place at Start (0, 0)
+          </Text>
+          <Text onPress={this.placeAt.bind(this, length)}>
+            Place at End ({length}, {length})
+          </Text>
+          <Text onPress={this.placeAtRandom.bind(this)}>
+            Place at Random
+          </Text>
+          <Text onPress={this.select.bind(this, 0, length)}>
+            Select All
+          </Text>
+          <Text onPress={this.selectRandom.bind(this)}>
+            Select Random
+          </Text>
+        </View>
+      </View>
+    );
+  }
+}
 
 var styles = StyleSheet.create({
   multiline: {
@@ -1347,11 +1700,11 @@ exports.examples = [
   },
   {
     title: 'Blur on submit',
-    render: function(): ReactElement { return <BlurOnSubmitExample />; },
+    render: function(): React.Element { return <BlurOnSubmitExample />; },
   },
   {
     title: 'Event handling',
-    render: function(): ReactElement { return <TextEventsExample />; },
+    render: function(): React.Element { return <TextEventsExample />; },
   },
   {
     title: 'Colors and text inputs',
@@ -1416,19 +1769,19 @@ exports.examples = [
     render: function() {
       return (
         <View>
-          <TextInput 
+          <TextInput
             style={[styles.singleLine, {fontFamily: 'sans-serif'}]}
             placeholder="Custom fonts like Sans-Serif are supported"
           />
-          <TextInput 
+          <TextInput
             style={[styles.singleLine, {fontFamily: 'sans-serif', fontWeight: 'bold'}]}
             placeholder="Sans-Serif bold"
           />
-          <TextInput 
+          <TextInput
             style={[styles.singleLine, {fontFamily: 'sans-serif', fontStyle: 'italic'}]}
             placeholder="Sans-Serif italic"
           />
-          <TextInput 
+          <TextInput
             style={[styles.singleLine, {fontFamily: 'serif'}]}
             placeholder="Serif"
           />
@@ -1478,19 +1831,19 @@ exports.examples = [
             placeholder="multiline, aligned top-left"
             placeholderTextColor="red"
             multiline={true}
-            style={[styles.multiline, {textAlign: "left", textAlignVertical: "top"}]}
+            style={[styles.multiline, {textAlign: 'left', textAlignVertical: 'top'}]}
           />
           <TextInput
             autoCorrect={true}
             placeholder="multiline, aligned center"
             placeholderTextColor="green"
             multiline={true}
-            style={[styles.multiline, {textAlign: "center", textAlignVertical: "center"}]}
+            style={[styles.multiline, {textAlign: 'center', textAlignVertical: 'center'}]}
           />
           <TextInput
             autoCorrect={true}
             multiline={true}
-            style={[styles.multiline, {color: 'blue'}, {textAlign: "right", textAlignVertical: "bottom"}]}>
+            style={[styles.multiline, {color: 'blue'}, {textAlign: 'right', textAlignVertical: 'bottom'}]}>
             <Text style={styles.multiline}>multiline with children, aligned bottom-right</Text>
           </TextInput>
         </View>
@@ -1572,6 +1925,52 @@ exports.examples = [
         );
       });
       return <View>{examples}{types}</View>;
+    }
+  },
+  {
+    title: 'Inline Images',
+    render: function() {
+      return (
+        <View>
+          <TextInput
+            inlineImageLeft="ic_menu_black_24dp"
+            placeholder="This has drawableLeft set"
+            style={styles.singleLine}
+          />
+          <TextInput
+            inlineImageLeft="ic_menu_black_24dp"
+            inlineImagePadding={30}
+            placeholder="This has drawableLeft and drawablePadding set"
+            style={styles.singleLine}
+          />
+          <TextInput
+            placeholder="This does not have drawable props set"
+            style={styles.singleLine}
+          />
+        </View>
+      );
+    }
+  },
+  {
+    title: 'Toggle Default Padding',
+    render: function(): React.Element { return <ToggleDefaultPaddingExample />; },
+  },
+  {
+    title: 'Text selection & cursor placement',
+    render: function() {
+      return (
+        <View>
+          <SelectionExample
+            style={styles.default}
+            value="text selection can be changed"
+          />
+          <SelectionExample
+            multiline
+            style={styles.multiline}
+            value={"multiline text selection\ncan also be changed"}
+          />
+        </View>
+      );
     }
   },
 ];
