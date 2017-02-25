@@ -80,7 +80,7 @@ class MyScene extends Component {
 
 点击这里阅读[Navigator的API文档](navigatorios.html)。
 
-> 你还可以看看[react-native-navigation](https://github.com/wix/react-native-navigation)，这是一个第三方的组件，旨在于提供原生的跨平台的导航组件。
+> 你还可以看看[react-navigation](https://reactnavigation.org/)，这是一个尚处在实验阶段的官方组件，旨在于提供原生的跨平台的导航组件。
 
 ## NavigationExperimental
 
