@@ -42,7 +42,7 @@ class MyButton extends Component {
 
 ## 在列表中上下滑动和在视图上左右滑动
 
-可滚动的列表是移动应用中一个常见的模式。用户会在列表中或快或慢的各种滑动。[ScrollView](using-a-scrollview.html)组件可以满足这一需求。
+可滚动的列表是移动应用中一个常见的模式。用户会在列表中或快或慢的各种滑动。[ScrollView](Using-a-scrollView.html)组件可以满足这一需求。
 
 ScrollView可以在垂直或水平方向滚动，还可以配置`pagingEnabled`属性来让用户整屏整屏的滑动。此外，水平方向的滑动还可以使用Android上的[ViewPagerAndroid](viewpagerandroid.html) 组件。
 
