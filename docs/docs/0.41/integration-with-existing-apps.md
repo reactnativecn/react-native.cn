@@ -568,9 +568,9 @@ var styles = StyleSheet.create({
 AppRegistry.registerComponent('HelloWorld', () => HelloWorld);
 ```
 
-## Prepare your current app
+## 准备工作
 
-In your app's `build.gradle` file add the React Native dependency:
+在你的app中 `build.gradle` 文件中添加 React Native 依赖:
 
 ```
  dependencies {
@@ -579,9 +579,9 @@ In your app's `build.gradle` file add the React Native dependency:
  }
 ```
 
-> If you want to ensure that you are always using a specific React Native version in your native build, replace `+` with an actual React Native version you've downloaded from `npm`.
+> 你想要指定构建时的 React Native 版本，请用 `npm` 已下载的本地 React Native 的版本号替换 `+` 。 
 
-In your project's `build.gradle` file add an entry for the local React Native maven directory. Be sure to add it to the "allprojects" block:
+在项目的 `build.gradle` 文件中为 React Native 添加一个 maven 依赖的入口，必须写在 "allprojects" 代码块中:
 
 ```
 allprojects {
@@ -596,13 +596,13 @@ allprojects {
 }
 ```
 
-> Make sure that the path is correct! You shouldn’t run into any “Failed to resolve: com.facebook.react:react-native:0.x.x" errors after running Gradle sync in Android Studio.
+> 确保依赖路径的正确！以免在 Android Studio 运行Gradle同步构建时抛出 “Failed to resolve: com.facebook.react:react-native:0.x.x" 异常。
 
-Next, make sure you have the Internet permission in your `AndroidManifest.xml`:
+接着，在 `AndroidManifest.xml` 清单文件中声明网络权限:
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-If you need to access to the `DevSettingsActivity` add to your `AndroidManifest.xml`:
+如果需要访问 `DevSettingsActivity` 界面，也需要在 `AndroidManifest.xml` 中声明:
 
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
@@ -611,9 +611,9 @@ This is only really used in dev mode when reloading JavaScript from the developm
 
 ## 添加原生代码
 
-You need to add some native code in order to start the React Native runtime and get it to render something. To do this, we're going to create an `Activity` that creates a `ReactRootView`, starts a React application inside it and sets it as the main content view.
+想要通过原生代码调用 React Native ，就像这样，我们需要在一个 `Activity` 中创建一个 `ReactRootView` 对象，将它关联一个 React application 并设为界面的主视图。
 
-> If you are targetting Android version <5, use the `AppCompatActivity` class from the `com.android.support:appcompat` package instead of `Activity`.
+> 如果你想在安卓5.0以下的系统上运行，请用 `com.android.support:appcompat` 包中的 `AppCompatActivity` 代替 `Activity` 。
 
  
 ```java
@@ -651,9 +651,9 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
 
 > 如果你的项目名字不是叫“HelloWorld”，则需要将“index.android.js”中的“AppRegistry.registerComponent()”方法中的第一个参数替换为对应的名字。
 
-如果你使用的是Android Studio, use `Alt + Enter` to add all missing imports in your MyReactActivity class. Be careful to use your package’s `BuildConfig` and not the one from the `...facebook...` package.
+如果你使用的是 Android Studio , 请用 `Alt + Enter` 为 MyReactActivity 类导包。当你使用了不止一个 `...facebook...` 包时，请谨慎选择要导入的类。
  
-We need set the theme of `MyReactActivity` to `Theme.AppCompat.Light.NoActionBar` beause some components rely on this theme.
+我们需要把 `MyReactActivity` 的主题设定为 `Theme.AppCompat.Light.NoActionBar` ，因为里面有许多组件都使用了这一主题。
 
  ```xml
  <activity
