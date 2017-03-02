@@ -48,6 +48,10 @@
                     "mdlink": "network"
                 },
                 {
+                    "subject": "使用导航器跳转页面",
+                    "mdlink": "using-navigators"
+                },
+                {
                     "subject": "其他参考资源",
                     "mdlink": "more-resources"
                 }
