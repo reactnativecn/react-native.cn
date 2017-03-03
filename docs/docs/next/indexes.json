@@ -225,6 +225,10 @@
                     "mdlink": "drawerlayoutandroid"
                 },
                 {
+                    "subject": "FlatList",
+                    "mdlink": "flatlist"
+                },
+                {
                     "subject": "Image",
                     "mdlink": "image"
                 },
@@ -279,6 +283,10 @@
                 {
                     "subject": "ScrollView",
                     "mdlink": "scrollview"
+                },
+                {
+                    "subject": "SectionList",
+                    "mdlink": "sectionlist"
                 },
                 {
                     "subject": "SegmentedControlIOS",
@@ -339,6 +347,10 @@
                 {
                     "subject": "ViewPagerAndroid",
                     "mdlink": "viewpagerandroid"
+                },
+                {
+                    "subject": "VirtualizedList",
+                    "mdlink": "virtualizedlist"
                 },
                 {
                     "subject": "WebView",
