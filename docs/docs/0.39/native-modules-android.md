@@ -108,13 +108,19 @@ class AnExampleReactPackage implements ReactPackage {
   }
 ```
 
-这个package需要在`MainApplication.java`文件的`getPackages`方法中提供。这个文件位于你的react-native应用文件夹的android目录中。具体路径是: `android/app/src/main/java/com/your-app-name/MainApplication.java`.
+这个package需要在`MainActivity.java`文件中提供。
 
 ```java
-protected List<ReactPackage> getPackages() {
-    return Arrays.<ReactPackage>asList(
-            new MainReactPackage(),
-            new AnExampleReactPackage()); // <-- 添加这一行，类名替换成你的Package类的名字.
+mReactInstanceManager = ReactInstanceManager.builder()
+                .setApplication(getApplication())
+                .setBundleAssetName("index.android.bundle")
+                .setJSMainModuleName("index.android")
+                .addPackage(new MainReactPackage())
+                //需要在这个地方注册才行
+                .addPackage(new MyToastPackage())
+                .setUseDeveloperSupport(BuildConfig.DEBUG)
+                .setInitialLifecycleState(LifecycleState.RESUMED)
+                .build();
 }
 ```
 
