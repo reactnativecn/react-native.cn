@@ -23,7 +23,7 @@ const linksInternal = [
   { section: '122live', href: '/post/3337', text: '1.22直播', hot: true },
   { section: 'cases', href: '/cases.html', text: '案例' },
   { section: 'blog', href: '/blog.html', text: '博客' },
-  { section: 'videos', href: '/videos.html', text: '视频', checkViewed: 'videos' },
+  { section: 'videos', href: '//i.youku.com/i/UMzM5ODI5MDA4MA==/videos', text: '视频', newTab: true },
   { section: 'bbs', href: 'http://bbs.reactnative.cn/', text: '讨论', newTab: true },
   { section: 'update', href: 'http://update.reactnative.cn/', text: '热更新', newTab: true },
   { section: 'about', href: '/about.html', text: '关于' },
