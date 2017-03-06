@@ -124,7 +124,7 @@ React Native的植入过程同时需要React和React Native两个node依赖包�
 
 下面是一个最简单的`package.json`的内容示例。
 
-> 示例中的`version`字段没有太大意义（除非你要把你的项目发布到npm仓库）。`scripts`中是用于启动packager服务的命令。dependencies中的react和react-native的版本取决于你的具体需求。一般来说我们推荐使用最新版本。你可以使用`npm info react`和`npm info react-native`来查看当前的最新版本。另外，react-native对react的版本有严格要求，高于或低于某个范围都不可以。本文无法在这里列出所有react native和对应的react版本要求，只能提醒读者先尝试执行npm install，然后注意观察安装过程中的报错信息，例如`require react@某.某.某版本, but none was installed`，然后根据这样的提示，执行`npm i -S react@某.某.某版本`。
+> 示例中的`version`字段没有太大意义（除非你要把你的项目发布到npm仓库）。`scripts`中是用于启动packager服务的命令。`dependencies`中的react和react-native的版本取决于你的具体需求。一般来说我们推荐使用最新版本。你可以使用`npm info react`和`npm info react-native`来查看当前的最新版本。另外，react-native对react的版本有严格要求，高于或低于某个范围都不可以。本文无法在这里列出所有react native和对应的react版本要求，只能提醒读者先尝试执行npm install，然后注意观察安装过程中的报错信息，例如`require react@某.某.某版本, but none was installed`，然后根据这样的提示，执行`npm i -S react@某.某.某版本`。
 
 </div><div markdown class="md-block objc">
 
@@ -527,11 +527,31 @@ Here is the *React Native* high score screen:
     $ npm install --save react react-native
     $ curl -o .flowconfig https://raw.githubusercontent.com/facebook/react-native/master/.flowconfig
 
-This creates a node module for your app and adds the `react-native` npm dependency. Now open the newly created `package.json` file and add this under `scripts`:
+`npm init`创建了一个空的node模块（其实就是创建了一个package.json描述文件），而`npm install`则创建了node_modules目录并把react和react-native下载到了其中。至于第三步curl命令，其实质是`下载`.flowconfig配置文件，这个文件用于约束js代码的写法。这一步非必需，可跳过。下面我们打开新创建的`package.json`文件，然后在其`scripts`字段中加入:
 
     "start": "node node_modules/react-native/local-cli/cli.js start"
 
-首先在项目根目录中创建`index.android.js`文件，然后将下面的代码复制粘贴进来：
+现在你的`package.json`内容应该类似这样：
+
+```bash
+{
+  "name": "NumberTileGame",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "react": "15.4.1",
+    "react-native": "0.39.2"
+  }
+}
+```
+
+> 示例中的`version`字段没有太大意义（除非你要把你的项目发布到npm仓库）。`scripts`中是用于启动packager服务的命令。`dependencies`中的react和react-native的版本取决于你的具体需求。一般来说我们推荐使用最新版本。你可以使用`npm info react`和`npm info react-native`来查看当前的最新版本。另外，react-native对react的版本有严格要求，高于或低于某个范围都不可以。本文无法在这里列出所有react native和对应的react版本要求，只能提醒读者先尝试执行npm install，然后注意观察安装过程中的报错信息，例如`require react@某.某.某版本, but none was installed`，然后根据这样的提示，执行`npm i -S react@某.某.某版本`。
+
+
+接下来在项目根目录中创建`index.android.js`文件，然后将下面的代码复制粘贴进来：
 
 ```js
 'use strict';
@@ -673,7 +693,7 @@ protected void onPause() {
     super.onPause();
 
     if (mReactInstanceManager != null) {
-        mReactInstanceManager.onHostPause();
+        mReactInstanceManager.onHostPause(this);
     }
 }
 

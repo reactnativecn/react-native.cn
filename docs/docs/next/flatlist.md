@@ -1,16 +1,16 @@
-A performant interface for rendering simple, flat lists, supporting the most handy features:
+高性能的简单列表组件，支持下面这些常用的功能：
 
-- Fully cross-platform.
-- Optional horizontal mode.
-- Configurable viewability callbacks.
-- Header support.
-- Footer support.
-- Separator support.
-- Pull to Refresh.
-- Scroll loading.
-- If you need section support, use <SectionList>.
+- 完全跨平台。
+- 支持水平布局模式。
+- 行组件显示或隐藏时可配置回调事件。
+- 支持单独的头部组件。
+- 支持单独的尾部组件。
+- 支持自定义行间分隔线。
+- 支持下拉刷新。
+- 支持上拉加载。
+- 如果需要分组/类/区（section），请使用[`<SectionList>`](sectionlist.html).
 
-Minimal Example:
+一个简单的例子：
 
 ```javascript
 <FlatList
@@ -19,42 +19,41 @@ Minimal Example:
 />
 ```
 
-This is a convenience wrapper around <VirtualizedList>, and thus inherits the following caveats:
+本组件实质是基于[`<VirtualizedList>`](virtualizedlist.html)组件的封装，因此也有下面这些需要注意的事项：
 
-- Internal state is not preserved when content scrolls out of the render window. Make sure all your data is captured in the item data or external stores like Flux, Redux, or Relay.
-- In order to constrain memory and enable smooth scrolling, content is rendered asynchronously offscreen. This means it's possible to scroll faster than the fill rate ands momentarily see blank content. This is a tradeoff that can be adjusted to suit the needs of each application, and we are working on improving it behind the scenes.
-- By default, the list looks for a key prop on each item and uses that for the React key. Alternatively, you can provide a custom keyExtractor prop.
+- 当某行滑出渲染区域之外后，其内部状态将不会保留。请确保你在行组件以外的地方保留了数据。
+- 为了优化内存占用同时保持滑动的流畅，列表内容会在屏幕外异步绘制。这意味着如果用户滑动的速度超过渲染的速度，则会先看到空白的内容。这是为了优化不得不作出的妥协，而我们也在设法持续改进。
+- 默认情况下每行都需要提供一个不重复的key属性。你也可以提供一个`keyExtractor`函数来生成key。
 
 ### 属性
 
 <div class="props">
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="footercomponent"></a>FooterComponent?: <span
             class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
-                                                                           href="docs/flatlist.html#footercomponent">#</a>
+                                                                           href="#footercomponent">#</a>
     </h4>
-        <div><p>Rendered at the bottom of all the items.</p></div>
+        <div><p>尾部组件</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="headercomponent"></a>HeaderComponent?: <span
             class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
                                                                            href="#headercomponent">#</a>
     </h4>
-        <div><p>Rendered at the top of all the items.</p></div>
+        <div><p>头部组件</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="separatorcomponent"></a>SeparatorComponent?: <span
             class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
                                                                            href="#separatorcomponent">#</a>
     </h4>
-        <div><p>Rendered in between each item, but not at the top or bottom.</p></div>
+        <div><p>行与行之间的分隔线组件。不会出现在第一行之前和最后一行之后。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="columnwrapperstyle"></a>columnWrapperStyle?: <span
             class="propType"><code>StyleObj</code></span> <a class="hash-link"
                                                              href="#columnwrapperstyle">#</a></h4>
-        <div><p>Optional custom style for multi-item rows generated when numColumns &gt; 1</p></div>
+        <div><p>如果设置了多列布局（即将<code>numColumns</code>值设为大于1的整数），则可以额外指定此样式作用在每行容器上。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="data"></a>data: <span class="propType"><code>?Array&lt;ItemT&gt;</code></span>
         <a class="hash-link" href="#data">#</a></h4>
-        <div><p>For simplicity, data is just a plain array. If you want to use something else, like an
-            immutable list, use the underlying <code>VirtualizedList</code> directly.</p></div>
+        <div><p>为了简化起见，data属性目前只支持普通数组。如果需要使用其他特殊数据结构，例如immutable数组，请直接使用更底层的<code>VirtualizedList</code>组件。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="getitem"></a>getItem?: <a class="hash-link"
                                                                                               href="#getitem">#</a>
@@ -65,26 +64,22 @@ This is a convenience wrapper around <VirtualizedList>, and thus inherits the fo
             class="propType"><code>(data: ?Array&lt;ItemT&gt;, index: number) =&gt;
   {length: number, offset: number, index: number}</code></span> <a class="hash-link"
                                                                    href="#getitemlayout">#</a></h4>
-        <div><p><code>getItemLayout</code> is an optional optimizations that let us skip measurement of dynamic content
-            if
-            you know the height of items a priori. <code>getItemLayout</code> is the most efficient, and is easy to
-            use if you have fixed height items, for example:</p>
+        <div><p><code>getItemLayout</code>是一个可选的优化，用于避免动态测量内容尺寸的开销，不过前提是你可以提前知道内容的高度。如果你的行高是固定的，<code>getItemLayout</code>用起来就既高效又简单，类似下面这样：</p>
             <div class="prism language-javascript">getItemLayout<span class="token operator">=</span><span
                     class="token punctuation">{</span><span class="token punctuation">(</span>data<span
                     class="token punctuation">,</span> index<span class="token punctuation">)</span> <span
                     class="token operator">=</span><span class="token operator">&gt;</span> <span
                     class="token punctuation">(</span>
-                <span class="token punctuation">{</span>length<span class="token punctuation">:</span> ITEM_HEIGHT<span
-                        class="token punctuation">,</span> offset<span class="token punctuation">:</span> ITEM_HEIGHT
+                <span class="token punctuation">{</span>length<span class="token punctuation">:</span> 行高<span
+                        class="token punctuation">,</span> offset<span class="token punctuation">:</span> 行高
                 <span class="token operator">*</span> index<span class="token punctuation">,</span> index<span
                         class="token punctuation">}</span>
                 <span class="token punctuation">)</span><span class="token punctuation">}</span></div>
-            <p>Remember to include separator length (height or width) in your offset calculation if you
-                specify <code>SeparatorComponent</code>.</p></div>
+            <p>注意如果你指定了<code>SeparatorComponent</code>，请把分隔线的尺寸也考虑到offset的计算之中。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="horizontal"></a>horizontal?: <span class="propType"><code>?boolean</code></span>
         <a class="hash-link" href="#horizontal">#</a></h4>
-        <div><p>If true, renders items next to each other horizontally instead of stacked vertically.</p></div>
+        <div><p>设置为true则变为水平布局模式。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="keyextractor"></a>keyExtractor: <span
             class="propType"><code>(item: ItemT, index: number) =&gt; string</code></span> <a class="hash-link"
@@ -96,12 +91,13 @@ This is a convenience wrapper around <VirtualizedList>, and thus inherits the fo
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="legacyimplementation"></a>legacyImplementation?:
         <span class="propType"><code>?boolean</code></span> <a class="hash-link"
-                                                               href="#legacyimplementation">#</a></h4>
+                                                               href="#legacyimplementation">#</a></h4>                                     
+        <div><p>设置为true则使用旧的ListView的实现。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="numcolumns"></a>numColumns: <span
             class="propType"><code>number</code></span> <a class="hash-link" href="#numcolumns">#</a>
     </h4>
-        <div><p>Multiple columns can only be rendered with <code>horizontal={false}`` and will zig-zag like a</code>flexWrap`
+        <div><p>Multiple columns can only be rendered with <code>horizontal={false}</code> and will zig-zag like a<code>flexWrap</code>
             layout. Items should all be the same height - masonry layouts are not supported.</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onendreached"></a>onEndReached?: <span
@@ -151,7 +147,7 @@ This is a convenience wrapper around <VirtualizedList>, and thus inherits the fo
                         class="token punctuation">.</span>title<span class="token punctuation">}</span><span
                         class="token punctuation">}</span>&lt;<span class="token operator">/</span>Text<span
                         class="token operator">&gt;</span>
-                &lt;TouchableOpacity<span class="token operator">/</span><span class="token operator">&gt;</span>
+                &lt;/TouchableOpacity<span class="token operator"></span><span class="token operator">&gt;</span>
                 <span class="token punctuation">)</span><span class="token punctuation">;</span>
                 <span class="token punctuation">.</span><span class="token punctuation">.</span><span
                         class="token punctuation">.</span>
@@ -178,7 +174,7 @@ This is a convenience wrapper around <VirtualizedList>, and thus inherits the fo
             class="propType"><code>ViewabilityConfig</code></span> <a class="hash-link"
                                                                       href="#viewabilityconfig">#</a>
     </h4>
-        <div><p>See <code>ViewabilityHelper</code> for flow type and further documentation.</p></div>
+        <div><p>See <a href="https://github.com/facebook/react-native/blob/master/Libraries/CustomComponents/Lists/ViewabilityHelper.js"><code>ViewabilityHelper</code></a> for flow type and further documentation.</p></div>
     </div>
 </div>
 

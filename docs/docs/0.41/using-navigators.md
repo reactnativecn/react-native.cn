@@ -58,7 +58,7 @@ class YoDawgApp extends Component {
 AppRegistry.registerComponent('YoDawgApp', () => YoDawgApp);
 ```
 
-我们现在已经创建了只有单个场景的App。其中的`MyScene`同时也是一个[可复用的Reac组件](https://facebook.github.io/react/docs/reusable-components.html)的例子。
+我们现在已经创建了只有单个场景的App。其中的`MyScene`同时也是一个[可复用的React组件](https://facebook.github.io/react/docs/reusable-components.html)的例子。
 
 ### 使用Navigator
 

@@ -30,7 +30,7 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="horizontal"></a>horizontal <span class="propType">bool</span> <a class="hash-link" href="#horizontal">#</a></h4>
 		<div>
-			<p>当此属性为true的时候，所有的的子视图会在水平方向上排成一行，而不是默认的在垂直方向上排成一列。默认值为false。</p>
+			<p>当此属性为true的时候，所有的子视图会在水平方向上排成一行，而不是默认的在垂直方向上排成一列。默认值为false。</p>
 		</div>
 	</div>
 	<div class="prop">
