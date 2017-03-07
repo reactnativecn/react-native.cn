@@ -324,41 +324,56 @@ RCT_EXPORT_METHOD(updateStatusBarAnimation:(UIStatusBarAnimation)animation
 
 ## 给Javascript发送事件
 
-即使没有被JavaScript调用，原生模块也可以给JavaScript发送事件通知。最直接的方式是使用`eventDispatcher`:
+即使没有被JavaScript调用，原生模块也可以给JavaScript发送事件通知。最好的方法是继承`RCTEventEmitter`，实现`suppportEvents`方法并调用`self sendEventWithName:`。
 
 ```objective-c
-#import <React/RCTBridge.h>
-#import <React/RCTEventDispatcher.h>
+// CalendarManager.h
+#import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
+
+@interface CalendarManager : RCTEventEmitter <RCTBridgeModule>
+
+@end
+```
+```objective-c
+// CalendarManager.m
+#import "CalendarManager.h"
 
 @implementation CalendarManager
 
-@synthesize bridge = _bridge;
+RCT_EXPORT_MODULE();
+
+- (NSArray<NSString *> *)supportedEvents
+{
+  return @[@"EventReminder"];
+}
 
 - (void)calendarEventReminderReceived:(NSNotification *)notification
 {
   NSString *eventName = notification.userInfo[@"name"];
-  [self.bridge.eventDispatcher sendAppEventWithName:@"EventReminder"
-                                               body:@{@"name": eventName}];
+  [self sendEventWithName:@"EventReminder" body:@{@"name": eventName}];
 }
 
 @end
 ```
-
-在JavaScript中可以这样订阅事件：
+JavaScript代码可以创建一个包含你的模块的`NativeEventEmitter`实例来订阅这些事件。
 
 ```javascript
-import { NativeAppEventEmitter } from 'react-native';
+import { NativeEventEmitter, NativeModules } from 'react-native';
+const { CalendarManager } = NativeModules;
 
-var subscription = NativeAppEventEmitter.addListener(
+const calendarManagerEmitter = new NativeEventEmitter(CalendarManager);
+
+const subscription = calendarManagerEmitter.addListener(
   'EventReminder',
-  (reminder) => console.log(reminder.name)
+  (reminder) => console.log(reminder.name)
 );
 ...
-// 千万不要忘记忘记取消订阅, 通常在componentWillUnmount函数中实现。
+// 别忘了取消订阅，通常在componentWillUnmount生命周期方法中实现。
 subscription.remove();
 ```
+更多给JavaScript发送事件的例子请看[`RCTLocationObserver`](https://github.com/facebook/react-native/blob/master/Libraries/Geolocation/RCTLocationObserver.m)。
 
-更多的给JavaScript发送事件的例子，参见[`RCTLocationObserver`](https://github.com/facebook/react-native/blob/master/Libraries/Geolocation/RCTLocationObserver.m).
 
 ## 优化无监听处理的事件
 
