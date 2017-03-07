@@ -52,8 +52,29 @@ var styles = StyleSheet.create({
     borderBottomColor<span class="token punctuation">:</span> <span class="token string">'#bbb'</span><span class="token punctuation">,</span>
     borderBottomWidth<span class="token punctuation">:</span> StyleSheet<span class="token punctuation">.</span>hairlineWidth
   <span class="token punctuation">}</span></div>
-  <p>这一常量始终是一个整数的像素值（线看起来会像头发丝一样细），并会尽量符合当前平台最细的线的标准。然而，你不能把它“视为一个常量”，因为不同的平台和不同的屏幕像素密度会导致不同的结果。</p></div></div>
-<div class="prop"><h4 class="propTitle"><a class="anchor" name="flatten"></a>flatten<span class="propType">: CallExpression</span>
+  <p>这一常量始终是一个整数的像素值（线看起来会像头发丝一样细），并会尽量符合当前平台最细的线的标准。然而，你不能把它“视为一个常量”，因为不同的平台和不同的屏幕像素密度会导致不同的结果。</p></div>
+  </div>
+  <div class="prop"><h4 class="propTitle"><a class="anchor" name="absolutefill"></a>absoluteFill<span class="propType">: CallExpression</span>
+    <a class="hash-link" href="#absolutefill">#</a></h4>
+    <div><p>A very common pattern is to create overlays with position absolute and zero positioning,
+        so <code>absoluteFill</code> can be used for convenience and to reduce duplication of these repeated
+        styles.</p></div>
+</div>
+<div class="prop"><h4 class="propTitle"><a class="anchor" name="absolutefillobject"></a>absoluteFillObject<span
+        class="propType">: ObjectExpression</span> <a class="hash-link"
+                                                      href="#absolutefillobject">#</a></h4>
+    <div><p>Sometimes you may want <code>absoluteFill</code> but with a couple tweaks - <code>absoluteFillObject</code>
+        can be
+        used to create a customized entry in a <code>StyleSheet</code>, e.g.:</p>
+        <p> const styles = StyleSheet.create({
+            wrapper: {
+            ...StyleSheet.absoluteFillObject,
+            top: 10,
+            backgroundColor: 'transparent',
+            },
+            });</p></div>
+</div>
+	<div class="prop"><h4 class="propTitle"><a class="anchor" name="flatten"></a>flatten<span class="propType">: CallExpression</span>
             <a class="hash-link" href="stylesheet.html#flatten">#</a></h4>
             <div><p>Flattens an array of style objects, into one aggregated style object.
                 Alternatively, this method can be used to lookup IDs, returned by
@@ -98,6 +119,6 @@ var styles = StyleSheet.create({
                     objects (instances of StyleSheet.create), are individually resolved to,
                     their respective objects, merged as one and then returned. This also explains
                     the alternative use.</p></div>
-        </div>
+    </div>
 </div>
 

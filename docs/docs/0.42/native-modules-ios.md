@@ -324,7 +324,7 @@ RCT_EXPORT_METHOD(updateStatusBarAnimation:(UIStatusBarAnimation)animation
 
 ## 给Javascript发送事件
 
-即使没有被JavaScript调用，本地模块也可以给JavaScript发送事件通知。最直接的方式是使用`eventDispatcher`:
+即使没有被JavaScript调用，原生模块也可以给JavaScript发送事件通知。最直接的方式是使用`eventDispatcher`:
 
 ```objective-c
 #import <React/RCTBridge.h>
