@@ -12,9 +12,9 @@ __译注__：[更新日志点这里查看](http://bbs.reactnative.cn/category/1)
 
 ### 2. 安装`react-native-git-upgrade`工具模块
 
-注意：如果你的React Native版本已经大于等于0.40的话，则`不需要安装此模块`。你可以在项目目录下使用`react-native -v`命令查看当前的版本。
+注意：如果你的React Native版本已经大于等于0.41的话，则`不需要安装此模块`。你可以在项目目录下使用`react-native -v`命令查看当前的版本。
 
-如果你的React Native版本低于0.40，则需要全局安装此命令行工具模块：
+如果你的React Native版本低于0.41，则需要全局安装此命令行工具模块：
 
 ```sh
 $ npm install -g react-native-git-upgrade
@@ -27,7 +27,7 @@ $ npm install -g react-native-git-upgrade
 
 ### 3. 运行更新命令
 
-如果你的React Native版本已经大于等于0.40的话，则运行：
+如果你的React Native版本已经大于等于0.41的话，则运行：
 
 ```sh
 $ react-native upgrade
@@ -39,7 +39,7 @@ $ react-native upgrade X.Y.Z
 # 这样把react native升级到指定的X.Y.Z版本
 ```
 
-如果你的React Native版本低于0.40，则运行：
+如果你的React Native版本低于0.41，则运行：
 
 ```sh
 $ react-native-git-upgrade

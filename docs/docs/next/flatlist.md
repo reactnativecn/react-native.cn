@@ -23,6 +23,10 @@
 
 - 当某行滑出渲染区域之外后，其内部状态将不会保留。请确保你在行组件以外的地方保留了数据。
 - 为了优化内存占用同时保持滑动的流畅，列表内容会在屏幕外异步绘制。这意味着如果用户滑动的速度超过渲染的速度，则会先看到空白的内容。这是为了优化不得不作出的妥协，而我们也在设法持续改进。
+- This is a `PureComponent` which means that it will not re-render if `props` remain shallow-
+ + *   equal. Make sure that everything your `renderItem` function depends on is passed as a prop that
+ + *   is not `===` after updates, otherwise your UI may not update on changes. This includes the
+ + *   `data` prop and parent component state.
 - 默认情况下每行都需要提供一个不重复的key属性。你也可以提供一个`keyExtractor`函数来生成key。
 
 ### 属性
