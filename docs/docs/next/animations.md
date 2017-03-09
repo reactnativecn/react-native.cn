@@ -177,10 +177,6 @@ onPanResponderMove={Animated.event([
 
 注意尽管`LayoutAnimation`非常强大且有用，但它对动画本身的控制没有`Animated`或者其它动画库那样方便，所以如果你使用`LayoutAnimation`无法实现一个效果，那可能还是要考虑其他的方案。
 
-另外，如果要在**Android**上使用LayoutAnimation，那么目前还需要在`UIManager`中启用：
-```javascript
-UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-```
 
 ![](img/LayoutAnimationExample.gif)
 

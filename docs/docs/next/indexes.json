@@ -245,10 +245,6 @@
                     "mdlink": "listviewdatasource"
                 },
                 {
-                    "subject": "MapView",
-                    "mdlink": "mapview"
-                },
-                {
                     "subject": "Modal",
                     "mdlink": "modal"
                 },
