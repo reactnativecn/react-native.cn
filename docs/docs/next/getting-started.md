@@ -104,6 +104,14 @@ npm config set disturl https://npm.taobao.org/dist --global
 npm install -g yarn react-native-cli
 ```
 
+安装完yarn后同理也要设置镜像源：
+
+```
+yarn config set registry https://registry.npm.taobao.org --global
+yarn config set disturl https://npm.taobao.org/dist --global
+```
+
+
 如果你看到`EACCES: permission denied`这样的权限报错，那么请参照上文的homebrew译注，修复`/usr/local`目录的所有权：  
 
 ```bash
@@ -308,6 +316,12 @@ npm config set disturl https://npm.taobao.org/dist --global
 npm install -g yarn react-native-cli
 ```
 
+安装完yarn后同理也要设置镜像源：
+
+```
+yarn config set registry https://registry.npm.taobao.org --global
+yarn config set disturl https://npm.taobao.org/dist --global
+```
 
 > 如果你遇到`EACCES: permission denied`权限错误，可以尝试运行下面的命令（限linux系统）：
 > `sudo npm install -g yarn react-native-cli`.

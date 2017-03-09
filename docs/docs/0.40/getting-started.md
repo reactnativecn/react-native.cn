@@ -89,7 +89,7 @@ sudo chown -R `whoami` /usr/local
 brew install node
 ```
 
-安装完node后建议设置npm镜像以加速后面的过程（或使用科学上网工具）。
+安装完node后建议设置npm镜像以加速后面的过程（或使用科学上网工具）。注意：不要使用cnpm！cnpm安装的模块路径比较奇怪，packager不能正常识别！
 
 ```
 npm config set registry https://registry.npm.taobao.org --global
@@ -104,6 +104,14 @@ npm config set disturl https://npm.taobao.org/dist --global
 npm install -g yarn react-native-cli
 ```
 
+安装完yarn后同理也要设置镜像源：
+
+```
+yarn config set registry https://registry.npm.taobao.org --global
+yarn config set disturl https://npm.taobao.org/dist --global
+```
+
+
 如果你看到`EACCES: permission denied`这样的权限报错，那么请参照上文的homebrew译注，修复`/usr/local`目录的所有权：  
 
 ```bash
@@ -114,7 +122,7 @@ sudo chown -R `whoami` /usr/local
 
 #### Xcode
 
-React Native目前需要[Xcode](https://developer.apple.com/xcode/downloads/) 7.0 或更高版本。你可以通过App Store或是到[Apple开发者官网](https://developer.apple.com/xcode/downloads/)上下载。这一步骤会同时安装Xcode IDE和Xcode的命令行工具。
+React Native目前需要[Xcode](https://developer.apple.com/xcode/downloads/) 8.0 或更高版本。你可以通过App Store或是到[Apple开发者官网](https://developer.apple.com/xcode/downloads/)上下载。这一步骤会同时安装Xcode IDE和Xcode的命令行工具。
 
 > 虽然一般来说命令行工具都是默认安装了，但你最好还是启动Xcode，并在`Xcode | Preferences | Locations`菜单中检查一下是否装有某个版本的`Command Line Tools`。Xcode的命令行工具中也包含一些必须的工具，比如`git`等。
 
@@ -291,7 +299,7 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node
 choco install nodejs.install
 ```
 
-安装完node后建议设置npm镜像以加速后面的过程（或使用科学上网工具）。
+安装完node后建议设置npm镜像以加速后面的过程（或使用科学上网工具）。注意：不要使用cnpm！cnpm安装的模块路径比较奇怪，packager不能正常识别！
 
 ```
 npm config set registry https://registry.npm.taobao.org --global
@@ -308,6 +316,12 @@ npm config set disturl https://npm.taobao.org/dist --global
 npm install -g yarn react-native-cli
 ```
 
+安装完yarn后同理也要设置镜像源：
+
+```
+yarn config set registry https://registry.npm.taobao.org --global
+yarn config set disturl https://npm.taobao.org/dist --global
+```
 
 > 如果你遇到`EACCES: permission denied`权限错误，可以尝试运行下面的命令（限linux系统）：
 > `sudo npm install -g yarn react-native-cli`.
