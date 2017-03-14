@@ -600,6 +600,8 @@ cd AwesomeProject
 react-native run-ios
 ```
 
+> 提示：你可以使用`--version`参数创建指定版本的项目。例如`react-native init MyApp --version 0.39.2`。注意版本号必须精确到两个小数点。
+
 你也可以在[Nuclide](http://nuclide.io)中打开[`AwesomeProject`](http://nuclide.io/docs/quick-start/getting-started/#adding-a-project)文件夹
 然后[运行](http://nuclide.io/docs/platforms/react-native/#command-line)，或是双击`ios/AwesomeProject.xcodeproj`文件然后在Xcode中点击`Run`按钮。
 
@@ -611,6 +613,8 @@ cd AwesomeProject
 react-native run-android
 ```
 
+> 提示：你可以使用`--version`参数创建指定版本的项目。例如`react-native init MyApp --version 0.39.2`。注意版本号必须精确到两个小数点。
+ 
 你也可以在[Nuclide](http://nuclide.io)中打开[`AwesomeProject`](http://nuclide.io/docs/quick-start/getting-started/#adding-a-project)文件夹然后[运行](http://nuclide.io/docs/platforms/react-native/#command-line)。
 
 </div><div markdown class="md-block mac ios android">
@@ -647,6 +651,8 @@ react-native init AwesomeProject
 cd AwesomeProject
 react-native run-android
 ```
+
+> 提示：你可以使用`--version`参数创建指定版本的项目。例如`react-native init MyApp --version 0.39.2`。注意版本号必须精确到两个小数点。
 
 __Windows用户请注意，请不要在命令行默认的System32目录中init项目！会有各种权限限制导致不能运行！__
 </div><div markdown class="md-block windows linux android">

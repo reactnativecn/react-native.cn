@@ -1,18 +1,16 @@
-This guide covers the various navigation components available in React Native. If you are just getting started with navigation, you will probably want to use React Navigation.
-
-If you are only targeting iOS and would like to stick to the native look and feel, check out `NavigatorIOS`. The `Navigator` component is older but has been thoroughly tested in production.
+本文档总结对比了React Native中现有的几个导航组件。如果你刚开始接触，那么直接选择`React Navigation`就好。如果你只针对iOS平台开发，并且想和系统原生外观一致，那么可以选择`NavigatorIOS`。你还可能在很多地方听说过`Navigator`，这个老组件会逐步被`React Navigation`替代，但是它经历了长期的实践，bug很少，目前仍然可用。过去还有一个实验性的导航器组件`NavigationExperimental`，这个组件已经完全弃用。
 
 ## React Navigation
 
-The community solution to navigation is a standalone library that allows developers to set up the screens of an app with just a few lines of code.
+社区今后主推的方案是一个单独的导航库`react-navigation`，它的使用十分简单。
 
-The first step is to install in your app:
+首先是在你的应用中安装此库：
 
 ```
 npm install --save react-navigation
 ```
 
-Then you can quickly create an app with a home screen and a profile screen:
+然后你就可以快速创建一个有两个页面（Main和Profile）的应用了：
 
 ```
 import {
@@ -25,7 +23,7 @@ const App = StackNavigator({
 });
 ```
 
-Each screen component can set navigation options such as the header title. It can use action creators on the `navigation` prop to link to other screens:
+其中每一个screen组件都可以单独设置导航选项，例如导航头的标题。还可以使用`navigation`属性中的方法去跳转到别的页面：
 
 ```
 class MainScreen extends React.Component {
@@ -46,25 +44,26 @@ class MainScreen extends React.Component {
 }
 ```
 
-React Navigation routers make it easy to override navigation logic or integrate it into redux. Because routers can be nested inside eachother, developers can override navigation logic for one area of the app without making widespread changes.
+React Navigation的路由写法使其非常容易扩展导航逻辑，或是整合到redux中。由于路由可以嵌套使用，因而开发者可以根据不同页面编写不同的导航逻辑，且彼此互不影响。
 
-The views in React Navigation use native components and the `Animated` library to deliver 60fps animations that are run on the native thread. Plus, the animations and gestures can be easily customized.
+React Navigation中的视图时原生组件，同时用到了运行在原生线程上的`Animated`动画库，因而性能表现十分流畅。此外其动画形式和手势都非常便于定制。 library to deliver 60fps animations that are run on the native thread. Plus, the animations and gestures can be easily customized.
 
-For a complete intro to React Navigation, follow the [getting started guide](https://reactnavigation.org/docs/intro/), or browse other docs such as the [intro to navigators](https://reactnavigation.org/docs/navigators/).
+要想详细了解React Navigation，可以阅读这一篇英文的[入门文档](https://reactnavigation.org/docs/intro/)。
 
 ## Navigator
 
-Like React Navigation, `Navigator` provides a JavaScript implementation of a navigation stack, so it works on both iOS and Android and is easy to customize. Navigator was released alongside React Native in 2015, so it predates the Animated library with native-thread animations.
+和React Navigation类似，`Navigator`使用纯JavaScript实现了一个导航栈，因此可以跨平台工作，同时也便于定制。但Navigator早在2015年就发布了，因此它没有能够享受到如今流畅的原生动画支持。
 
 ![](img/NavigationStack-Navigator.gif)
 
-`Navigator` can be adapted to render different components based on the current route in its `renderScene` function. It will transition new scenes onto the screen by sliding in from the right by default, but you can control this behavior by using the `configureScene` function. You can also configure a navigation bar through the `navigationBar` prop.
+`Navigator`可以在`renderScene`方法中根据当前路由渲染不同的组件。默认情况下新的场景会从屏幕右侧滑进来，但你也可以通过`configureScene`方法来管理这一行为。你还可以通过`navigationBar`属性来配置一个跨场景的导航栏。（译注：但我们不推荐使用跨场景的navigationBar，它的代码逻辑维护起来很困难！建议自己在场景中用`View`实现自定义的导航栏。）
 
-Check out the [Navigator API reference](docs/navigator.html) for specific examples that cover each of these scenarios.
+点击这里阅读[Navigator的API文档](navigator.html)。
+
 
 ## NavigatorIOS
 
-If you are targeting iOS only, you may also want to consider using [NavigatorIOS](docs/navigatorios.html). It looks and feels just like [`UINavigationController`](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UINavigationController_Class/), because it is actually built on top of it.
+如果你只针对iOS平台开发，那么可以考虑使用[NavigatorIOS](navigatorios.html)。它是基于 [`UINavigationController`](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UINavigationController_Class/)封装的，所以看起来很像。
 
 ![](img/NavigationStack-NavigatorIOS.gif)
 
@@ -78,9 +77,9 @@ If you are targeting iOS only, you may also want to consider using [NavigatorIOS
 />
 ```
 
-Like other navigation systems, `NavigatorIOS` uses routes to represent screens, with some important differences. The actual component that will be rendered can be specified using the `component` key in the route, and any props that should be passed to this component can be specified in `passProps`. A "navigator" object is automatically passed as a prop to the component, allowing you to call `push` and `pop` as needed.
+用法类似`Navigator`，`NavigatorIOS`也使用路由对象来描述场景，但有一些重要区别。其中要渲染的组件在路由对象的`component`字段中指定，要给目标组件传递的参数则写在`passProps`中。被渲染的component都会自动接受到一个名为`navigator`的属性，你可以直接调用此对象(this.props.navigator)的`push`和`pop`方法。
 
-As `NavigatorIOS` leverages native UIKit navigation, it will automatically render a navigation bar with a back button and title.
+由于`NavigatorIOS`使用的是原生的UIKit导航，所以它会自动渲染一个带有返回按钮和标题的导航栏。
 
 ```javascript
 import React, { Component, PropTypes } from 'react';
@@ -130,16 +129,4 @@ class MyScene extends Component {
 }
 ```
 
-Check out the [`NavigatorIOS` reference docs](docs/navigatorios.html) to learn more about this component.
-
-> You may also want to check out [react-native-navigation](https://github.com/wix/react-native-navigation), a component that aims to provide native navigation on both iOS and Android.
-
-## NavigationExperimental
-
-Since early 2016, React Native has shipped with an experimental re-implementation of the original `Navigator` component called `CardStack`. The major benefit it had over `Navigator` is the smooth native-thread animations provided by the Animated library.
-
-Because `NavigationExperimental` only included view components, it required a lot of boilerplate to use by itself. Several libraries sprung up around it, making it easier to use. Libraries such as `react-native-router-flux`, `ex-navigation`, and `react-router-native` all wrapped NavigationExperimental views in an easier-to-use API. Authors of many of these libraries now support React Navigation.
-
-The `CardStack` and other NavigationExperimental views live on as a part of the React Navigation project. The new library aims to be easy to use, while continuing to enable the smooth and customizable animations that NavigationExperimental pioneered.
-
-As of React Native 0.43, `NavigationExperimental` is deprecated. It will be removed from the codebase in a later version.
+点击这里阅读[NavigatorIOS的API文档](navigatorios.html)。
