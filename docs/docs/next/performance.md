@@ -53,49 +53,7 @@ JavaScript线程的性能在开发模式下是很糟糕的。这是不可避免�
 
 长远的解决方法，其中一部分是要允许基于JavaScript的动画从主线程分离。同样是上面的例子，我们可以在切换动画开始的时候计算出一个列表，其中包含所有的新的场景需要的x轴偏移量，然后一次发送到主线程以某种优化的方式执行。由于JavaScript线程已经从更新x轴偏移量给主线程这个职责中解脱了出来，因此JavaScript线程中的掉帧就不是什么大问题了 —— 用户将基本上不会意识到这个问题，因为用户的注意力会被流畅的切换动作所吸引。
 
-不幸的是，这个方案还没有被实现。所以当前的解决方案是，在动画的进行过程中，利用InteractionManager来选择性的渲染新场景所需的最小限度的内容。
-
-`InteractionManager.runAfterInteractions`的参数中包含一个回调，这个回调会在navigator切换动画结束的时候被触发（每个来自于`Animated`接口的动画都会通知InteractionManager，不过这个就超出了本文的讨论）。
-
-你的场景组件看上去应该是这样的：
-
-```javascript
-class ExpensiveScene extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {renderPlaceholderOnly: true};
-  }
-
-  componentDidMount() {
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({renderPlaceholderOnly: false});
-    });
-  }
-
-  render() {
-    if (this.state.renderPlaceholderOnly) {
-      return this._renderPlaceholderView();
-    }
-
-    return (
-      <View>
-        <Text>Your full view goes here</Text>
-      </View>
-    );
-  }
-
-
-  _renderPlaceholderView() {
-    return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
-};
-```
-
-你不必被限制在仅仅是做一些loading指示的渲染，你也可以绘制部分的页面内容 —— 例如，当你加载Facebook应用的时候，你会看见一个灰色方形的消息流的占位符，是将来用来显示文字的地方。如果你正在场景中绘制地图，那么最好在场景切换完成之前，显示一个灰色的占位页面或者是一个转动的动画，因为切换过程的确会导致主线程的掉帧。
+新的[React Navigation](https://reactnavigation.org/)库的一大目标就是为了解决这个问题。React Navigation中的视图是原生组件，同时用到了运行在原生线程上的`Animated`动画库，因而性能表现十分流畅。
 
 ### ListView初始化渲染太慢以及列表过长时滚动性能太差
 这是一个频繁出现的问题。因为iOS配备了UITableView，通过重用底层的UIViews实现了非常高性能的体验（相比之下ListView的性能没有那么好）。用React Native实现相同效果的工作仍正在进行中，但是在此之前，我们有一些可用的方法来稍加改进性能以满足我们的需求。
