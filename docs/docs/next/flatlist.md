@@ -29,23 +29,23 @@
 ### 属性
 
 <div class="props">
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="footercomponent"></a>FooterComponent?: <span
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="itemseparatorcomponent"></a>ItemSeparatorComponent?: <span
             class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
-                                                                           href="#footercomponent">#</a>
+                                                                           href="#itemseparatorcomponent">#</a>
+    </h4>
+        <div><p>行与行之间的分隔线组件。不会出现在第一行之前和最后一行之后。</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="listfootercomponent"></a>ListFooterComponent?: <span
+            class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
+                                                                           href="#listfootercomponent">#</a>
     </h4>
         <div><p>尾部组件</p></div>
     </div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="headercomponent"></a>HeaderComponent?: <span
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="listheadercomponent"></a>ListHeaderComponent?: <span
             class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
-                                                                           href="#headercomponent">#</a>
+                                                                           href="#listheadercomponent">#</a>
     </h4>
         <div><p>头部组件</p></div>
-    </div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="separatorcomponent"></a>SeparatorComponent?: <span
-            class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
-                                                                           href="#separatorcomponent">#</a>
-    </h4>
-        <div><p>行与行之间的分隔线组件。不会出现在第一行之前和最后一行之后。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="columnwrapperstyle"></a>columnWrapperStyle?: <span
             class="propType"><code>StyleObj</code></span> <a class="hash-link"
@@ -86,9 +86,7 @@
             class="propType"><code>(item: ItemT, index: number) =&gt; string</code></span> <a class="hash-link"
                                                                                               href="#keyextractor">#</a>
     </h4>
-        <div><p>Used to extract a unique key for a given item at the specified index. Key is used for caching
-            and as the react key to track item re-ordering. The default extractor checks <code>item.key</code>, then
-            falls back to using the index, like React does.</p></div>
+        <div><p>此函数用于为给定的item生成一个不重复的key。Key的作用是使React能够区分同类元素的不同个体，以便在刷新时能够确定其变化的位置，减少重新渲染的开销。若不指定此函数，则默认抽取<code>item.key</code>作为key值。若<code>item.key</code>也不存在，则使用数组下标。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="legacyimplementation"></a>legacyImplementation?:
         <span class="propType"><code>?boolean</code></span> <a class="hash-link"
@@ -169,7 +167,7 @@
   prevInfo: {item: ItemT, index: number},
   nextInfo: {item: ItemT, index: number}
 ) =&gt; boolean</code></span> <a class="hash-link" href="#shoulditemupdate">#</a></h4>
-        <div><p>Optional optimization to minimize re-rendering items.</p></div>
+        <div><p>可选的优化函数。由开发者提供更符合实际的比对策略，以避免不必要的重新渲染。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="viewabilityconfig"></a>viewabilityConfig?: <span
             class="propType"><code>ViewabilityConfig</code></span> <a class="hash-link"
@@ -185,7 +183,7 @@
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="scrolltoend"></a>scrollToEnd<span
             class="methodType">(params?: object)</span> <a class="hash-link" href="#scrolltoend">#</a>
     </h4>
-        <div><p>Scrolls to the end of the content. May be janky without <code>getItemLayout</code> prop.</p></div>
+        <div><p>滚动到底部。如果不设置<code>getItemLayout</code>属性的话，可能会比较卡。</p></div>
     </div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="scrolltoindex"></a>scrollToIndex<span
             class="methodType">(params: object)</span> <a class="hash-link"
@@ -222,6 +220,7 @@
 const React = require('react');
 const ReactNative = require('react-native');
 const {
+  Animated,
   FlatList,
   StyleSheet,
   View,
@@ -243,6 +242,8 @@ const {
   renderSmallSwitchOption,
 } = require('./ListExampleShared');
 
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
+
 const VIEWABILITY_CONFIG = {
   minimumViewTime: 3000,
   viewAreaCoveragePercentThreshold: 100,
@@ -262,18 +263,34 @@ class FlatListExample extends React.PureComponent {
     logViewable: false,
     virtualized: true,
   };
+
   _onChangeFilterText = (filterText) => {
     this.setState({filterText});
   };
+
   _onChangeScrollToIndex = (text) => {
-    this._listRef.scrollToIndex({viewPosition: 0.5, index: Number(text)});
+    this._listRef.getNode().scrollToIndex({viewPosition: 0.5, index: Number(text)});
   };
+
+  _scrollPos = new Animated.Value(0);
+  _scrollSinkX = Animated.event(
+    [{nativeEvent: { contentOffset: { x: this._scrollPos } }}],
+    {useNativeDriver: true},
+  );
+  _scrollSinkY = Animated.event(
+    [{nativeEvent: { contentOffset: { y: this._scrollPos } }}],
+    {useNativeDriver: true},
+  );
+
   componentDidUpdate() {
-    this._listRef.recordInteraction(); // e.g. flipping logViewable switch
+    this._listRef.getNode().recordInteraction(); // e.g. flipping logViewable switch
   }
+
   render() {
     const filterRegex = new RegExp(String(this.state.filterText), 'i');
-    const filter = (item) => (filterRegex.test(item.text) || filterRegex.test(item.title));
+    const filter = (item) => (
+      filterRegex.test(item.text) || filterRegex.test(item.title)
+    );
     const filteredData = this.state.data.filter(filter);
     return (
       <UIExplorerPage
@@ -289,7 +306,6 @@ class FlatListExample extends React.PureComponent {
             <PlainInput
               onChangeText={this._onChangeScrollToIndex}
               placeholder="scrollToIndex..."
-              style={styles.searchTextInput}
             />
           </View>
           <View style={styles.options}>
@@ -298,22 +314,37 @@ class FlatListExample extends React.PureComponent {
             {renderSmallSwitchOption(this, 'fixedHeight')}
             {renderSmallSwitchOption(this, 'logViewable')}
             {renderSmallSwitchOption(this, 'debug')}
+            <Animated.View style={[styles.spindicator, {
+              transform: [
+                {rotate: this._scrollPos.interpolate({
+                  inputRange: [0, 5000],
+                  outputRange: ['0deg', '360deg'],
+                  extrapolate: 'extend',
+                })}
+              ]
+            }]} />
           </View>
         </View>
         <SeparatorComponent />
-        <FlatList
-          HeaderComponent={HeaderComponent}
-          FooterComponent={FooterComponent}
-          SeparatorComponent={SeparatorComponent}
+        <AnimatedFlatList
+          ItemSeparatorComponent={SeparatorComponent}
+          ListHeaderComponent={HeaderComponent}
+          ListFooterComponent={FooterComponent}
           data={filteredData}
           debug={this.state.debug}
           disableVirtualization={!this.state.virtualized}
-          getItemLayout={this.state.fixedHeight ? this._getItemLayout : undefined}
+          getItemLayout={this.state.fixedHeight ?
+            this._getItemLayout :
+            undefined
+          }
           horizontal={this.state.horizontal}
-          key={(this.state.horizontal ? 'h' : 'v') + (this.state.fixedHeight ? 'f' : 'd')}
+          key={(this.state.horizontal ? 'h' : 'v') +
+            (this.state.fixedHeight ? 'f' : 'd')
+          }
           legacyImplementation={false}
           numColumns={1}
           onRefresh={this._onRefresh}
+          onScroll={this.state.horizontal ? this._scrollSinkX : this._scrollSinkY}
           onViewableItemsChanged={this._onViewableItemsChanged}
           ref={this._captureRef}
           refreshing={false}
@@ -341,26 +372,35 @@ class FlatListExample extends React.PureComponent {
   };
   _shouldItemUpdate(prev, next) {
     /**
-     * Note that this does not check state.horizontal or state.fixedheight because we blow away the
-     * whole list by changing the key in those cases. Make sure that you do the same in your code,
-     * or incorporate all relevant data into the item data, or skip this optimization entirely.
+     * Note that this does not check state.horizontal or state.fixedheight
+     * because we blow away the whole list by changing the key in those cases.
+     * Make sure that you do the same in your code, or incorporate all relevant
+     * data into the item data, or skip this optimization entirely.
      */
     return prev.item !== next.item;
   }
-  // This is called when items change viewability by scrolling into or out of the viewable area.
+  // This is called when items change viewability by scrolling into or out of
+  // the viewable area.
   _onViewableItemsChanged = (info: {
       changed: Array<{
-        key: string, isViewable: boolean, item: any, index: ?number, section?: any
+        key: string,
+        isViewable: boolean,
+        item: any,
+        index: ?number,
+        section?: any,
       }>
     }
   ) => {
     // Impressions can be logged here
     if (this.state.logViewable) {
-      infoLog('onViewableItemsChanged: ', info.changed.map((v) => ({...v, item: '...'})));
+      infoLog(
+        'onViewableItemsChanged: ',
+        info.changed.map((v) => ({...v, item: '...'})),
+      );
     }
   };
   _pressItem = (key: number) => {
-    this._listRef.recordInteraction();
+    this._listRef.getNode().recordInteraction();
     pressItem(this, key);
   };
   _listRef: FlatList<*>;
@@ -375,6 +415,12 @@ const styles = StyleSheet.create({
   },
   searchRow: {
     paddingHorizontal: 10,
+  },
+  spindicator: {
+    marginLeft: 'auto',
+    width: 2,
+    height: 16,
+    backgroundColor: 'darkgray',
   },
 });
 
