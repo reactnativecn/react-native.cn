@@ -4,8 +4,11 @@
 ## 在真机上访问开发服务器（packager）
 
 你可以在真机上访问开发服务器以快速测试和迭代。首先需要确保设备已使用usb连接至电脑，同时和电脑处在同一wifi网络内，然后在Xcode中选择你的设备作为编译目标（左上角运行按钮的右边），然后点击运行按钮即可。  
-如果你需要在真机上启用调试功能，则需要打开[RCTWebSocketExecutor.m](https://github.com/facebook/react-native/blob/master/Libraries/WebSocket/RCTWebSocketExecutor.m)文件，然后将其中的"localhost"改为你的电脑的IP地址，最后启用开发者菜单中的"Debug JS Remotely"选项。
-
+如果你需要在真机上启用调试功能，则需要打开AppDelegate.m(AwesomePreject目录里)文件，然后将其中的"localhost"改为你的电脑的IP地址，最后启用开发者菜单中的"Debug JS Remotely"选项。
+### AppDelegate.m
+```javascript
+ Line 34 ：jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+```
 > 提示  
 摇晃设备就可以打开开发者菜单。
 
