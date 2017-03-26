@@ -8,7 +8,7 @@
 
 ```javascript
 componentDidMount() {
-  var url = Linking.getInitialURL().then(url) => {
+  Linking.getInitialURL().then(url) => {
     if (url) {
       console.log('Initial url is: ' + url);
     }

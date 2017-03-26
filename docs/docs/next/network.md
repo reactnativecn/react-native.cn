@@ -50,7 +50,7 @@ fetch('https://mywebsite.com/endpoint/', {
 
   ```js
   getMoviesFromApiAsync() {
-    return fetch('http://facebook.github.io/react-native/movies.json')
+    return fetch('https://facebook.github.io/react-native/movies.json')
       .then((response) => response.json())
       .then((responseJson) => {
         return responseJson.movies;
@@ -68,7 +68,7 @@ fetch('https://mywebsite.com/endpoint/', {
   async getMoviesFromApi() {
     try {
       // 注意这里的await语句，其所在的函数必须有async关键字声明
-      let response = await fetch('http://facebook.github.io/react-native/movies.json');
+      let response = await fetch('https://facebook.github.io/react-native/movies.json');
       let responseJson = await response.json();
       return responseJson.movies;
     } catch(error) {
@@ -79,7 +79,7 @@ fetch('https://mywebsite.com/endpoint/', {
 
 别忘了catch住`fetch`可能抛出的异常，否则出错时你可能看不到任何提示。
 
-> 默认情况下，iOS会阻止所有非HTTPS的请求。如果你请求的接口是http协议，那么首先需要添加一个App Transport Securty的例外，详细可参考[这篇帖子](https://segmentfault.com/a/1190000002933776)。
+> 默认情况下，iOS会阻止所有非https的请求。如果你请求的接口是http协议，那么首先需要添加一个App Transport Security的例外，详细可参考[这篇帖子](https://segmentfault.com/a/1190000002933776)。
 
 
 ### 使用其他的网络库
