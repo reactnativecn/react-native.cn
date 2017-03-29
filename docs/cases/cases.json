@@ -1,5 +1,12 @@
 [
 	{
+		"name": "幕布",
+		"desc": "管理你的大脑",
+		"ios": "https://itunes.apple.com/app/id1214302139",
+		"android": "https://mubu.com/app-dl",
+		"icon": "https://img.mubu.com/static/wechat-share-icon.png"
+	},
+	{
 		"name": "大浙惠生活",
 		"desc": "大浙网优惠福利信息",
 		"ios": "https://itunes.apple.com/app/apple-store/id1184729110??l=zh&ls=1&mt=8",
