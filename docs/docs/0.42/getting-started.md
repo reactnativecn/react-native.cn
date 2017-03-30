@@ -2,7 +2,7 @@
 
 根据你所使用的操作系统、针对的目标平台不同，具体步骤有所不同。如果想同时开发iOS和Android也没问题，你只需要先选一个平台开始，另一个平台的环境搭建只是稍有不同。
 
-如果`阅读完本文档`后还碰到很多环境搭建的问题，我们建议你还可以再看看由本站提供的[`环境搭建视频教程`](http://list.youku.com/albumlist/show?id=49361022)、[windows环境搭建文字教程](http://bbs.reactnative.cn/topic/10)、以及[常见问题](http://bbs.reactnative.cn/topic/130)。
+如果`阅读完本文档`后还碰到很多环境搭建的问题，我们建议你还可以再看看由本站提供的`环境搭建视频教程`([macOS iOS](https://ke.qq.com/webcourse/index.html#course_id=197101&term_id=100233637&taid=1220865928921581&vid=a1417i5op7k)、[macOS Android](https://ke.qq.com/webcourse/index.html#course_id=197101&term_id=100233637&taid=1220870223888877&vid=z1417kmxask)、[windows Android](https://ke.qq.com/webcourse/index.html#course_id=197101&term_id=100233637&taid=1220874518856173&vid=d1417tgg1ez))、[windows环境搭建文字教程](http://bbs.reactnative.cn/topic/10)、以及[常见问题](http://bbs.reactnative.cn/topic/130)。
 
 <div class="toggler">
 <style>
@@ -45,7 +45,6 @@
 <a class="button-linux" onclick="display('os', 'linux')">Linux</a>
 <a class="button-windows" onclick="display('os', 'windows')">Windows</a>
 </div>
-
 
 <!-- ######### LINUX AND WINDOWS for iOS ##################### -->
 
@@ -656,17 +655,6 @@ react-native run-android
 > 提示：你可以使用`--version`参数创建指定版本的项目。例如`react-native init MyApp --version 0.39.2`。注意版本号必须精确到两个小数点。
 
 __Windows用户请注意，请不要在命令行默认的System32目录中init项目！会有各种权限限制导致不能运行！__
-</div><div markdown class="md-block windows linux android">
-
-### 手动运行Packager
-
-有个常见的问题是在你运行`react-native run-android`命令后，Packager可能不会自动运行。此时你可以手动启动它：
-
-```
-cd AwesomeProject
-react-native start
-```
-
 </div>
 <div markdown class="md-block windows linux android">
 
