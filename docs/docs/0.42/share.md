@@ -3,23 +3,21 @@
 <div class="props">
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="share"></a><span class="methodType">static </span>share<span
             class="methodType">(content, options)</span> <a class="hash-link" href="#share">#</a></h4>
-        <div><p>Open a dialog to share text content.</p>
-            <p>In iOS, Returns a Promise which will be invoked an object containing <code>action</code>, <code>activityType</code>.
-                If the user dismissed the dialog, the Promise will still be resolved with action being <code>Share.dismissedAction</code>
-                and all the other keys being undefined.</p>
-            <p>In Android, Returns a Promise which always be resolved with action being <code>Share.sharedAction</code>.
+        <div><p>打开一个对话框来共享文本内容。</p>
+            <p>在iOS中，返回一个<code>Promise</code>，它将被调用一个包含<code>action</code>的对象，<code>activityType</code>。 如果用户关闭对话框，则<code>Promise</code>仍将被解析，而<code>ActionDisissedAction</code>和所有其他键未被定义。</p>
+            <p>在<code>Android</code>中，返回一个<code>Promise</code>，它始终使用<code>Share.sharedAction</code>操作来解决。
             </p>
             <h3><a class="anchor" name="content"></a>Content <a class="hash-link" href="#content">#</a>
             </h3>
             <ul>
-                <li><code>message</code> - a message to share</li>
-                <li><code>title</code> - title of the message</li>
+                <li><code>message</code> - 要分享的消息</li>
+                <li><code>title</code> - 消息的标题</li>
             </ul>
             <h4><a class="anchor" name="ios"></a>iOS <a class="hash-link" href="#ios">#</a></h4>
             <ul>
-                <li><code>url</code> - an URL to share</li>
+                <li><code>url</code> - 要分享的网址</li>
             </ul>
-            <p>At least one of URL and message is required.</p>
+            <p>至少需要一个URL和消息.</p>
             <h3><a class="anchor" name="options"></a>Options <a class="hash-link" href="#options">#</a>
             </h3><h4><a class="anchor" name="ios"></a>iOS <a class="hash-link" href="#ios">#</a></h4>
             <ul>
@@ -37,11 +35,11 @@
             class="methodType">static </span>sharedAction<span class="methodType">()</span> <a class="hash-link"
                                                                                                 href="#sharedaction">#</a>
     </h4>
-        <div><p>The content was successfully shared.</p></div>
+        <div><p>内容已成功共享。.</p></div>
     </div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="dismissedaction"></a><span class="methodType">static </span>dismissedAction<span
             class="methodType">()</span> <a class="hash-link" href="#dismissedaction">#</a></h4>
-        <div><p>The dialog has been dismissed.
+        <div><p>该对话框已被拒绝.
             @platform ios</p></div>
     </div>
 </div>
