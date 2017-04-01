@@ -9,8 +9,8 @@
 ```js
 async function requestCameraPermission() {
   try {
-    const granted = await AndroidPermissions.request(
-      AndroidPermissions.PERMISSIONS.CAMERA,
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
       {
         'title': '申请摄像头权限',
         'message': '一个很牛逼的应用想借用你的摄像头，' +
