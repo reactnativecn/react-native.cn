@@ -14,7 +14,7 @@ A performant interface for rendering sectioned lists, supporting the most handy 
 
 If you don't need section support and want a simpler interface, use [`<FlatList>`](flatlist.html).
 
-If you need sticky section header support, use [`ListView`](listview.html) for now.
+在0.43版本中，如果希望section的头部能够吸顶悬浮，请暂时先使用老版的[`<ListView>`](listview.html)。下一个版本开始可以支持悬浮的section头部。
 
 简单的例子：
 

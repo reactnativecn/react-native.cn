@@ -8,7 +8,8 @@
 - 支持自定义行间分隔线。
 - 支持下拉刷新。
 - 支持上拉加载。
-- 如果需要分组/类/区（section），请使用[`<SectionList>`](sectionlist.html).
+
+如果需要分组/类/区（section），请使用[`<SectionList>`](sectionlist.html).
 
 一个简单的例子：
 
@@ -96,8 +97,7 @@
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="numcolumns"></a>numColumns: <span
             class="propType"><code>number</code></span> <a class="hash-link" href="#numcolumns">#</a>
     </h4>
-        <div><p>Multiple columns can only be rendered with <code>horizontal={false}</code> and will zig-zag like a<code>flexWrap</code>
-            layout. Items should all be the same height - masonry layouts are not supported.</p></div>
+        <div><p>多列布局只能在非水平模式下使用。此时组件内元素会从左到右从上到下按Z字形排列，类似启用了<code>flexWrap</code>的布局。组件内元素必须是等高的——暂时还无法支持瀑布流布局。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onendreached"></a>onEndReached?: <span
             class="propType"><code>?(info: {distanceFromEnd: number}) =&gt; void</code></span> <a class="hash-link"
@@ -161,13 +161,6 @@
                         class="token punctuation">}</span> <span class="token operator">/</span><span
                         class="token operator">&gt;</span></div>
             <p>Provides additional metadata like <code>index</code> if you need it.</p></div>
-    </div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="shoulditemupdate"></a>shouldItemUpdate: <span
-            class="propType"><code>(
-  prevInfo: {item: ItemT, index: number},
-  nextInfo: {item: ItemT, index: number}
-) =&gt; boolean</code></span> <a class="hash-link" href="#shoulditemupdate">#</a></h4>
-        <div><p>可选的优化函数。由开发者提供更符合实际的比对策略，以避免不必要的重新渲染。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="viewabilityconfig"></a>viewabilityConfig?: <span
             class="propType"><code>ViewabilityConfig</code></span> <a class="hash-link"

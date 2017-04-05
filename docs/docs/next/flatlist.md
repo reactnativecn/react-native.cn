@@ -8,9 +8,13 @@
 - 支持自定义行间分隔线。
 - 支持下拉刷新。
 - 支持上拉加载。
-- 如果需要分组/类/区（section），请使用[`<SectionList>`](sectionlist.html).
+- 支持跳转到指定行（ScrollToIndex）。
 
-一个简单的例子：
+
+如果需要分组/类/区（section），请使用[`<SectionList>`](sectionlist.html)。
+
+
+一个最简单的例子：
 
 ```javascript
 <FlatList
@@ -19,12 +23,73 @@
 />
 ```
 
+下面是一个较复杂的例子，其中演示了如何利用`PureComponent`来进一步优化性能和减少bug产生的可能。 
+
+- By binding the `onPressItem` handler, the props will remain `===` and `PureComponent` will prevent wasteful re-renders unless the actual `id`, `selected`, or `title` props change, even if the inner `SomeOtherWidget` has no such optimizations.
+- By passing `extraData={this.state}` to `FlatList` we make sure `FlatList` itself will re-render when the `state.selected` changes. Without setting this prop, `FlatList` would not know it needs to re-render any items because it is also a `PureComponent` and the prop comparison will not show any changes.
+- `keyExtractor` tells the list to use the ids for the react keys.
+
+```javascript
+class MyListItem extends React.PureComponent {
+  _onPress = () => {
+    this.props.onPressItem(this.props.id);
+  };
+
+  render() {
+    return (
+      <SomeOtherWidget
+        {...this.props}
+        onPress={this._onPress}
+      />
+    )
+  }
+}
+
+class MyList extends React.PureComponent {
+  state = {selected: (new Map(): Map<string, boolean>)};
+
+  _keyExtractor = (item, index) => item.id;
+
+  _onPressItem = (id: string) => {
+    // updater functions are preferred for transactional updates
+    this.setState((state) => {
+      // copy the map rather than modifying state.
+      const selected = new Map(state.selected);
+      selected.set(id, !state.get(id)); // toggle
+      return {selected};
+    });
+  };
+
+  _renderItem = ({item}) => (
+    <MyListItem
+      id={item.id}
+      onPressItem={this._onPressItem}
+      selected={!!this.state.selected.get(item.id)}
+      title={item.title}
+    />
+  );
+
+  render() {
+    return (
+      <FlatList
+        data={this.props.data}
+        extraData={this.state}
+        keyExtractor={this._keyExtractor}
+        renderItem={this._renderItem}
+      />
+    );
+  }
+}
+```
+
 本组件实质是基于[`<VirtualizedList>`](virtualizedlist.html)组件的封装，因此也有下面这些需要注意的事项：
 
 - 当某行滑出渲染区域之外后，其内部状态将不会保留。请确保你在行组件以外的地方保留了数据。
 - 为了优化内存占用同时保持滑动的流畅，列表内容会在屏幕外异步绘制。这意味着如果用户滑动的速度超过渲染的速度，则会先看到空白的内容。这是为了优化不得不作出的妥协，而我们也在设法持续改进。
 - This is a `PureComponent` which means that it will not re-render if `props` remain shallow-equal. Make sure that everything your `renderItem` function depends on is passed as a prop that is not `===` after updates, otherwise your UI may not update on changes. This includes the `data` prop and parent component state.
 - 默认情况下每行都需要提供一个不重复的key属性。你也可以提供一个`keyExtractor`函数来生成key。
+
+NOTE: `removeClippedSubviews` might not be necessary and may cause bugs. If you see issues with content not rendering, e.g when using `LayoutAnimation`, try setting `removeClippedSubviews={false}`, and we may change the default in the future after more experimentation in production apps.
 
 ### 属性
 
@@ -56,9 +121,17 @@
         <a class="hash-link" href="#data">#</a></h4>
         <div><p>为了简化起见，data属性目前只支持普通数组。如果需要使用其他特殊数据结构，例如immutable数组，请直接使用更底层的<code>VirtualizedList</code>组件。</p></div>
     </div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="getitem"></a>getItem?: <a class="hash-link"
-                                                                                              href="#getitem">#</a>
-    </h4></div>
+       <div class="prop">
+       <h4 class="propTitle"><a class="anchor" name="extradata"></a>extraData?: <span class="propType">any</span> <a class="hash-link" href="#extradata">#</a></h4>
+       <div><p>A marker property for telling the list to re-render (since it implements <code>PureComponent</code>). If
+any of your <code>renderItem</code>, Header, Footer, etc. functions depend on anything outside of the
+<code>data</code> prop, stick it here and treat it immutably.</p>
+       </div>
+       </div>
+    <div class="prop">
+       <h4 class="propTitle"><a class="anchor" name="getitem"></a>getItem?: <a class="hash-link" href="#getitem">#</a>
+    </h4>
+       </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="getitemcount"></a>getItemCount?: <a
             class="hash-link" href="#getitemcount">#</a></h4></div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="getitemlayout"></a>getItemLayout?: <span
@@ -82,6 +155,10 @@
         <a class="hash-link" href="#horizontal">#</a></h4>
         <div><p>设置为true则变为水平布局模式。</p></div>
     </div>
+       <div class="prop">
+       <h4 class="propTitle"><a class="anchor" name="initialnumtorender"></a>initialNumToRender: <span class="propType">number</span> <a class="hash-link" href="#initialnumtorender">#</a></h4>
+       <div><p>How many items to render in the initial batch. This should be enough to fill the screen but not much more. Note these items will never be unmounted as part of the windowed rendering in order to improve perceived performance of scroll-to-top actions.</p></div>
+       </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="keyextractor"></a>keyExtractor: <span
             class="propType"><code>(item: ItemT, index: number) =&gt; string</code></span> <a class="hash-link"
                                                                                               href="#keyextractor">#</a>
@@ -96,8 +173,7 @@
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="numcolumns"></a>numColumns: <span
             class="propType"><code>number</code></span> <a class="hash-link" href="#numcolumns">#</a>
     </h4>
-        <div><p>Multiple columns can only be rendered with <code>horizontal={false}</code> and will zig-zag like a<code>flexWrap</code>
-            layout. Items should all be the same height - masonry layouts are not supported.</p></div>
+        <div><p>多列布局只能在非水平模式下使用，即必须是<code>horizontal={false}</code>。此时组件内元素会从左到右从上到下按Z字形排列，类似启用了<code>flexWrap</code>的布局。组件内元素必须是等高的——暂时还无法支持瀑布流布局。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onendreached"></a>onEndReached?: <span
             class="propType"><code>?(info: {distanceFromEnd: number}) =&gt; void</code></span> <a class="hash-link"
@@ -161,13 +237,6 @@
                         class="token punctuation">}</span> <span class="token operator">/</span><span
                         class="token operator">&gt;</span></div>
             <p>Provides additional metadata like <code>index</code> if you need it.</p></div>
-    </div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="shoulditemupdate"></a>shouldItemUpdate: <span
-            class="propType"><code>(
-  prevInfo: {item: ItemT, index: number},
-  nextInfo: {item: ItemT, index: number}
-) =&gt; boolean</code></span> <a class="hash-link" href="#shoulditemupdate">#</a></h4>
-        <div><p>可选的优化函数。由开发者提供更符合实际的比对策略，以避免不必要的重新渲染。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="viewabilityconfig"></a>viewabilityConfig?: <span
             class="propType"><code>ViewabilityConfig</code></span> <a class="hash-link"
@@ -236,6 +305,7 @@ const {
   ItemComponent,
   PlainInput,
   SeparatorComponent,
+  Spindicator,
   genItemData,
   getItemLayout,
   pressItem,
@@ -255,7 +325,7 @@ class FlatListExample extends React.PureComponent {
   static description = 'Performant, scrollable list of data.';
 
   state = {
-    data: genItemData(1000),
+    data: genItemData(100),
     debug: false,
     horizontal: false,
     filterText: '',
@@ -314,15 +384,7 @@ class FlatListExample extends React.PureComponent {
             {renderSmallSwitchOption(this, 'fixedHeight')}
             {renderSmallSwitchOption(this, 'logViewable')}
             {renderSmallSwitchOption(this, 'debug')}
-            <Animated.View style={[styles.spindicator, {
-              transform: [
-                {rotate: this._scrollPos.interpolate({
-                  inputRange: [0, 5000],
-                  outputRange: ['0deg', '360deg'],
-                  extrapolate: 'extend',
-                })}
-              ]
-            }]} />
+            <Spindicator value={this._scrollPos} />
           </View>
         </View>
         <SeparatorComponent />
@@ -343,13 +405,13 @@ class FlatListExample extends React.PureComponent {
           }
           legacyImplementation={false}
           numColumns={1}
+          onEndReached={this._onEndReached}
           onRefresh={this._onRefresh}
           onScroll={this.state.horizontal ? this._scrollSinkX : this._scrollSinkY}
           onViewableItemsChanged={this._onViewableItemsChanged}
           ref={this._captureRef}
           refreshing={false}
           renderItem={this._renderItemComponent}
-          shouldItemUpdate={this._shouldItemUpdate}
           viewabilityConfig={VIEWABILITY_CONFIG}
         />
       </UIExplorerPage>
@@ -358,6 +420,11 @@ class FlatListExample extends React.PureComponent {
   _captureRef = (ref) => { this._listRef = ref; };
   _getItemLayout = (data: any, index: number) => {
     return getItemLayout(data, index, this.state.horizontal);
+  };
+  _onEndReached = () => {
+    this.setState((state) => ({
+      data: state.data.concat(genItemData(100, state.data.length)),
+    }));
   };
   _onRefresh = () => alert('onRefresh: nothing to refresh :P');
   _renderItemComponent = ({item}) => {
@@ -370,15 +437,6 @@ class FlatListExample extends React.PureComponent {
       />
     );
   };
-  _shouldItemUpdate(prev, next) {
-    /**
-     * Note that this does not check state.horizontal or state.fixedheight
-     * because we blow away the whole list by changing the key in those cases.
-     * Make sure that you do the same in your code, or incorporate all relevant
-     * data into the item data, or skip this optimization entirely.
-     */
-    return prev.item !== next.item;
-  }
   // This is called when items change viewability by scrolling into or out of
   // the viewable area.
   _onViewableItemsChanged = (info: {
@@ -415,12 +473,6 @@ const styles = StyleSheet.create({
   },
   searchRow: {
     paddingHorizontal: 10,
-  },
-  spindicator: {
-    marginLeft: 'auto',
-    width: 2,
-    height: 16,
-    backgroundColor: 'darkgray',
   },
 });
 
