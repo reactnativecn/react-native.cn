@@ -1,5 +1,11 @@
 [
 	{
+		"name": "找车场",
+		"desc": "简单方便的帮你找车场",
+		"ios": "https://itunes.apple.com/us/app/id1223491793?l=zh&ls=1&mt=8",
+		"android": "http://a.app.qq.com/o/simple.jsp?pkgname=com.zcc",
+		"icon": "https://images.vmartaw.com/2017/04/07/icon.png"
+	},{
 		"name": "幕布",
 		"desc": "管理你的大脑",
 		"ios": "https://itunes.apple.com/app/id1214302139",
