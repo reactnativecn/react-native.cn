@@ -1,18 +1,15 @@
-A performant interface for rendering sectioned lists, supporting the most handy features:
+高性能的分组(section)列表组件，支持下面这些常用的功能：
 
-- Fully cross-platform.
-- Configurable viewability callbacks.
-- List header support.
-- List footer support.
-- Item separator support.
-- Section header support.
-- Section separator support.
-- Heterogeneous data and item rendering support.
-- Pull to Refresh.
-- Scroll loading.
+- 完全跨平台。
+- 支持水平布局模式。
+- 行组件显示或隐藏时可配置回调事件。
+- 支持单独的头部组件。
+- 支持单独的尾部组件。
+- 支持自定义行间分隔线。
+- 支持下拉刷新。
+- 支持上拉加载。
 
-
-If you don't need section support and want a simpler interface, use [`<FlatList>`](flatlist.html).
+如果你的列表不需要分组(section)，那么可以使用结构更简单的[`<FlatList>`](flatlist.html)。
 
 在0.43版本中，如果希望section的头部能够吸顶悬浮，请暂时先使用老版的[`<ListView>`](listview.html)。下一个版本开始可以支持悬浮的section头部。
 
@@ -38,11 +35,12 @@ If you don't need section support and want a simpler interface, use [`<FlatList>
 />
 ```
 
-This is a convenience wrapper around [<VirtualizedList>](virtualizedlist.html), and thus inherits the following caveats:
+本组件实质是基于[`<VirtualizedList>`](virtualizedlist.html)组件的封装，因此也有下面这些需要注意的事项：
 
-- Internal state is not preserved when content scrolls out of the render window. Make sure all your data is captured in the item data or external stores like Flux, Redux, or Relay.
-- In order to constrain memory and enable smooth scrolling, content is rendered asynchronously offscreen. This means it's possible to scroll faster than the fill rate ands momentarily see blank content. This is a tradeoff that can be adjusted to suit the needs of each application, and we are working on improving it behind the scenes.
-- By default, the list looks for a key prop on each item and uses that for the React key. Alternatively, you can provide a custom keyExtractor prop.
+- 当某行滑出渲染区域之外后，其内部状态将不会保留。请确保你在行组件以外的地方保留了数据。
+- 为了优化内存占用同时保持滑动的流畅，列表内容会在屏幕外异步绘制。这意味着如果用户滑动的速度超过渲染的速度，则会先看到空白的内容。这是为了优化不得不作出的妥协，而我们也在设法持续改进。
+- 本组件继承自`PureComponent`而非通常的`Component`，这意味着如果其`props`在`浅比较`中是相等的，则不会重新渲染。所以请先检查你的`renderItem`函数所依赖的`props`数据（包括`data`属性以及可能用到的父组件的state），如果是一个引用类型（Object或者数组都是引用类型），则需要先修改其引用地址（比如先复制到一个新的Object或者数组中），然后再修改其值，否则界面很可能不会刷新。（译注：这一段不了解的朋友建议先学习下[js中的基本类型和引用类型](https://segmentfault.com/a/1190000002789651)。）
+- 默认情况下每行都需要提供一个不重复的key属性。你也可以提供一个`keyExtractor`函数来生成key。
 
 
 ### 属性

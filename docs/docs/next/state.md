@@ -15,7 +15,9 @@ class Blink extends Component {
 
     // 每1000毫秒对showText状态做一次取反操作
     setInterval(() => {
-      this.setState({ showText: !this.state.showText });
+      this.setState(previousState => {
+        return { showText: !previousState.showText };
+      });
     }, 1000);
   }
 

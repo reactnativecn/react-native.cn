@@ -43,13 +43,16 @@ class Example extends Component {
             class="hash-link" href="keyboard.html#addlistener">#</a></h4>
         <div><p><code>addListener</code>用于注册一个JavaScript函数来监听处理原生键盘通知事件。</p>
             <p>此方法会返回监听函数的引用。</p>
-            <p>@param {string} nativeEvent <code>nativeEvent</code>参数用来指明要监听的事件，具体有以下几种:
-                - <code>keyboardWillShow</code>
-                - <code>keyboardDidShow</code>
-                - <code>keyboardWillHide</code>
-                - <code>keyboardDidHide</code>
-                - <code>keyboardWillChangeFrame</code>
-                - <code>keyboardDidChangeFrame</code></p>
+            <p>@param {string} nativeEvent <code>nativeEvent</code>参数用来指明要监听的事件，具体有以下几种:</p>
+            <ul>
+                <li><code>keyboardWillShow</code></li>
+                <li><code>keyboardDidShow</code></li>
+                <li><code>keyboardWillHide</code></li>
+                <li><code>keyboardDidHide</code></li>
+                <li><code>keyboardWillChangeFrame</code></li>
+                <li><code>keyboardDidChangeFrame</code></li>
+            </ul>
+            <p>注意如果你把`android:windowSoftInputMode`设置为`adjustResize`或是`adjustNothing`，则在Android上只有`keyboardDidShow`和`keyboardDidHide`事件有效。</p>>
             <p>@param {function} jsFunction 事件触发时调用的js函数。</p></div>
     </div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="removealllisteners"></a><span class="methodType">static </span>removeAllListeners<span
