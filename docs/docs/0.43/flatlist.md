@@ -103,8 +103,7 @@
             class="propType"><code>?(info: {distanceFromEnd: number}) =&gt; void</code></span> <a class="hash-link"
                                                                                                   href="#onendreached">#</a>
     </h4>
-        <div><p>Called once when the scroll position gets within <code>onEndReachedThreshold</code> of the rendered
-            content.</p></div>
+        <div><p>当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足<code>onEndReachedThreshold</code>个像素的距离时调用。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onendreachedthreshold"></a>onEndReachedThreshold?:
         <span class="propType"><code>?number</code></span> <a class="hash-link"
