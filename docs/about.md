@@ -34,6 +34,10 @@ React Native及相关标识版权由©Facebook Inc.所有。本网站并非隶�
 
 需要量身订做、随叫随到的完善技术支持？请联络[QQ:402740419](tencent://message/?uin=402740419&Site=react-native.cn&Menu=yes) 或[通过猪八戒平台对我们进行雇佣](http://shop.zbj.com/14338306/)
 
+### 高级商务合作 ###
+
+如果您想要更深入地定制化服务，比如<span style="background:#96E164">技术内部培训、项目技术咨询管理、项目解决方案</span>等，请联系：王先生 [18513831297](tel:18513831297) [wuxieken@qq.com](mailto:wuxieken@qq.com)
+
 ## 捐助
 
 本网站目前流量压力巨大，服务器成本较高。如果您认为本网站对您有所帮助，希望支持本网站的持续发展和维护，可以使用支付宝`转账`到下面地址对我们进行捐助。谢谢！
@@ -95,6 +99,4 @@ React Native中文网是由杭州欧石南网络科技有限公司创办的，�
 
 地址：杭州市西湖区古墩路616号同人精华大厦2座1516室
 
-联系电话：王先生 [18513831297](tel:18513831297)
-
-QQ：[402740419](tencent://message/?uin=402740419&Site=react-native.cn&Menu=yes)
+邮箱：eliza@hzerica.cn[mailto:eliza@hzerica.cn]

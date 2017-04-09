@@ -10,9 +10,7 @@
 - 支持上拉加载。
 - 支持跳转到指定行（ScrollToIndex）。
 
-
 如果需要分组/类/区（section），请使用[`<SectionList>`](sectionlist.html)。
-
 
 一个最简单的例子：
 
