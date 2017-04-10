@@ -99,4 +99,4 @@ React Native中文网是由杭州欧石南网络科技有限公司创办的，�
 
 地址：杭州市西湖区古墩路616号同人精华大厦2座1516室
 
-邮箱：eliza@hzerica.cn[mailto:eliza@hzerica.cn]
+邮箱：[eliza@hzerica.cn](mailto:eliza@hzerica.cn)
