@@ -32,7 +32,8 @@ ndk.dir=/Users/your_unix_name/android-ndk/android-ndk-r10e
 
 更多参考您可以访问官网NDK界面 [official page](http://developer.android.com/ndk/downloads/index.html).
 
-__译注__:建议安装r10e版本，否则在编译过程可能会出错
+__译注__:建议安装r10e版本，否则在编译过程可能会出错。
+
 # 编译源代码：
 
 ## 1.在你的分支代码中进行安装
@@ -73,7 +74,7 @@ project(':ReactAndroid').projectDir = new File(rootProject.projectDir, '../node_
 ...
 ```
 
-修改你的`android/app/build.gradle`文件，使用`:ReactAndroid`替换预编译库。例如用`compile project(':ReactAndroid'):`替换`compile 'com.facebook.react:react-native:0.16.+'`
+修改你的`android/app/build.gradle`文件，使用`:ReactAndroid`替换预编译库。例如用`compile project(':ReactAndroid')`替换`compile 'com.facebook.react:react-native:0.16.+'`
 
 ```
 ...

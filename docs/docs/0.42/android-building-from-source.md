@@ -32,7 +32,8 @@ ndk.dir=/Users/your_unix_name/android-ndk/android-ndk-r10e
 
 更多参考您可以访问官网NDK界面 [official page](http://developer.android.com/ndk/downloads/index.html).
 
-__译注__:建议安装r10e版本，否则在编译过程可能会出错
+__译注__:建议安装r10e版本，否则在编译过程可能会出错。
+
 # 编译源代码：
 
 ## 1.在你的分支代码中进行安装
@@ -73,7 +74,7 @@ project(':ReactAndroid').projectDir = new File(rootProject.projectDir, '../node_
 ...
 ```
 
-修改你的`android/app/build.gradle`文件，使用`:ReactAndroid`替换预编译库。例如用`compile project(':ReactAndroid'):`替换`compile 'com.facebook.react:react-native:0.16.+'`
+修改你的`android/app/build.gradle`文件，使用`:ReactAndroid`替换预编译库。例如用`compile project(':ReactAndroid')`替换`compile 'com.facebook.react:react-native:0.16.+'`
 
 ```
 ...
@@ -115,3 +116,28 @@ gradle.projectsLoaded {
     }
 }
 ```
+
+## Additional notes
+
+Building from source can take a long time, especially for the first build, as it needs to download ~200 MB of artifacts and compile the native code. Every time you update the `react-native` version from your repo, the build directory may get deleted, and all the files are re-downloaded. To avoid this, you might want to change your build directory path by editing the `~/.gradle/init.gradle ` file:
+
+```gradle
+gradle.projectsLoaded {
+    rootProject.allprojects {
+        buildDir = "/path/to/build/directory/${rootProject.name}/${project.name}"
+    }
+}
+```
+
+## Building for Maven/Nexus deployment
+
+If you find that you need to push up a locally compiled React Native .aar and related files to a remote Nexus repository, you can.
+
+Start by following the `Point Gradle to your Android SDK` section of this page. Once you do this, assuming you have Gradle configured properly, you can then run the following command from the root of your React Native checkout to build and package all required files:
+
+```
+./gradlew ReactAndroid:installArchives
+```
+
+This will package everything that would typically be included in the `android` directory of your `node_modules/react-native/` installation in the root directory of your React Native checkout. 
+

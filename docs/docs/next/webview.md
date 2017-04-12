@@ -55,6 +55,13 @@
 		<div class="deprecated"><div class="deprecatedTitle"><span>已过期</span></div><div class="deprecatedMessage"><div><p>请使用<code>source</code> 属性代替。</p></div></div></div>
 	</div>
 	<div class="prop">
+	<h4 class="propTitle"><a class="anchor" name="injectjavascript"></a>injectJavaScript?: <span class="propType">function</span> <a class="hash-link" href="#injectjavascript">#</a>
+	</h4>
+	<div>
+	<p>在网页加载完成之后，还可以主动调用此方法（以ref形式调用）继续给WebView注入JS代码。注入后会立即执行。</p>
+	</div>
+	</div>
+	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="injectedjavascript"></a>injectedJavaScript <span class="propType">string</span> <a class="hash-link" href="#injectedjavascript">#</a></h4>
 		<div>
 			<p>设置在网页加载之前注入的一段JS代码。</p>
@@ -141,6 +148,24 @@
 		<div class="deprecated"><div class="deprecatedTitle"><span>已过期</span></div><div class="deprecatedMessage"><div><p>请使用<code>source</code> 属性代替。</p></div></div></div>
 	</div>
 	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="mixedcontentmode"></a><span class="platform">android</span>mixedContentMode?: <span class="propType">enum('never', 'always', 'compatibility')</span> <a class="hash-link" href="#mixedcontentmode">#</a></h4>
+		<div>
+			<p>指定混合内容模式。即WebView是否应该允许安全链接（https）页面中加载非安全链接（http）的内容。</p>
+			<p>可选的<code>mixedContentMode</code>值如下：</p>
+			<ul>
+				<li><code>'never'</code> (默认) - WebView不允许安全链接页面中加载非安全链接的内容。</li>
+				<li><code>'always'</code> - WebView允许安全链接页面中加载非安全链接的内容。</li>
+				<li><code>'compatibility'</code> - WebView会尽量和浏览器当前对待此情况的行为一致。</li>
+			</ul>
+		</div>
+	</div>
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="saveformdatadisabled"></a><span class="platform">android</span>saveFormDataDisabled?: <span class="propType">bool</span> <a class="hash-link" href="#saveformdatadisabled">#</a></h4>
+		<div>
+			<p>用于控制页面上的表单是否启用自动保存/自动补全功能。仅Android有效。</p>
+		</div>
+	</div>
+	<div class="prop">
 	    <h4 class="propTitle">
 	        <a class="anchor" name="useragent"></a>
 	        <span class="platform">android</span>userAgent
@@ -151,6 +176,7 @@
 </div>
 
 ### 例子
+
 ```javascript
 'use strict';
 
@@ -396,6 +422,35 @@ class MessagingTest extends React.Component {
   }
 }
 
+class InjectJS extends React.Component {
+  webview = null;
+  injectJS = () => {
+    const script = 'document.write("Injected JS ")';  // eslint-disable-line quotes
+    if (this.webview) {
+      this.webview.injectJavaScript(script);
+    }
+  }
+  render() {
+    return (
+      <View>
+        <WebView
+          ref={webview => { this.webview = webview; }}
+          style={{
+            backgroundColor: BGWASH,
+            height: 300,
+          }}
+          source={{uri: 'https://www.facebook.com'}}
+          scalesPageToFit={true}
+        />
+        <View style={styles.buttons}>
+          <Button text="Inject JS" enabled onPress={this.injectJS} />
+        </View>
+    </View>
+    );
+  }
+}
+
+
 var styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -572,8 +627,12 @@ exports.examples = [
     }
   },
   {
-    title: 'Mesaging Test',
+    title: 'Messaging Test',
     render(): ReactElement<any> { return <MessagingTest />; }
-  }
+  },
+  {
+    title: 'Inject JavaScript',
+    render(): React.Element<any> { return <InjectJS />; }
+  },
 ];
 ```
