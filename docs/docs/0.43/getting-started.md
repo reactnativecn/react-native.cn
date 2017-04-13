@@ -422,7 +422,7 @@ export ANDROID_HOME=~/Library/Android/sdk
 然后使用下列命令使其立即生效（否则重启后才生效）：  
 
 ```bash
-source ./bash_profile
+source ~/.bash_profile
 ```
 
 可以使用`echo $ANDROID_HOME`检查此变量是否已正确设置。
