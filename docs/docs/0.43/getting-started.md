@@ -155,7 +155,7 @@ Android Studio包含了运行和测试React Native应用所需的Android SDK和�
 
 ![configure sdk](img/react-native-android-studio-configure-sdk.png)
 
-- 在`SDK Platforms`窗口中，选择`Show Package Details`，然后在`Android 6.0 (Marshmallow)`中勾选`Google APIs`、`Android SDK Platform 23`、`Intel x86 Atom System Image`、`Intel x86 Atom_64 System Image`以及`Google APIs Intel x86 Atom_64 System Image`。
+- 在`SDK Platforms`窗口中，选择`Show Package Details`，然后在`Android 6.0 (Marshmallow)`中勾选`Google APIs`、`Android SDK Platform 23`、`Intel x86 Atom_64 System Image`以及`Google APIs Intel x86 Atom_64 System Image`。
 
 ![platforms](img/react-native-android-studio-android-sdk-platforms.png)
 
@@ -170,7 +170,7 @@ Android Studio包含了运行和测试React Native应用所需的Android SDK和�
 ```
 # 如果你不是通过Android Studio安装的sdk，则其路径可能不同，请自行确定清楚。
 export ANDROID_HOME=~/Library/Android/sdk
-```  
+```
 
 然后使用下列命令使其立即生效（否则重启后才生效）：  
 
@@ -614,7 +614,7 @@ react-native run-android
 ```
 
 > 提示：你可以使用`--version`参数创建指定版本的项目。例如`react-native init MyApp --version 0.39.2`。注意版本号必须精确到两个小数点。
- 
+
 你也可以在[Nuclide](http://nuclide.io)中打开[`AwesomeProject`](http://nuclide.io/docs/quick-start/getting-started/#adding-a-project)文件夹然后[运行](http://nuclide.io/docs/platforms/react-native/#command-line)。
 
 </div><div markdown class="md-block mac ios android">
@@ -719,7 +719,7 @@ if (window.location.hash !== '' && window.location.hash !== 'content') { // cont
           var targetPlatform = null;
           // Could be more than one target os and dev platform, but just choose some sort of order
           // of priority here.
-
+    
           // Dev OS
           if (parent.className.indexOf('mac') > -1) {
             devOS = 'mac';
@@ -730,7 +730,7 @@ if (window.location.hash !== '' && window.location.hash !== 'content') { // cont
           } else {
             break; // assume we don't have anything.
           }
-
+    
           // Target Platform
           if (parent.className.indexOf('ios') > -1) {
             targetPlatform = 'ios';
