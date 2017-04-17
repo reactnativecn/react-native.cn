@@ -243,5 +243,12 @@
 		"ios": "https://itunes.apple.com/us/app/%E4%B8%87%E9%A2%97%E5%95%86%E5%9F%8E/id1136517970?mt=8",
 		"android": "http://zhushou.360.cn/detail/index/soft_id/3349739?recrefer=SE_D_%E4%B8%87%E9%A2%97%E5%95%86%E5%9F%8E",
 		"icon": "http://is1.mzstatic.com/image/thumb/Purple122/v4/75/db/c9/75dbc963-7696-1583-d2f8-055596654daf/source/175x175bb.jpg"
+	},
+	{
+		"name": "花匠铺",
+		"desc": "家庭园艺种植交流平台",
+		"ios": "https://itunes.apple.com/app/id1219173067",
+		"android": "https://huajiangpu.com/m",
+		"icon": "http://oiifzbqya.bkt.clouddn.com/hjplogo128.png"
 	}
 ]
