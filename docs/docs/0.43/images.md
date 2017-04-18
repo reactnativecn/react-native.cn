@@ -74,7 +74,7 @@ var icon = this.props.active ? require('./my-icon-active.png') : require('./my-i
 
 ## 网络图片
 
-很多要在App中显示的图片并不能在编译的时候获得，又或者有时候需要动态载入来减少打包后的二进制文件的大小。这些时候，与静态资源不同的是，`你需要手动指定图片的尺寸`。并强烈建议你使用https以满足iOS [App Transport Security](https://facebook.github.io/react-native/docs/running-on-device.html#app-transport-security) 的要求。
+很多要在App中显示的图片并不能在编译的时候获得，又或者有时候需要动态载入来减少打包后的二进制文件的大小。这些时候，与静态资源不同的是，`你需要手动指定图片的尺寸`。同时我们强烈建议你使用https以满足iOS [App Transport Security](https://segmentfault.com/a/1190000002933776) 的要求。
 
 ```javascript
 // 正确

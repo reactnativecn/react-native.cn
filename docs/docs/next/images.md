@@ -53,7 +53,13 @@ var icon = this.props.active ? require('./my-icon-active.png') : require('./my-i
 <Image source={icon} />
 ```
 
-**本特性从0.14开始生效**。请注意：新的资源系统依靠修改打包脚本来实现，`react-native init`创建的新工程已经包含了这些修改：[Xcode](https://github.com/facebook/react-native/pull/3523)和[Gradle](https://github.com/facebook/react-native/commit/9dc036d2b99e6233297c55a3490bfc308e34e75f)。如果你的工程是在0.13或者更早版本创建的，你可能需要自行添加对应的代码来支持新的图片资源系统。请参考文档[升级版本](/docs/upgrading.html)文档中的升级操作说明。
+请注意：通过这种方式引用的图片资源包含图片的尺寸（宽度，高度）信息，如果你需要动态缩放图片（例如，通过flex），你可能必须手动在style属性设置`{ width: undefined, height: undefined }`。
+
+## 静态非图片资源
+
+上面描述的`require`语法也可以用来静态地加载你项目中的声音、视频或者文档文件。大多数的文件类型包括`.mp3`, `.wav`, `.mp4`, `.mov`, `.htm` 和 `.pdf`（完整列表请看 [packager defaults](https://github.com/facebook/react-native/blob/master/packager/defaults.js)）
+
+需要注意的是视频必须使用绝对定位而不是`flexGrow`，因为尺寸信息当前未通过非图片资源传递。这个限制对于直接链接到Xcode或者Android资源文件夹的视频不会出现。
 
 ## 使用混合App的图片资源
 
@@ -68,7 +74,7 @@ var icon = this.props.active ? require('./my-icon-active.png') : require('./my-i
 
 ## 网络图片
 
-很多要在App中显示的图片并不能在编译的时候获得，又或者有时候需要动态载入来减少打包后的二进制文件的大小。这些时候，与静态资源不同的是，`你需要手动指定图片的尺寸`。
+很多要在App中显示的图片并不能在编译的时候获得，又或者有时候需要动态载入来减少打包后的二进制文件的大小。这些时候，与静态资源不同的是，`你需要手动指定图片的尺寸`。同时我们强烈建议你使用https以满足iOS [App Transport Security](https://segmentfault.com/a/1190000002933776) 的要求。
 
 ```javascript
 // 正确
@@ -77,6 +83,20 @@ var icon = this.props.active ? require('./my-icon-active.png') : require('./my-i
 
 // 错误
 <Image source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}} />
+```
+
+## 缓存控制（仅iOS）
+
+在某些情况下你可能仅仅想展示一张已经在本地缓存的图片，例如一个低分辨率的占位符，直到高分辨率的图片可用。在其他情况下你不关心图片是否是过时的，并愿意显示过时的图片，以节省带宽。缓存资源属性给你控制网络层与缓存交互的方式。
+
+* `default`：使用原生平台默认策略。
+* `reload`：URL的数据将从原始地址加载。不使用现有的缓存数据。
+* `force-cache`：现有的缓存数据将用于满足请求，忽略其期限或到期日。如果缓存中没有对应请求的数据，则从原始地址加载。
+* `only-if-cached`：现有的缓存数据将用于满足请求，忽略其期限或到期日。如果缓存中没有对应请求的数据，则不尝试从原始地址加载，并且认为请求是失败的。
+
+```javascript
+<Image source={{uri: 'https://facebook.github.io/react/img/logo_og.png', cache: 'only-if-cached'}}
+       style={{width: 400, height: 400}} />
 ```
 
 ## 本地文件系统中的图片
