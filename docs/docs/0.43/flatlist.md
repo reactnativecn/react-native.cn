@@ -23,8 +23,8 @@
 本组件实质是基于[`<VirtualizedList>`](virtualizedlist.html)组件的封装，因此也有下面这些需要注意的事项：
 
 - 当某行滑出渲染区域之外后，其内部状态将不会保留。请确保你在行组件以外的地方保留了数据。
-- 为了优化内存占用同时保持滑动的流畅，列表内容会在屏幕外异步绘制。这意味着如果用户滑动的速度超过渲染的速度，则会先看到空白的内容。这是为了优化不得不作出的妥协，而我们也在设法持续改进。
 - 本组件继承自`PureComponent`而非通常的`Component`，这意味着如果其`props`在`浅比较`中是相等的，则不会重新渲染。所以请先检查你的`renderItem`函数所依赖的`props`数据（包括`data`属性以及可能用到的父组件的state），如果是一个引用类型（Object或者数组都是引用类型），则需要先修改其引用地址（比如先复制到一个新的Object或者数组中），然后再修改其值，否则界面很可能不会刷新。（译注：这一段不了解的朋友建议先学习下[js中的基本类型和引用类型](https://segmentfault.com/a/1190000002789651)。）
+- 为了优化内存占用同时保持滑动的流畅，列表内容会在屏幕外异步绘制。这意味着如果用户滑动的速度超过渲染的速度，则会先看到空白的内容。这是为了优化不得不作出的妥协，而我们也在设法持续改进。
 - 默认情况下每行都需要提供一个不重复的key属性。你也可以提供一个`keyExtractor`函数来生成key。
 
 ### 属性
@@ -112,8 +112,7 @@
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onrefresh"></a>onRefresh?: <span
             class="propType"><code>?() =&gt; void</code></span> <a class="hash-link"
                                                                    href="#onrefresh">#</a></h4>
-        <div><p>If provided, a standard RefreshControl will be added for "Pull to Refresh" functionality. Make
-            sure to also set the <code>refreshing</code> prop correctly.</p></div>
+        <div><p>如果设置了此选项，则会在列表头部添加一个标准的<code>RefreshControl</code>控件，以便实现“下拉刷新”的功能。同时你需要正确设置<code>refreshing</code>属性。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onviewableitemschanged"></a>onViewableItemsChanged?:
         <span class="propType"><code>?(info: {viewableItems: Array&lt;ViewToken&gt;, changed: Array&lt;ViewToken&gt;}) =&gt; void</code></span>
@@ -128,7 +127,7 @@
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="renderitem"></a>renderItem: <span
             class="propType"><code>(info: {item: ItemT, index: number}) =&gt; ?React.Element&lt;any&gt;</code></span> <a
             class="hash-link" href="#renderitem">#</a></h4>
-        <div><p>Takes an item from <code>data</code> and renders it into the list. Typical usage:</p>
+        <div><p>根据行数据<code>data</code>渲染每一行的组件。典型用法：</p>
             <div class="prism language-javascript">_renderItem <span class="token operator">=</span> <span
                     class="token punctuation">(</span><span class="token punctuation">{</span>item<span
                     class="token punctuation">}</span><span class="token punctuation">)</span> <span
@@ -159,13 +158,13 @@
                         class="token keyword">this</span><span class="token punctuation">.</span>_renderItem<span
                         class="token punctuation">}</span> <span class="token operator">/</span><span
                         class="token operator">&gt;</span></div>
-            <p>Provides additional metadata like <code>index</code> if you need it.</p></div>
+            <p>除<code>data</code>外还有第二个参数<code>index</code>可供使用。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="viewabilityconfig"></a>viewabilityConfig?: <span
             class="propType"><code>ViewabilityConfig</code></span> <a class="hash-link"
                                                                       href="#viewabilityconfig">#</a>
     </h4>
-        <div><p>See <a href="https://github.com/facebook/react-native/blob/master/Libraries/CustomComponents/Lists/ViewabilityHelper.js"><code>ViewabilityHelper</code></a> for flow type and further documentation.</p></div>
+        <div><p>请参考<a href="https://github.com/facebook/react-native/blob/master/Libraries/CustomComponents/Lists/ViewabilityHelper.js"><code>ViewabilityHelper</code></a>的源码来了解具体的配置类型。</p></div>
     </div>
 </div>
 

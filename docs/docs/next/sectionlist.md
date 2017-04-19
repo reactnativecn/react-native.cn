@@ -17,7 +17,7 @@
 
 ```javascript
 <SectionList
-  renderItem={({item}) => <ListItem title={item.title}}
+  renderItem={({item}) => <ListItem title={item.title} />}
   renderSectionHeader={({section}) => <H1 title={section.key} />}
   sections={[ // 不同section渲染相同类型的子组件
     {data: [...], key: ...},
@@ -38,10 +38,9 @@
 本组件实质是基于[`<VirtualizedList>`](virtualizedlist.html)组件的封装，因此也有下面这些需要注意的事项：
 
 - 当某行滑出渲染区域之外后，其内部状态将不会保留。请确保你在行组件以外的地方保留了数据。
-- 为了优化内存占用同时保持滑动的流畅，列表内容会在屏幕外异步绘制。这意味着如果用户滑动的速度超过渲染的速度，则会先看到空白的内容。这是为了优化不得不作出的妥协，而我们也在设法持续改进。
 - 本组件继承自`PureComponent`而非通常的`Component`，这意味着如果其`props`在`浅比较`中是相等的，则不会重新渲染。所以请先检查你的`renderItem`函数所依赖的`props`数据（包括`data`属性以及可能用到的父组件的state），如果是一个引用类型（Object或者数组都是引用类型），则需要先修改其引用地址（比如先复制到一个新的Object或者数组中），然后再修改其值，否则界面很可能不会刷新。（译注：这一段不了解的朋友建议先学习下[js中的基本类型和引用类型](https://segmentfault.com/a/1190000002789651)。）
+- 为了优化内存占用同时保持滑动的流畅，列表内容会在屏幕外异步绘制。这意味着如果用户滑动的速度超过渲染的速度，则会先看到空白的内容。这是为了优化不得不作出的妥协，而我们也在设法持续改进。
 - 默认情况下每行都需要提供一个不重复的key属性。你也可以提供一个`keyExtractor`函数来生成key。
-
 
 ### 属性
 
@@ -50,19 +49,19 @@
         <span class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
                                                                              href="#itemseparatorcomponent">#</a>
     </h4>
-        <div><p>Rendered in between adjacent Items within each section.</p></div>
+        <div><p>行与行之间的分隔线组件。不会出现在第一行之前和最后一行之后。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="listfootercomponent"></a>ListFooterComponent?: <span
             class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
                                                                            href="#listfootercomponent">#</a>
     </h4>
-        <div><p>Rendered at the very end of the list.</p></div>
+        <div><p>尾部组件</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="listheadercomponent"></a>ListHeaderComponent?: <span
             class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
                                                                            href="#listheadercomponent">#</a>
     </h4>
-        <div><p>Rendered at the very beginning of the list.</p></div>
+        <div><p>头部组件</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="sectionseparatorcomponent"></a>SectionSeparatorComponent?:
         <span class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"

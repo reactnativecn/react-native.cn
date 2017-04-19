@@ -186,8 +186,7 @@ any of your <code>renderItem</code>, Header, Footer, etc. functions depend on an
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onrefresh"></a>onRefresh?: <span
             class="propType"><code>?() =&gt; void</code></span> <a class="hash-link"
                                                                    href="#onrefresh">#</a></h4>
-        <div><p>If provided, a standard RefreshControl will be added for "Pull to Refresh" functionality. Make
-            sure to also set the <code>refreshing</code> prop correctly.</p></div>
+        <div><p>如果设置了此选项，则会在列表头部添加一个标准的<code>RefreshControl</code>控件，以便实现“下拉刷新”的功能。同时你需要正确设置<code>refreshing</code>属性。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onviewableitemschanged"></a>onViewableItemsChanged?:
         <span class="propType"><code>?(info: {viewableItems: Array&lt;ViewToken&gt;, changed: Array&lt;ViewToken&gt;}) =&gt; void</code></span>
@@ -202,7 +201,7 @@ any of your <code>renderItem</code>, Header, Footer, etc. functions depend on an
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="renderitem"></a>renderItem: <span
             class="propType"><code>(info: {item: ItemT, index: number}) =&gt; ?React.Element&lt;any&gt;</code></span> <a
             class="hash-link" href="#renderitem">#</a></h4>
-        <div><p>Takes an item from <code>data</code> and renders it into the list. Typical usage:</p>
+        <div><p>根据行数据<code>data</code>渲染每一行的组件。典型用法：</p>
             <div class="prism language-javascript">_renderItem <span class="token operator">=</span> <span
                     class="token punctuation">(</span><span class="token punctuation">{</span>item<span
                     class="token punctuation">}</span><span class="token punctuation">)</span> <span
@@ -233,13 +232,13 @@ any of your <code>renderItem</code>, Header, Footer, etc. functions depend on an
                         class="token keyword">this</span><span class="token punctuation">.</span>_renderItem<span
                         class="token punctuation">}</span> <span class="token operator">/</span><span
                         class="token operator">&gt;</span></div>
-            <p>Provides additional metadata like <code>index</code> if you need it.</p></div>
+            <p>除<code>data</code>外还有第二个参数<code>index</code>可供使用。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="viewabilityconfig"></a>viewabilityConfig?: <span
             class="propType"><code>ViewabilityConfig</code></span> <a class="hash-link"
                                                                       href="#viewabilityconfig">#</a>
     </h4>
-        <div><p>See <a href="https://github.com/facebook/react-native/blob/master/Libraries/CustomComponents/Lists/ViewabilityHelper.js"><code>ViewabilityHelper</code></a> for flow type and further documentation.</p></div>
+        <div><p>请参考<a href="https://github.com/facebook/react-native/blob/master/Libraries/CustomComponents/Lists/ViewabilityHelper.js"><code>ViewabilityHelper</code></a>的源码来了解具体的配置类型。</p></div>
     </div>
 </div>
 
@@ -257,13 +256,12 @@ any of your <code>renderItem</code>, Header, Footer, etc. functions depend on an
         <div><p>Scrolls to the item at a the specified index such that it is positioned in the viewable area
             such that <code>viewPosition</code> 0 places it at the top, 1 at the bottom, and 0.5 centered in the
             middle.</p>
-            <p>May be janky without <code>getItemLayout</code> prop.</p></div>
+            <p>如果不设置<code>getItemLayout</code>属性的话，可能会比较卡。</p></div>
     </div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="scrolltoitem"></a>scrollToItem<span
             class="methodType">(params: object)</span> <a class="hash-link" href="#scrolltoitem">#</a>
     </h4>
-        <div><p>Requires linear scan through data - use <code>scrollToIndex</code> instead if possible. May be janky
-            without <code>getItemLayout</code> prop.</p></div>
+        <div><p>Requires linear scan through data - use <code>scrollToIndex</code> instead if possible. 如果不设置<code>getItemLayout</code>属性的话，可能会比较卡。</p></div>
     </div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="scrolltooffset"></a>scrollToOffset<span
             class="methodType">(params: object)</span> <a class="hash-link"
