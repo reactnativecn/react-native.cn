@@ -85,6 +85,22 @@ var icon = this.props.active ? require('./my-icon-active.png') : require('./my-i
 <Image source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}} />
 ```
 
+### 网络图片的请求参数
+  
+你可以在Image组件的source属性中指定一些请求参数，如下面的示例：
+  
+```javascript
+<Image source={{
+  uri: 'https://facebook.github.io/react/img/logo_og.png',
+  method: 'POST',
+  headers: {
+    Pragma: 'no-cache'
+  },
+  body: 'Your Body goes here'
+}}
+style={{width: 400, height: 400}} />
+```
+  
 ## 缓存控制（仅iOS）
 
 在某些情况下你可能仅仅想展示一张已经在本地缓存的图片，例如一个低分辨率的占位符，直到高分辨率的图片可用。在其他情况下你不关心图片是否是过时的，并愿意显示过时的图片，以节省带宽。缓存资源属性给你控制网络层与缓存交互的方式。

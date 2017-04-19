@@ -675,7 +675,7 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
 
 > 如果你的项目名字不是叫“HelloWorld”，则需要将“index.android.js”中的“AppRegistry.registerComponent()”方法中的第一个参数替换为对应的名字。
 
-如果你使用的是 Android Studio , 请用 `Alt + Enter` 为 MyReactActivity 类导包。当你使用了不止一个 `...facebook...` 包时，请谨慎选择要导入的类。
+如果你使用的是 Android Studio , 可以使用`Alt + Enter`快捷键来自动为MyReactActivity类补上缺失的import语句。注意引入的`BuildConfig`应该是在你自己的包中，而不是在`...facebook...`的包中。
  
 我们需要把 `MyReactActivity` 的主题设定为 `Theme.AppCompat.Light.NoActionBar` ，因为里面有许多组件都使用了这一主题。
 
@@ -687,9 +687,9 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
  </activity>
  ```
 
-> A `ReactInstanceManager` can be shared amongst multiple activities and/or fragments. You will want to make your own `ReactFragment` or `ReactActivity` and have a singleton *holder* that holds a `ReactInstanceManager`. When you need the `ReactInstanceManager` (e.g., to hook up the `ReactInstanceManager` to the lifecycle of those Activities or Fragments) use the one provided by the singleton.
+> 一个`ReactInstanceManager`可以在多个activities或fragments间共享。 You will want to make your own `ReactFragment` or `ReactActivity` and have a singleton *holder* that holds a `ReactInstanceManager`. When you need the `ReactInstanceManager` (e.g., to hook up the `ReactInstanceManager` to the lifecycle of those Activities or Fragments) use the one provided by the singleton.
 
-Next, we need to pass some activity lifecycle callbacks down to the `ReactInstanceManager`:
+下一步我们需要把一些activity的生命周期回调传递给`ReactInstanceManager`：
 
 ```java
 @Override
@@ -752,7 +752,7 @@ public boolean onKeyUp(int keyCode, KeyEvent event) {
 
 ### 配置权限以便开发中的红屏错误能正确显示
 
-If your app is targeting the Android `API level 23` or greater, make sure you have the `overlay` permission enabled for the development build. You can check it with `Settings.canDrawOverlays(this);`. This is required in dev builds because react native development errors must be displayed above all the other windows. Due to the new permissions system introduced in the API level 23, the user needs to approve it. This can be acheived by adding the following code to the Activity file in the onCreate() method. OVERLAY_PERMISSION_REQ_CODE is a field of the class which would be responsible for passing the result back to the Activity.
+如果你的应用会运行在Android 6.0（API level 23）或更高版本，请确保你在开发版本中有打开`悬浮窗(overlay)`权限。If your app is targeting the Android `API level 23` or greater, make sure you have the `overlay` permission enabled for the development build. You can check it with `Settings.canDrawOverlays(this);`. This is required in dev builds because react native development errors must be displayed above all the other windows. Due to the new permissions system introduced in the API level 23, the user needs to approve it. This can be acheived by adding the following code to the Activity file in the onCreate() method. OVERLAY_PERMISSION_REQ_CODE is a field of the class which would be responsible for passing the result back to the Activity.
 
 ```java
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -786,24 +786,23 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
     $ npm start
 
-Now build and run your Android app as normal (`./gradlew installDebug` from command-line; in Android Studio just create debug build as usual).
+保持packager的窗口运行不要关闭，然后像往常一样编译运行你的Android应用(在命令行中执行`./gradlew installDebug`或是在Android Studio中编译运行)。
 
-> If you are using Android Studio for your builds and not the Gradle Wrapper directly, make sure you install [watchman](https://facebook.github.io/watchman/) before running `npm start`. It will prevent the packager from crashing due to conflicts between Android Studio and the React Native packager.
+> 如果你是使用Android Studio来编译运行，有可能会导致packger报错退出。这种情况下你需要安装[watchman](https://facebook.github.io/watchman/)。但是watchman目前没有稳定的Windows版本，所以在Windows下这种崩溃情况暂时没有特别好的解决方案。
 
-Once you reach your React-powered activity inside the app, it should load the JavaScript code from the development server and display:
+编译执行一切顺利进行之后，在进入到MyReactActivity时应该就能立刻从packager中读取JavaScript代码并执行和显示：
 
 ![Screenshot](img/EmbeddedAppAndroid.png)
 
 ## 在Android Studio中打包
 
-你也可以使用Android Studio来打包！You can use Android Studio to create your release builds too! It’s as easy as creating release builds of your previously-existing native Android app. There’s just one additional step, which you’ll have to do before every release build. You need to execute the following to create a React Native bundle, which’ll be included with your native Android app:
+你也可以使用Android Studio来打release包！其步骤基本和原生应用一样，只是在每次编译打包之前需要先执行js文件的打包(即生成离线的jsbundle文件)。具体的js打包命令如下：
 
     $ react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/com/your-company-name/app-package-name/src/main/assets/index.android.bundle --assets-dest android/com/your-company-name/app-package-name/src/main/res/
 
-Don’t forget to replace the paths with correct ones and create the assets folder if it doesn’t exist!
+注意把上述命令中的路径替换为你实际项目的路径。如果assets目录不存在，需要提前自己创建一个。
 
-Now just create a release build of your native app from within Android Studio as usual and you should be good to go!
-
+然后在Android Studio中正常生成release版本即可！
 </div>
 <script class="markdown-script">
 window.display = function (type, value) {

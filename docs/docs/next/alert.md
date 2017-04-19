@@ -12,6 +12,26 @@
 
 如果你只指定一个按钮，则它具有“积极态”的属性（比如“确定”）；两个按钮，则分别是“消极态”和“积极态”（比如“取消”和“确定”）；三个按钮则意味着“中间态”、“消极态”和“积极态”（比如“稍候再说”，“取消”，“确定”）。
 
+在Android上默认情况下点击提示框的外面会自动取消提示框。你可以提供一个额外参数来处理这一事件：`{ onDismiss: () => {} }`。
+
+还有另外一个参数也可以用来阻止提示框被自动取消，即`{ cancelable: false }`。
+
+一个简单的例子：
+
+```javascript
+// iOS和Android上都可用
+Alert.alert(
+  'Alert Title',
+  'My Alert Msg',
+  [
+    {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+    {text: 'OK', onPress: () => console.log('OK Pressed')},
+  ],
+  { cancelable: false }
+)
+```
+
 ### 方法
 
 <div class="props">

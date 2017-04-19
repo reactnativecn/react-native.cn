@@ -4,9 +4,11 @@
 
 ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者。
 
-<ScrollView> vs <ListView> - which one to use? ScrollView simply renders all its react child components at once. That makes it very easy to understand and use. On the other hand, this has a performance downside. Imagine you have a very long list of items you want to display, worth of couple of your ScrollView’s heights. Creating JS components and native views upfront for all its items, which may not even be shown, will contribute to slow rendering of your screen and increased memory usage.
+`ScrollView`和`ListView/FlatList`应该如何选择？ScrollView会简单粗暴地把所有子元素一次性全部渲染出来。其原理浅显易懂，使用上自然也最简单。然而这样简单的渲染逻辑自然带来了性能上的不足。想象一下你有一个特别长的列表需要显示，可能有好几屏的高度。创建和渲染那些屏幕以外的JS组件和原生视图，显然对于渲染性能和内存占用都是一种极大的拖累和浪费。
 
-This is where ListView comes into play. ListView renders items lazily, just when they are about to appear. This laziness comes at cost of a more complicated API, which is worth it unless you are rendering a small fixed set of items.
+这就是为什么我们还有专门的`ListView`组件。`ListView`会惰性渲染子元素，只在它们将要出现在屏幕中时开始渲染。这种惰性渲染逻辑要复杂很多，因而API在使用上也更为繁琐。除非你要渲染的数据特别少，否则你都应该尽量使用`ListView`，哪怕它们用起来更麻烦。
+
+`FlatList`是0.43版本开始新出的改进版的`ListView`，性能更优，但可能不够稳定，尚待时间考验。
 
 ### 属性
 
