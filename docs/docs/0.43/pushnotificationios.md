@@ -145,16 +145,26 @@
 		</div>
 	</div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="popinitialnotification"></a><span class="propType">static </span>popInitialNotification<span class="propType">()</span> <a class="hash-link" href="#popinitialnotification">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="getinitialnotification"></a><span class="propType">static </span>getInitialNotification<span class="propType">()</span> <a class="hash-link" href="#getinitialnotification">#</a></h4>
 		<div>
 			<p>如果用户通过点击推送通知来冷启动应用（即：之前应用不在运行状态），此函数会返回一个初始的通知。</p>
-			<p>第一次调用<code>popInitialNotification</code>会返回初始的通知对象，或者返回<code>null</code>。后续的调用全部会返回null.</p>
+			<p>第一次调用<code>getInitialNotification</code>会返回初始的通知对象，或者返回<code>null</code>。后续的调用全部会返回null.</p>
 		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="constructor"></a>constructor<span class="propType">(nativeNotif: Object)</span> <a class="hash-link" href="#constructor">#</a></h4>
 		<div><p>你应该永远不需要自己实例化<code>PushNotificationIOS</code>对象。监听<code>notification</code>事件和调用<code>popInitialNotification</code>应当足够了。</p>
 		</div>
+	</div>
+	<div class="prop">
+	<h4 class="methodTitle"><a class="anchor" name="finish"></a>finish<span class="methodType">(fetchResult)</span> <a class="hash-link" href="docs/pushnotificationios.html#finish">#</a></h4>
+	<div>
+		<p>This method is available for remote notifications that have been received via:
+		<code>application:didReceiveRemoteNotification:fetchCompletionHandler:</code>
+		<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIApplicationDelegate_Protocol/#//apple_ref/occ/intfm/UIApplicationDelegate/application:didReceiveRemoteNotification:fetchCompletionHandler">https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIApplicationDelegate_Protocol/#//apple_ref/occ/intfm/UIApplicationDelegate/application:didReceiveRemoteNotification:fetchCompletionHandler</a>:
+		</p>
+		<p>Call this to execute when the remote notification handling is complete. When calling this block, pass in the fetch result value that best describes the results of your operation. You <em>must</em> call this handler and should do so as soon as possible. For a list of possible values, see <code>PushNotificationIOS.FetchResult</code>.</p><p>If you do not call this method your background remote notifications could be throttled, to read more about it see the above documentation link.</p>
+	</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="getmessage"></a>getMessage<span class="propType">()</span> <a class="hash-link" href="#getmessage">#</a></h4>
