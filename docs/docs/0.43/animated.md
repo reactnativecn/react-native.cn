@@ -25,18 +25,18 @@ class FadeInView extends React.Component {
      );
    }
  }
- ```
+```
 
 
- 注意只有声明为可动画化的组件才能被关联动画。`View`、`Text`，还有`Image`都是可动画化的。如果你想让自定义组件可动画化，可以用`createAnimatedComponent`。这些特殊的组件里面用了一些黑魔法，来把动画数值绑定到属性上，然后在每帧去执行原生更新，来避免每次render和同步过程的开销。他们还处理了在节点卸载时的清理工作以确保使用安全。
+注意只有声明为可动画化的组件才能被关联动画。`View`、`Text`，还有`Image`都是可动画化的。如果你想让自定义组件可动画化，可以用`createAnimatedComponent`。这些特殊的组件里面用了一些黑魔法，来把动画数值绑定到属性上，然后在每帧去执行原生更新，来避免每次render和同步过程的开销。他们还处理了在节点卸载时的清理工作以确保使用安全。
 
- 动画具备很强的可配置性。自定义或者预定义的过渡函数、延迟、时间、衰减比例、刚度等等。取决于动画类型的不同，你还可以配置更多的参数。
+动画具备很强的可配置性。自定义或者预定义的过渡函数、延迟、时间、衰减比例、刚度等等。取决于动画类型的不同，你还可以配置更多的参数。
 
- 一个`Animated.Value`可以驱动任意数量的属性，并且每个属性可以配置一个不同的插值函数。插值函数把一个输入的范围映射到输出的范围，通常我们用线性插值，不过你也可以使用其他的过渡函数。默认情况下，当输入超出范围时，它也会对应的进行转换，不过你也可以把输出约束到范围之内。 
+一个`Animated.Value`可以驱动任意数量的属性，并且每个属性可以配置一个不同的插值函数。插值函数把一个输入的范围映射到输出的范围，通常我们用线性插值，不过你也可以使用其他的过渡函数。默认情况下，当输入超出范围时，它也会对应的进行转换，不过你也可以把输出约束到范围之内。 
 
- 举个例子，你可能希望你的`Animated.Value`从0变化到1时，把组件的位置从150px移动到0px，不透明度从0到1。可以通过以下的方法修改`style`属性来实现：
+举个例子，你可能希望你的`Animated.Value`从0变化到1时，把组件的位置从150px移动到0px，不透明度从0到1。可以通过以下的方法修改`style`属性来实现：
 
- ```javascript
+```javascript
  style={{
    opacity: this.state.fadeAnim, // Binds directly
    transform: [{
@@ -46,13 +46,13 @@ class FadeInView extends React.Component {
      }),
    }],
  }}>
- ```
+```
 
- 动画还可以被更复杂地组合，通过一些辅助函数例如`sequence`或者`parallel`（它们分别用于先后执行多个动画和同时执行多个动画），而且还可以通过把toValue设置为另一个Animated.Value来产生一个动画序列。
+动画还可以被更复杂地组合，通过一些辅助函数例如`sequence`或者`parallel`（它们分别用于先后执行多个动画和同时执行多个动画），而且还可以通过把toValue设置为另一个Animated.Value来产生一个动画序列。
 
- `Animated.ValueXY`则用来处理一些2D动画，譬如滑动。并且还有一些辅助功能譬如`setOffset`和`getLayout`来帮助实现一些常见的交互效果，譬如拖放操作(Drag and drop)。
+`Animated.ValueXY`则用来处理一些2D动画，譬如滑动。并且还有一些辅助功能譬如`setOffset`和`getLayout`来帮助实现一些常见的交互效果，譬如拖放操作(Drag and drop)。
 
- 你可以在`AnimationExample.js`中找到一些更复杂的例子。你还可以看看Gratuitous Animation App，以及[动画指南文档](animations.html)。
+你可以在`AnimationExample.js`中找到一些更复杂的例子。你还可以看看Gratuitous Animation App，以及[动画指南文档](animations.html)。
 
 注意`Animated`模块被设计为可完全序列化的，这样动画可以脱离JavaScript事件循环，以一种高性能的方式运行。这可能会导致API看起来比较难懂，与一个完全同步的动画系统相比稍微有一些奇怪。`Animated.Value.addListener`可以帮助你解决一些相关限制，不过使用它的时候需要小心，因为将来的版本中它可能会牵扯到性能问题。
 

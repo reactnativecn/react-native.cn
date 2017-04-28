@@ -41,7 +41,7 @@ public class ToastModule extends ReactContextBaseJavaModule {
   }
 ```
 
-_译注_：模块名前的RCT前缀会被自动移除。所以如果返回的字符串为"RCTToastAndroid"，在JavaScript端依然通过`React.NativeModules.ToastAndroid`访问到这个模块。
+_译注_：模块名前的RCT前缀会被自动移除。所以如果返回的字符串为"RCTToastAndroid"，在JavaScript端依然可以通过`React.NativeModules.ToastAndroid`访问到这个模块。
 
 一个可选的方法`getContants`返回了需要导出给JavaScript使用的常量。它并不一定需要实现，但在定义一些可以被JavaScript同步访问到的预定义的值时非常有用。
 

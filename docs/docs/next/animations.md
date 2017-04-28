@@ -1,44 +1,64 @@
-流畅、有意义的动画对于移动应用用户体验来说是非常必要的。和React Native的其他部分一样，动画API也还在积极开发中，不过我们已经可以联合使用两个互补的系统：用于全局的布局动画`LayoutAnimation`，和用于创建更精细的交互控制的动画`Animated`。
+流畅、有意义的动画对于移动应用用户体验来说是非常重要的。现实生活中的物体在开始移动和停下来的时候都具有一定的惯性，我们在界面中也可以使用动画来实现契合物理规律的交互。
+React Native提供了两个互补的动画系统：用于全局的布局动画`LayoutAnimation`，和用于创建更精细的交互控制的动画`Animated`。
 
 ### Animated
 
-`Animated`库使得开发者可以非常容易地实现各种各样的动画和交互方式，并且具备极高的性能。`Animated`仅关注动画的输入与输出声明，在其中建立一个可配置的变化函数，然后使用简单的`start/stop`方法来控制动画按顺序执行。下面是一个在加载时带有简单的弹跳动画的组件示例：
+`Animated`库使得开发者可以非常容易地实现各种各样的动画和交互方式，并且具备极高的性能。`Animated`旨在以声明的形式来定义动画的输入与输出，在其中建立一个可配置的变化函数，然后使用简单的`start/stop`方法来控制动画按顺序执行。
+`Animated`仅封装了四个可以动画化的组件：`View`、`Text`、`Image`和`ScrollView`，不过你也可以使用`Animated.createAnimatedComponent()`来封装你自己的组件。
+下面是一个在加载时带有淡入动画效果的视图：
 
 ```javascript
-class Playground extends React.Component {
-  constructor(props: any) {
+// FadeInView.js
+import React, { Component } from 'react';
+import {
+  Animated,
+} from 'react-native';
+
+export default class FadeInView extends Component {
+  constructor(props) {
     super(props);
     this.state = {
-      bounceValue: new Animated.Value(0),
+      fadeAnim: new Animated.Value(0),          // Initial value for opacity: 0
     };
   }
-  render(): ReactElement {
+  componentDidMount() {
+    Animated.timing(                            // Animate over time
+      this.state.fadeAnim,                      // The animated value to drive
+      {
+        toValue: 1,                             // Animate to opacity: 1, or fully opaque
+      }
+    ).start();                                  // 开始执行动画
+  }
+  render() {
     return (
-      <Animated.Image                         // 可选的基本组件类型: Image, Text, View
-        source={{uri: 'http://i.imgur.com/XMKOH81.jpg'}}
+      <Animated.View                            // Special animatable View
         style={{
-          flex: 1,
-          transform: [                        // `transform`是一个有序数组（动画按顺序执行）
-            {scale: this.state.bounceValue},  // 将`bounceValue`赋值给 `scale`
-          ]
+          ...this.props.style,
+          opacity: this.state.fadeAnim,          // Bind opacity to animated value
         }}
-      />
+      >
+        {this.props.children}
+      </Animated.View>
     );
   }
-  componentDidMount() {
-    this.state.bounceValue.setValue(1.5);     // 设置一个较大的初始值
-    Animated.spring(                          // 可选的基本动画类型: spring, decay, timing
-      this.state.bounceValue,                 // 将`bounceValue`值动画化
-      {
-        toValue: 0.8,                         // 将其值以动画的形式改到一个较小值
-        friction: 1,                          // Bouncier spring
-      }
-    ).start();                                // 开始执行动画
-  }
+}
+
+```
+
+You can then use your `FadeInView` in place of a `View` in your components, like so:
+
+```javascript
+render() {
+  return (
+    <FadeInView style={{width: 250, height: 50, backgroundColor: 'powderblue'}}>
+      <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Fading in</Text>
+    </FadeInView>
+  )
 }
 ```
 
-`bounceValue`在构造函数中初始化为`state`的一部分，然后和图片的缩放比例进行绑定。在动画执行的背后，其数值会被不断的计算并用于设置缩放比例。当组件刚刚挂载的时候，缩放比例被设置到1.5。然后紧跟着在`bounceValue`上执行了一个弹跳动画(spring)，会逐帧刷新数值，并同步更新所有依赖本数值的绑定（在这个例子里，就是图片的缩放比例）。比起调用`setState`然后重新渲染，这一运行过程要快得多。因为整个配置都是声明式的，我们可以实现更进一步的优化，只要序列化好配置，然后我们可以在一个高优先级的线程执行动画。
+![](img/AnimatedFadeInView.gif)
+
 
 #### 核心API
 
@@ -169,7 +189,7 @@ onPanResponderMove={Animated.event([
 
 如前面所述，我们计划继续优化Animated，以进一步提升性能。我们还想尝试一些声明式的手势响应和触发动画，譬如垂直或者水平的倾斜操作。
 
-上面的API提供了一个强大的工具来简明、健壮、高效地组织各种各种不同的动画。你可以在[UIExplorer/AnimationExample](https://github.com/facebook/react-native/tree/master/Examples/UIExplorer/AnimatedGratuitousApp)中看到更多的样例代码。不过还有些时候`Animated`并不能支持你想要的效果，下面的章节包含了一些其它的动画系统。
+上面的API提供了一个强大的工具来简明、健壮、高效地组织各种各种不同的动画。你可以在[UIExplorer/AnimationExample](https://github.com/facebook/react-native/tree/master/Examples/UIExplorer/js/AnimatedGratuitousApp)中看到更多的样例代码。不过还有些时候`Animated`并不能支持你想要的效果，下面的章节包含了一些其它的动画系统。
 
 ### LayoutAnimation
 
@@ -379,7 +399,7 @@ render: function() {
 
 不过你没办法把`setNativeProps`和react-tween-state结合使用，因为更新的补间值会自动被库设置到state上——Rebound则不同，它通过`onSprintUpdate`函数在每一帧中给我们提供一个更新后的值。
 
-如果你发现你的动画丢帧（低于60帧每秒），可以尝试使用`setNativeProps`或者`shouldComponentUpdate`来优化它们。你还可能需要将部分计算工作放在动画完成之后进行，这时可以使用[InteractionManager](/react-native/docs/interactionmanager.html)。你还可以使用应用内的开发者菜单中的“FPS Monitor”工具来监控应用的帧率。
+如果你发现你的动画丢帧（低于60帧每秒），可以尝试使用`setNativeProps`或者`shouldComponentUpdate`来优化它们。你还可能需要将部分计算工作放在动画完成之后进行，这时可以使用[InteractionManager](interactionmanager.html)。你还可以使用应用内的开发者菜单中的“FPS Monitor”工具来监控应用的帧率。
 
 ### 导航器场景切换
 

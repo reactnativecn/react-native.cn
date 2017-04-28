@@ -169,7 +169,7 @@ onPanResponderMove={Animated.event([
 
 如前面所述，我们计划继续优化Animated，以进一步提升性能。我们还想尝试一些声明式的手势响应和触发动画，譬如垂直或者水平的倾斜操作。
 
-上面的API提供了一个强大的工具来简明、健壮、高效地组织各种各种不同的动画。你可以在[UIExplorer/AnimationExample](https://github.com/facebook/react-native/tree/master/Examples/UIExplorer/AnimatedGratuitousApp)中看到更多的样例代码。不过还有些时候`Animated`并不能支持你想要的效果，下面的章节包含了一些其它的动画系统。
+上面的API提供了一个强大的工具来简明、健壮、高效地组织各种各种不同的动画。你可以在[UIExplorer/AnimationExample](https://github.com/facebook/react-native/tree/master/Examples/UIExplorer/js/AnimatedGratuitousApp)中看到更多的样例代码。不过还有些时候`Animated`并不能支持你想要的效果，下面的章节包含了一些其它的动画系统。
 
 ### LayoutAnimation
 
@@ -379,7 +379,7 @@ render: function() {
 
 不过你没办法把`setNativeProps`和react-tween-state结合使用，因为更新的补间值会自动被库设置到state上——Rebound则不同，它通过`onSprintUpdate`函数在每一帧中给我们提供一个更新后的值。
 
-如果你发现你的动画丢帧（低于60帧每秒），可以尝试使用`setNativeProps`或者`shouldComponentUpdate`来优化它们。你还可能需要将部分计算工作放在动画完成之后进行，这时可以使用[InteractionManager](/react-native/docs/interactionmanager.html)。你还可以使用应用内的开发者菜单中的“FPS Monitor”工具来监控应用的帧率。
+如果你发现你的动画丢帧（低于60帧每秒），可以尝试使用`setNativeProps`或者`shouldComponentUpdate`来优化它们。你还可能需要将部分计算工作放在动画完成之后进行，这时可以使用[InteractionManager](interactionmanager.html)。你还可以使用应用内的开发者菜单中的“FPS Monitor”工具来监控应用的帧率。
 
 ### 导航器场景切换
 

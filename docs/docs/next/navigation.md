@@ -50,16 +50,6 @@ React Navigation中的视图是原生组件，同时用到了运行在原生线�
 
 要想详细了解React Navigation，可以阅读这一篇英文的[入门文档](https://reactnavigation.org/docs/intro/)。
 
-## Navigator
-
-和React Navigation类似，`Navigator`使用纯JavaScript实现了一个导航栈，因此可以跨平台工作，同时也便于定制。但Navigator早在2015年就发布了，因此它没有能够享受到如今流畅的原生动画支持。
-
-![](img/NavigationStack-Navigator.gif)
-
-`Navigator`可以在`renderScene`方法中根据当前路由渲染不同的组件。默认情况下新的场景会从屏幕右侧滑进来，但你也可以通过`configureScene`方法来管理这一行为。你还可以通过`navigationBar`属性来配置一个跨场景的导航栏。（译注：但我们不推荐使用跨场景的navigationBar，它的代码逻辑维护起来很困难！建议自己在场景中用`View`实现自定义的导航栏。）
-
-点击这里阅读[Navigator的API文档](navigator.html)。
-
 
 ## NavigatorIOS
 
