@@ -3,16 +3,16 @@ export default {
     banner: {
       img: require('./img/course01.png'),
       text: '听晴明老师从头讲React Native',
-      link: 'https://ke.qq.com/course/197101',
-      gainfo: 'course01/index'
+      link: '/post/3376',
+      gainfo: 'post3376/index'
     }
   },
   docs: {
     banner: {
       img: require('./img/course01.png'),
       text: '听晴明老师从头讲React Native',
-      link: 'https://ke.qq.com/course/197101',
-      gainfo: 'course01/docs'
+      link: '/post/3376',
+      gainfo: 'post3376/docs'
     }
   }
 }
