@@ -5,15 +5,13 @@
 首先请[手动链接](linking-libraries-ios.html)PushNotificationIOS的库（以下操作如果不熟悉，请自行补习Xcode的使用教程）：  
 - 将`node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj`文件拖到Xcode界面中
 - 在Xcode的`Link Binary With Libraries`中添加`libRCTPushNotification.a`
-- 在`Header Search Paths`中添加: `$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS`  
-- 将搜索选项设为`recursive`
 
 然后你需要在AppDelegate中启用推送通知的支持以及注册相应的事件。
 
 在`AppDelegate.m`开头：
 
 ```objective-c
-#import "RCTPushNotificationManager.h"
+#import <React/RCTPushNotificationManager.h>
 ```
 
 然后在AppDelegate实现中添加如下的代码：

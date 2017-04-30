@@ -284,26 +284,45 @@ RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 // MapView.js
 
 class MapView extends React.Component {
-  constructor() {
-    this._onChange = this._onChange.bind(this);
-  }
-  _onChange(event: Event) {
+  static propTypes = {
+    /**
+     * Callback that is called continuously when the user is dragging the map.
+     */
+    onChange: React.PropTypes.func,
+    ...
+  };
+  _onChange = (event: Event) => {
     if (!this.props.onRegionChange) {
       return;
     }
-    this.props.onRegionChange(event.nativeEvent.region);
+    this.props.onRegionChange(event.nativeEvent);
   }
   render() {
     return <RNTMap {...this.props} onChange={this._onChange} />;
   }
 }
-MapView.propTypes = {
-  /**
-   * Callback that is called continuously when the user is dragging the map.
-   */
-  onRegionChange: React.PropTypes.func,
-  ...
-};
+
+class MapViewExample extends React.Component {
+   onRegionChange(event: Event) {
+     // Do stuff with event.region.latitude, etc.
+   }
+ 
+   render() {
+     var region = {
+       latitude: 37.48,
+       longitude: -122.16,
+       latitudeDelta: 0.1,
+       longitudeDelta: 0.1,
+     };
+ 
+     return (
+       <MapView region={region} pitchEnabled={false} style={{flex: 1}} onChange={this.onRegionChange}/>
+     );
+   }  
+ }
+ 
+ // Module name
+ +AppRegistry.registerComponent('MapViewExample', () => MapViewExample);
 ```
 
 ## 样式
