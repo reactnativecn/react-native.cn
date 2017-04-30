@@ -5,4 +5,29 @@
         border-left: 4px solid #05A5D1;
         background-color: rgba(5, 165, 209, 0.05);
     }
+
+    table {
+        display: block;
+        width: 100%;
+        overflow: auto;
+        th {
+            font-weight: 600;
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        tr {
+            background-color: #fff;
+            border-top: 1px solid #c6cbd1;
+            &:nth-child(2n) {
+                background-color: #f6f8fa;
+            }
+        }
+        img {
+            background-color: transparent;
+        }
+    }
 }
