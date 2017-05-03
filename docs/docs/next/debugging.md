@@ -38,14 +38,18 @@
 应用内的警告会以全屏黄色显示在应用中（调试模式下），我们称为黄屏（yellow box）报错。点击警告可以查看详情或是忽略掉。
 和红屏报警类似，你可以使用`console.warn()`来手动触发黄屏警告。
 在默认情况下，开发模式中启用了黄屏警告。可以通过以下代码关闭：
-```js
+
+```javascript
 console.disableYellowBox = true;
 console.warn('YellowBox is disabled.');
 ```
-你也可以通过代码屏蔽指定的警告，像下面这样设置一个数组：
-```js
-console.ignoredYellowBox = ['Warning: ...'];
+
+你也可以通过代码屏蔽指定的警告，像下面这样调用ignoreWarnings方法，参数为一个数组：
+
+```javascript
+YellowBox.ignoreWarnings(['Warning: ...']);
 ```
+
 数组中的字符串就是要屏蔽的警告的开头的内容。（例如上面的代码会屏蔽掉所有以Warning开头的警告内容）
 
 > 红屏和黄屏在发布版（release/production）中都是自动禁用的。

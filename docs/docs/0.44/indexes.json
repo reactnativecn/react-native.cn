@@ -390,6 +390,10 @@
                     "mdlink": "backandroid"
                 },
                 {
+                    "subject": "BackHandler",
+                    "mdlink": "backhandler"
+                },
+                {
                     "subject": "CameraRoll",
                     "mdlink": "cameraroll"
                 },

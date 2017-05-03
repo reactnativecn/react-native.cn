@@ -1,4 +1,6 @@
-本文档总结对比了React Native中现有的几个导航组件。如果你刚开始接触，那么直接选择`React Navigation`就好。如果你只针对iOS平台开发，并且想和系统原生外观一致，那么可以选择`NavigatorIOS`。你还可能在很多地方听说过`Navigator`，这个老组件会逐步被`React Navigation`替代，但是它经历了长期的实践，bug很少，目前仍然可用。过去还有一个实验性的导航器组件`NavigationExperimental`，这个组件已经完全弃用。
+本文档总结对比了React Native中现有的几个导航组件。如果你刚开始接触，那么直接选择`React Navigation`就好。如果你只针对iOS平台开发，并且想和系统原生外观一致，那么可以选择`NavigatorIOS`。你还可能在很多地方听说过`Navigator`，这个老组件会逐步被`React Navigation`替代，但是它经历了长期的实践，较为稳定。过去还有一个实验性的导航器组件`NavigationExperimental`，这个组件已经完全弃用。
+
+> 译注：从0.44版本开始，`Navigator`被从react native的核心组件库中剥离到了一个名为`react-native-deprecated-custom-components`的单独模块中。如果你需要继续使用`Navigator`，则需要先`npm i -S react-native-deprecated-custom-components`，然后从这个模块中import，即`import { Navigator } from 'react-native-deprecated-custom-components'`.
 
 ## React Navigation
 

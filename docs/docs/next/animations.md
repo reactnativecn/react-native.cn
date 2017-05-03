@@ -72,9 +72,9 @@ This is done in an optimized way that is faster than calling `setState` and re-r
 Because the entire configuration is declarative, we will be able to implement further optimizations that serialize the configuration and runs the animation on a high-priority thread.
 
 
-### Configuring animations
+### 配置动画
 
-Animations are heavily configurable. Custom and predefined easing functions, delays, durations, decay factors, spring constants, and more can all be tweaked depending on the type of animation.
+动画拥有非常灵活的配置项。自定义的或预定义的easing函数、延迟、持续时间、Animations are heavily configurable. Custom and predefined easing functions, delays, durations, decay factors, spring constants, and more can all be tweaked depending on the type of animation.
 
 `Animated` provides several animation types, the most commonly used one being [`Animated.timing()`](animated.html#timing).
 It supports animating a value over time using one of various predefined easing functions, or you can use your own.
@@ -125,9 +125,9 @@ Animated.sequence([            // 首先执行decay动画，结束后同时执�
 
 You can find a full list of composition methods in the [Composing animations](animated.html#composing-animations) section of the `Animated` API reference.
 
-### Combining animated values
+### 联动多个动画值
 
-You can [combine two animated values](docs/animated.html#combining-animated-values) via addition, multiplication, division, or modulo to make a new animated value.
+You can [combine two animated values](animated.html#combining-animated-values) via addition, multiplication, division, or modulo to make a new animated value.
 
 There are some cases where an animated value needs to invert another animated value for calculation.
 An example is inverting a scale (2x --> 0.5x):
