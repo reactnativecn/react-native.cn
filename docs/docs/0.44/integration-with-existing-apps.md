@@ -603,7 +603,7 @@ AppRegistry.registerComponent('HelloWorld', () => HelloWorld);
  }
 ```
 
-> 你想要指定构建时的 React Native 版本，请用 `npm` 已下载的本地 React Native 的版本号替换 `+` 。 
+> 如果想要指定特定的React Native版本，可以用具体的版本号替换 `+`，当然前提是你从npm里下载的是这个版本 。 
 
 在项目的 `build.gradle` 文件中为 React Native 添加一个 maven 依赖的入口，必须写在 "allprojects" 代码块中:
 

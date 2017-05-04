@@ -17,6 +17,130 @@ NOTE: `LayoutAnimation` and sticky section headers both have bugs when used with
 ### 属性
 
 <div class="props">
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="data"></a>data?: <span class="propType">any</span>
+        <a class="hash-link" href="#data">#</a></h4>
+        <div><p>The default accessor functions assume this is an Array&lt;{key: string}&gt; but you can override
+            getItem, getItemCount, and keyExtractor to handle any type of index-based data.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="debug"></a>debug?: <span class="propType"><span>?boolean</span></span>
+        <a class="hash-link" href="#debug">#</a></h4>
+        <div><p><code>debug</code> will turn on extra logging and visual overlays to aid with debugging both usage and
+            implementation, but with a significant perf hit.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="disablevirtualization"></a>disableVirtualization:
+        <span class="propType">boolean</span> <a class="hash-link"
+                                                 href="#disablevirtualization">#</a></h4>
+        <div><p>DEPRECATED: Virtualization provides significant performance and memory optimizations, but fully
+            unmounts react instances that are outside of the render window. You should only need to disable
+            this for debugging purposes.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="extradata"></a>extraData?: <span class="propType">any</span>
+        <a class="hash-link" href="#extradata">#</a></h4>
+        <div><p>A marker property for telling the list to re-render (since it implements <code>PureComponent</code>). If
+            any of your <code>renderItem</code>, Header, Footer, etc. functions depend on anything outside of the
+            <code>data</code> prop, stick it here and treat it immutably.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="getitem"></a>getItem: <span class="propType">(data: any, index: number) =&gt; ?Item</span>
+        <a class="hash-link" href="#getitem">#</a></h4>
+        <div><p>A generic accessor for extracting an item from any sort of data blob.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="getitemcount"></a>getItemCount: <span
+            class="propType">(data: any) =&gt; number</span> <a class="hash-link"
+                                                                href="#getitemcount">#</a></h4>
+        <div><p>Determines how many items are in the data blob.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="getitemlayout"></a>getItemLayout?: <span
+            class="propType">(data: any, index: number) =&gt;
+  {length: number, offset: number, index: number}</span> <a class="hash-link"
+                                                            href="#getitemlayout">#</a></h4>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="horizontal"></a>horizontal?: <span class="propType"><span>?boolean</span></span>
+        <a class="hash-link" href="#horizontal">#</a></h4></div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="initialnumtorender"></a>initialNumToRender: <span
+            class="propType">number</span> <a class="hash-link"
+                                              href="#initialnumtorender">#</a></h4>
+        <div><p>How many items to render in the initial batch. This should be enough to fill the screen but not
+            much more. Note these items will never be unmounted as part of the windowed rendering in order
+            to improve perceived performance of scroll-to-top actions.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="keyextractor"></a>keyExtractor: <span
+            class="propType">(item: Item, index: number) =&gt; string</span> <a class="hash-link"
+                                                                                href="#keyextractor">#</a>
+    </h4></div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="maxtorenderperbatch"></a>maxToRenderPerBatch: <span
+            class="propType">number</span> <a class="hash-link"
+                                              href="#maxtorenderperbatch">#</a></h4>
+        <div><p>The maximum number of items to render in each incremental render batch. The more rendered at
+            once, the better the fill rate, but responsiveness my suffer because rendering content may
+            interfere with responding to button taps or other interactions.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="onendreached"></a>onEndReached?: <span
+            class="propType"><span>?(info: {distanceFromEnd: number}) =&gt; void</span></span> <a class="hash-link"
+                                                                                                  href="#onendreached">#</a>
+    </h4></div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="onendreachedthreshold"></a>onEndReachedThreshold?:
+        <span class="propType"><span>?number</span></span> <a class="hash-link"
+                                                              href="#onendreachedthreshold">#</a>
+    </h4></div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="onlayout"></a>onLayout?: <span
+            class="propType"><span>?Function</span></span> <a class="hash-link"
+                                                              href="#onlayout">#</a></h4></div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="onrefresh"></a>onRefresh?: <span
+            class="propType"><span>?Function</span></span> <a class="hash-link"
+                                                              href="#onrefresh">#</a></h4>
+        <div><p>If provided, a standard RefreshControl will be added for "Pull to Refresh" functionality. Make
+            sure to also set the <code>refreshing</code> prop correctly.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="onviewableitemschanged"></a>onViewableItemsChanged?:
+        <span class="propType"><span>?(info: {
+  viewableItems: Array&lt;ViewToken&gt;,
+  changed: Array&lt;ViewToken&gt;,
+}) =&gt; void</span></span> <a class="hash-link" href="#onviewableitemschanged">#</a></h4>
+        <div><p>Called when the viewability of rows changes, as defined by the
+            <code>viewabilityConfig</code> prop.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="refreshing"></a>refreshing?: <span class="propType"><span>?boolean</span></span>
+        <a class="hash-link" href="#refreshing">#</a></h4>
+        <div><p>Set this true while waiting for new data from a refresh.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="removeclippedsubviews"></a>removeClippedSubviews?:
+        <span class="propType">boolean</span> <a class="hash-link"
+                                                 href="#removeclippedsubviews">#</a></h4>
+        <div><p>A native optimization that removes clipped subviews (those outside the parent) from the view
+            hierarchy to offload work from the native rendering system. They are still kept around so no
+            memory is saved and state is preserved.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="renderitem"></a>renderItem: <span class="propType">(info: {item: Item, index: number}) =&gt; ?React.Element&lt;any&gt;</span>
+        <a class="hash-link" href="#renderitem">#</a></h4></div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="renderscrollcomponent"></a>renderScrollComponent:
+        <span class="propType">(props: Object) =&gt; React.Element&lt;any&gt;</span> <a class="hash-link"
+                                                                                        href="#renderscrollcomponent">#</a>
+    </h4>
+        <div><p>Render a custom scroll component, e.g. with a differently styled <code>RefreshControl</code>.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="updatecellsbatchingperiod"></a>updateCellsBatchingPeriod:
+        <span class="propType">number</span> <a class="hash-link"
+                                                href="#updatecellsbatchingperiod">#</a></h4>
+        <div><p>Amount of time between low-pri item render batches, e.g. for rendering items quite a ways off
+            screen. Similar fill rate/responsiveness tradeoff as <code>maxToRenderPerBatch</code>.</p></div>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="viewabilityconfig"></a>viewabilityConfig?: <span
+            class="propType">ViewabilityConfig</span> <a class="hash-link"
+                                                         href="#viewabilityconfig">#</a></h4>
+    </div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="windowsize"></a>windowSize: <span class="propType">number</span>
+        <a class="hash-link" href="#windowsize">#</a></h4>
+        <div><p>Determines the maximum number of items rendered outside of the visible area, in units of
+            visible lengths. So if your list fills the screen, then <code>windowSize={21}</code> (the default) will
+            render the visible screen area plus up to 10 screens above and 10 below the viewport. Reducing
+            this number will reduce memory consumption and may improve performance, but will increase the
+            chance that fast scrolling may reveal momentary blank areas of unrendered content.</p></div>
+    </div>
+</div>
+
+### 方法
+
+<div class="props">
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="scrolltoend"></a>scrollToEnd<span
             class="methodType">(params?: object)</span> <a class="hash-link"
                                                            href=".html#scrolltoend">#</a></h4></div>

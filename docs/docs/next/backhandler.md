@@ -1,12 +1,12 @@
-Detect hardware button presses for back navigation.
+监听设备上的后退按钮事件。
 
-Android: Detect hardware back button presses, and programmatically invoke the default back button functionality to exit the app if there are no listeners or if none of the listeners return true.
+Android：监听后退按钮事件。如果没有添加任何监听函数，或者所有的监听函数都返回false，则会执行默认行为，退出应用。 
 
-tvOS: Detect presses of the menu button on the TV remote. (Still to be implemented: programmatically disable menu button handling functionality to exit the app if there are no listeners or if none of the listeners return true.)
+tvOS(即Apple TV机顶盒)：监听遥控器上的后退按钮事件（阻止应用退出的功能尚未实现）。
 
-iOS: Not applicable.
+iOS：尚无作用。
 
-The event subscriptions are called in reverse order (i.e. last registered subscription first), and if one subscription returns true then subscriptions registered earlier will not be called.
+监听函数是按倒序的顺序执行（即后添加的函数先执行）。如果某一个函数返回true，则后续的函数都不会被调用。
 
 ```javascript
 BackHandler.addEventListener('hardwareBackPress', function() {

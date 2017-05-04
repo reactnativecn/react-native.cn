@@ -1,4 +1,4 @@
-此Api已废弃，请使用[`BackHandler`](BackHandler.html)代替。
+此Api已废弃，请使用[`BackHandler`](backhandler.html)代替。
 
 ### 方法
 
