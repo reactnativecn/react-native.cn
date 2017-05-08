@@ -53,7 +53,7 @@ class MyList extends React.PureComponent {
     this.setState((state) => {
       // copy the map rather than modifying state.
       const selected = new Map(state.selected);
-      selected.set(id, !state.get(id)); // toggle
+      selected.set(id, !selected.get(id)); // toggle
       return {selected};
     });
   };
@@ -121,9 +121,7 @@ class MyList extends React.PureComponent {
     </div>
        <div class="prop">
        <h4 class="propTitle"><a class="anchor" name="extradata"></a>extraData?: <span class="propType">any</span> <a class="hash-link" href="#extradata">#</a></h4>
-       <div><p>A marker property for telling the list to re-render (since it implements <code>PureComponent</code>). If
-any of your <code>renderItem</code>, Header, Footer, etc. functions depend on anything outside of the
-<code>data</code> prop, stick it here and treat it immutably.</p>
+       <div><p>如果有除<code>data</code>以外的数据用在列表中（不论是用在<code>renderItem</code>还是Header或者Footer中），请在此属性中指定。同时此数据在修改时也需要先修改其引用地址（比如先复制到一个新的Object或者数组中），然后再修改其值，否则界面很可能不会刷新。</p>
        </div>
        </div>
     <div class="prop">
@@ -155,7 +153,7 @@ any of your <code>renderItem</code>, Header, Footer, etc. functions depend on an
     </div>
        <div class="prop">
        <h4 class="propTitle"><a class="anchor" name="initialnumtorender"></a>initialNumToRender: <span class="propType">number</span> <a class="hash-link" href="#initialnumtorender">#</a></h4>
-       <div><p>How many items to render in the initial batch. This should be enough to fill the screen but not much more. Note these items will never be unmounted as part of the windowed rendering in order to improve perceived performance of scroll-to-top actions.</p></div>
+       <div><p>指定一开始渲染的元素数量，最好刚刚够填满一个屏幕，这样保证了用最短的时间给用户呈现可见的内容。注意这第一批次渲染的元素不会在滑动过程中被卸载，这样是为了保证用户执行返回顶部的操作时，不需要重新渲染首批元素。</p></div>
        </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="keyextractor"></a>keyExtractor: <span
             class="propType"><code>(item: ItemT, index: number) =&gt; string</code></span> <a class="hash-link"
@@ -191,12 +189,11 @@ any of your <code>renderItem</code>, Header, Footer, etc. functions depend on an
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onviewableitemschanged"></a>onViewableItemsChanged?:
         <span class="propType"><code>?(info: {viewableItems: Array&lt;ViewToken&gt;, changed: Array&lt;ViewToken&gt;}) =&gt; void</code></span>
         <a class="hash-link" href="#onviewableitemschanged">#</a></h4>
-        <div><p>Called when the viewability of rows changes, as defined by the
-            <code>viewablePercentThreshold</code> prop.</p></div>
+        <div><p>在可见行元素变化时调用。可见范围和变化频率等参数的配置请设置<code>viewabilityconfig</code>属性</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="refreshing"></a>refreshing?: <span class="propType"><code>?boolean</code></span>
         <a class="hash-link" href="#refreshing">#</a></h4>
-        <div><p>Set this true while waiting for new data from a refresh.</p></div>
+        <div><p>在等待加载新数据时将此属性设为true，列表就会显示出一个正在加载的符号。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="renderitem"></a>renderItem: <span
             class="propType"><code>(info: {item: ItemT, index: number}) =&gt; ?React.Element&lt;any&gt;</code></span> <a
@@ -238,7 +235,7 @@ any of your <code>renderItem</code>, Header, Footer, etc. functions depend on an
             class="propType"><code>ViewabilityConfig</code></span> <a class="hash-link"
                                                                       href="#viewabilityconfig">#</a>
     </h4>
-        <div><p>请参考<a href="https://github.com/facebook/react-native/blob/master/Libraries/CustomComponents/Lists/ViewabilityHelper.js"><code>ViewabilityHelper</code></a>的源码来了解具体的配置类型。</p></div>
+        <div><p>请参考<a href="https://github.com/facebook/react-native/blob/master/Libraries/Lists/ViewabilityHelper.js"><code>ViewabilityHelper</code></a>的源码来了解具体的配置。</p></div>
     </div>
 </div>
 

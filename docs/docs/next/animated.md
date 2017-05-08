@@ -31,6 +31,16 @@ There are two value types you can use with `Animated`:
 
 In most cases, you will be using `timing()`. By default, it uses a symmetric easeInOut curve that conveys the gradual acceleration of an object to full speed and concludes by gradually decelerating to a stop.
 
+### Working with animations 
+
+Animations are started by calling `start()` on your animation. `start()` takes a completion callback that will be called when the animation is done. If the animation finished running normally, the completion callback will be invoked with `{finished: true}`. If the animation is done because `stop()` was called on it before it could finish (e.g. because it was interrupted by a gesture or another animation), then it will receive `{finished: false}`.
+
+### Using the native driver 
+
+By using the native driver, we send everything about the animation to native before starting the animation, allowing native code to perform the animation on the UI thread without having to go through the bridge on every frame. Once the animation has started, the JS thread can be blocked without affecting the animation.
+
+You can use the native driver by specifying `useNativeDriver: true` in your animation configuration. See the [Animations](animations.html#使用原生动画驱动) guide to learn more.
+
 ### 方法
 
 <div class="props">
