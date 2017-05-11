@@ -47,7 +47,7 @@ console.warn('YellowBox is disabled.');
 你也可以通过代码屏蔽指定的警告，像下面这样调用ignoreWarnings方法，参数为一个数组：
 
 ```javascript
-YellowBox.ignoreWarnings(['Warning: ...']);
+console.ignoredYellowBox = ['Warning: ...'];
 ```
 
 数组中的字符串就是要屏蔽的警告的开头的内容。（例如上面的代码会屏蔽掉所有以Warning开头的警告内容）
@@ -82,7 +82,9 @@ With React Native 0.43 or higher, you can use [the standalone version of React D
 npm install -g react-devtools
 ```
 
-Now run `react-devtools` from the terminal to launch the standalone DevTools app:
+> 译注：react-devtools依赖于electron，而electron需要到国外服务器下载二进制包，所以国内用户这一步很可能会卡住。此时请在`环境变量`中添加electron专用的国内镜像源：`ELECTRON_MIRROR="https://npm.taobao.org/mirrors/electron/"`，然后再尝试安装react-devtools。
+
+安装完成后在命令行中执行`react-devtools`即可启动此工具：
 
 ```bash
 react-devtools
