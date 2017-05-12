@@ -77,6 +77,7 @@ Gradle的`assembleRelease`参数会把所有用到的JavaScript代码都打包�
 
 生成的APK文件位于`android/app/build/outputs/apk/app-release.apk`，它已经可以用来发布了。
 
+
 ### 测试应用的发行版本
 
 在把发行版本提交到Play Store之前，你应该做一次最终测试。输入以下命令可以在设备上安装发行版本：
@@ -87,6 +88,8 @@ $ cd android && ./gradlew installRelease
 
 注意`installRelease`参数只能在你完成了上面的签名配置之后才可以使用。
 你现在可以关掉运行中的packager了，因为你所有的代码和框架依赖已经都被打包到apk包中，可以离线运行了。
+
+> 在debug和release版本间来回切换安装时可能会报错签名不匹配，此时需要先卸载前一个版本再尝试安装。
 
 ### 启用Proguard代码混淆来缩小APK文件的大小（可选）
 

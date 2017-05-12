@@ -48,10 +48,6 @@
                     "mdlink": "network"
                 },
                 {
-                    "subject": "使用导航器跳转页面",
-                    "mdlink": "using-navigators"
-                },
-                {
                     "subject": "其他参考资源",
                     "mdlink": "more-resources"
                 }
@@ -229,6 +225,10 @@
                     "mdlink": "drawerlayoutandroid"
                 },
                 {
+                    "subject": "FlatList",
+                    "mdlink": "flatlist"
+                },
+                {
                     "subject": "Image",
                     "mdlink": "image"
                 },
@@ -245,16 +245,8 @@
                     "mdlink": "listviewdatasource"
                 },
                 {
-                    "subject": "MapView",
-                    "mdlink": "mapview"
-                },
-                {
                     "subject": "Modal",
                     "mdlink": "modal"
-                },
-                {
-                    "subject": "Navigator",
-                    "mdlink": "navigator"
                 },
                 {
                     "subject": "NavigatorIOS",
@@ -283,6 +275,10 @@
                 {
                     "subject": "ScrollView",
                     "mdlink": "scrollview"
+                },
+                {
+                    "subject": "SectionList",
+                    "mdlink": "sectionlist"
                 },
                 {
                     "subject": "SegmentedControlIOS",
@@ -343,6 +339,10 @@
                 {
                     "subject": "ViewPagerAndroid",
                     "mdlink": "viewpagerandroid"
+                },
+                {
+                    "subject": "VirtualizedList",
+                    "mdlink": "virtualizedlist"
                 },
                 {
                     "subject": "WebView",
@@ -484,10 +484,6 @@
                 {
                     "subject": "ToastAndroid",
                     "mdlink": "toastandroid"
-                },
-                {
-                    "subject": "VibrationIOS",
-                    "mdlink": "vibrationios"
                 },
                 {
                     "subject": "Vibration",

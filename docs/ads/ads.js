@@ -1,18 +1,18 @@
 export default {
   index: {
     banner: {
-      img: require('./img/122live.jpg'),
-      text: '1月22日天地之灵直播MobX案例精讲',
-      link: 'http://reactnative.cn/post/3337',
-      gainfo: '122live/index'
+      img: require('./img/course01.png'),
+      text: '听晴明老师从头讲React Native',
+      link: 'https://ke.qq.com/course/197101',
+      gainfo: 'course01/index'
     }
   },
   docs: {
     banner: {
-      img: require('./img/122live.jpg'),
-      text: '1月22日天地之灵直播MobX案例精讲',
-      link: 'http://reactnative.cn/post/3337',
-      gainfo: '122live/docs'
+      img: require('./img/course01.png'),
+      text: '听晴明老师从头讲React Native',
+      link: 'https://ke.qq.com/course/197101',
+      gainfo: 'course01/docs'
     }
   }
 
