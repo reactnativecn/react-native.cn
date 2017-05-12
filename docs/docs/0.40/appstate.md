@@ -27,8 +27,11 @@ componentDidMount() {
 componentWillUnmount() {
   AppState.removeEventListener('change', this._handleAppStateChange);
 }
-_handleAppStateChange(currentAppState) {
-  this.setState({ currentAppState, });
+_handleAppStateChange = (nextAppState) => {
+  if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+    console.log('App has come to the foreground!')
+  }
+  this.setState({appState: nextAppState});
 }
 render() {
   return (

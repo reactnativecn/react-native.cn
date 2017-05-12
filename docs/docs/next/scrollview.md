@@ -4,6 +4,10 @@
 
 ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者。
 
+<ScrollView> vs <ListView> - which one to use? ScrollView simply renders all its react child components at once. That makes it very easy to understand and use. On the other hand, this has a performance downside. Imagine you have a very long list of items you want to display, worth of couple of your ScrollView’s heights. Creating JS components and native views upfront for all its items, which may not even be shown, will contribute to slow rendering of your screen and increased memory usage.
+
+This is where ListView comes into play. ListView renders items lazily, just when they are about to appear. This laziness comes at cost of a more complicated API, which is worth it unless you are rendering a small fixed set of items.
+
 ### 属性
 
 <div class="props">
@@ -30,7 +34,7 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="horizontal"></a>horizontal <span class="propType">bool</span> <a class="hash-link" href="#horizontal">#</a></h4>
 		<div>
-			<p>当此属性为true的时候，所有的的子视图会在水平方向上排成一行，而不是默认的在垂直方向上排成一列。默认值为false。</p>
+			<p>当此属性为true的时候，所有的子视图会在水平方向上排成一行，而不是默认的在垂直方向上排成一列。默认值为false。</p>
 		</div>
 	</div>
 	<div class="prop">
@@ -188,6 +192,28 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	    </div>
 	</div>
 	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="overscrollmode"></a><span
+        class="platform">android</span>overScrollMode <span class="propType">enum('auto', 'always', 'never')</span> <a
+        class="hash-link" href="#overscrollmode">#</a></h4>
+    <div><p>覆盖默认的overScroll模式</p>
+        <p>可选的值有：</p>
+        <ul>
+            <li><code>'auto'</code> - 默认值，允许用户在内容超出视图高度之后可以滚动视图。
+            </li>
+            <li><code>'always'</code> - 无论内容尺寸，用户始终可以滚动视图。</li>
+            <li><code>'never'</code> - 始终不允许用户滚动视图。</li>
+        </ul>
+    </div>
+    <div class="prop">
+    	<h4 class="propTitle"><a class="anchor" name="scrollperftag"></a><span class="platform">android</span>scrollPerfTag
+    <span class="propType">string</span> <a class="hash-link" href="#scrollperftag">#</a></h4>
+	    <div><p>Tag used to log scroll performance on this scroll view. Will force
+	        momentum events to be turned on (see sendMomentumEvents). This doesn't do
+	        anything out of the box and you need to implement a custom native
+	        FpsListener for it to be useful.</p></div>
+		</div>
+	</div>
+	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="alwaysbouncehorizontal"></a><span class="platform">ios</span>alwaysBounceHorizontal <span class="propType">bool</span> <a class="hash-link" href="#alwaysbouncehorizontal">#</a></h4>
 		<div>
 			<p>当此属性为true时，水平方向即使内容比滚动视图本身还要小，也可以弹性地拉动一截。当<code>horizontal={true}</code>时默认值为true，否则为false。</p>
@@ -256,6 +282,19 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 		<div>
 			<p>当值为真时，滚动视图在拖拽的时候会锁定只有垂直或水平方向可以滚动。默认值为false。</p>
 		</div>
+	</div>
+	<div class="prop">
+    <h4 class="propTitle"><a class="anchor" name="indicatorstyle"></a><span class="platform">ios</span>indicatorStyle
+    <span class="propType">enum('default', 'black', 'white')</span> <a class="hash-link"
+                                                                       href="#indicatorstyle">#</a>
+    </h4>
+    <div><p>设置滚动条的样式。</p>
+        <ul>
+            <li><code>default</code>，默认值，等同<code>black</code>.</li>
+            <li><code>black</code>，黑色滚动条。</li>
+            <li><code>white</code>，白色滚动条。</li>
+        </ul>
+    </div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="maximumzoomscale"></a><span class="platform">ios</span>maximumZoomScale <span class="propType">number</span> <a class="hash-link" href="#maximumzoomscale">#</a></h4>
@@ -332,7 +371,7 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 		</div>
 	</div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="stickyheaderindices"></a><span class="platform">ios</span>stickyHeaderIndices <span class="propType">[number]</span> <a class="hash-link" href="#stickyheaderindices">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="stickyheaderindices"></a>stickyHeaderIndices <span class="propType">[number]</span> <a class="hash-link" href="#stickyheaderindices">#</a></h4>
 		<div>
 			<p>一个子视图下标的数组，用于决定哪些成员会在滚动之后固定在屏幕顶端。举个例子，传递<code>stickyHeaderIndices={[0]}</code>会让第一个成员固定在滚动视图顶端。这个属性不能和<code>horizontal={true}</code>一起使用。</p>
 		</div>
@@ -354,6 +393,12 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
             <p>使用示例:</p>
             <p><code>scrollTo({x: 0, y: 0, animated: true})</code></p></div>
     </div>
+    <div class="prop"><h4 class="methodTitle"><a class="anchor" name="scrolltoend"></a>scrollToEnd<span class="methodType">(options?)</span> <a class="hash-link" href="#scrolltoend">#</a></h4>
+    	<div>
+    	<p>滚动到视图底部（水平方向的视图则滚动到最右边）。</p><p>加上动画参数 <code>scrollToEnd({animated: true})</code>则启用平滑滚动动画，或是调用
+<code>scrollToEnd({animated: false})</code>来立即跳转。如果不使用参数，则<code>animated</code>选项默认启用。</p>
+		</div>
+	</div>
 </div>
 
 ### 例子
@@ -396,6 +441,11 @@ exports.examples = [
           onPress={() => { _scrollView.scrollTo({y: 0}); }}>
           <Text>Scroll to top</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => { _scrollView.scrollToEnd({animated: true}); }}>
+          <Text>Scroll to bottom</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -418,23 +468,29 @@ exports.examples = [
           onPress={() => { _scrollView.scrollTo({x: 0}); }}>
           <Text>Scroll to start</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => { _scrollView.scrollToEnd({animated: true}); }}>
+          <Text>Scroll to end</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }];
 
-var Thumb = React.createClass({
-  shouldComponentUpdate: function(nextProps, nextState) {
+class Thumb extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
     return false;
-  },
-  render: function() {
+  }
+
+  render() {
     return (
       <View style={styles.button}>
         <Image style={styles.img} source={{uri:this.props.uri}} />
       </View>
     );
   }
-});
+}
 
 var THUMBS = ['https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/t39.1997/p128x128/851549_767334479959628_274486868_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851561_767334496626293_1958532586_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/t39.1997/p128x128/851579_767334503292959_179092627_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851589_767334513292958_1747022277_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851563_767334559959620_1193692107_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851593_767334566626286_1953955109_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851591_767334523292957_797560749_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851567_767334529959623_843148472_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851548_767334489959627_794462220_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851575_767334539959622_441598241_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/t39.1997/p128x128/851573_767334549959621_534583464_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851583_767334573292952_1519550680_n.png'];
 THUMBS = THUMBS.concat(THUMBS); // double length of THUMBS

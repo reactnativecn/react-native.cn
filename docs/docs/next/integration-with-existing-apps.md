@@ -124,7 +124,7 @@ React Native的植入过程同时需要React和React Native两个node依赖包�
 
 下面是一个最简单的`package.json`的内容示例。
 
-> 示例中的`version`字段没有太大意义（除非你要把你的项目发布到npm仓库）。`scripts`中是用于启动packager服务的命令。dependencies中的react和react-native的版本取决于你的具体需求。一般来说我们推荐使用最新版本。你可以使用`npm info react`和`npm info react-native`来查看当前的最新版本。另外，react-native对react的版本有严格要求，高于或低于某个范围都不可以。本文无法在这里列出所有react native和对应的react版本要求，只能提醒读者先尝试执行npm install，然后注意观察安装过程中的报错信息，例如`require react@某.某.某版本, but none was installed`，然后根据这样的提示，执行`npm i -S react@某.某.某版本`。
+> 示例中的`version`字段没有太大意义（除非你要把你的项目发布到npm仓库）。`scripts`中是用于启动packager服务的命令。`dependencies`中的react和react-native的版本取决于你的具体需求。一般来说我们推荐使用最新版本。你可以使用`npm info react`和`npm info react-native`来查看当前的最新版本。另外，react-native对react的版本有严格要求，高于或低于某个范围都不可以。本文无法在这里列出所有react native和对应的react版本要求，只能提醒读者先尝试执行npm install，然后注意观察安装过程中的报错信息，例如`require react@某.某.某版本, but none was installed`，然后根据这样的提示，执行`npm i -S react@某.某.某版本`。
 
 </div><div markdown class="md-block objc">
 
@@ -209,7 +209,9 @@ target 'NumberTileGame' do
     'RCTWebSocket', # 这个模块是用于调试功能的
     # 在这里继续添加你所需要的模块
   ]
-
+  # 如果你的RN版本 >= 0.42.0，请加入下面这行
+  pod "Yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
+  
 end
 ```
 
@@ -234,6 +236,8 @@ target 'swift-2048' do
     'RCTWebSocket', # 这个模块是用于调试功能的
     # 在这里继续添加你所需要的模块
   ]
+  # 如果你的RN版本 >= 0.42.0，请加入下面这行
+  pod "Yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
 
 end
 ```
@@ -527,11 +531,31 @@ Here is the *React Native* high score screen:
     $ npm install --save react react-native
     $ curl -o .flowconfig https://raw.githubusercontent.com/facebook/react-native/master/.flowconfig
 
-This creates a node module for your app and adds the `react-native` npm dependency. Now open the newly created `package.json` file and add this under `scripts`:
+`npm init`创建了一个空的node模块（其实就是创建了一个package.json描述文件），而`npm install`则创建了node_modules目录并把react和react-native下载到了其中。至于第三步curl命令，其实质是`下载`.flowconfig配置文件，这个文件用于约束js代码的写法。这一步非必需，可跳过。下面我们打开新创建的`package.json`文件，然后在其`scripts`字段中加入:
 
     "start": "node node_modules/react-native/local-cli/cli.js start"
 
-首先在项目根目录中创建`index.android.js`文件，然后将下面的代码复制粘贴进来：
+现在你的`package.json`内容应该类似这样：
+
+```bash
+{
+  "name": "NumberTileGame",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "react": "15.4.1",
+    "react-native": "0.39.2"
+  }
+}
+```
+
+> 示例中的`version`字段没有太大意义（除非你要把你的项目发布到npm仓库）。`scripts`中是用于启动packager服务的命令。`dependencies`中的react和react-native的版本取决于你的具体需求。一般来说我们推荐使用最新版本。你可以使用`npm info react`和`npm info react-native`来查看当前的最新版本。另外，react-native对react的版本有严格要求，高于或低于某个范围都不可以。本文无法在这里列出所有react native和对应的react版本要求，只能提醒读者先尝试执行npm install，然后注意观察安装过程中的报错信息，例如`require react@某.某.某版本, but none was installed`，然后根据这样的提示，执行`npm i -S react@某.某.某版本`。
+
+
+接下来在项目根目录中创建`index.android.js`文件，然后将下面的代码复制粘贴进来：
 
 ```js
 'use strict';
@@ -568,9 +592,9 @@ var styles = StyleSheet.create({
 AppRegistry.registerComponent('HelloWorld', () => HelloWorld);
 ```
 
-## Prepare your current app
+## 准备工作
 
-In your app's `build.gradle` file add the React Native dependency:
+在你的app中 `build.gradle` 文件中添加 React Native 依赖:
 
 ```
  dependencies {
@@ -579,9 +603,9 @@ In your app's `build.gradle` file add the React Native dependency:
  }
 ```
 
-> If you want to ensure that you are always using a specific React Native version in your native build, replace `+` with an actual React Native version you've downloaded from `npm`.
+> 你想要指定构建时的 React Native 版本，请用 `npm` 已下载的本地 React Native 的版本号替换 `+` 。 
 
-In your project's `build.gradle` file add an entry for the local React Native maven directory:
+在项目的 `build.gradle` 文件中为 React Native 添加一个 maven 依赖的入口，必须写在 "allprojects" 代码块中:
 
 ```
 allprojects {
@@ -596,13 +620,13 @@ allprojects {
 }
 ```
 
-> Make sure that the path is correct! You shouldn’t run into any “Failed to resolve: com.facebook.react:react-native:0.x.x" errors after running Gradle sync in Android Studio.
+> 确保依赖路径的正确！以免在 Android Studio 运行Gradle同步构建时抛出 “Failed to resolve: com.facebook.react:react-native:0.x.x" 异常。
 
-Next, make sure you have the Internet permission in your `AndroidManifest.xml`:
+接着，在 `AndroidManifest.xml` 清单文件中声明网络权限:
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-If you need to access to the `DevSettingsActivity` add to your `AndroidManifest.xml`:
+如果需要访问 `DevSettingsActivity` 界面，也需要在 `AndroidManifest.xml` 中声明:
 
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
@@ -611,9 +635,9 @@ This is only really used in dev mode when reloading JavaScript from the developm
 
 ## 添加原生代码
 
-You need to add some native code in order to start the React Native runtime and get it to render something. To do this, we're going to create an `Activity` that creates a `ReactRootView`, starts a React application inside it and sets it as the main content view.
+想要通过原生代码调用 React Native ，就像这样，我们需要在一个 `Activity` 中创建一个 `ReactRootView` 对象，将它关联一个 React application 并设为界面的主视图。
 
-> If you are targetting Android version <5, use the `AppCompatActivity` class from the `com.android.support:appcompat` package instead of `Activity`.
+> 如果你想在安卓5.0以下的系统上运行，请用 `com.android.support:appcompat` 包中的 `AppCompatActivity` 代替 `Activity` 。
 
  
 ```java
@@ -651,9 +675,9 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
 
 > 如果你的项目名字不是叫“HelloWorld”，则需要将“index.android.js”中的“AppRegistry.registerComponent()”方法中的第一个参数替换为对应的名字。
 
-If you are using Android Studio, use `Alt + Enter` to add all missing imports in your MyReactActivity class. Be careful to use your package’s `BuildConfig` and not the one from the `...facebook...` package.
+如果你使用的是 Android Studio , 请用 `Alt + Enter` 为 MyReactActivity 类导包。当你使用了不止一个 `...facebook...` 包时，请谨慎选择要导入的类。
  
-We need set the theme of `MyReactActivity` to `Theme.AppCompat.Light.NoActionBar` beause some components rely on this theme.
+我们需要把 `MyReactActivity` 的主题设定为 `Theme.AppCompat.Light.NoActionBar` ，因为里面有许多组件都使用了这一主题。
 
  ```xml
  <activity
@@ -673,7 +697,7 @@ protected void onPause() {
     super.onPause();
 
     if (mReactInstanceManager != null) {
-        mReactInstanceManager.onHostPause();
+        mReactInstanceManager.onHostPause(this);
     }
 }
 

@@ -116,7 +116,7 @@ ListView还支持一些高级特性，譬如给每段/组(section)数据添加�
     <div>
       <p>(sectionData, sectionID) =&gt; renderable</p>
       <p>如果提供了此函数，会为每个小节(section)渲染一个粘性的标题。</p>
-      <p>粘性是指当它刚出现时，会处在对应小节的内容顶部；继续下滑当它到达屏幕顶端的时候，它会停留在屏幕顶端，一直到对应的位置被下一个小节的标题占据为止。</p>
+      <p>粘性是指当它刚出现时，会处在对应小节的内容顶部；继续下滑当它到达屏幕顶端的时候，它会停留在屏幕顶端，一直到对应的位置被下一个小节的标题占据为止。可以使用<code> stickySectionHeadersEnabled</code>来决定是否启用其粘性特性。</p>
     </div>
   </div>
   <div class="prop">
@@ -133,11 +133,17 @@ ListView还支持一些高级特性，譬如给每段/组(section)数据添加�
     </div>
   </div>
   <div class="prop">
-        <h4 class="propTitle"><a class="anchor" name="stickyheaderindices"></a><span class="platform">ios</span>stickyHeaderIndices <span class="propType">[number]</span> <a class="hash-link" href="#stickyheaderindices">#</a></h4>
+        <h4 class="propTitle"><a class="anchor" name="stickyheaderindices"></a>stickyHeaderIndices <span class="propType">[number]</span> <a class="hash-link" href="#stickyheaderindices">#</a></h4>
         <div>
             <p>一个子视图下标的数组，用于决定哪些成员会在滚动之后固定在屏幕顶端。举个例子，传递<code>stickyHeaderIndices={[0]}</code>会让第一个成员固定在滚动视图顶端。这个属性不能和<code>horizontal={true}</code>一起使用。</p>
         </div>
-    </div>
+  </div>
+  <div class="prop">
+  	<h4 class="propTitle"><a class="anchor" name="stickysectionheadersenabled"></a>stickySectionHeadersEnabled?: <span class="propType">bool</span> <a class="hash-link" href="#stickysectionheadersenabled">#</a></h4>
+	<div>
+	  	<p>设置小节标题(section header)是否具有粘性。粘性是指当它刚出现时，会处在对应小节的内容顶部；继续下滑当它到达屏幕顶端的时候，它会停留在屏幕顶端，一直到对应的位置被下一个小节的标题占据为止。注意此设置在水平模式（<code>horizontal={true}</code>）下无效。由于不同平台的设计原则不同，此选项在iOS上默认开启，andriod上默认关闭。</p>
+	</div>
+  </div>
 </div>
 
 ### 方法
@@ -150,8 +156,14 @@ ListView还支持一些高级特性，譬如给每段/组(section)数据添加�
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="scrollto"></a>scrollTo<span class="propType">(...args)</span>
         <a class="hash-link" href="#scrollto">#</a></h4>
         <div><p>滚动到指定的x, y偏移处，可以指定是否加上过渡动画。</p>
-            <p>参考 <a href="scrollview#scrollto">ScrollView#scrollTo</a>.</p></div>
+            <p>参考 <a href="scrollview.html#scrollto">ScrollView#scrollTo</a>.</p></div>
     </div>
+    <div class="prop"><h4 class="methodTitle"><a class="anchor" name="scrolltoend"></a>scrollToEnd<span class="methodType">(options?)</span> <a class="hash-link" href="#scrolltoend">#</a></h4>
+    	<div>
+    	<p>滚动到视图底部（水平方向的视图则滚动到最右边）。</p><p>加上动画参数 <code>scrollToEnd({animated: true})</code>则启用平滑滚动动画，或是调用
+<code>scrollToEnd({animated: false})</code>来立即跳转。如果不使用参数，则<code>animated</code>选项默认启用。</p>
+		</div>
+	</div>
 </div>
 
 
