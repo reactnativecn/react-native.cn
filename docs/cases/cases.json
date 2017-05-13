@@ -1,5 +1,12 @@
 [
 	{
+		"name": "一键康",
+		"desc": "您的公立医院体检平台",
+		"ios": "https://itunes.apple.com/cn/app/id1100633202?mt=8",
+		"android": "http://www.touchealth.com.cn/",
+		"icon": "http://ol3l72k79.bkt.clouddn.com/20170512172843_jXH13w_logo512.jpeg"
+	},
+	{
 		"name": "找车场",
 		"desc": "简单方便的帮你找车场",
 		"ios": "https://itunes.apple.com/us/app/id1223491793?l=zh&ls=1&mt=8",
