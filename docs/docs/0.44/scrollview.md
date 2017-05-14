@@ -206,6 +206,7 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
             <li><code>'never'</code> - 始终不允许用户滚动视图。</li>
         </ul>
     </div>
+    </div>
     <div class="prop">
     	<h4 class="propTitle"><a class="anchor" name="scrollperftag"></a><span class="platform">android</span>scrollPerfTag
     <span class="propType">string</span> <a class="hash-link" href="#scrollperftag">#</a></h4>
@@ -236,7 +237,7 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="bounces"></a><span class="platform">ios</span>bounces <span class="propType">bool</span> <a class="hash-link" href="#bounces">#</a></h4>
 		<div>
-			<p>当值为true时，如果内容范围比滚动视图本身大，在到达内容末尾的时候，可以弹性地拉动一截。如果为false，尾部的所有弹性都会被禁用，即使<code>alwaysBounce*</code>属性为true。默认值为true。</p>
+			<p>当值为true时，如果内容范围比滚动视图本身大，在到达内容末尾的时候，可以弹性地拉动一截。如果为false，尾部的所有弹性都会被禁用，即使<code>alwaysBounce</code>属性为true。默认值为true。</p>
 		</div>
 	</div>
 	<div class="prop">

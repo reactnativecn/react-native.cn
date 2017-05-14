@@ -206,6 +206,7 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
             <li><code>'never'</code> - 始终不允许用户滚动视图。</li>
         </ul>
     </div>
+    </div>
     <div class="prop">
     	<h4 class="propTitle"><a class="anchor" name="scrollperftag"></a><span class="platform">android</span>scrollPerfTag
     <span class="propType">string</span> <a class="hash-link" href="#scrollperftag">#</a></h4>
@@ -230,13 +231,13 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="automaticallyadjustcontentinsets"></a><span class="platform">ios</span>automaticallyAdjustContentInsets <span class="propType">bool</span> <a class="hash-link" href="#automaticallyadjustcontentinsets">#</a></h4>
 		<div>
-			<p>如果滚动视图放在一个导航条或者工具条后面的时候，iOS系统是否要自动调整内容的范围。默认值为true。（译注：如果你的ScrollView或ListView的头部出现莫名其妙的空白，尝试将此属性置为false）</p>
+			<p>当滚动视图放在一个导航条或者工具条后面的时候，iOS系统是否要自动调整内容的范围。默认值为true。（译注：如果你的ScrollView或ListView的头部出现莫名其妙的空白，尝试将此属性置为false）</p>
 		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="bounces"></a><span class="platform">ios</span>bounces <span class="propType">bool</span> <a class="hash-link" href="#bounces">#</a></h4>
 		<div>
-			<p>当值为true时，如果内容范围比滚动视图本身大，在到达内容末尾的时候，可以弹性地拉动一截。如果为false，尾部的所有弹性都会被禁用，即使<code>alwaysBounce*</code>属性为true。默认值为true。</p>
+			<p>当值为true时，如果内容范围比滚动视图本身大，在到达内容末尾的时候，可以弹性地拉动一截。如果为false，尾部的所有弹性都会被禁用，即使<code>alwaysBounce</code>属性为true。默认值为true。</p>
 		</div>
 	</div>
 	<div class="prop">
