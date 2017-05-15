@@ -1,4 +1,11 @@
 [
+ 	 {
+  		"name": "农眼",
+   		"desc": "农业大数据平台",
+   		"ios": "https://itunes.apple.com/cn/app/nonyang/id1177902411?mt=8",
+   		"android": "http://app.airag.cn/app/update/farmer/visionfarmer.apk",
+   		"icon": "http://app.airag.cn/app/icon/icon_vision_512.png"
+  	},
 	{
 		"name": "一键康",
 		"desc": "您的公立医院体检平台",
