@@ -230,5 +230,12 @@
 		"ios": "https://itunes.apple.com/cn/app/hong-bao-quan-hong-bao-jiao/id1193509121?mt=8",
 		"android": "http://h5.down.bwgame.com.cn/redpackage.apk",
 		"icon": "http://ohg9m5uoq.bkt.clouddn.com/1024.png"
-  }
+  },
+  {
+  "name": "农眼",
+  "desc": "农业大数据平台",
+  "ios": "https://itunes.apple.com/cn/app/nonyang/id1177902411?mt=8",
+  "android": "http://app.airag.cn/app/update/farmer/visionfarmer.apk",
+  "icon": "http://app.airag.cn/app/icon/icon_vision_512.png"
+ }
 ]
