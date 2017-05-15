@@ -106,7 +106,7 @@ class SimpleNavigationApp extends Component {
       <Navigator
         initialRoute={{ title: 'My Initial Scene', index: 0 }}
         renderScene={(route, navigator) =>
-          <MyScene
+          return <MyScene
             title={route.title}
 
             // Function to call when a new scene should be displayed           
