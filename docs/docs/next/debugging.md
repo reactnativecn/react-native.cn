@@ -47,7 +47,7 @@ console.warn('YellowBox is disabled.');
 你也可以通过代码屏蔽指定的警告，像下面这样调用ignoreWarnings方法，参数为一个数组：
 
 ```javascript
-YellowBox.ignoreWarnings(['Warning: ...']);
+YellowBox.ignoreWarnings(['Warning: ']);
 ```
 
 数组中的字符串就是要屏蔽的警告的开头的内容。（例如上面的代码会屏蔽掉所有以Warning开头的警告内容）

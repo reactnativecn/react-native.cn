@@ -204,15 +204,15 @@ AppRegistry.registerComponent(
     <div class="prop">
     	<h4 class="propTitle"><a class="anchor" name="onscroll"></a>onScroll <span class="propType">function</span> <a class="hash-link" href="#onscroll">#</a></h4>
     	<div>
-    		<p>Invoked on content scroll with <code>{ nativeEvent: { contentOffset: { x, y } } }</code>.
-    		May also contain other properties from ScrollEvent but on Android contentSize is not provided for performance reasons.</p>
+    		<p>在内容滚动时持续调用，传回参数的格式形如<code>{ nativeEvent: { contentOffset: { x, y } } }</code>。
+    		也可能包含其他和滚动事件相关的参数，但是在Android上，出于性能考虑，不会提供contentSize参数。</p>
 		</div>
 	</div>
     <div class="prop">
     	<h4 class="propTitle"><a class="anchor" name="onselectionchange"></a>onSelectionChange <span class="propType">function</span> <a class="hash-link" href="#onselectionchange">#</a></h4>
     	<div>
-    		<p>Callback that is called when the text input selection is changed. This will be called with
-				<code>{ nativeEvent: { selection: { start, end } } }</code>.</p>
+    		<p>长按选择文本时，选择范围变化时调用此函数，传回参数的格式形如
+				<code>{ nativeEvent: { selection: { start, end } } }</code>。</p>
 		</div>
 	</div>
     <div class="prop">
@@ -236,7 +236,8 @@ AppRegistry.registerComponent(
     <div class="prop">
         <h4 class="propTitle"><a class="anchor" name="returnkeytype"></a><span class="platform">ios</span>returnKeyType <span class="propType">enum('done', 'go', 'next', 'search', 'send', 'none', 'previous', 'default', 'emergency-call', 'google', 'join', 'route', 'yahoo')</span> <a class="hash-link" href="#returnkeytype">#</a></h4>
         <div><p>决定“确定”按钮显示的内容。 On Android you can also use
-<code>returnKeyLabel</code>.</p><p><em>Cross platform</em></p><p>The following values work across platforms:</p>
+<code>returnKeyLabel</code>.</p>
+		<p><em>Cross platform</em></p><p>The following values work across platforms:</p>
 		<ul>
 			<li><code>done</code></li>
 			<li><code>go</code></li>
