@@ -184,7 +184,7 @@ var {
   View,
 } = ReactNative;
 
-var UIExplorerPage = require('./UIExplorerPage');
+var RNTesterPage = require('./RNTesterPage');
 
 var ListViewSimpleExample = React.createClass({
   statics: {
@@ -207,7 +207,7 @@ var ListViewSimpleExample = React.createClass({
 
   render: function() {
     return (
-      <UIExplorerPage
+      <RNTesterPage
         title={this.props.navigator ? null : '<ListView>'}
         noSpacer={true}
         noScroll={true}>
@@ -217,7 +217,7 @@ var ListViewSimpleExample = React.createClass({
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={this._renderSeperator}
         />
-      </UIExplorerPage>
+      </RNTesterPage>
     );
   },
 

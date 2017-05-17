@@ -53,7 +53,7 @@ var {
   View,
 } = ReactNative;
 
-var UIExplorerBlock = require('./UIExplorerBlock');
+var RNTesterBlock = require('./RNTesterBlock');
 
 // corporate ipsum > lorem ipsum
 var alertMessage = 'Credibly reintermediate next-generation potentialities after goal-oriented ' +
@@ -141,9 +141,9 @@ var AlertExample = React.createClass({
   },
   render: function() {
     return (
-      <UIExplorerBlock title={'Alert'}>
+      <RNTesterBlock title={'Alert'}>
         <SimpleAlertExampleBlock />
-      </UIExplorerBlock>
+      </RNTesterBlock>
     );
   }
 });

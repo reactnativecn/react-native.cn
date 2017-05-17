@@ -39,8 +39,8 @@ var {
   TouchableWithoutFeedback,
 } = ReactNative;
 
-var UIExplorerBlock = require('UIExplorerBlock');
-var UIExplorerPage = require('UIExplorerPage');
+var RNTesterBlock = require('RNTesterBlock');
+var RNTesterPage = require('RNTesterPage');
 
 class ToastExample extends React.Component {
   static title = 'Toast Example';
@@ -49,22 +49,22 @@ class ToastExample extends React.Component {
 
   render() {
     return (
-      <UIExplorerPage title="ToastAndroid">
-        <UIExplorerBlock title="Simple toast">
+      <RNTesterPage title="ToastAndroid">
+        <RNTesterBlock title="Simple toast">
           <TouchableWithoutFeedback
             onPress={() =>
               ToastAndroid.show('This is a toast with short duration', ToastAndroid.SHORT)}>
             <Text style={styles.text}>Click me.</Text>
           </TouchableWithoutFeedback>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Toast with long duration">
+        </RNTesterBlock>
+        <RNTesterBlock title="Toast with long duration">
           <TouchableWithoutFeedback
             onPress={() =>
               ToastAndroid.show('This is a toast with long duration', ToastAndroid.LONG)}>
             <Text style={styles.text}>Click me.</Text>
           </TouchableWithoutFeedback>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Toast with top gravity">
+        </RNTesterBlock>
+        <RNTesterBlock title="Toast with top gravity">
           <TouchableWithoutFeedback
             onPress={() =>
               ToastAndroid.showWithGravity(
@@ -75,8 +75,8 @@ class ToastExample extends React.Component {
             }>
             <Text style={styles.text}>Click me.</Text>
           </TouchableWithoutFeedback>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Toast with center gravity">
+        </RNTesterBlock>
+        <RNTesterBlock title="Toast with center gravity">
           <TouchableWithoutFeedback
             onPress={() =>
               ToastAndroid.showWithGravity(
@@ -87,8 +87,8 @@ class ToastExample extends React.Component {
             }>
             <Text style={styles.text}>Click me.</Text>
           </TouchableWithoutFeedback>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Toast with bottom gravity">
+        </RNTesterBlock>
+        <RNTesterBlock title="Toast with bottom gravity">
           <TouchableWithoutFeedback
             onPress={() =>
               ToastAndroid.showWithGravity(
@@ -99,8 +99,8 @@ class ToastExample extends React.Component {
             }>
             <Text style={styles.text}>Click me.</Text>
           </TouchableWithoutFeedback>
-        </UIExplorerBlock>
-      </UIExplorerPage>
+        </RNTesterBlock>
+      </RNTesterPage>
     );
   }
 }

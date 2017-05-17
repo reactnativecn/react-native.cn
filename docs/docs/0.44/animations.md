@@ -59,7 +59,7 @@ render() {
 
 ![](img/AnimatedFadeInView.gif)
 
-Let's break down what's happening here.
+我们来分析一下这个过程。
 In the `FadeInView` constructor, a new `Animated.Value` called `fadeAnim` is initialized as part of `state`.
 The opacity property on the `View` is mapped to this animated value.
 Behind the scenes, the numeric value is extracted and used to set opacity.
@@ -72,9 +72,9 @@ This is done in an optimized way that is faster than calling `setState` and re-r
 Because the entire configuration is declarative, we will be able to implement further optimizations that serialize the configuration and runs the animation on a high-priority thread.
 
 
-### Configuring animations
+### 配置动画
 
-Animations are heavily configurable. Custom and predefined easing functions, delays, durations, decay factors, spring constants, and more can all be tweaked depending on the type of animation.
+动画拥有非常灵活的配置项。自定义的或预定义的easing函数、延迟、持续时间、Animations are heavily configurable. Custom and predefined easing functions, delays, durations, decay factors, spring constants, and more can all be tweaked depending on the type of animation.
 
 `Animated` provides several animation types, the most commonly used one being [`Animated.timing()`](animated.html#timing).
 It supports animating a value over time using one of various predefined easing functions, or you can use your own.
@@ -125,9 +125,9 @@ Animated.sequence([            // 首先执行decay动画，结束后同时执�
 
 You can find a full list of composition methods in the [Composing animations](animated.html#composing-animations) section of the `Animated` API reference.
 
-### Combining animated values
+### 联动多个动画值
 
-You can [combine two animated values](docs/animated.html#combining-animated-values) via addition, multiplication, division, or modulo to make a new animated value.
+You can [combine two animated values](animated.html#combining-animated-values) via addition, multiplication, division, or modulo to make a new animated value.
 
 There are some cases where an animated value needs to invert another animated value for calculation.
 An example is inverting a scale (2x --> 0.5x):
@@ -244,7 +244,7 @@ Just add `useNativeDriver: true` to the animation config when starting it.
 Animated.timing(this.state.animatedValue, {
   toValue: 1,
   duration: 500,
-  useNativeDriver: true, // <-- Add this
+  useNativeDriver: true, // <-- 加上这一行
 }).start();
 ```
 
@@ -260,31 +260,31 @@ the animation will always run a frame behind the gesture due to the async nature
   scrollEventThrottle={1} // <-- Use 1 here to make sure no events are ever missed
   onScroll={Animated.event(
     [{ nativeEvent: { contentOffset: { y: this.state.animatedValue } } }],
-    { useNativeDriver: true } // <-- Add this
+    { useNativeDriver: true } // <-- 加上这一行
   )}
 >
   {content}
 </Animated.ScrollView>
 ```
 
-You can see the native driver in action by running the [UIExplorer sample app](https://github.com/facebook/react-native/blob/master/Examples/UIExplorer/),
+You can see the native driver in action by running the [RNTester app](https://github.com/facebook/react-native/blob/master/RNTester/),
 then loading the Native Animated Example.
-You can also take a look at the [source code](https://github.com/facebook/react-native/blob/master/Examples/UIExplorer/js/NativeAnimationsExample.js) to learn how these examples were produced.
+You can also take a look at the [source code](https://github.com/facebook/react-native/blob/master/RNTester/js/NativeAnimationsExample.js) to learn how these examples were produced.
 
-#### Caveats
+#### 注意事项
 
 Not everything you can do with `Animated` is currently supported by the native driver.
 The main limitation is that you can only animate non-layout properties:
-things like `transform`, `opacity` and `backgroundColor` will work, but flexbox and position properties will not.
+things like `transform` and `opacity` will work, but flexbox and position properties will not.
 When using `Animated.event`, it will only work with direct events and not bubbling events.
 This means it does not work with `PanResponder` but does work with things like `ScrollView#onScroll`.
 
-### Additional examples
+### 示例
 
-The UIExplorer sample app has various examples of `Animated` in use:
+The RNTester app has various examples of `Animated` in use:
 
-- [AnimatedGratuitousApp](https://github.com/facebook/react-native/tree/master/Examples/UIExplorer/js/AnimatedGratuitousApp)
-- [NativeAnimationsExample](https://github.com/facebook/react-native/blob/master/Examples/UIExplorer/js/NativeAnimationsExample.js)
+- [AnimatedGratuitousApp](https://github.com/facebook/react-native/tree/master/Examples/RNTester/js/AnimatedGratuitousApp)
+- [NativeAnimationsExample](https://github.com/facebook/react-native/blob/master/Examples/RNTester/js/NativeAnimationsExample.js)
 
 ### LayoutAnimation
 
@@ -369,7 +369,7 @@ This example uses a preset value, you can customize the animations as
 you need, see [LayoutAnimation.js](https://github.com/facebook/react-native/blob/master/Libraries/LayoutAnimation/LayoutAnimation.js)
 for more information.
 
-## Additional notes
+## 其他要注意的地方
 
 ### `requestAnimationFrame`
 

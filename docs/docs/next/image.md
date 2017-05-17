@@ -871,7 +871,7 @@ exports.examples = [
           <Image
             source={{
               url: 'ImageInBundle',
-              bundle: 'UIExplorerBundle',
+              bundle: 'RNTesterBundle',
               width: 100,
               height: 100,
             }}
@@ -880,7 +880,7 @@ exports.examples = [
           <Image
             source={{
               url: 'ImageInAssetCatalog',
-              bundle: 'UIExplorerBundle',
+              bundle: 'RNTesterBundle',
               width: 100,
               height: 100,
             }}

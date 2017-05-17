@@ -134,7 +134,7 @@ const {
   View,
 } = ReactNative;
 
-const UIExplorerPage = require('./UIExplorerPage');
+const RNTesterPage = require('./RNTesterPage');
 
 const infoLog = require('infoLog');
 
@@ -186,7 +186,7 @@ class SectionListExample extends React.PureComponent {
     const filter = (item) => (filterRegex.test(item.text) || filterRegex.test(item.title));
     const filteredData = this.state.data.filter(filter);
     return (
-      <UIExplorerPage
+      <RNTesterPage
         noSpacer={true}
         noScroll={true}>
         <View style={styles.searchRow}>
@@ -226,7 +226,7 @@ class SectionListExample extends React.PureComponent {
           ]}
           viewabilityConfig={VIEWABILITY_CONFIG}
         />
-      </UIExplorerPage>
+      </RNTesterPage>
     );
   }
   _renderItemComponent = ({item}) => <ItemComponent item={item} onPress={this._pressItem} />;

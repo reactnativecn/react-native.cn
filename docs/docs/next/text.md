@@ -698,8 +698,8 @@ var {
   Text,
   View,
 } = ReactNative;
-var UIExplorerBlock = require('./UIExplorerBlock');
-var UIExplorerPage = require('./UIExplorerPage');
+var RNTesterBlock = require('./RNTesterBlock');
+var RNTesterPage = require('./RNTesterPage');
 
 var Entity = React.createClass({
   render: function() {
@@ -754,19 +754,19 @@ var TextExample = React.createClass({
   },
   render: function() {
     return (
-      <UIExplorerPage title="<Text>">
-        <UIExplorerBlock title="Wrap">
+      <RNTesterPage title="<Text>">
+        <RNTesterBlock title="Wrap">
           <Text>
             The text should wrap if it goes on multiple lines.
             See, this is going to the next line.
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Padding">
+        </RNTesterBlock>
+        <RNTesterBlock title="Padding">
           <Text style={{padding: 10}}>
             This text is indented by 10px padding on all sides.
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Font Family">
+        </RNTesterBlock>
+        <RNTesterBlock title="Font Family">
           <Text style={{fontFamily: 'sans-serif'}}>
             Sans-Serif
           </Text>
@@ -785,8 +785,8 @@ var TextExample = React.createClass({
           <Text style={{fontFamily: 'monospace', fontWeight: 'bold'}}>
             Monospace Bold (After 5.0)
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Android Material Design fonts">
+        </RNTesterBlock>
+        <RNTesterBlock title="Android Material Design fonts">
           <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>
             <View style={{flex: 1}}>
               <Text style={{fontFamily: 'sans-serif'}}>
@@ -836,8 +836,8 @@ var TextExample = React.createClass({
               </Text>
             </View>
           </View>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Custom Fonts">
+        </RNTesterBlock>
+        <RNTesterBlock title="Custom Fonts">
           <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>
             <View style={{flex: 1}}>
               <Text style={{fontFamily: 'notoserif'}}>
@@ -851,46 +851,46 @@ var TextExample = React.createClass({
               </Text>
             </View>
           </View>
-        </UIExplorerBlock>
+        </RNTesterBlock>
 
-        <UIExplorerBlock title="Font Size">
+        <RNTesterBlock title="Font Size">
           <Text style={{fontSize: 23}}>
             Size 23
           </Text>
           <Text style={{fontSize: 8}}>
             Size 8
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Color">
+        </RNTesterBlock>
+        <RNTesterBlock title="Color">
           <Text style={{color: 'red'}}>
             Red color
           </Text>
           <Text style={{color: 'blue'}}>
             Blue color
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Font Weight">
+        </RNTesterBlock>
+        <RNTesterBlock title="Font Weight">
           <Text style={{fontWeight: 'bold'}}>
             Move fast and be bold
           </Text>
           <Text style={{fontWeight: 'normal'}}>
             Move fast and be bold
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Font Style">
+        </RNTesterBlock>
+        <RNTesterBlock title="Font Style">
           <Text style={{fontStyle: 'italic'}}>
             Move fast and be bold
           </Text>
           <Text style={{fontStyle: 'normal'}}>
             Move fast and be bold
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Font Style and Weight">
+        </RNTesterBlock>
+        <RNTesterBlock title="Font Style and Weight">
           <Text style={{fontStyle: 'italic', fontWeight: 'bold'}}>
             Move fast and be bold
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Text Decoration">
+        </RNTesterBlock>
+        <RNTesterBlock title="Text Decoration">
           <Text style={{textDecorationLine: 'underline'}}>
             Solid underline
           </Text>
@@ -906,8 +906,8 @@ var TextExample = React.createClass({
           <Text>
             Mixed text with <Text style={{textDecorationLine: 'underline'}}>underline</Text> and <Text style={{textDecorationLine: 'line-through'}}>line-through</Text> text nodes
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Nested">
+        </RNTesterBlock>
+        <RNTesterBlock title="Nested">
           <Text onPress={() => console.log('1st')}>
             (Normal text,
             <Text style={{fontWeight: 'bold'}} onPress={() => console.log('2nd')}>
@@ -949,8 +949,8 @@ var TextExample = React.createClass({
           <Text style={{fontSize: 12}}>
             <Entity>Entity Name</Entity>
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Text Align">
+        </RNTesterBlock>
+        <RNTesterBlock title="Text Align">
           <Text>
             auto (default) - english LTR
           </Text>
@@ -966,8 +966,8 @@ var TextExample = React.createClass({
           <Text style={{textAlign: 'right'}}>
             right right right right right right right right right right right right right
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Unicode">
+        </RNTesterBlock>
+        <RNTesterBlock title="Unicode">
           <View style={{flex: 1}}>
             <View style={{flexDirection: 'row'}}>
               <Text style={{backgroundColor: 'red'}}>
@@ -990,24 +990,24 @@ var TextExample = React.createClass({
               </Text>
             </View>
           </View>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Spaces">
+        </RNTesterBlock>
+        <RNTesterBlock title="Spaces">
           <Text>
             A {'generated'} {' '} {'string'} and    some &nbsp;&nbsp;&nbsp; spaces
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Line Height">
+        </RNTesterBlock>
+        <RNTesterBlock title="Line Height">
           <Text style={{lineHeight: 35}}>
             Holisticly formulate inexpensive ideas before best-of-breed benefits. <Text style={{fontSize: 20}}>Continually</Text> expedite magnetic potentialities rather than client-focused interfaces.
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Empty Text">
+        </RNTesterBlock>
+        <RNTesterBlock title="Empty Text">
           <Text />
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Toggling Attributes">
+        </RNTesterBlock>
+        <RNTesterBlock title="Toggling Attributes">
           <AttributeToggler />
-        </UIExplorerBlock>
-        <UIExplorerBlock title="backgroundColor attribute">
+        </RNTesterBlock>
+        <RNTesterBlock title="backgroundColor attribute">
           <Text style={{backgroundColor: '#ffaaaa'}}>
             Red background,
             <Text style={{backgroundColor: '#aaaaff'}}>
@@ -1029,8 +1029,8 @@ var TextExample = React.createClass({
               </Text>
             </Text>
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="containerBackgroundColor attribute">
+        </RNTesterBlock>
+        <RNTesterBlock title="containerBackgroundColor attribute">
           <View style={{flexDirection: 'row', height: 85}}>
             <View style={{backgroundColor: '#ffaaaa', width: 150}} />
             <View style={{backgroundColor: '#aaaaff', width: 150}} />
@@ -1041,8 +1041,8 @@ var TextExample = React.createClass({
           <Text style={[styles.backgroundColorText, {top: -70, backgroundColor: 'transparent'}]}>
             {"containerBackgroundColor: 'transparent' + backgroundColor wash"}
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="numberOfLines attribute">
+        </RNTesterBlock>
+        <RNTesterBlock title="numberOfLines attribute">
           <Text numberOfLines={1}>
             Maximum of one line no matter now much I write here. If I keep writing it{"'"}ll just truncate after one line
           </Text>
@@ -1052,18 +1052,18 @@ var TextExample = React.createClass({
           <Text style={{marginTop: 20}}>
             No maximum lines specified no matter now much I write here. If I keep writing it{"'"}ll just keep going and going
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Inline images">
+        </RNTesterBlock>
+        <RNTesterBlock title="Inline images">
           <Text>
             This text contains an inline image <Image source={require('./flux.png')}/>. Neat, huh?
           </Text>
-        </UIExplorerBlock>
-        <UIExplorerBlock title="Text shadow">
+        </RNTesterBlock>
+        <RNTesterBlock title="Text shadow">
           <Text style={{fontSize: 20, textShadowOffset: {width: 2, height: 2}, textShadowRadius: 1, textShadowColor: '#00cccc'}}>
             Demo text shadow
           </Text>
-        </UIExplorerBlock>
-      </UIExplorerPage>
+        </RNTesterBlock>
+      </RNTesterPage>
     );
   }
 });

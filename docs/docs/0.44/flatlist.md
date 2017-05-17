@@ -287,7 +287,7 @@ const {
   View,
 } = ReactNative;
 
-const UIExplorerPage = require('./UIExplorerPage');
+const RNTesterPage = require('./RNTesterPage');
 
 const infoLog = require('infoLog');
 
@@ -355,7 +355,7 @@ class FlatListExample extends React.PureComponent {
     );
     const filteredData = this.state.data.filter(filter);
     return (
-      <UIExplorerPage
+      <RNTesterPage
         noSpacer={true}
         noScroll={true}>
         <View style={styles.searchRow}>
@@ -406,7 +406,7 @@ class FlatListExample extends React.PureComponent {
           renderItem={this._renderItemComponent}
           viewabilityConfig={VIEWABILITY_CONFIG}
         />
-      </UIExplorerPage>
+      </RNTesterPage>
     );
   }
   _captureRef = (ref) => { this._listRef = ref; };

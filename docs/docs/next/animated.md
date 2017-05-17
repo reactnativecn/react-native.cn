@@ -41,6 +41,19 @@ By using the native driver, we send everything about the animation to native bef
 
 You can use the native driver by specifying `useNativeDriver: true` in your animation configuration. See the [Animations](animations.html#使用原生动画驱动) guide to learn more.
 
+### Animatable components 
+
+Only animatable components can be animated. These special components do the magic of binding the animated values to the properties, and do targeted native updates to avoid the cost of the react render and reconciliation process on every frame. They also handle cleanup on unmount so they are safe by default.
+
+- `createAnimatedComponent()` can be used to make a component animatable.
+
+`Animated` exports the following animatable components using the above wrapper:
+
+- `Animated.Image`
+- `Animated.ScrollView`
+- `Animated.Text`
+- `Animated.View`
+
 ### 方法
 
 <div class="props">
@@ -307,7 +320,7 @@ var {
   Text,
   View,
 } = ReactNative;
-var UIExplorerButton = require('./UIExplorerButton');
+var RNTesterButton = require('./RNTesterButton');
 
 exports.framework = 'React';
 exports.title = 'Animated - Examples';
@@ -363,14 +376,14 @@ exports.examples = [
         render() {
           return (
             <View>
-              <UIExplorerButton onPress={() => {
+              <RNTesterButton onPress={() => {
                   this.setState((state) => (
                     {show: !state.show}
                   ));
                 }}>
                 Press to {this.state.show ?
                   'Hide' : 'Show'}
-              </UIExplorerButton>
+              </RNTesterButton>
               {this.state.show && <FadeInView>
                 <View style={styles.content}>
                   <Text>FadeInView</Text>
@@ -394,7 +407,7 @@ exports.examples = [
       this.anim = this.anim || new Animated.Value(0);
       return (
         <View>
-          <UIExplorerButton onPress={() => {
+          <RNTesterButton onPress={() => {
             Animated.spring(this.anim, {
               toValue: 0,   // Returns to the start
               velocity: 3,  // Velocity makes it move
@@ -402,7 +415,7 @@ exports.examples = [
               friction: 1,  // Oscillate a lot
             }).start(); }}>
             Press to Fling it!
-          </UIExplorerButton>
+          </RNTesterButton>
           <Animated.View
             style={[styles.content, {
               transform: [   // Array order matters
@@ -438,7 +451,7 @@ exports.examples = [
       );
       return (
         <View>
-          <UIExplorerButton onPress={() => {
+          <RNTesterButton onPress={() => {
             var timing = Animated.timing;
             Animated.sequence([ // One after the other
               timing(this.anims[0], {
@@ -479,7 +492,7 @@ exports.examples = [
               ),
             ]).start(); }}>
             Press to Animate
-          </UIExplorerButton>
+          </RNTesterButton>
           {['Composite', 'Easing', 'Animations!'].map(
             (text, ii) => (
               <Animated.View

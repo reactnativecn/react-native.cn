@@ -322,7 +322,7 @@ var {
   Text,
   View,
 } = ReactNative;
-var UIExplorerButton = require('./UIExplorerButton');
+var RNTesterButton = require('./RNTesterButton');
 
 exports.framework = 'React';
 exports.title = 'Animated - Examples';
@@ -378,14 +378,14 @@ exports.examples = [
         render() {
           return (
             <View>
-              <UIExplorerButton onPress={() => {
+              <RNTesterButton onPress={() => {
                   this.setState((state) => (
                     {show: !state.show}
                   ));
                 }}>
                 Press to {this.state.show ?
                   'Hide' : 'Show'}
-              </UIExplorerButton>
+              </RNTesterButton>
               {this.state.show && <FadeInView>
                 <View style={styles.content}>
                   <Text>FadeInView</Text>
@@ -409,7 +409,7 @@ exports.examples = [
       this.anim = this.anim || new Animated.Value(0);
       return (
         <View>
-          <UIExplorerButton onPress={() => {
+          <RNTesterButton onPress={() => {
             Animated.spring(this.anim, {
               toValue: 0,   // Returns to the start
               velocity: 3,  // Velocity makes it move
@@ -417,7 +417,7 @@ exports.examples = [
               friction: 1,  // Oscillate a lot
             }).start(); }}>
             Press to Fling it!
-          </UIExplorerButton>
+          </RNTesterButton>
           <Animated.View
             style={[styles.content, {
               transform: [   // Array order matters
@@ -453,7 +453,7 @@ exports.examples = [
       );
       return (
         <View>
-          <UIExplorerButton onPress={() => {
+          <RNTesterButton onPress={() => {
             var timing = Animated.timing;
             Animated.sequence([ // One after the other
               timing(this.anims[0], {
@@ -494,7 +494,7 @@ exports.examples = [
               ),
             ]).start(); }}>
             Press to Animate
-          </UIExplorerButton>
+          </RNTesterButton>
           {['Composite', 'Easing', 'Animations!'].map(
             (text, ii) => (
               <Animated.View
