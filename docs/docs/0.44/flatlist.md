@@ -177,10 +177,16 @@ class MyList extends React.PureComponent {
     </h4>
         <div><p>当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足<code>onEndReachedThreshold</code>个像素的距离时调用。</p></div>
     </div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="onendreachedthreshold"></a>onEndReachedThreshold?:
-        <span class="propType"><code>?number</code></span> <a class="hash-link"
-                                                              href="#onendreachedthreshold">#</a></h4>
-    </div>
+	<div class="prop">
+	<h4 class="propTitle"><a class="anchor" name="onendreachedthreshold"></a>onEndReachedThreshold?: <span class="propType"><span>?number</span></span> <a class="hash-link" href="#onendreachedthreshold">#</a></h4>
+	<div>
+		<p>How far from the end (in units of visible length of the list) the bottom edge of the
+		list must be from the end of the content to trigger the <code>onEndReached</code> callback.
+		Thus a value of 0.5 will trigger <code>onEndReached</code> when the end of the content is
+		within half the visible length of the list.
+		</p>
+	</div>
+	</div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onrefresh"></a>onRefresh?: <span
             class="propType"><code>?() =&gt; void</code></span> <a class="hash-link"
                                                                    href="#onrefresh">#</a></h4>

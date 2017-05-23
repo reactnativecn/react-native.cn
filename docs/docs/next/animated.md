@@ -54,6 +54,56 @@ Only animatable components can be animated. These special components do the magi
 - `Animated.Text`
 - `Animated.View`
 
+### Composing animations 
+
+Animations can also be combined in complex ways using composition functions:
+
+- `Animated.delay()` starts an animation after a given delay.
+- `Animated.parallel()` starts a number of animations at the same time.
+- `Animated.sequence()` starts the animations in order, waiting for each to complete before starting the next.
+- `Animated.stagger()` starts animations in order and in parallel, but with successive delays.
+
+Animations can also be chained together simply by setting the `toValue` of one animation to be another `Animated.Value`. See [跟踪动态值](animations.html#跟踪动态值) values in the Animations guide.
+
+By default, if one animation is stopped or interrupted, then all other animations in the group are also stopped.
+
+### Combining animated values 
+
+You can combine two animated values via addition, multiplication, division, or modulo to make a new animated value:
+
+- `Animated.add()`
+- `Animated.divide()`
+- `Animated.modulo()`
+- `Animated.multiply()`
+
+### Interpolation 
+
+The `interpolate()` function allows input ranges to map to different output ranges. By default, it will extrapolate the curve beyond the ranges given, but you can also have it clamp the output value. It uses lineal interpolation by default but also supports easing functions.
+
+- `interpolate()`
+
+Read more about interpolation in the [动画](animations.html#插值（Interpolation）)文档。
+
+### Handling gestures and other events 
+
+Gestures, like panning or scrolling, and other events can map directly to animated values using `Animated.event()`. This is done with a structured map syntax so that values can be extracted from complex event objects. The first level is an array to allow mapping across multiple args, and that array contains nested objects.
+
+- `Animated.event()`
+
+For example, when working with horizontal scrolling gestures, you would do the following in order to map `event.nativeEvent.contentOffset.x` to `scrollX` (an `Animated.Value`):
+
+```javascript
+ onScroll={Animated.event(
+   // scrollX = e.nativeEvent.contentOffset.x
+   [{ nativeEvent: {
+        contentOffset: {
+          x: scrollX
+        }
+      }
+    }]
+ )}
+```
+
 ### 方法
 
 <div class="props">

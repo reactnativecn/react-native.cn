@@ -25,26 +25,45 @@ componentDidMount() {
  android:launchMode="singleTask">
 ```
 
-对于iOS来说，如果要在App启动后也监听传入的App链接，那么首先需要在项目中链接`RCTLinking`，具体步骤请参考[使用链接库](linking-libraries-ios.html)这篇文档，然后需要在`AppDelegate.m`中增加以下代码：
+对于iOS来说，如果要在App启动后也监听传入的App链接，那么首先需要在项目中链接`RCTLinking`，具体步骤请参考[手动链接](linking-libraries-ios.html#手动链接)这篇文档，然后需要在`AppDelegate.m`中增加以下代码：
 
 ```objective-c
+// iOS 10
+#import <React/RCTLinkingManager.h>
+- (BOOL)application:(UIApplication *)application
+   openURL:(NSURL *)url
+   options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+ return [RCTLinkingManager application:application openURL:url
+ sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+            annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+}
+```
+
+```objective-c
+// iOS 9 or older
 #import <React/RCTLinkingManager.h>
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
-   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
- {
-   return [RCTLinkingManager application:application openURL:url
-                       sourceApplication:sourceApplication annotation:annotation];
- }
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+  return [RCTLinkingManager application:application openURL:url
+         sourceApplication:sourceApplication annotation:annotation];
+}
+```
 
-// Only if your app is using [Universal Links](https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/AppSearch/UniversalLinks.html).
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity
-  restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
- {
-  return [RCTLinkingManager application:application
-                   continueUserActivity:userActivity
-                     restorationHandler:restorationHandler];
- }
+If your app is using [Universal Links](https://developer.apple.com/library/erelease/ios/documentation/General/Conceptual/AppSearch/UniversalLinks.html)
+you'll need to add the following code as well:
+
+```
+- (BOOL)application:(UIApplication *)application continueUserActivity:(UserActivity *)userActivity
+ restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
+{
+ return [RCTLinkingManager application:application
+                  continueUserActivity:userActivity
+                    restorationHandler:restorationHandler];
+}
+
 ```
 
 然后你的React组件就可以监听`Linking`的相关事件：

@@ -201,7 +201,7 @@ dependencies {
         </div>
     </div>
     <div class="prop">
-    <h4 class="propTitle"><a class="anchor" name="blurradius"></a><span class="platform">ios</span>blurRadius <span class="propType">number</span> <a class="hash-link" href="#blurradius">#</a>
+    <h4 class="propTitle"><a class="anchor" name="blurradius"></a>blurRadius <span class="propType">number</span> <a class="hash-link" href="#blurradius">#</a>
     </h4>
     <div>
     <p>blurRadius(模糊半径)：为图片添加一个指定半径的模糊滤镜。</p>
