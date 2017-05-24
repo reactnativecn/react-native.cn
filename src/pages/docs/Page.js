@@ -4,7 +4,7 @@ import { Row, Col, Panel } from 'react-bootstrap';
 import { Link } from 'react-router';
 import DocumentMeta from 'react-document-meta';
 import Marked from '../../components/Marked';
-import SNSComment from '../../components/SNSComment';
+// import SNSComment from '../../components/SNSComment';
 import { loadResources, getResource } from '../../logic/loadResource';
 
 import ads from '../../../docs/ads/ads';
@@ -161,7 +161,7 @@ export default class Page extends React.Component {
           </Row>
         </section>
         {ads.docs && this.renderBanner(ads.docs)}
-        <SNSComment threadKey={location.pathname} title={`${params.version}/${title}`} />
+        {/*<SNSComment threadKey={location.pathname} title={`${params.version}/${title}`} />*/}
       </div>
     );
   }
