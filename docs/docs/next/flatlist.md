@@ -23,7 +23,7 @@
 
 下面是一个较复杂的例子，其中演示了如何利用`PureComponent`来进一步优化性能和减少bug产生的可能。 
 
-- By binding the `onPressItem` handler, the props will remain `===` and `PureComponent` will prevent wasteful re-renders unless the actual `id`, `selected`, or `title` props change, even if the inner `SomeOtherWidget` has no such optimizations.
+- 对于`MyListItem`组件来说，其`onPressItem`属性使用箭头函数而非bind的方式进行绑定，使其不会在每次列表重新render时生成一个新的函数，从而保证了props的不变性（当然前提是 `id`、`selected`和`title`也没变），不会触发自身无谓的重新render。换句话说，如果你是用bind来绑定`onPressItem`，每次都会生成一个新的函数，导致props在`===`比较时返回false，从而触发自身的一次不必要的重新render。
 - By passing `extraData={this.state}` to `FlatList` we make sure `FlatList` itself will re-render when the `state.selected` changes. Without setting this prop, `FlatList` would not know it needs to re-render any items because it is also a `PureComponent` and the prop comparison will not show any changes.
 - `keyExtractor` tells the list to use the ids for the react keys.
 

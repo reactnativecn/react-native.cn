@@ -57,9 +57,9 @@ var icon = this.props.active ? require('./my-icon-active.png') : require('./my-i
 
 ## 静态非图片资源
 
-上面描述的`require`语法也可以用来静态地加载你项目中的声音、视频或者文档文件。大多数的文件类型包括`.mp3`, `.wav`, `.mp4`, `.mov`, `.htm` 和 `.pdf`（完整列表请看 [packager defaults](https://github.com/facebook/react-native/blob/master/packager/defaults.js)）
+上面描述的`require`语法也可以用来静态地加载你项目中的声音、视频或者文档文件。大多数常见文件类型都支持，包括`.mp3`, `.wav`, `.mp4`, `.mov`, `.htm` 和 `.pdf`等（完整列表请看 [packager defaults](https://github.com/facebook/react-native/blob/master/packager/defaults.js)）。
 
-需要注意的是视频必须使用绝对定位而不是`flexGrow`，因为尺寸信息当前未通过非图片资源传递。这个限制对于直接链接到Xcode或者Android资源文件夹的视频不会出现。
+需要注意的是视频必须指定尺寸而不能使用`flex`样式，因为我们目前还不能从非图片资源中获取到尺寸信息。对于直接链接到Xcode或者Android资源文件夹的视频，则不会有这个限制。
 
 ## 使用混合App的图片资源
 
