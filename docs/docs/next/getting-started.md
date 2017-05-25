@@ -293,7 +293,7 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node
 
 </div><div markdown class="md-block windows android">
 
-打开命令提示符窗口，使用Chocolatey来安装NodeJS。注意，目前已知Node 7.1版本在windows上无法正常工作，请避开这个版本！
+打开命令提示符窗口，使用Chocolatey来安装NodeJS。
 
 ```
 choco install nodejs.install
@@ -327,8 +327,6 @@ yarn config set disturl https://npm.taobao.org/dist --global
 > `sudo npm install -g yarn react-native-cli`.
 
 #### Android Studio
-
-[Android Studio](http://developer.android.com/sdk/index.html) 2.0 or higher.
 
 React Native目前需要[Android Studio](http://developer.android.com/sdk/index.html)2.0或更高版本。
 

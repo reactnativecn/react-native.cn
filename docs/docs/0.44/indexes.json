@@ -127,7 +127,7 @@
             "contains": [
                 {
                     "subject": "中文视频教程",
-                    "external": "/videos.html"
+                    "external": "https://i.youku.com/i/UMzM5ODI5MDA4MA==/videos"
                 },
                 {
                     "subject": "js.coach第三方组件库",

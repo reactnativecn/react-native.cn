@@ -95,6 +95,8 @@ dependencies {
         <h4 class="propTitle"><a class="anchor" name="source"></a>source <span class="propType">{uri: string}, number</span> <a class="hash-link" href="#source">#</a></h4>
         <div>
             <p><code>uri</code>是一个表示图片的资源标识的字符串，它可以是一个http地址或是一个本地文件路径（使用<code>require(相对路径)</code>来引用）。</p>
+            <p>This prop can also contain several remote URLs, specified together with their width and height and potentially with scale/other URI arguments. The native side will then choose the best `uri` to display based on the measured size of the image container. A `cache` property can be added to control how networked request interacts with the local cache.</p>
+            <p>目前原生支持的图片格式有`png`、`jpg`、`jpeg`、`bmp`、`gif`、`webp` （限Android）、`psd` （限iOS）。当然你可以在github上找一些第三方组件来扩充支持的格式。</p>
         </div>
     </div>
     <div class="prop">
