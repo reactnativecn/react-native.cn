@@ -66,7 +66,7 @@ export default class Post extends Component {
                 }}
               />
             </div>
-            <SNSComment threadKey={location.pathname} title={post.title} />
+{/*<SNSComment threadKey={location.pathname} title={post.title} />*/}
           </Container>
         }
       </div>
