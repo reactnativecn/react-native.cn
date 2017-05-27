@@ -38,14 +38,18 @@
 应用内的警告会以全屏黄色显示在应用中（调试模式下），我们称为黄屏（yellow box）报错。点击警告可以查看详情或是忽略掉。
 和红屏报警类似，你可以使用`console.warn()`来手动触发黄屏警告。
 在默认情况下，开发模式中启用了黄屏警告。可以通过以下代码关闭：
-```js
+
+```javascript
 console.disableYellowBox = true;
 console.warn('YellowBox is disabled.');
 ```
-你也可以通过代码屏蔽指定的警告，像下面这样设置一个数组：
-```js
-console.ignoredYellowBox = ['Warning: ...'];
+
+你也可以通过代码屏蔽指定的警告，像下面这样调用ignoreWarnings方法，参数为一个数组：
+
+```javascript
+YellowBox.ignoreWarnings(['Warning: ...']);
 ```
+
 数组中的字符串就是要屏蔽的警告的开头的内容。（例如上面的代码会屏蔽掉所有以Warning开头的警告内容）
 
 > 红屏和黄屏在发布版（release/production）中都是自动禁用的。
@@ -69,7 +73,40 @@ $ react-native log-android
 
 __译注__：Chrome中并不能直接看到App的用户界面，而只能提供console的输出，以及在sources项中断点调试js脚本。
 
-> [目前无法正常使用React开发插件](https://github.com/facebook/react-devtools/issues/229)（就是某些教程或截图上提到的Chrome开发工具上多出来的React选项），但这并不影响代码的调试。如果你需要像调试web页面那样查看RN应用的jsx结构，暂时只能使用Nuclide的"React Native Inspector"这一功能来代替。
+
+## React Developer Tools
+ 
+With React Native 0.43 or higher, you can use [the standalone version of React Developer Tools](https://github.com/facebook/react-devtools/tree/master/packages/react-devtools) to debug the React component hierarchy. To use it, install the `react-devtools` package globally:
+
+```bash
+npm install -g react-devtools
+```
+
+> 译注：react-devtools依赖于electron，而electron需要到国外服务器下载二进制包，所以国内用户这一步很可能会卡住。此时请在`环境变量`中添加electron专用的国内镜像源：`ELECTRON_MIRROR="https://npm.taobao.org/mirrors/electron/"`，然后再尝试安装react-devtools。
+
+安装完成后在命令行中执行`react-devtools`即可启动此工具：
+
+```bash
+react-devtools
+```
+
+<img src="https://camo.githubusercontent.com/3226d81c8d40f07f10c1f78876905a1bfc2d6d82/687474703a2f2f692e696d6775722e636f6d2f49586548695a442e706e67" width="700" alt="React DevTools">
+
+It should connect to your simulator within a few seconds.
+
+> Note: if you prefer to avoid global installations, you can add `react-devtools` as a project dependency. With Yarn, you can run `yarn add --dev react-devtools`, and then run `yarn react-devtools` from your project folder to open the DevTools. With npm, you can run `npm install --save-dev react-devtools`, add `"react-devtools": "react-devtools"` to the `scripts` section in your `package.json`, and then run `npm run react-devtools` from your project folder to open the DevTools.
+
+### Integration with React Native Inspector
+
+You can open the [in-app developer menu](#accessing-the-in-app-developer-menu) and choose "Show Inspector". It will bring up an overlay that lets you tap on any UI element and see information about it:
+
+<img src="https://d2ppvlu71ri8gs.cloudfront.net/items/1R1d2x0O3M0C1t071Q0F/Screen%20Recording%202017-05-01%20at%2020.14.gif?v=45691135" alt="Show Inspector" width="300">
+
+However, when `react-devtools` is running, Inspector will enter a special collapsed mode, and instead use the DevTools as primary UI. In this mode, clicking on something in the simulator will bring up the relevant components in the DevTools:
+
+<img src="https://d2ppvlu71ri8gs.cloudfront.net/items/1v031W3O1W322z3G1k15/Screen%20Recording%202017-05-01%20at%2020.16.gif?v=a87eb3f4" alt="Show Inspector with React DevTools" width="700">
+
+You can choose "Hide Inspector" in the same menu to exit this mode.
 
 ### 使用Chrome开发者工具来在设备上调试
 

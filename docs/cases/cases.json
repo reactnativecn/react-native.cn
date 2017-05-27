@@ -1,7 +1,41 @@
 [
 	{
+		"name": "立刻说",
+		"desc": "现在英语学习网站",
+		"ios": "https://itunes.apple.com/us/app/立刻说/id1190202556?ls=1&mt=8",
+		"android": "http://android.myapp.com/myapp/detail.htm?apkName=com.lks",
+		"icon": "https://file.likeshuo.com/content/images/other/logo/logo_app.png"
+	},
+ 	 {
+  		"name": "农眼",
+   		"desc": "农业大数据平台",
+   		"ios": "https://itunes.apple.com/cn/app/nonyang/id1177902411?mt=8",
+   		"android": "http://app.airag.cn/app/update/farmer/visionfarmer.apk",
+   		"icon": "http://app.airag.cn/app/icon/icon_vision_512.png"
+  	},
+	{
+		"name": "一键康",
+		"desc": "您的公立医院体检平台",
+		"ios": "https://itunes.apple.com/cn/app/id1100633202?mt=8",
+		"android": "http://www.touchealth.com.cn/",
+		"icon": "http://ol3l72k79.bkt.clouddn.com/20170512172843_jXH13w_logo512.jpeg"
+	},
+	{
+		"name": "找车场",
+		"desc": "简单方便的帮你找车场",
+		"ios": "https://itunes.apple.com/us/app/id1223491793?l=zh&ls=1&mt=8",
+		"android": "http://a.app.qq.com/o/simple.jsp?pkgname=com.zcc",
+		"icon": "https://images.vmartaw.com/2017/04/07/icon.png"
+	},{
+		"name": "幕布",
+		"desc": "管理你的大脑",
+		"ios": "https://itunes.apple.com/app/id1214302139",
+		"android": "https://mubu.com/app-dl",
+		"icon": "https://img.mubu.com/static/wechat-share-icon.png"
+	},
+	{
 		"name": "大浙惠生活",
-		"desc": "腾讯大浙网旗下，浙江省本地吃喝玩乐活动、优惠福利信息的推荐平台",
+		"desc": "大浙网优惠福利信息",
 		"ios": "https://itunes.apple.com/app/apple-store/id1184729110??l=zh&ls=1&mt=8",
 		"android": "",
 		"icon": "http://is4.mzstatic.com/image/thumb/Purple122/v4/8f/87/30/8f873055-d51e-ec43-a57c-2057a8cb95a8/source/175x175bb.jpg"
@@ -175,13 +209,6 @@
 		"android": "",
 		"icon": "http://img2.yhwj168.com/1024.png"
 	},
-	{
-		"name": "16直播",
-		"desc": "土豪离不开的直播",
-		"ios": "https://itunes.apple.com/us/app/mei-nu-zha-jin-hua-zhi-bo/id1151272467?l=zh&ls=1&mt=8",
-		"android": "http://zhushou.360.cn/detail/index/soft_id/3438248?recrefer=SE_D_16%E7%9B%B4%E6%92%AD",
-		"icon": "http://p17.qhimg.com/t012e5fe09adb1d0ffa.png"
-	},
   {
 		"name": "水稻汽车",
 		"desc": "平价放心的超级4S店",
@@ -228,7 +255,28 @@
 		"name": "红包圈",
 		"desc": "红包交友同城聊天应用",
 		"ios": "https://itunes.apple.com/cn/app/hong-bao-quan-hong-bao-jiao/id1193509121?mt=8",
-		"android": "http://h5.down.bwgame.com.cn/redpackage.apk",
+		"android": "http://h5.down.bwgame.com.cn/redenvelope2017041916.apk",
 		"icon": "http://ohg9m5uoq.bkt.clouddn.com/1024.png"
-  }
+  },
+	{
+		"name": "万颗商城",
+		"desc": "针对农村的电商平台",
+		"ios": "https://itunes.apple.com/us/app/%E4%B8%87%E9%A2%97%E5%95%86%E5%9F%8E/id1136517970?mt=8",
+		"android": "http://zhushou.360.cn/detail/index/soft_id/3349739?recrefer=SE_D_%E4%B8%87%E9%A2%97%E5%95%86%E5%9F%8E",
+		"icon": "http://is1.mzstatic.com/image/thumb/Purple122/v4/75/db/c9/75dbc963-7696-1583-d2f8-055596654daf/source/175x175bb.jpg"
+	},
+	{
+		"name": "花匠铺",
+		"desc": "家庭园艺种植交流平台",
+		"ios": "https://itunes.apple.com/app/id1219173067",
+		"android": "https://huajiangpu.com/m",
+		"icon": "http://oiifzbqya.bkt.clouddn.com/hjplogo128.png"
+	},
+		{
+		"name": "鲜易商城",
+		"desc": "鲜易商城是国内领先的B2B生鲜电商",
+		"ios": "https://itunes.apple.com/us/app/鲜易商城/id1039746711?l=zh&ls=1&mt=8",
+		"android": "http://a.app.qq.com/o/simple.jsp?pkgname=com.xebest.b2c",
+		"icon": "http://pp.myapp.com/ma_icon/0/icon_12159939_1493113253/96"
+	}
 ]
