@@ -8,7 +8,7 @@ React Native及相关标识版权由©Facebook Inc.所有。本网站并非隶�
 
 ## 需要帮助？ ##
 
-### 免费QQ群 ###
+### QQ群 ###
 
 “React Native中文网”的维护人员和其他参与者都在  
 > 1群： 439022088（已满）   
@@ -18,19 +18,18 @@ React Native及相关标识版权由©Facebook Inc.所有。本网站并非隶�
 5群： 138811944（已满）  
 6群： 446548027（已满）  
 7群： 115487854（已满）  
-8群： 317323710   
-  
+8群： 317323710（已满）  
+9群： 128731649
+   
 讨论交流。所有群里都会经常发布许多新的教程和资讯。
-
-### 付费QQ群 ###
-
-#### `“React Native中文网”的核心员工也为付费用户提供高质量的咨询服务`。  
-您可以在[淘宝上购买本服务](https://item.taobao.com/item.htm?id=529691026114)。
- 
 
 ### 付费技术支持 ###
 
 需要量身订做、随叫随到的完善技术支持？请联络[QQ:402740419](tencent://message/?uin=402740419&Site=react-native.cn&Menu=yes) 或[通过猪八戒平台对我们进行雇佣](http://shop.zbj.com/14338306/)
+
+### 高级商务合作 ###
+
+如果您想要更深入地定制化服务，比如<span style="background:#96E164">技术内部培训、项目技术咨询管理、项目解决方案</span>等，请联系：__王先生 [18513831297](tel:18513831297) [wuxieken@qq.com](mailto:wuxieken@qq.com)__
 
 ## 捐助
 
@@ -93,6 +92,4 @@ React Native中文网是由杭州欧石南网络科技有限公司创办的，�
 
 地址：杭州市西湖区古墩路616号同人精华大厦2座1516室
 
-联系电话：王先生 [18513831297](tel:18513831297)
-
-QQ：[402740419](tencent://message/?uin=402740419&Site=react-native.cn&Menu=yes)
+邮箱：[eliza@hzerica.cn](mailto:eliza@hzerica.cn)
