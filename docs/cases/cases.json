@@ -1,5 +1,12 @@
 [
 	{
+		"name": "漂漂共享书",
+		"desc": "与朋友同事分享纸质图书",
+		"ios": "https://itunes.apple.com/cn/app/id1201678520?ls=1&mt=8",
+		"android": "http://sj.qq.com/myapp/detail.htm?apkName=com.jubing.piaopiaoshu",
+		"icon": "http://pp.myapp.com/ma_icon/0/icon_52416269_1494393330/96"
+	},
+	{
 		"name": "立刻说",
 		"desc": "在线英语学习网站",
 		"ios": "https://itunes.apple.com/us/app/立刻说/id1190202556?ls=1&mt=8",
