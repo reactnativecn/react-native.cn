@@ -1,6 +1,6 @@
 `CameraRoll`模块提供了访问本地相册的功能。在iOS上使用这个模块之前，你需要先链接`RCTCameraRoll`库，具体做法请参考[链接原生库](linking-libraries-ios.html)文档。
 
-**译注**：本模块只提供了基本的访问图片的功能，并没有提供相册界面。对于多数开发者来说，可能[react-native-image-picker](https://github.com/marcshilling/react-native-image-picker)的功能更为完整易用。
+**译注**：本模块只提供了基本的访问图片的功能，并没有提供相册界面。对于多数开发者来说，可能第三方的[react-native-image-crop-picker](https://github.com/ivpusic/react-native-image-crop-picker)的功能更为完整易用（可多选、压缩、裁剪等）。
 
 ### iOS 10的权限要求
 从iOS10开始，访问相册需要用户授权。你需要在`Info.plist`中添加一条名为`NSCameraUsageDescription`的键，然后在其值中填写向用户请求权限的具体描述。编辑完成后这个键在Xcode中实际会显示为`Privacy - Camera Usage Description`。

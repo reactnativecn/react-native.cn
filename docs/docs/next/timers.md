@@ -43,29 +43,10 @@ InteractionManager.clearInteractionHandle(handle);
 // 在所有句柄都清除之后，现在开始依序执行队列中的任务
 ```
 
-## TimerMixin
+## 务必在卸载组件前清除定时器！
 
-我们发现很多React Native应用发生致命错误（闪退）是与计时器有关。具体来说，是在某个组件被卸载（unmount）之后，计时器却仍然被激活。为了解决这个问题，我们引入了`TimerMixin`。如果你在组件中引入`TimerMixin`，就可以把你原本的`setTimeout(fn, 500)`改为`this.setTimeout(fn, 500)`(只需要在前面加上`this.`)，然后当你的组件卸载时，所有的计时器事件也会被正确的清除。
+我们发现很多React Native应用发生致命错误（闪退）是与计时器有关。具体来说，是在某个组件被卸载（unmount）之后，计时器却仍然在运行。要解决这个问题，只需铭记`在unmount组件时清除（clearTimeout/clearInterval）所有用到的定时器`即可：
 
-这个库并没有跟着React Native一起发布。你需要在项目文件夹下输入`npm i react-timer-mixin --save`来单独安装它。
-
-```javascript
-var TimerMixin = require('react-timer-mixin');
-
-var Component = React.createClass({
-  mixins: [TimerMixin],
-  componentDidMount: function() {
-    this.setTimeout(
-      () => { console.log('这样我就不会导致内存泄露!'); },
-      500
-    );
-  }
-});
-```
-
-我们强烈建议您使用react-timer-mixin提供的`this.setTimeout(...)`来代替`setTimeout(...)`。这可以规避许多难以排查的BUG。  
-
-__译注__：Mixin属于ES5语法，对于ES6代码来说，__无法直接使用Mixin__。如果你的项目是用ES6代码编写，同时又使用了计时器，那么你只需铭记`在unmount组件时清除（clearTimeout/clearInterval）所有用到的定时器`，那么也可以实现和TimerMixin同样的效果。例如：
 ```js
 import React,{
   Component
@@ -79,6 +60,8 @@ export default class Hello extends Component {
     );
   }
   componentWillUnmount() {
+    // 请注意Un"m"ount的m是小写
+    
     // 如果存在this.timer，则使用clearTimeout清空。
     // 如果你使用多个timer，那么用多个变量，或者用个数组来保存引用，然后逐个clear
     this.timer && clearTimeout(this.timer);

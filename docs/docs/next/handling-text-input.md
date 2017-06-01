@@ -37,4 +37,3 @@ AppRegistry.registerComponent('PizzaTranslator', () => PizzaTranslator);
 文本输入方面还有很多其他的东西要处理。比如你可能想要在用户输入的时候进行验证，在[React的表单组件中的受限组件](http://reactjs.cn/react/docs/forms.html)一节中有一些详细的示例（注意react中的onChange对应的是rn中的onChangeText）。此外你还需要看看[TextInput的文档](textinput.html)。
 
 TextInput可能是天然具有“动态状态”的最简单的组件了。下面我们来看看另一类控制布局的组件，先从[ScrollView开始学习](using-a-scrollview.html)。
-s
