@@ -93,8 +93,8 @@ var MyButton = React.createClass({
 
   render() {
     return (
-      <View ref={component => this._root = component} {...this.props}>
-        <Text>{this.props.label}</Text>
+      <View>
+        <Text ref={component => this._root = component} {...this.props}>{this.props.label}</Text>
       </View>
     )
   },
