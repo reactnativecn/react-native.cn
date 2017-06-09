@@ -22,12 +22,6 @@ React Native及相关标识版权由©Facebook Inc.所有。本网站并非隶�
   
 讨论交流。所有群里都会经常发布许多新的教程和资讯。
 
-### 付费QQ群 ###
-
-#### `“React Native中文网”的核心员工也为付费用户提供高质量的咨询服务`。  
-您可以在[淘宝上购买本服务](https://item.taobao.com/item.htm?id=529691026114)。
- 
-
 ### 付费技术支持 ###
 
 需要量身订做、随叫随到的完善技术支持？请联络[QQ:402740419](tencent://message/?uin=402740419&Site=react-native.cn&Menu=yes) 或[通过猪八戒平台对我们进行雇佣](http://shop.zbj.com/14338306/)
