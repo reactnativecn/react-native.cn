@@ -36,11 +36,11 @@
                     "mdlink": "handling-text-input"
                 },
                 {
-                    "subject": "如何使用ScrollView",
+                    "subject": "如何使用滚动视图",
                     "mdlink": "using-a-scrollview"
                 },
                 {
-                    "subject": "如何使用ListView",
+                    "subject": "如何使用长列表",
                     "mdlink": "using-a-listview"
                 },
                 {

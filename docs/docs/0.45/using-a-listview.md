@@ -1,4 +1,4 @@
-React Native provides a suite of components for presenting lists of data. Generally, you'll want to use either [FlatList](flatlist.html) or [SectionList](sectionlist.html).
+React Native提供了几个适用于展示长列表数据的组件，一般而言我们会选用[FlatList](flatlist.html)或是[SectionList](sectionlist.html)。
 
 `FlatList`组件用于显示一个垂直的滚动列表，其中的元素之间结构近似而仅数据不同。
 
