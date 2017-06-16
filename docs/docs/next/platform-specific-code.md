@@ -81,13 +81,16 @@ var styles = StyleSheet.create({
 
 `Platform.OS`在iOS上会返回`ios`，而在Android设备或模拟器上则会返回`android`。
 
+### 检测iOS版本
+在iOS上，`Version`属性是`-[UIDevice systemVersion]`的返回值，具体形式为一个表示当前系统版本的字符串。比如可能是"10.3"。
+
 ### 检测Android版本
-在Android上，平台模块还可以用来检测当前所运行的Android平台的版本：
+在Android上，`Version`属性是一个数字，表示Android的api level：
 
 ```javascript
 import { Platform } from 'react-native';
 
 if(Platform.Version === 21){
-  console.log('Running on Lollipop!');
+  console.log('当前api level是21，即运行的是Android 5.0，代号Lolipop');
 }
 ```

@@ -4,6 +4,6 @@
 
 ## 指定模拟的设备类型
 
-你可以使用`--simulator`参数，在其后加上要使用的设备名称来指定要模拟的设备类型（目前默认为"iPhone 6"）。如果你要模拟iPhone 4s，那么这样运行命令即可：`react-native run-ios --simulator "iPhone 4s"`。
+你可以使用`--simulator`参数，在其后加上要使用的设备名称来指定要模拟的设备类型（目前默认为"iPhone 6"）。如果你要模拟iPhone 4s，那么这样运行命令即可：`react-native run-ios --simulator "iPhone 4s"`。run-ios还有其他参数，可以用于指定设备、根目录路径等，具体请参考[runIOS.js](https://github.com/facebook/react-native/blob/master/local-cli/runIOS/runIOS.js#L228)源代码。
 
 你可以在终端中运行`xcrun simctl list devices`来查看具体可用的设备名称。
