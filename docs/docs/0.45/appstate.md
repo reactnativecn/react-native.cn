@@ -6,7 +6,7 @@ AppState通常在处理推送通知的时候用来决定内容和对应的行为
 
 * `active` - 应用正在前台运行
 * `background` - 应用正在后台运行。用户既可能在别的应用中，也可能在桌面。
-* `inactive` - 这是一个过渡状态，不会在正常的React Native应用中出现。
+* `inactive` - 此状态表示应用正在前后台的切换过程中，或是处在系统的多任务视图，又或是处在来电状态中。
 
 要了解更多信息，可以阅读[Apple的文档](https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/TheAppLifeCycle/TheAppLifeCycle.html)。
 
