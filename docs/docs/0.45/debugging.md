@@ -4,7 +4,7 @@
 
 ![](img/DeveloperMenu.png)
 
-> 注意：在成品（release/producation builds）中开发者菜单会被关闭。
+> 注意：在成品（release/production builds）中开发者菜单会被关闭。
 
 ## 刷新JavaScript
 
