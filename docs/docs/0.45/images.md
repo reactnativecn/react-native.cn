@@ -147,15 +147,15 @@ iOS会为同一张图片在相册中保存多个不同尺寸的副本。为了�
 
 对于开发者来说，则可以在其中标注一些有用的属性，例如图片的尺寸，这样可以使图片自己去计算将要显示的尺寸（而不必在样式中写死）。请在这一数据结构中自由发挥，存储你可能需要的任何图片相关的信息。
 
-## 背景图片组件ImageBackground
+## 通过嵌套来实现背景图片
 
-开发者们常面对的一种需求就是类似web中的背景图（`background-image`）。要实现这一用例，只需简单使用`<ImageBackground>`组件，然后把需要背景图的子组件嵌入其中即可。
+开发者们常面对的一种需求就是类似web中的背景图（`background-image`）。要实现这一用例，只需简单地创建一个`<Image>`组件，然后把需要背景图的子组件嵌入其中即可。
 
 ```javascript
 return (
-  <ImageBackground source={...}>
+  <Image source={...}>
     <Text>Inside</Text>
-  </ImageBackground>
+  </Image>
 );
 ```
 ## iOS边框圆角的注意事项
