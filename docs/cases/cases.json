@@ -285,5 +285,12 @@
 		"ios": "https://itunes.apple.com/us/app/鲜易商城/id1039746711?l=zh&ls=1&mt=8",
 		"android": "http://a.app.qq.com/o/simple.jsp?pkgname=com.xebest.b2c",
 		"icon": "http://pp.myapp.com/ma_icon/0/icon_12159939_1493113253/96"
+	},
+	{
+		"name": "澳門手遊",
+		"desc": "澳門手遊平台",
+		"ios": "https://www.gaaamee.com/download-app.html",
+		"android": "https://www.gaaamee.com/download-app.html",
+		"icon": "https://www.gaaamee.com/download/images/download/code.png"
 	}
 ]
