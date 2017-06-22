@@ -249,13 +249,13 @@ RCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSe
 ## 依赖注入
 bridge会自动注册实现了`RCTBridgeModule`协议的模块，但是你可能也希望能够初始化自定义的模块实例（这样可以注入依赖）。
  
-要实现这个功能，你需要实现`RTCBridgeDelegate`协议，初始化`RTCBridge`，并且在初始化方法里指定代理。然后用初始化好的`RTCBridge`实例初始化一个`RTCRootView`。
+要实现这个功能，你需要实现`RCTBridgeDelegate`协议，初始化`RCTBridge`，并且在初始化方法里指定代理。然后用初始化好的`RCTBridge`实例初始化一个`RCTRootView`。
  
 ```objective-c
-id<RCTBridgeDelegate> moduleInitialiser = [[classThatImplementsRTCBridgeDelegate alloc] init];
- 
+id<RCTBridgeDelegate> moduleInitialiser = [[classThatImplementsRCTBridgeDelegate alloc] init];
+
 RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:moduleInitialiser launchOptions:nil];
- 
+
 RCTRootView *rootView = [[RCTRootView alloc]
                         initWithBridge:bridge
                             moduleName:kModuleName
