@@ -95,6 +95,8 @@ dependencies {
         <h4 class="propTitle"><a class="anchor" name="source"></a>source <span class="propType">{uri: string}, number</span> <a class="hash-link" href="#source">#</a></h4>
         <div>
             <p><code>uri</code>是一个表示图片的资源标识的字符串，它可以是一个http地址或是一个本地文件路径（使用<code>require(相对路径)</code>来引用）。</p>
+            <p>This prop can also contain several remote URLs, specified together with their width and height and potentially with scale/other URI arguments. The native side will then choose the best `uri` to display based on the measured size of the image container. A `cache` property can be added to control how networked request interacts with the local cache.</p>
+            <p>目前原生支持的图片格式有`png`、`jpg`、`jpeg`、`bmp`、`gif`、`webp` （限Android）、`psd` （限iOS）。当然你可以在github上找一些第三方组件来扩充支持的格式。</p>
         </div>
     </div>
     <div class="prop">
@@ -201,7 +203,7 @@ dependencies {
         </div>
     </div>
     <div class="prop">
-    <h4 class="propTitle"><a class="anchor" name="blurradius"></a><span class="platform">ios</span>blurRadius <span class="propType">number</span> <a class="hash-link" href="#blurradius">#</a>
+    <h4 class="propTitle"><a class="anchor" name="blurradius"></a>blurRadius <span class="propType">number</span> <a class="hash-link" href="#blurradius">#</a>
     </h4>
     <div>
     <p>blurRadius(模糊半径)：为图片添加一个指定半径的模糊滤镜。</p>
@@ -253,7 +255,7 @@ dependencies {
             class="propType">(uri: string, success: (width: number, height: number) =&gt; void, failure: (error: any) =&gt; void)</span>
         <a class="hash-link" href="#getsize">#</a></h4>
         <div><p>在显示图片前获取图片的宽高(以像素为单位)。如果图片地址不正确或下载失败,此方法也会失败。</p>
-            <p>要获取图片的尺寸,首先需要加载或下载图片(同时会被缓存起来)。这意味着理论上你可以用这个方法来预加载图片,虽然此方法并没有针对这一用法进行优化,而且将来可能会换一些实现方案使得并不需要完整下载图片即可获取尺寸。所以更好的预加载方案是使用下面那个专门的预加载方法。</p></div>
+            <p>要获取图片的尺寸,首先需要加载或下载图片(同时会被缓存起来)。这意味着理论上你可以用这个方法来预加载图片，虽然此方法并没有针对这一用法进行优化，而且将来可能会换一些实现方案使得并不需要完整下载图片即可获取尺寸。所以更好的预加载方案是使用下面那个专门的预加载方法。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="prefetch"></a><span class="propType">static </span>prefetch<span
             class="propType">(url: string)</span> <a class="hash-link" href="#prefetch">#</a></h4>

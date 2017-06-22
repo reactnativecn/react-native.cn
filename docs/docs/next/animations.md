@@ -60,11 +60,10 @@ render() {
 ![](img/AnimatedFadeInView.gif)
 
 我们来分析一下这个过程。
-In the `FadeInView` constructor, a new `Animated.Value` called `fadeAnim` is initialized as part of `state`.
-The opacity property on the `View` is mapped to this animated value.
-Behind the scenes, the numeric value is extracted and used to set opacity.
+在`FadeInView`的构造函数里，我们创建了一个名为`fadeAnim`的`Animated.Value`，并放在`state`中。
+而`View`的透明度是和这个值绑定的。 
 
-When the component mounts, the opacity is set to 0.
+组件加载时，透明度首先设为0.
 Then, an easing animation is started on the `fadeAnim` animated value,
 which will update all of its dependent mappings (in this case, just the opacity) on each frame as the value animates to the final value of 1.
 
@@ -229,7 +228,7 @@ This does influence the API, so keep that in mind when it seems a little trickie
 Check out `Animated.Value.addListener` as a way to work around some of these limitations,
 but use it sparingly since it might have performance implications in the future.
 
-### Using the native driver
+### 使用原生动画驱动
 
 The `Animated` API is designed to be serializable.
 By using the [native driver](http://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html),
