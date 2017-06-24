@@ -63,11 +63,17 @@ var icon = this.props.active ? require('./my-icon-active.png') : require('./my-i
 
 ## 使用混合App的图片资源
 
-如果你在编写一个混合App（一部分UI使用React Native，而另一部分使用平台原生代码），也可以使用已经打包到App中的图片资源（通过Xcode的asset类目或者Android的drawable文件夹打包）：
+如果你在编写一个混合App（一部分UI使用React Native，而另一部分使用平台原生代码），也可以使用已经打包到App中的图片资源（以拖拽的方式放置在Xcode的asset类目中，或是放置在Android的drawable目录里）。注意此时只使用文件名，不带路径也不带后缀：
 
 ```javascript
 <Image source={{uri: 'app_icon'}} style={{width: 40, height: 40}} />
 ```
+
+对于放置在Android的assets目录中的图片，还可以使用`asset:/` 前缀来引用：
+
+```javascript
+ <Image source={{uri: 'asset:/app_icon.png'}} style={{width: 40, height: 40}} />
+ ```
 
 注意：这一做法并没有任何安全检查。你需要自己确保图片在应用中确实存在，而且还需要指定尺寸。
 

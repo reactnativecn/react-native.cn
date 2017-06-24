@@ -60,11 +60,10 @@ render() {
 ![](img/AnimatedFadeInView.gif)
 
 我们来分析一下这个过程。
-In the `FadeInView` constructor, a new `Animated.Value` called `fadeAnim` is initialized as part of `state`.
-The opacity property on the `View` is mapped to this animated value.
-Behind the scenes, the numeric value is extracted and used to set opacity.
+在`FadeInView`的构造函数里，我们创建了一个名为`fadeAnim`的`Animated.Value`，并放在`state`中。
+而`View`的透明度是和这个值绑定的。 
 
-When the component mounts, the opacity is set to 0.
+组件加载时，透明度首先设为0.
 Then, an easing animation is started on the `fadeAnim` animated value,
 which will update all of its dependent mappings (in this case, just the opacity) on each frame as the value animates to the final value of 1.
 
@@ -74,9 +73,9 @@ Because the entire configuration is declarative, we will be able to implement fu
 
 ### 配置动画
 
-动画拥有非常灵活的配置项。自定义的或预定义的easing函数、延迟、持续时间、Animations are heavily configurable. Custom and predefined easing functions, delays, durations, decay factors, spring constants, and more can all be tweaked depending on the type of animation.
+动画拥有非常灵活的配置项。自定义的或预定义的easing函数、延迟、持续时间、衰减系数、Animations are heavily configurable. Custom and predefined easing functions, delays, durations, decay factors, spring constants, and more can all be tweaked depending on the type of animation.
 
-`Animated` provides several animation types, the most commonly used one being [`Animated.timing()`](animated.html#timing).
+`Animated`提供了多种动画类型，其中最常用的要属[`Animated.timing()`](animated.html#timing)。
 It supports animating a value over time using one of various predefined easing functions, or you can use your own.
 Easing functions are typically used in animation to convey gradual acceleration and deceleration of objects.
 
@@ -229,16 +228,14 @@ This does influence the API, so keep that in mind when it seems a little trickie
 Check out `Animated.Value.addListener` as a way to work around some of these limitations,
 but use it sparingly since it might have performance implications in the future.
 
-### Using the native driver
+### 使用原生动画驱动
 
-The `Animated` API is designed to be serializable.
-By using the [native driver](http://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html),
-we send everything about the animation to native before starting the animation,
-allowing native code to perform the animation on the UI thread without having to go through the bridge on every frame.
-Once the animation has started, the JS thread can be blocked without affecting the animation.
+`Animated`的API是可序列化的（即可转化为字符串表达以便通信或存储）。  
+通过启用[原生驱动](http://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html)，我们在启动动画前就把其所有配置信息都发送到原生端，利用原生代码在UI线程执行动画，而不用每一帧都在两端间来回沟通。
+如此一来，动画一开始就完全脱离了JS线程，因此此时即便JS线程被卡住，也不会影响到动画了。
 
-Using the native driver for normal animations is quite simple.
-Just add `useNativeDriver: true` to the animation config when starting it.
+在动画中启用原生驱动非常简单。
+只需在开始动画之前，在动画配置中加入一行`useNativeDriver: true`，如下所示：
 
 ```javascript
 Animated.timing(this.state.animatedValue, {
@@ -248,16 +245,15 @@ Animated.timing(this.state.animatedValue, {
 }).start();
 ```
 
-Animated values are only compatible with one driver so if you use native driver when starting an animation on a value,
-make sure every animation on that value also uses the native driver.
+动画值在不同的驱动方式之间是不能兼容的。因此如果你在某个动画中启用了原生驱动，那么所有和此动画依赖相同动画值的其他动画也必须启用原生驱动。
 
-The native driver also works with `Animated.event`.
+原生驱动还可以在`Animated.event`中使用。
 This is specially useful for animations that follow the scroll position as without the native driver,
 the animation will always run a frame behind the gesture due to the async nature of React Native.
 
 ```javascript
-<Animated.ScrollView // <-- Use the Animated ScrollView wrapper
-  scrollEventThrottle={1} // <-- Use 1 here to make sure no events are ever missed
+<Animated.ScrollView // <-- 使用Animated ScrollView wrapper
+  scrollEventThrottle={1} // <-- 设为1以确保滚动事件的触发频率足够密集
   onScroll={Animated.event(
     [{ nativeEvent: { contentOffset: { y: this.state.animatedValue } } }],
     { useNativeDriver: true } // <-- 加上这一行

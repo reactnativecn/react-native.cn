@@ -71,7 +71,7 @@ android {
 $ cd android && ./gradlew assembleRelease
 ```
 
-译注：cd android表示进入android目录（如果你已经在android目录中了那就不用输入了）。`./gradlew assembleRelease`在macOS和Linux系统中表示执行当前目录下的名为gradlew的脚本文件，运行参数为assembleRelease，注意这个`./`不可省略；而在windows命令行下则需要去掉`./`。
+译注：cd android表示进入android目录（如果你已经在android目录中了那就不用输入了）。`./gradlew assembleRelease`在macOS、Linux或是windows的PowerShell环境中表示执行当前目录下的名为gradlew的脚本文件，且其运行参数为assembleRelease，注意这个`./`不可省略；而在windows的传统CMD命令行下则需要去掉`./`。
 
 Gradle的`assembleRelease`参数会把所有用到的JavaScript代码都打包到一起，然后内置到APK包中。如果你想调整下这个行为（比如js代码以及静态资源打包的默认文件名或是目录结构等），可以看看`android/app/build.gradle`文件，然后琢磨下应该怎么修改以满足你的需求。 
 
