@@ -96,7 +96,13 @@ class MyList extends React.PureComponent {
             class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
                                                                            href="#itemseparatorcomponent">#</a>
     </h4>
-        <div><p>行与行之间的分隔线组件。不会出现在第一行之前和最后一行之后。</p></div>
+        <div><p>行与行之间的分隔线组件。不会出现在第一行之前和最后一行之后。</p></div>
+    </div>
+<div class="prop"><h4 class="propTitle"><a class="anchor" name="listEmptyComponent"></a>ListEmptyComponent?: <span
+            class="propType"><code>?ReactClass&lt;any&gt; | React.Element&lt;any&gt;</code></span> <a class="hash-link"
+                                                                           href="#listEmptyComponent">#</a>
+    </h4>
+<div><p>列表为空时渲染该组件。可以是React Component, 也可以是一个render函数， 或者渲染好的element。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="listfootercomponent"></a>ListFooterComponent?: <span
             class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
