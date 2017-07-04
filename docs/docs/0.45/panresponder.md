@@ -46,7 +46,7 @@ onPanResponderMove: (event, gestureState) => {}
       onPanResponderGrant: (evt, gestureState) => {
         // 开始手势操作。给用户一些视觉反馈，让他们知道发生了什么事情！
 
-        // gestureState.{x,y}0 现在会被设置为0
+        // gestureState.{x,y} 现在会被设置为0
       },
       onPanResponderMove: (evt, gestureState) => {
         // 最近一次的移动距离为gestureState.move{X,Y}

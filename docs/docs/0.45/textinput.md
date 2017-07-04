@@ -275,7 +275,7 @@ AppRegistry.registerComponent(
     <div class="prop">
     	<h4 class="propTitle"><a class="anchor" name="selection"></a>selection <span class="propType">{start: number, end: number}</span> <a class="hash-link" href="#selection">#</a></h4>
     	<div>
-    		<p>The start and end of the text input's selection. Set start and end to the same value to position the cursor.</p>
+    		<p>设置选中文字的范围（指定首尾的索引值）。如果首尾为同一索引位置，则相当于指定光标的位置。</p>
 		</div>
 	</div>
     <div class="prop">
@@ -309,11 +309,11 @@ AppRegistry.registerComponent(
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="inlineimageleft"></a><span class="platform">android</span>inlineImageLeft <span class="propType">string</span> <a class="hash-link" href="#inlineimageleft">#</a></h4>
-		<div><p>If defined, the provided image resource will be rendered on the left.</p></div>
+		<div><p>指定一个图片放置在左侧。</p></div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="inlineimagepadding"></a><span class="platform">android</span>inlineImagePadding <span class="propType">number</span> <a class="hash-link" href="#inlineimagepadding">#</a></h4>
-		<div><p>Padding between the inline image, if any, and the text input itself.</p></div>
+		<div><p>给放置在左侧的图片设置padding样式。</p></div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="returnkeylabel"></a><span class="platform">android</span>returnKeyLabel <span class="propType">string</span> <a class="hash-link" href="#returnkeylabel">#</a></h4>

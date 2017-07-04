@@ -11,13 +11,14 @@ Animated.timing(                            // Animate value over time
 ).start();                                  // Start the animation
 ```
 
-Refer to the [动画](animations.html)文档 guide to see additional examples of Animated in action.
+你可以在[动画](animations.html)文档中看到更多实际的例子。
 
 ## 概览
-There are two value types you can use with `Animated`:  
 
-- `Animated.Value()` for single values  
-- `Animated.ValueXY()` for vectors  
+`Animated`提供了两种类型的值：  
+
+- `Animated.Value()`用于单个值 
+- `Animated.ValueXY()`用于矢量值 
 
 `Animated.Value` can bind to style properties or other props, and can be interpolated as well. A single `Animated.Value` can drive any number of properties.
 
@@ -125,10 +126,9 @@ For example, when working with horizontal scrolling gestures, you would do the f
 			<p>推动一个值按照一个过渡曲线而随时间变化。<code>Easing</code>模块定义了一大堆曲线，你也可以使用你自己的函数。</p>
 			<p>Config参数有以下这些属性：</p>
 			<ul>
-				<li><code>duration</code>: Length of animation (milliseconds).  Default 500.</li>
-				<li><code>easing</code>: Easing function to define curve.
-	Default is <code>Easing.inOut(Easing.ease)</code>.</li>
-				<li><code>delay</code>: Start the animation after delay (milliseconds).  Default 0.</li>
+				<li><code>duration</code>: 动画的持续时间（毫秒）。默认值为500.</li>
+				<li><code>easing</code>: Easing function to define curve。默认值为<code>Easing.inOut(Easing.ease)</code>.</li>
+				<li><code>delay</code>: 开始动画前的延迟时间（毫秒）。默认为0.</li>
 				<li><code>useNativeDriver</code>: 使用原生动画驱动。默认不启用(false)。</li>
 			</ul>
 		</div>
