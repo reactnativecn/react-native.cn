@@ -111,12 +111,16 @@ yarn config set registry https://registry.npm.taobao.org --global
 yarn config set disturl https://npm.taobao.org/dist --global
 ```
 
-
 如果你看到`EACCES: permission denied`这样的权限报错，那么请参照上文的homebrew译注，修复`/usr/local`目录的所有权：  
 
 ```bash
 sudo chown -R `whoami` /usr/local
 ```
+
+
+安装完yarn之后就可以用yarn代替npm了，例如用`yarn`代替`npm install`命令，用`yarn add 某第三方库名`代替`npm install --save 某第三方库名`。
+
+> 注意：目前npm5（发文时最新版本为5.0.4）存在安装新库时会删除其他库的问题，导致项目无法正常运行。请尽量使用yarn代替npm操作。
 
 </div><div markdown class="md-block mac ios">
 
@@ -325,6 +329,11 @@ yarn config set disturl https://npm.taobao.org/dist --global
 
 > 如果你遇到`EACCES: permission denied`权限错误，可以尝试运行下面的命令（限linux系统）：
 > `sudo npm install -g yarn react-native-cli`.
+
+安装完yarn之后就可以用yarn代替npm了，例如用`yarn`代替`npm install`命令，用`yarn add 某第三方库名`代替`npm install --save 某第三方库名`。
+
+> 注意：目前npm5（发文时最新版本为5.0.4）存在安装新库时会删除其他库的问题，导致项目无法正常运行。请尽量使用yarn代替npm操作。
+
 
 #### Android Studio
 
