@@ -1,3 +1,6 @@
+
+**此组件已过期** - 请使用[`FlatList`](flatlist.html)或[`SectionList`](sectionlist.html)代替。
+
 ListView - 一个核心组件，用于高效地显示一个可以垂直滚动的变化的数据列表。最基本的使用方式就是创建一个`ListView.DataSource`数据源，然后给它传递一个普通的数据数组，再使用数据源来实例化一个`ListView`组件，并且定义它的`renderRow`回调函数，这个函数会接受数组中的每个数据作为参数，返回一个可渲染的组件（作为listview的每一行）。
 
 最简单的例子：

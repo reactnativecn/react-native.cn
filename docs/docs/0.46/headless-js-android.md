@@ -39,6 +39,13 @@ public class MyTaskService extends HeadlessJsTaskService {
 }
 ```
 
+然后记得把服务添加到`AndroidManifest`文件里：
+ 
+ ```
+ <service android:name="com.example.MyTaskService" />
+ ```
+
+
 好了，现在当你[启动服务时][0]（例如一个周期性的任务或是响应一些系统事件/广播），JS任务就会开始执行。
 
 ## 注意事项
