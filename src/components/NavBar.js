@@ -12,7 +12,7 @@ import {
 
 import './NavBar.less';
 import versions from '../../docs/versions.json';
-import ViewRecords from './ViewRecords';
+// import ViewRecords from './ViewRecords';
 import Subscribe from './Subscribe';
 
 import imageHot from './images/hot.png';
@@ -48,7 +48,7 @@ export default class MyNavBar extends React.Component {
     if (v.isHidden && v.isHidden()) {
       return null;
     }
-    const { viewRecords } = this.state;
+    // const { viewRecords } = this.state;
     const external = /^\w+:/.test(v.href);
 
     const newTab = v.newTab !== null ? v.newTab : external;
@@ -67,20 +67,20 @@ export default class MyNavBar extends React.Component {
       <LinkContainer to={v.href} onClick={v.onClick || this.noop} key={v.section}>
         <NavItem>
           {v.text}
-          {viewRecords && v.checkViewed && !!viewRecords[v.checkViewed].left && <Badge />}
+          {/*{viewRecords && v.checkViewed && !!viewRecords[v.checkViewed].left && <Badge />}*/}
           {v.hot && <div className="hotSign"><img src={imageHot} alt="hot" /></div>}
         </NavItem>
       </LinkContainer>
     );
   }
   state = {};
-  updateViewRecords = (viewRecords) => {
-    this.setState({
-      viewRecords
-    });
-  };
+  // updateViewRecords = (viewRecords) => {
+  //   this.setState({
+  //     viewRecords
+  //   });
+  // };
   componentDidMount() {
-    ViewRecords.updateVideosLeft();
+    // ViewRecords.updateVideosLeft();
   }
   goToDoc = (version) =>
     () => this.context.router.push(`/docs/${version}/getting-started.html`);
@@ -137,7 +137,7 @@ export default class MyNavBar extends React.Component {
           </Navbar.Collapse>
         </Navbar>
         <div className="navbar-placeholder" />
-        <Subscribe target={ViewRecords.event} eventName="update" listener={this.updateViewRecords} />
+        {/*<Subscribe target={ViewRecords.event} eventName="update" listener={this.updateViewRecords} />*/}
       </div>
     );
   }
