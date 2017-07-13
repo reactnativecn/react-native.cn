@@ -147,9 +147,10 @@ AppRegistry.registerComponent(
             <p>决定弹出的何种软键盘的，譬如<code>numeric</code>（纯数字键盘）。</p>
             <p>这些值在所有平台都可用：</p>
             <ul>
-            <li>default</li>
-            <li>numeric</li>
-            <li>email-address</li>
+	            <li>default</li>
+	            <li>numeric</li>
+	            <li>email-address</li>
+	            <li>phone-pad</li>
             </ul>
         </div>
     </div>
