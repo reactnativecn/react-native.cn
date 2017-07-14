@@ -20,7 +20,8 @@ import imageLogo from './images/header_logo.png';
 
 const linksInternal = [
   { section: 'docs', href: `/docs/${versions.current}/getting-started.html`, text: '文档' },
-  { section: '122live', href: '/post/3337', text: '1.22直播', hot: true },
+  { section: 'course', href: 'https://ke.qq.com/course/197101', text: '入门课程', hot: true, newTab: true  },
+  // { section: 'live', href: '/post/3376', text: '3.5直播', hot: true },
   { section: 'cases', href: '/cases.html', text: '案例' },
   { section: 'blog', href: '/blog.html', text: '博客' },
   { section: 'videos', href: '//i.youku.com/i/UMzM5ODI5MDA4MA==/videos', text: '视频', newTab: true },
