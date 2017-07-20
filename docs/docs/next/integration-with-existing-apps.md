@@ -204,13 +204,14 @@ target 'NumberTileGame' do
   # 但是如果你的结构不同，那你就要根据实际路径修改下面的`:path`
   pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',
+    'CxxBridge', # 如果RN版本 >= 0.47则加入此行
     'DevSupport', # 如果RN版本 >= 0.43，则需要加入此行才能开启开发者菜单
     'RCTText',
     'RCTNetwork',
     'RCTWebSocket', # 这个模块是用于调试功能的
     # 在这里继续添加你所需要的模块
   ]
-  # 如果你的RN版本 >= 0.42.0，请加入下面这行
+  # 如果你的RN版本 >= 0.42.0，则加入下面这行
   pod "Yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
   
 end
@@ -350,7 +351,7 @@ AppRegistry.registerComponent('RNHighScores', () => RNHighScores);
 
 > `RNHighScores`是整体js模块（即你所有的js代码）的名称。你在iOS原生代码中添加React Native视图时会用到这个名称。
 
-## The Magic: `RCTRootView`
+## 掌握核心科技： `RCTRootView`
 
 现在我们已经在`index.ios.js`中创建了React Native组件，下一步就是把这个组件添加给一个新的或已有的`ViewController`。 The easiest path to take is to optionally create an event path to your component and then add that component to an existing `ViewController`.
 

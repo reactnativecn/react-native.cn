@@ -124,9 +124,9 @@ Animated.sequence([            // 首先执行decay动画，结束后同时执�
 
 You can find a full list of composition methods in the [Composing animations](animated.html#composing-animations) section of the `Animated` API reference.
 
-### 联动多个动画值
+### 合成动画值
 
-You can [combine two animated values](animated.html#combining-animated-values) via addition, multiplication, division, or modulo to make a new animated value.
+你可以使用加减乘除以及取余等运算来[把两个动画值合成为一个新的动画值](animated.html#合成动画值)。
 
 There are some cases where an animated value needs to invert another animated value for calculation.
 An example is inverting a scale (2x --> 0.5x):
@@ -140,7 +140,7 @@ Animated.spring(a, {
 }).start();
 ```
 
-### 插值（Interpolation）
+### 插值
 
 `Animated` API还有一个很强大的部分就是`interpolate`插值函数。它可以接受一个输入区间，然后将其映射到另一个的输出区间。下面是一个一个简单的从0-1区间到0-100区间的映射示例：
 

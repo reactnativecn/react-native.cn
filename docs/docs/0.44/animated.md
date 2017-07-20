@@ -1,60 +1,109 @@
-动画是现代用户体验中非常重要的一个部分，`Animated`库就是用来创造流畅、强大、并且易于构建和维护的动画。
+The `Animated` library is designed to make animations fluid, powerful, and easy to build and maintain. `Animated` focuses on declarative relationships between inputs and outputs, with configurable transforms in between, and simple `start/stop` methods to control time-based animation execution.
 
-最简单的工作流程就是创建一个`Animated.Value`，把它绑定到组件的一个或多个样式属性上。然后可以通过动画驱动它，譬如`Animated.timing`，或者通过`Animated.event`把它关联到一个手势上，譬如拖动或者滑动操作。除了样式，`Animated.value`还可以绑定到props上，并且一样可以被插值。这里有一个简单的例子，一个容器视图会在加载的时候淡入显示：
-
-```javascript
-class FadeInView extends React.Component {
-   constructor(props) {
-     super(props);
-     this.state = {
-       fadeAnim: new Animated.Value(0), // init opacity 0
-     };
-   }
-   componentDidMount() {
-     Animated.timing(          // Uses easing functions
-       this.state.fadeAnim,    // The value to drive
-       {toValue: 1},           // Configuration
-     ).start();                // Don't forget start!
-   }
-   render() {
-     return (
-       <Animated.View          // Special animatable View
-         style={{opacity: this.state.fadeAnim}}> // Binds
-         {this.props.children}
-       </Animated.View>
-     );
-   }
- }
-```
-
-
-注意只有声明为可动画化的组件才能被关联动画。`View`、`Text`，还有`Image`都是可动画化的。如果你想让自定义组件可动画化，可以用`createAnimatedComponent`。这些特殊的组件里面用了一些黑魔法，来把动画数值绑定到属性上，然后在每帧去执行原生更新，来避免每次render和同步过程的开销。他们还处理了在节点卸载时的清理工作以确保使用安全。
-
-动画具备很强的可配置性。自定义或者预定义的过渡函数、延迟、时间、衰减比例、刚度等等。取决于动画类型的不同，你还可以配置更多的参数。
-
-一个`Animated.Value`可以驱动任意数量的属性，并且每个属性可以配置一个不同的插值函数。插值函数把一个输入的范围映射到输出的范围，通常我们用线性插值，不过你也可以使用其他的过渡函数。默认情况下，当输入超出范围时，它也会对应的进行转换，不过你也可以把输出约束到范围之内。 
-
-举个例子，你可能希望你的`Animated.Value`从0变化到1时，把组件的位置从150px移动到0px，不透明度从0到1。可以通过以下的方法修改`style`属性来实现：
+The simplest workflow for creating an animation is to to create an `Animated.Value`, hook it up to one or more style attributes of an animated component, and then drive updates via animations using `Animated.timing()`:
 
 ```javascript
- style={{
-   opacity: this.state.fadeAnim, // Binds directly
-   transform: [{
-     translateY: this.state.fadeAnim.interpolate({
-       inputRange: [0, 1],
-       outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
-     }),
-   }],
- }}>
+Animated.timing(                            // Animate value over time
+  this.state.fadeAnim,                      // The value to drive
+  {
+    toValue: 1,                             // Animate to final value of 1
+  }
+).start();                                  // Start the animation
 ```
 
-动画还可以被更复杂地组合，通过一些辅助函数例如`sequence`或者`parallel`（它们分别用于先后执行多个动画和同时执行多个动画），而且还可以通过把toValue设置为另一个Animated.Value来产生一个动画序列。
+你可以在[动画](animations.html)文档中看到更多实际的例子。
 
-`Animated.ValueXY`则用来处理一些2D动画，譬如滑动。并且还有一些辅助功能譬如`setOffset`和`getLayout`来帮助实现一些常见的交互效果，譬如拖放操作(Drag and drop)。
+## 概览
 
-你可以在`AnimationExample.js`中找到一些更复杂的例子。你还可以看看Gratuitous Animation App，以及[动画指南文档](animations.html)。
+`Animated`提供了两种类型的值：  
 
-注意`Animated`模块被设计为可完全序列化的，这样动画可以脱离JavaScript事件循环，以一种高性能的方式运行。这可能会导致API看起来比较难懂，与一个完全同步的动画系统相比稍微有一些奇怪。`Animated.Value.addListener`可以帮助你解决一些相关限制，不过使用它的时候需要小心，因为将来的版本中它可能会牵扯到性能问题。
+- `Animated.Value()`用于单个值 
+- `Animated.ValueXY()`用于矢量值 
+
+`Animated.Value`可以绑定到样式或是其他属性上，也可以进行插值运算。单个`Animated.Value`可以用在任意多个属性上。
+
+### 配置动画
+
+`Animated`提供了三种动画类型。每种动画类型都提供了特定的函数曲线，用于控制动画值从初始值变化到最终值的变化过程：
+
+- `Animated.decay()`以指定的初始速度开始变化，然后变化速度越来越慢直至停下。 starts with an initial velocity and gradually slows to a stop.
+- `Animated.spring()` provides a simple spring physics model.
+- `Animated.timing()` animates a value over time using [easing函数](easing.html).
+
+大多数情况下你应该使用`timing()`。By default, it uses a symmetric easeInOut curve that conveys the gradual acceleration of an object to full speed and concludes by gradually decelerating to a stop.
+
+### 使用动画 
+
+Animations are started by calling `start()` on your animation. `start()` takes a completion callback that will be called when the animation is done. If the animation finished running normally, the completion callback will be invoked with `{finished: true}`. If the animation is done because `stop()` was called on it before it could finish (e.g. because it was interrupted by a gesture or another animation), then it will receive `{finished: false}`.
+
+### 使用原生动画驱动
+
+By using the native driver, we send everything about the animation to native before starting the animation, allowing native code to perform the animation on the UI thread without having to go through the bridge on every frame. Once the animation has started, the JS thread can be blocked without affecting the animation.
+
+You can use the native driver by specifying `useNativeDriver: true` in your animation configuration. 你可以在[动画文档](animations.html#使用原生动画驱动) 中看到更详细的解释。
+
+### 自定义动画组件 
+
+组件必须经过特殊处理才能用于动画。所谓的特殊处理主要是指把动画值绑定到属性上，并且在一帧帧执行动画时避免react重新渲染和重新调和的开销。此外还得在组件卸载时做一些清理工作，使得这些组件在使用时是安全的。
+
+- `createAnimatedComponent()`方法正是用来处理组件，使其可以用于动画。
+
+`Animated`中默认导出了以下这些可以直接使用的动画组件，当然它们都是通过使用上面这个方法进行了封装：
+
+- `Animated.Image`
+- `Animated.ScrollView`
+- `Animated.Text`
+- `Animated.View`
+
+### 组合动画 
+
+Animations can also be combined in complex ways using composition functions:
+
+- `Animated.delay()` starts an animation after a given delay.
+- `Animated.parallel()` starts a number of animations at the same time.
+- `Animated.sequence()` starts the animations in order, waiting for each to complete before starting the next.
+- `Animated.stagger()` starts animations in order and in parallel, but with successive delays.
+
+Animations can also be chained together simply by setting the `toValue` of one animation to be another `Animated.Value`. See [跟踪动态值](animations.html#跟踪动态值) values in the Animations guide.
+
+By default, if one animation is stopped or interrupted, then all other animations in the group are also stopped.
+
+### 合成动画值 
+
+你可以使用加减乘除以及取余等运算来把两个动画值合成为一个新的动画值。
+
+- `Animated.add()`
+- `Animated.divide()`
+- `Animated.modulo()`
+- `Animated.multiply()`
+
+### 插值 
+
+The `interpolate()` function allows input ranges to map to different output ranges. By default, it will extrapolate the curve beyond the ranges given, but you can also have it clamp the output value. It uses lineal interpolation by default but also supports easing functions.
+
+- `interpolate()`
+
+你可以在[动画](animations.html#插值)文档中了解到更多。
+
+### 处理手势和其他事件 
+
+Gestures, like panning or scrolling, and other events can map directly to animated values using `Animated.event()`. This is done with a structured map syntax so that values can be extracted from complex event objects. The first level is an array to allow mapping across multiple args, and that array contains nested objects.
+
+- `Animated.event()`
+
+For example, when working with horizontal scrolling gestures, you would do the following in order to map `event.nativeEvent.contentOffset.x` to `scrollX` (an `Animated.Value`):
+
+```javascript
+ onScroll={Animated.event(
+   // scrollX = e.nativeEvent.contentOffset.x
+   [{ nativeEvent: {
+        contentOffset: {
+          x: scrollX
+        }
+      }
+    }]
+ )}
+```
 
 ### 方法
 
@@ -63,24 +112,69 @@ class FadeInView extends React.Component {
 		<h4 class="propTitle"><a class="anchor" name="decay"></a><span class="propType">static </span>decay<span class="propType">(value: AnimatedValue | AnimatedValueXY, config: DecayAnimationConfig)</span> <a class="hash-link" href="#decay">#</a></h4>
 		<div>
 			<p>推动一个值以一个初始的速度和一个衰减系数逐渐变为0。</p>
+			<p>Config参数有以下这些属性：</p>
+			<ul>
+				<li><code>velocity</code>: 初始速度。必填。</li>
+				<li><code>deceleration</code>: 衰减系数。默认值0.997。</li>
+				<li><code>useNativeDriver</code>: 使用原生动画驱动。默认不启用(false)。</li>
+			</ul>
 		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="timing"></a><span class="propType">static </span>timing<span class="propType">(value: AnimatedValue | AnimatedValueXY, config: TimingAnimationConfig)</span> <a class="hash-link" href="#timing">#</a></h4>
 		<div>
 			<p>推动一个值按照一个过渡曲线而随时间变化。<code>Easing</code>模块定义了一大堆曲线，你也可以使用你自己的函数。</p>
+			<p>Config参数有以下这些属性：</p>
+			<ul>
+				<li><code>duration</code>: 动画的持续时间（毫秒）。默认值为500.</li>
+				<li><code>easing</code>: Easing function to define curve。默认值为<code>Easing.inOut(Easing.ease)</code>.</li>
+				<li><code>delay</code>: 开始动画前的延迟时间（毫秒）。默认为0.</li>
+				<li><code>useNativeDriver</code>: 使用原生动画驱动。默认不启用(false)。</li>
+			</ul>
 		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="spring"></a><span class="propType">static </span>spring<span class="propType">(value: AnimatedValue | AnimatedValueXY, config: SpringAnimationConfig)</span> <a class="hash-link" href="#spring">#</a></h4>
 		<div>
 			<p>产生一个基于Rebound和Origami实现的Spring动画。它会在<code>toValue</code>值更新的同时跟踪当前的速度状态，以确保动画连贯。可以链式调用。</p>
+			<p>Config参数有以下这些属性（注意你不能同时定义bounciness/speed和 tension/friction这两组，只能指定其中一组）：</p>
+			<ul>
+				<li><code>friction</code>: Controls "bounciness"/overshoot.  Default 7.</li>
+				<li><code>tension</code>: Controls speed.  Default 40.</li>
+				<li><code>speed</code>: Controls speed of the animation. Default 12.</li>
+				<li><code>bounciness</code>: Controls bounciness. Default 8.</li>
+				<li><code>useNativeDriver</code>: 使用原生动画驱动。默认不启用(false)。</li>
+			</ul>
 		</div>
 	</div>
-	<div class="prop"><h4 class="propTitle"><a class="anchor" name="add"></a><span class="propType">static </span>add<span class="propType">(a: Animated, b: Animated)</span> <a class="hash-link" href="#add">#</a></h4><div>
-	<p>将两个动画值相加计算，创建一个新的动画值。</p></div></div>
-<div class="prop"><h4 class="propTitle"><a class="anchor" name="multiply"></a><span class="propType">static </span>multiply<span class="propType">(a: Animated, b: Animated)</span> <a class="hash-link" href="#multiply">#</a></h4><div>
-<p>将两个动画值相乘计算，创建一个新的动画值。</p></div></div>
+	<div class="prop"><h4 class="propTitle"><a class="anchor" name="add"></a><span class="propType">static </span>add<span class="propType">(a: Animated, b: Animated)</span> <a class="hash-link" href="#add">#</a></h4>
+		<div>
+		<p>将两个动画值相加计算，得出一个新的动画值。</p>
+		</div>
+	</div>
+	<div class="prop"><h4 class="propTitle"><a class="anchor" name="divide"></a><span class="propType">static </span>divide<span class="propType">(a: Animated, b: Animated)</span> <a class="hash-link" href="#divide">#</a></h4>
+		<div>
+		<p>将两个动画值相除计算，得出一个新的动画值。</p>
+		</div>
+	</div>
+	<div class="prop"><h4 class="propTitle"><a class="anchor" name="multiply"></a><span class="propType">static </span>multiply<span class="propType">(a: Animated, b: Animated)</span> <a class="hash-link" href="#multiply">#</a></h4>
+		<div>
+		<p>将两个动画值相乘计算，得出一个新的动画值。</p>
+		</div>
+	</div>
+	<div class="prop"><h4 class="propTitle"><a class="anchor" name="modulo"></a><span class="propType">static </span>modulo<span class="propType">(a: Animated, b: Animated)</span> <a class="hash-link" href="#modulo">#</a></h4>
+		<div>
+		<p>将两个动画值做取模（取余数）计算，得出一个新的动画值。</p>
+		</div>
+	</div>
+	<div class="prop">
+		<h4 class="methodTitle"><a class="anchor" name="diffclamp"></a><span class="methodType">static </span>diffClamp<span class="methodType">(a, min, max)</span> <a class="hash-link" href="#diffclamp">#</a></h4>
+		<div>
+		<p>Create a new Animated value that is limited between 2 values. It uses the difference between the last value so even if the value is far from the bounds it will start changing when the value starts getting closer again. (<code>value = clamp(value + diff, min, max)</code>).</p>
+		<p>This is useful with scroll events, for example, to show the navbar when
+		scrolling up and to hide it when scrolling down.</p>
+		</div>
+	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="delay"></a><span class="propType">static </span>delay<span class="propType">(time: number)</span> <a class="hash-link" href="#delay">#</a></h4>
 		<div>
@@ -106,6 +200,12 @@ class FadeInView extends React.Component {
 		</div>
 	</div>
 	<div class="prop">
+	<h4 class="methodTitle"><a class="anchor" name="loop"></a><span class="methodType">static </span>loop<span class="methodType">(animation)</span> <a class="hash-link" href="#loop">#</a></h4>
+		<div><p>Loops a given animation continuously, so that each time it reaches the end, it resets and begins again from the start. Can specify number of
+		times to loop using the key 'iterations' in the config. Will loop without
+		blocking the UI thread if the child animation is set to 'useNativeDriver'.</p></div>
+	</div>
+	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="event"></a><span class="propType">static </span>event<span class="propType">(argMapping: Array&lt;Mapping&gt;, config?: EventConfig)</span> <a class="hash-link" href="#event">#</a></h4>
 		<div>
 			<p>接受一个映射的数组，对应的解开每个值，然后调用所有对应的输出的<code>setValue</code>方法。例如：</p>
@@ -127,7 +227,17 @@ class FadeInView extends React.Component {
 			<p>使得任何一个React组件支持动画。用它来创建<code>Animated.View</code>等等。</p>
 		</div>
 	</div>
-</div>
+	<div class="prop"><h4 class="methodTitle"><a class="anchor" name="attachnativeevent"></a><span class="methodType">static </span>attachNativeEvent<span class="methodType">(viewRef, eventName, argMapping)</span> <a class="hash-link" href="#attachnativeevent">#</a></h4>
+		<div><p>Imperative API to attach an animated value to an event on a view. Prefer using
+	<code>Animated.event</code> with <code>useNativeDrive: true</code> if possible.</p></div>
+	</div>
+	<div class="prop"><h4 class="methodTitle"><a class="anchor" name="forkevent"></a><span class="methodType">static </span>forkEvent<span class="methodType">(event, listener)</span> <a class="hash-link" href="#forkevent">#</a></h4>
+		<div><p>Advanced imperative API for snooping on animated events that are passed in through props. Use
+		values directly where possible.</p>
+		</div>
+	</div>
+	<div class="prop"><h4 class="methodTitle"><a class="anchor" name="unforkevent"></a><span class="methodType">static </span>unforkEvent<span class="methodType">(event, listener)</span> <a class="hash-link" href="#unforkevent">#</a></h4></div>
+	</div>
 
 ### 属性
 
@@ -142,6 +252,12 @@ class FadeInView extends React.Component {
 		<h4 class="propTitle"><a class="anchor" name="valuexy"></a>ValueXY<span class="propType">: AnimatedValueXY</span> <a class="hash-link" href="#valuexy">#</a></h4>
 		<div>
 			<p>表示一个2D值的类，用来驱动2D动画，例如拖动操作等。</p>
+		</div>
+	</div>
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="interpolation"></a>Interpolation<span class="propType">: AnimatedInterpolation</span> <a class="hash-link" href="#interpolation">#</a></h4>
+		<div>
+		<p>exported to use the Interpolation type in flow</p><p>See also <a href="animated.html#animatedinterpolation" target="_blank"><code>AnimatedInterpolation</code></a>.</p>
 		</div>
 	</div>
 </div>
@@ -175,6 +291,12 @@ class FadeInView extends React.Component {
 		</div>
 	</div>
 	<div class="prop">
+		<h4 class="methodTitle"><a class="anchor" name="extractoffset"></a>extractOffset<span class="methodType">()</span> <a class="hash-link" href="#extractoffset">#</a></h4>
+		<div>
+		<p>Sets the offset value to the base value, and resets the base value to zero. The final output of the value is unchanged.</p>
+		</div>
+	</div>
+	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="addlistener"></a>addListener<span class="propType">(callback: ValueListenerCallback)</span> <a class="hash-link" href="#addlistener">#</a></h4>
 		<div>
 			<p>添加一个异步监听函数，这样你就可以监听动画值的变更。这有时候很有用，因为你没办法同步的读取动画的当前值，因为有时候动画会在原生层次运行。</p>
@@ -191,6 +313,10 @@ class FadeInView extends React.Component {
 		<div>
 			<p>停止任何正在运行的动画或跟踪值。<code>callback</code>会被调用，参数是动画结束后的最终值，这个值可能会用于同步更新状态与动画位置。</p>
 		</div>
+	</div>
+	<div class="prop">
+		<h4 class="methodTitle"><a class="anchor" name="resetanimation"></a>resetAnimation<span class="methodType">(callback?)</span> <a class="hash-link" href="#resetanimation">#</a></h4>
+		<div><p>Stops any animation and resets the value to its original</p></div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="interpolate"></a>interpolate<span class="propType">(config: InterpolationConfigType)</span> <a class="hash-link" href="#interpolate">#</a></h4>
@@ -308,228 +434,14 @@ class DraggableView extends React.Component {
 	</div>
 </div>
 
- ### 例子
 
- ```javascript
-'use strict';
+## class AnimatedInterpolation
 
-var React = require('react');
-var ReactNative = require('react-native');
-var {
-  Animated,
-  Easing,
-  StyleSheet,
-  Text,
-  View,
-} = ReactNative;
-var RNTesterButton = require('./RNTesterButton');
+### 方法
 
-exports.framework = 'React';
-exports.title = 'Animated - Examples';
-exports.description = 'Animated provides a powerful ' +
-  'and easy-to-use API for building modern, ' +
-  'interactive user experiences.';
-
-exports.examples = [
-  {
-    title: 'FadeInView',
-    description: 'Uses a simple timing animation to ' +
-      'bring opacity from 0 to 1 when the component ' +
-      'mounts.',
-    render: function() {
-      class FadeInView extends React.Component {
-        state: any;
-
-        constructor(props) {
-          super(props);
-          this.state = {
-            fadeAnim: new Animated.Value(0), // opacity 0
-          };
-        }
-        componentDidMount() {
-          Animated.timing(       // Uses easing functions
-            this.state.fadeAnim, // The value to drive
-            {
-              toValue: 1,        // Target
-              duration: 2000,    // Configuration
-            },
-          ).start();             // Don't forget start!
-        }
-        render() {
-          return (
-            <Animated.View   // Special animatable View
-              style={{
-                opacity: this.state.fadeAnim,  // Binds
-              }}>
-              {this.props.children}
-            </Animated.View>
-          );
-        }
-      }
-      class FadeInExample extends React.Component {
-        state: any;
-
-        constructor(props) {
-          super(props);
-          this.state = {
-            show: true,
-          };
-        }
-        render() {
-          return (
-            <View>
-              <RNTesterButton onPress={() => {
-                  this.setState((state) => (
-                    {show: !state.show}
-                  ));
-                }}>
-                Press to {this.state.show ?
-                  'Hide' : 'Show'}
-              </RNTesterButton>
-              {this.state.show && <FadeInView>
-                <View style={styles.content}>
-                  <Text>FadeInView</Text>
-                </View>
-              </FadeInView>}
-            </View>
-          );
-        }
-      }
-      return <FadeInExample />;
-    },
-  },
-  {
-    title: 'Transform Bounce',
-    description: 'One `Animated.Value` is driven by a ' +
-      'spring with custom constants and mapped to an ' +
-      'ordered set of transforms.  Each transform has ' +
-      'an interpolation to convert the value into the ' +
-      'right range and units.',
-    render: function() {
-      this.anim = this.anim || new Animated.Value(0);
-      return (
-        <View>
-          <RNTesterButton onPress={() => {
-            Animated.spring(this.anim, {
-              toValue: 0,   // Returns to the start
-              velocity: 3,  // Velocity makes it move
-              tension: -10, // Slow
-              friction: 1,  // Oscillate a lot
-            }).start(); }}>
-            Press to Fling it!
-          </RNTesterButton>
-          <Animated.View
-            style={[styles.content, {
-              transform: [   // Array order matters
-                {scale: this.anim.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [1, 4],
-                })},
-                {translateX: this.anim.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, 500],
-                })},
-                {rotate: this.anim.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [
-                    '0deg', '360deg' // 'deg' or 'rad'
-                  ],
-                })},
-              ]}
-            ]}>
-            <Text>Transforms!</Text>
-          </Animated.View>
-        </View>
-      );
-    },
-  },
-  {
-    title: 'Composite Animations with Easing',
-    description: 'Sequence, parallel, delay, and ' +
-      'stagger with different easing functions.',
-    render: function() {
-      this.anims = this.anims || [1,2,3].map(
-        () => new Animated.Value(0)
-      );
-      return (
-        <View>
-          <RNTesterButton onPress={() => {
-            var timing = Animated.timing;
-            Animated.sequence([ // One after the other
-              timing(this.anims[0], {
-                toValue: 200,
-                easing: Easing.linear,
-              }),
-              Animated.delay(400), // Use with sequence
-              timing(this.anims[0], {
-                toValue: 0,
-                easing: Easing.elastic(2), // Springy
-              }),
-              Animated.delay(400),
-              Animated.stagger(200,
-                this.anims.map((anim) => timing(
-                  anim, {toValue: 200}
-                )).concat(
-                this.anims.map((anim) => timing(
-                  anim, {toValue: 0}
-                ))),
-              ),
-              Animated.delay(400),
-              Animated.parallel([
-                Easing.inOut(Easing.quad), // Symmetric
-                Easing.back(1.5),  // Goes backwards first
-                Easing.ease        // Default bezier
-              ].map((easing, ii) => (
-                timing(this.anims[ii], {
-                  toValue: 320, easing, duration: 3000,
-                })
-              ))),
-              Animated.delay(400),
-              Animated.stagger(200,
-                this.anims.map((anim) => timing(anim, {
-                  toValue: 0,
-                  easing: Easing.bounce, // Like a ball
-                  duration: 2000,
-                })),
-              ),
-            ]).start(); }}>
-            Press to Animate
-          </RNTesterButton>
-          {['Composite', 'Easing', 'Animations!'].map(
-            (text, ii) => (
-              <Animated.View
-                key={text}
-                style={[styles.content, {
-                  left: this.anims[ii]
-                }]}>
-                <Text>{text}</Text>
-              </Animated.View>
-            )
-          )}
-        </View>
-      );
-    },
-  },
-  {
-    title: 'Continuous Interactions',
-    description: 'Gesture events, chaining, 2D ' +
-      'values, interrupting and transitioning ' +
-      'animations, etc.',
-    render: () => (
-      <Text>Checkout the Gratuitous Animation App!</Text>
-    ),
-  }
-];
-
-var styles = StyleSheet.create({
-  content: {
-    backgroundColor: 'deepskyblue',
-    borderWidth: 1,
-    borderColor: 'dodgerblue',
-    padding: 20,
-    margin: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-});
- ```
+<div class="props">
+	<div class="prop"><h4 class="methodTitle"><a class="anchor" name="constructor"></a>constructor<span class="methodType">(parent, config)</span> <a class="hash-link" href="#constructor">#</a></h4>
+	</div>
+	<div class="prop"><h4 class="methodTitle"><a class="anchor" name="interpolate"></a>interpolate<span class="methodType">(config)</span> <a class="hash-link" href="#interpolate">#</a></h4>
+	</div>
+</div>

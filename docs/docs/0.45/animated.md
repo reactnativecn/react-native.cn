@@ -20,42 +20,42 @@ Animated.timing(                            // Animate value over time
 - `Animated.Value()`用于单个值 
 - `Animated.ValueXY()`用于矢量值 
 
-`Animated.Value` can bind to style properties or other props, and can be interpolated as well. A single `Animated.Value` can drive any number of properties.
+`Animated.Value`可以绑定到样式或是其他属性上，也可以进行插值运算。单个`Animated.Value`可以用在任意多个属性上。
 
 ### 配置动画
 
-`Animated` provides three types of animation types. Each animation type provides a particular animation curve that controls how your values animate from their initial value to the final value:
+`Animated`提供了三种动画类型。每种动画类型都提供了特定的函数曲线，用于控制动画值从初始值变化到最终值的变化过程：
 
-- `Animated.decay()` starts with an initial velocity and gradually slows to a stop.
+- `Animated.decay()`以指定的初始速度开始变化，然后变化速度越来越慢直至停下。 starts with an initial velocity and gradually slows to a stop.
 - `Animated.spring()` provides a simple spring physics model.
-- `Animated.timing()` animates a value over time using [easin函数](easing.html).
+- `Animated.timing()` animates a value over time using [easing函数](easing.html).
 
-In most cases, you will be using `timing()`. By default, it uses a symmetric easeInOut curve that conveys the gradual acceleration of an object to full speed and concludes by gradually decelerating to a stop.
+大多数情况下你应该使用`timing()`。By default, it uses a symmetric easeInOut curve that conveys the gradual acceleration of an object to full speed and concludes by gradually decelerating to a stop.
 
-### Working with animations 
+### 使用动画 
 
 Animations are started by calling `start()` on your animation. `start()` takes a completion callback that will be called when the animation is done. If the animation finished running normally, the completion callback will be invoked with `{finished: true}`. If the animation is done because `stop()` was called on it before it could finish (e.g. because it was interrupted by a gesture or another animation), then it will receive `{finished: false}`.
 
-### Using the native driver 
+### 使用原生动画驱动
 
 By using the native driver, we send everything about the animation to native before starting the animation, allowing native code to perform the animation on the UI thread without having to go through the bridge on every frame. Once the animation has started, the JS thread can be blocked without affecting the animation.
 
-You can use the native driver by specifying `useNativeDriver: true` in your animation configuration. See the [Animations](animations.html#使用原生动画驱动) guide to learn more.
+You can use the native driver by specifying `useNativeDriver: true` in your animation configuration. 你可以在[动画文档](animations.html#使用原生动画驱动) 中看到更详细的解释。
 
-### Animatable components 
+### 自定义动画组件 
 
-Only animatable components can be animated. These special components do the magic of binding the animated values to the properties, and do targeted native updates to avoid the cost of the react render and reconciliation process on every frame. They also handle cleanup on unmount so they are safe by default.
+组件必须经过特殊处理才能用于动画。所谓的特殊处理主要是指把动画值绑定到属性上，并且在一帧帧执行动画时避免react重新渲染和重新调和的开销。此外还得在组件卸载时做一些清理工作，使得这些组件在使用时是安全的。
 
-- `createAnimatedComponent()` can be used to make a component animatable.
+- `createAnimatedComponent()`方法正是用来处理组件，使其可以用于动画。
 
-`Animated` exports the following animatable components using the above wrapper:
+`Animated`中默认导出了以下这些可以直接使用的动画组件，当然它们都是通过使用上面这个方法进行了封装：
 
 - `Animated.Image`
 - `Animated.ScrollView`
 - `Animated.Text`
 - `Animated.View`
 
-### Composing animations 
+### 组合动画 
 
 Animations can also be combined in complex ways using composition functions:
 
@@ -68,24 +68,24 @@ Animations can also be chained together simply by setting the `toValue` of one a
 
 By default, if one animation is stopped or interrupted, then all other animations in the group are also stopped.
 
-### Combining animated values 
+### 合成动画值 
 
-You can combine two animated values via addition, multiplication, division, or modulo to make a new animated value:
+你可以使用加减乘除以及取余等运算来把两个动画值合成为一个新的动画值。
 
 - `Animated.add()`
 - `Animated.divide()`
 - `Animated.modulo()`
 - `Animated.multiply()`
 
-### Interpolation 
+### 插值 
 
 The `interpolate()` function allows input ranges to map to different output ranges. By default, it will extrapolate the curve beyond the ranges given, but you can also have it clamp the output value. It uses lineal interpolation by default but also supports easing functions.
 
 - `interpolate()`
 
-Read more about interpolation in the [动画](animations.html#插值（Interpolation）)文档。
+你可以在[动画](animations.html#插值)文档中了解到更多。
 
-### Handling gestures and other events 
+### 处理手势和其他事件 
 
 Gestures, like panning or scrolling, and other events can map directly to animated values using `Animated.event()`. This is done with a structured map syntax so that values can be extracted from complex event objects. The first level is an array to allow mapping across multiple args, and that array contains nested objects.
 

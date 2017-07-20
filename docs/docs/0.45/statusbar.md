@@ -20,6 +20,9 @@
  </View>
 ```
 
+### 静态API
+为了应付没有很好的使用组件的情况，`StatusBar` 暴露了一个静态API。然而不推荐大家同时通过静态API和组件来定义相同的属性，因为静态API定义的属性值在后续的渲染中会被组件中定义的值所覆盖。
+
 ### 常量
 
 `currentHeight` 状态栏的当前高度。
@@ -60,6 +63,98 @@
             class="platform">ios</span>showHideTransition <span class="propType">enum('fade', 'slide')</span> <a
             class="hash-link" href="#showhidetransition">#</a></h4>
         <div><p>通过<code>hidden</code>属性来显示或隐藏状态栏时所使用的动画效果。默认值为'fade'。</p></div>
+    </div>
+</div>
+
+
+### 方法
+
+<div class="props">
+    <div class="prop">
+        <h4 class="methodTitle"><a class="anchor" name="setHidden"></a><span
+                class="methodType">static </span>setHidden<span class="methodType">(hidden:boolean, animation?:StatusBarAnimation)</span> <a
+                class="hash-link" href="#setHidden">#</a></h4>
+        <div>
+            <p>显示／隐藏状态栏</p>
+            <ul>
+                <li><code>hidden</code>（布尔类型） - 是否隐藏状态栏</li>
+                <li><code>[animation]</code>（StatusBarAnimation） - 改变状态栏显示状态的动画过渡效果</li>
+            </ul>
+        </div>
+    </div>
+    <div class="prop">
+        <h4 class="methodTitle"><a class="anchor" name="setBarStyle"></a><span
+                class="methodType">static </span>setBarStyle<span class="methodType">(style:StatusBarStyle, animated?:boolean)</span> <a
+                class="hash-link" href="#setBarStyle">#</a></h4>
+        <div>
+            <p>设置状态栏的样式</p>
+            <ul>
+                <li><code>style</code>（StatusBarStyle） - 将要设置的状态栏样式</li>
+                <li><code>[animated]</code>（布尔类型） - 是否启用过渡动画</li>
+            </ul>
+        </div>
+    </div>
+    <div class="prop">
+        <h4 class="methodTitle"><a class="anchor" name="setBackgroundColor"></a><span
+                class="methodType">static </span>setBackgroundColor<span class="methodType">(visible:boolean)</span> <a
+                class="hash-link" href="#setBackgroundColor">#</a></h4>
+        <div>
+            <p>显示／隐藏网络活动指示器</p>
+            <ul>
+                <li><code>visible</code>（布尔类型） - 是否显示网络活动指示器</li>
+            </ul>
+        </div>
+    </div>
+    <div class="prop">
+        <h4 class="methodTitle"><a class="anchor" name="setNetworkActivityIndicatorVisible"></a><span
+                class="methodType">static </span>setNetworkActivityIndicatorVisible<span class="methodType">(color:string, animated?:boolean)</span> <a
+                class="hash-link" href="#setNetworkActivityIndicatorVisible">#</a></h4>
+        <div>
+            <p>设置状态栏的背景色</p>
+            <ul>
+                <li><code>color</code>（字符串） - 背景色</li>
+                <li><code>[animated]</code>（布尔类型） - 是否启用过渡动画</li>
+            </ul>
+        </div>
+    </div>
+    <div class="prop">
+        <h4 class="methodTitle"><a class="anchor" name="setTranslucent"></a><span
+                class="methodType">static </span>setTranslucent<span class="methodType">(translucent:boolean)</span> <a
+                class="hash-link" href="#setTranslucent">#</a></h4>
+        <div>
+            <p>指定状态栏是否透明。设置为true时，应用会在状态栏之下绘制（即所谓“沉浸式”——被状态栏遮住一部分）。常和带有半透明背景色的状态栏搭配使用。</p>
+            <ul>
+                <li><code>translucent</code>（布尔类型） - 状态栏是否透明</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+### 类型定义
+
+<div class="props">
+    <div class="prop">
+        <h4 class="propTitle"><a class="anchor" name="StatusBarStyle"></a>StatusBarStyle<a class="hash-link" href="#StatusBarStyle">#</a></h4>
+        <div>
+            <p>状态栏样式</p>
+            <ul>
+                <li><code>default</code> - 默认的样式（IOS为白底黑字、Android为黑底白字）</li>
+                <li><code>light-content</code> - 黑底白字</li>
+                <li><code>dark-content</code> - 白底黑字</li>
+            </ul>
+        </div>
+    </div>
+    <div class="prop">
+        <h4 class="propTitle"><a class="anchor" name="StatusBarAnimation"></a>StatusBarAnimation<a class="hash-link" href="#StatusBarAnimation">#</a></h4>
+        <div>
+            <p>状态栏动画过渡效果</p>
+            <ul>
+                <li><code>none</code> - 没有动画</li>
+                <li><code>fade</code> - 渐变效果</li>
+                <li><code>slide</code> - 滑动效果</li>
+            </ul>
+        </div>
     </div>
 </div>
 
