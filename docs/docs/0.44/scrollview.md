@@ -70,6 +70,10 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	        <p>此方法是通过绑定在内容容器上的onLayout来实现的。</p></div>
 	</div>
 	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="onmomentumscrollend"></a>onMomentumScrollEnd?: <span class="propType">function</span> <a class="hash-link" href="#onmomentumscrollend">#</a></h4>
+		<div><p>滚动动画结束时调用此函数。</p></div>
+	</div>
+	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onscroll"></a>onScroll <span class="propType">function</span> <a class="hash-link" href="#onscroll">#</a></h4>
 		<div>
 			<p>在滚动的过程中，每帧最多调用一次此回调函数。调用的频率可以用<code>scrollEventThrottle</code>属性来控制。</p>
