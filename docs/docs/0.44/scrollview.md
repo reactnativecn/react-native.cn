@@ -70,6 +70,10 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	        <p>此方法是通过绑定在内容容器上的onLayout来实现的。</p></div>
 	</div>
 	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="onmomentumscrollstart"></a>onMomentumScrollStart?: <span class="propType">function</span> <a class="hash-link" href="#onmomentumscrollstart">#</a></h4>
+		<div><p>滚动动画开始时调用此函数。</p></div>
+	</div>
+	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onmomentumscrollend"></a>onMomentumScrollEnd?: <span class="propType">function</span> <a class="hash-link" href="#onmomentumscrollend">#</a></h4>
 		<div><p>滚动动画结束时调用此函数。</p></div>
 	</div>
@@ -323,12 +327,6 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	</div>
 	</div>
 	</div>
-	</div>
-	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="onscrollanimationend"></a><span class="platform">ios</span>onScrollAnimationEnd <span class="propType">function</span> <a class="hash-link" href="#onscrollanimationend">#</a></h4>
-		<div>
-			<p>当滚动动画结束之后调用此回调。</p>
-		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="pagingenabled"></a>pagingEnabled <span class="propType">bool</span> <a class="hash-link" href="#pagingenabled">#</a></h4>
