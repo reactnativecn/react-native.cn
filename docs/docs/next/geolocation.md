@@ -26,7 +26,7 @@
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="watchposition"></a><span
             class="propType">static </span>watchPosition<span class="propType">(success: Function, error?: Function, options?: GeoOptions)</span>
         <a class="hash-link" href="#watchposition">#</a></h4>
-        <div><p>持续监听位置，每当位置变化之后都调用success回调。支持的选项：timeout (ms), maximumAge (ms), enableHighAccuracy (bool)</p></div>
+        <div><p>持续监听位置，每当位置变化之后都调用success回调。支持的选项：timeout (ms), maximumAge (ms), enableHighAccuracy (bool), useSignificantChanges (bool)</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="clearwatch"></a><span
             class="propType">static </span>clearWatch<span class="propType">(watchID: number)</span> <a

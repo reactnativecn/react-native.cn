@@ -358,10 +358,6 @@
                     "mdlink": "actionsheetios"
                 },
                 {
-                    "subject": "AdSupportIOS",
-                    "mdlink": "adsupportios"
-                },
-                {
                     "subject": "Alert",
                     "mdlink": "alert"
                 },
