@@ -57,7 +57,7 @@
             "group": "进阶指南",
             "contains": [
                 {
-                    "subject": "嵌入到现有原生应用",
+                    "subject": "集成到现有原生应用",
                     "mdlink": "integration-with-existing-apps"
                 },
                 {

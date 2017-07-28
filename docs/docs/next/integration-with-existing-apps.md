@@ -325,10 +325,10 @@ const styles = StyleSheet.create({
 });
 
 // 整体js模块的名称
-AppRegistry.registerComponent('RNHighScores', () => RNHighScores);
+AppRegistry.registerComponent('MyReactNativeApp', () => RNHighScores);
 ```
 
-> `RNHighScores`是整体js模块（即你所有的js代码）的名称。你在iOS原生代码中添加React Native视图时会用到这个名称。
+> `MyReactNativeApp `是整体js模块（即你所有的js代码）的名称。你在iOS原生代码中添加React Native视图时会用到这个名称。
 
 #### 掌握核心科技： `RCTRootView`
 
@@ -346,9 +346,9 @@ You can add a new link on the main game menu to go to the "High Score" React Nat
 
 We will now add an event handler from the menu link. A method will be added to the main `ViewController` of your application. This is where `RCTRootView` comes into play.
 
-When you build a React Native application, you use the React Native packager to create an `index.ios.bundle` that will be served by the React Native server. Inside `index.ios.bundle` will be our `RNHighScore` module. So, we need to point our `RCTRootView` to the location of the `index.ios.bundle` resource (via `NSURL`) and tie it to the module.
+When you build a React Native application, you use the React Native packager to create an `index.ios.bundle` that will be served by the React Native server. Inside `index.ios.bundle` will be our `MyReactNativeApp` module. So, we need to point our `RCTRootView` to the location of the `index.ios.bundle` resource (via `NSURL`) and tie it to the module.
 
-We will, for debugging purposes, log that the event handler was invoked. Then, we will create a string with the location of our React Native code that exists inside the `index.ios.bundle`. Finally, we will create the main `RCTRootView`. Notice how we provide `RNHighScores` as the `moduleName` that we created [above](#the-react-native-component) when writing the code for our React Native component.
+We will, for debugging purposes, log that the event handler was invoked. Then, we will create a string with the location of our React Native code that exists inside the `index.ios.bundle`. Finally, we will create the main `RCTRootView`. Notice how we provide `MyReactNativeApp` as the `moduleName` that we created [above](#the-react-native-component) when writing the code for our React Native component.
 
 </div><div markdown class="md-block objc">
 
@@ -367,7 +367,7 @@ We will, for debugging purposes, log that the event handler was invoked. Then, w
                              URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
     RCTRootView *rootView =
       [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
-                           moduleName        : @"RNHighScores"
+                           moduleName        : @"MyReactNativeApp"
                            initialProperties :
                              @{
                                @"scores" : @[
@@ -413,7 +413,7 @@ import React
 
   let rootView = RCTRootView(
       bundleURL: jsCodeLocation,
-      moduleName: "RNHighScores",
+      moduleName: "MyReactNativeApp",
       initialProperties: mockData as [NSObject : AnyObject],
       launchOptions: nil
   )
