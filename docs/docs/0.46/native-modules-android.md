@@ -404,6 +404,31 @@ public class ImagePickerModule extends ReactContextBaseJavaModule {
 }
 ```
 
+为了让你的功能从JavaScript端访问起来更为方便，通常我们都会把原生模块封装成一个JavaScript模块。这不是必须的，但省下了每次都从`NativeModules`中获取对应模块的步骤。这个JS文件也可以用于添加一些其他JavaScript端实现的功能。
+
+```javascript
+'use strict';
+import { NativeModules } from 'react-native';
+
+export default NativeModules.ImagePickerModule;
+```
+
+现在，在别处的JavaScript代码中可以这样调用你的方法(此处的调用涉及到Promise语法)：
+
+```javascript
+import ImagePickerModule from './ImagePickerModule';
+ImagePickerModule.pickImage()
+                .then((msg) => {
+                    //此处为成功之后回调的信息（指的是：uri.toString() 的值 ）
+                    alert(msg);
+                 })
+               .catch((err) => {
+                   //此处为失败之后回调的信息
+                    alert(err);
+                });
+                
+```
+
 ### 监听生命周期事件
 
 监听activity的生命周期事件（比如`onResume`, `onPause`等等）和我们在前面实现 `ActivityEventListener`的做法类似。模块必须实现`LifecycleEventListener`，然后需要在构造函数中注册一个监听函数：
