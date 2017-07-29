@@ -169,6 +169,10 @@
                 {
                     "subject": "在原生和React Native间通信",
                     "mdlink": "communication-ios"
+                },
+                {
+                    "subject": "iOS应用扩展",
+                    "mdlink": "app-extensions"
                 }
             ]
         },
@@ -208,6 +212,10 @@
         {
             "group": "组件",
             "contains": [
+                {
+                    "subject": "AccessibilityInfo",
+                    "mdlink": "accessibilityinfo"
+                },
                 {
                     "subject": "ActivityIndicator",
                     "mdlink": "activityindicator"

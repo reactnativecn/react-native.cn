@@ -11,26 +11,24 @@
 
 如果你的列表不需要分组(section)，那么可以使用结构更简单的[`<FlatList>`](flatlist.html)。
 
-在0.43版本中，如果希望section的头部能够吸顶悬浮，请暂时先使用老版的[`<ListView>`](listview.html)。下一个版本开始可以支持悬浮的section头部。
-
 简单的例子：
 
 ```javascript
 <SectionList
   renderItem={({item}) => <ListItem title={item.title} />}
-  renderSectionHeader={({section}) => <H1 title={section.key} />}
+  renderSectionHeader={({section}) => <Header title={section.key} />}
   sections={[ // 不同section渲染相同类型的子组件
-    {data: [...], key: ...},
-    {data: [...], key: ...},
-    {data: [...], key: ...},
+    {data: [...], title: ...},
+    {data: [...], title: ...},
+    {data: [...], title: ...},
   ]}
 />
 
 <SectionList
   sections={[ // 不同section渲染不同类型的子组件
-    {data: [...], key: ..., renderItem: ...},
-    {data: [...], key: ..., renderItem: ...},
-    {data: [...], key: ..., renderItem: ...},
+    {data: [...], renderItem: ...},
+    {data: [...], renderItem: ...},
+    {data: [...], renderItem: ...},
   ]}
 />
 ```
@@ -49,8 +47,19 @@
         <span class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
                                                                              href="#itemseparatorcomponent">#</a>
     </h4>
-        <div><p>行与行之间的分隔线组件。不会出现在第一行之前和最后一行之后。</p></div>
+        <div>
+        	<p>行与行之间的分隔线组件。不会出现在第一行之前和最后一行之后。 By default, <code>highlighted</code>,
+<code>section</code>, and <code>[leading/trailing][Item/Separator]</code> props are provided. <code>renderItem</code> provides
+<code>separators.highlight</code>/<code>unhighlight</code> which will update the <code>highlighted</code> prop, but you can also
+add custom props with <code>separators.updateProps</code>.</p>
+        </div>
     </div>
+    <div class="prop">
+    <h4 class="propTitle"><a class="anchor" name="listemptycomponent"></a>ListEmptyComponent?: <span class="propType"><span>?<span><span>ReactClass&lt;any&gt; | </span>React.Element&lt;any&gt;</span></span></span> <a class="hash-link" href="#listemptycomponent">#</a></h4>
+	    <div><p>Rendered when the list is empty. Can be a React Component Class, a render function, or
+	a rendered element.</p>
+		</div>
+	</div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="listfootercomponent"></a>ListFooterComponent?: <span
             class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
                                                                            href="#listfootercomponent">#</a>
@@ -63,62 +72,114 @@
     </h4>
         <div><p>头部组件</p></div>
     </div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="sectionseparatorcomponent"></a>SectionSeparatorComponent?:
-        <span class="propType"><code>?ReactClass&lt;any&gt;</code></span> <a class="hash-link"
-                                                                             href="#sectionseparatorcomponent">#</a>
-    </h4>
-        <div><p>Rendered in between each section.</p></div>
-    </div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="keyextractor"></a>keyExtractor: <span
-            class="propType"><code>(item: Item, index: number) =&gt; string</code></span> <a class="hash-link"
-                                                                                             href="#keyextractor">#</a>
-    </h4>
-        <div><p>Used to extract a unique key for a given item at the specified index. Key is used for caching
-            and as the react key to track item re-ordering. The default extractor checks item.key, then
-            falls back to using the index, like react does.</p></div>
-    </div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="onendreached"></a>onEndReached?: <span
+    <div class="prop">
+    	<h4 class="propTitle"><a class="anchor" name="sectionseparatorcomponent"></a>SectionSeparatorComponent?: <span class="propType"><span>?ReactClass&lt;any&gt;</span></span> <a class="hash-link" href="#sectionseparatorcomponent">#</a></h4>
+	    <div><p>Rendered at the top and bottom of each section (note this is different from
+	<code>ItemSeparatorComponent</code> which is only rendered between items). These are intended to separate
+	sections from the headers above and below and typically have the same highlight response as
+	<code>ItemSeparatorComponent</code>. Also receives <code>highlighted</code>, <code>[leading/trailing][Item/Separator]</code>,
+	and any custom props from <code>separators.updateProps</code>.</p>
+		</div>
+	</div>
+   <div class="prop">
+       <h4 class="propTitle"><a class="anchor" name="extradata"></a>extraData?: <span class="propType">any</span> <a class="hash-link" href="#extradata">#</a></h4>
+       <div><p>如果有除<code>data</code>以外的数据用在列表中（不论是用在<code>renderItem</code>还是Header或者Footer中），请在此属性中指定。同时此数据在修改时也需要先修改其引用地址（比如先复制到一个新的Object或者数组中），然后再修改其值，否则界面很可能不会刷新。</p>
+       </div>
+   </div>
+    <div class="prop">
+       <h4 class="propTitle"><a class="anchor" name="initialnumtorender"></a>initialNumToRender: <span class="propType">number</span> <a class="hash-link" href="#initialnumtorender">#</a></h4>
+       <div><p>指定一开始渲染的元素数量，最好刚刚够填满一个屏幕，这样保证了用最短的时间给用户呈现可见的内容。注意这第一批次渲染的元素不会在滑动过程中被卸载，这样是为了保证用户执行返回顶部的操作时，不需要重新渲染首批元素。</p>
+       </div>
+    </div>	
+    <div class="prop">
+    	<h4 class="propTitle"><a class="anchor" name="inverted"></a>inverted?: <span class="propType"><span>?boolean</span></span> <a class="hash-link" href="#inverted">#</a></h4>
+    	<div><p>翻转滚动方向。实质是将scale变换设置为-1。</p></div>
+	</div>
+    <div class="prop">
+	    <h4 class="propTitle"><a class="anchor" name="keyextractor"></a>keyExtractor: <span
+	            class="propType"><code>(item: ItemT, index: number) =&gt; string</code></span> <a class="hash-link" href="#keyextractor">#</a>
+	    </h4>
+	    <div><p>此函数用于为给定的item生成一个不重复的key。Key的作用是使React能够区分同类元素的不同个体，以便在刷新时能够确定其变化的位置，减少重新渲染的开销。若不指定此函数，则默认抽取<code>item.key</code>作为key值。若<code>item.key</code>也不存在，则使用数组下标。</p></div>
+    </div>  
+    <div class="prop">
+    	<h4 class="propTitle"><a class="anchor" name="onendreached"></a>onEndReached?: <span
             class="propType"><code>?(info: {distanceFromEnd: number}) =&gt; void</code></span> <a class="hash-link"
                                                                                                   href="#onendreached">#</a>
-    </h4></div>
+    	</h4>
+        <div><p>当列表被滚动到距离内容最底部不足<code>onEndReachedThreshold</code>的距离时调用。</p></div>
+    </div>
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="onendreachedthreshold"></a>onEndReachedThreshold?: <span class="propType"><span>?number</span></span> <a class="hash-link" href="#onendreachedthreshold">#</a></h4>
+		<div>
+			<p>
+			决定当距离内容最底部还有多远时触发<code>onEndReached</code>回调。注意此参数是一个比值而非像素单位。比如，0.5表示距离内容最底部的距离为当前列表可见长度的一半时触发。
+			</p>
+		</div>
+	</div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onrefresh"></a>onRefresh?: <span
             class="propType"><code>?() =&gt; void</code></span> <a class="hash-link"
                                                                    href="#onrefresh">#</a></h4>
-        <div><p>If provided, a standard RefreshControl will be added for "Pull to Refresh" functionality. Make
-            sure to also set the <code>refreshing</code> prop correctly.</p></div>
+        <div><p>如果设置了此选项，则会在列表头部添加一个标准的<code>RefreshControl</code>控件，以便实现“下拉刷新”的功能。同时你需要正确设置<code>refreshing</code>属性。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onviewableitemschanged"></a>onViewableItemsChanged?:
         <span class="propType"><code>?(info: {viewableItems: Array&lt;ViewToken&gt;, changed: Array&lt;ViewToken&gt;}) =&gt; void</code></span>
         <a class="hash-link" href="#onviewableitemschanged">#</a></h4>
-        <div><p>Called when the viewability of rows changes, as defined by the
-            <code>viewabilityConfig</code> prop.</p></div>
+        <div><p>在可见行元素变化时调用。可见范围和变化频率等参数的配置请设置<code>viewabilityconfig</code>属性</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="refreshing"></a>refreshing?: <span class="propType"><code>?boolean</code></span>
         <a class="hash-link" href="#refreshing">#</a></h4>
-        <div><p>Set this true while waiting for new data from a refresh.</p></div>
+        <div><p>在等待加载新数据时将此属性设为true，列表就会显示出一个正在加载的符号。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="renderitem"></a>renderItem: <span
             class="propType"><code>(info: {item: Item, index: number}) =&gt; ?React.Element&lt;any&gt;</code></span> <a
             class="hash-link" href="#renderitem">#</a></h4>
         <div><p>Default renderer for every item in every section. Can be over-ridden on a per-section basis.</p></div>
     </div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="rendersectionheader"></a>renderSectionHeader?: <span
-            class="propType"><code>?(info: {section: SectionT}) =&gt; ?React.Element&lt;any&gt;</code></span> <a
-            class="hash-link" href="#rendersectionheader">#</a></h4>
-        <div><p>Rendered at the top of each section. Sticky headers are not yet supported.</p></div>
-    </div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="sections"></a>sections: <span
-            class="propType"><code>Array&lt;SectionT&gt;</code></span> <a class="hash-link"
-                                                                          href="#sections">#</a>
-    </h4></div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="shoulditemupdate"></a>shouldItemUpdate: <span
-            class="propType"><code>(
-  prevProps: {item: Item, index: number},
-  nextProps: {item: Item, index: number}
-) =&gt; boolean</code></span> <a class="hash-link" href="#shoulditemupdate">#</a></h4>
-        <div><p>This is an optional optimization to minimize re-rendering items.</p></div>
-    </div>
+    <div class="prop">
+    	<h4 class="propTitle"><a class="anchor" name="rendersectionheader"></a>renderSectionHeader?: <span class="propType"><span>?(info: {section: SectionT}) =&gt; ?React.Element&lt;any&gt;</span></span> <a class="hash-link" href="#rendersectionheader">#</a></h4>
+    	<div><p>Rendered at the top of each section. These stick to the top of the <code>ScrollView</code> by default on
+iOS. See <a href="#stickysectionheadersenabled"><code>stickySectionHeadersEnabled</code></a>.</p></div>
+	</div>
+ 	<div class="prop">
+	 	<h4 class="propTitle"><a class="anchor" name="sections"></a>sections: <span class="propType">$ReadOnlyArray&lt;SectionT&gt;</span> <a class="hash-link" href="#sections">#</a></h4>
+	 	<div><p>The actual data to render, akin to the <code>data</code> prop in <a href="flatlist.html" target="_blank"><code>&lt;FlatList&gt;</code></a>.</p><p>General shape:</p><div class="prism language-javascript">sections<span class="token punctuation">:</span> $ReadOnlyArray<span class="token operator">&lt;</span><span class="token punctuation">{</span>
+	  data<span class="token punctuation">:</span> $ReadOnlyArray<span class="token operator">&lt;</span>SectionItem<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+	  renderItem<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>item<span class="token punctuation">:</span> SectionItem<span class="token punctuation">,</span> <span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token operator">?</span>React<span class="token punctuation">.</span>Element<span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+	  ItemSeparatorComponent<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token operator">?</span>ReactClass<span class="token operator">&lt;</span><span class="token punctuation">{</span>highlighted<span class="token punctuation">:</span> boolean<span class="token punctuation">,</span> <span class="token operator">...</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+	<span class="token punctuation">}</span><span class="token operator">&gt;</span></div></div>
+	</div>
+    <div class="prop">
+	    <h4 class="propTitle"><a class="anchor" name="stickysectionheadersenabled"></a>stickySectionHeadersEnabled?: <span class="propType">boolean</span> <a class="hash-link" href="#stickysectionheadersenabled">#</a></h4>
+	    <div><p>Makes section headers stick to the top of the screen until the next one pushes it off. Only
+	enabled by default on iOS because that is the platform standard there.</p></div>
+	</div>
 </div>
+
+
+
+### 方法
+
+<div class="props">
+	<div class="prop">
+		<h4 class="methodTitle"><a class="anchor" name="scrolltolocation"></a>scrollToLocation<span class="methodType">(params: object)</span> <a class="hash-link" href="#scrolltolocation">#</a></h4>
+		<div><p>Scrolls to the item at the specified <code>sectionIndex</code> and <code>itemIndex</code> (within the section)
+	positioned in the viewable area such that <code>viewPosition</code> 0 places it at the top (and may be
+	covered by a sticky header), 1 at the bottom, and 0.5 centered in the middle. <code>viewOffset</code> is a
+	fixed number of pixels to offset the final target position, e.g. to compensate for sticky
+	headers.</p><p>Note: cannot scroll to locations outside the render window without specifying the
+	<code>getItemLayout</code> prop.</p></div></div>
+    <div class="prop"><h4 class="methodTitle"><a class="anchor" name="recordinteraction"></a>recordInteraction<span
+            class="methodType">()</span> <a class="hash-link" href="#recordinteraction">#</a></h4>
+        <div><p>Tells the list an interaction has occured, which should trigger viewability calculations, e.g.
+            if <code>waitForInteractions</code> is true and the user has not scrolled. This is typically called by
+            taps on items or by navigation actions.</p></div>
+    </div>
+    <div class="prop">
+    	<h4 class="methodTitle"><a class="anchor" name="flashscrollindicators"></a>flashScrollIndicators<span class="methodType">()</span> <a class="hash-link" href="#flashscrollindicators">#</a></h4>
+    	<div><p>Displays the scroll indicators momentarily.</p></div>
+	</div>
+</div>
+
 
 ### 例子
 

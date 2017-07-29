@@ -125,11 +125,11 @@ class MyList extends React.PureComponent {
         <a class="hash-link" href="#data">#</a></h4>
         <div><p>为了简化起见，data属性目前只支持普通数组。如果需要使用其他特殊数据结构，例如immutable数组，请直接使用更底层的<code>VirtualizedList</code>组件。</p></div>
     </div>
-       <div class="prop">
+   <div class="prop">
        <h4 class="propTitle"><a class="anchor" name="extradata"></a>extraData?: <span class="propType">any</span> <a class="hash-link" href="#extradata">#</a></h4>
        <div><p>如果有除<code>data</code>以外的数据用在列表中（不论是用在<code>renderItem</code>还是Header或者Footer中），请在此属性中指定。同时此数据在修改时也需要先修改其引用地址（比如先复制到一个新的Object或者数组中），然后再修改其值，否则界面很可能不会刷新。</p>
        </div>
-       </div>
+   </div>
     <div class="prop">
        <h4 class="propTitle"><a class="anchor" name="getitem"></a>getItem?: <a class="hash-link" href="#getitem">#</a>
     </h4>
@@ -171,11 +171,15 @@ class MyList extends React.PureComponent {
 		<code>getItemLayout</code> to be implemented.</p>
 		</div>
 	</div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="keyextractor"></a>keyExtractor: <span
-            class="propType"><code>(item: ItemT, index: number) =&gt; string</code></span> <a class="hash-link"
-                                                                                              href="#keyextractor">#</a>
-    </h4>
-        <div><p>此函数用于为给定的item生成一个不重复的key。Key的作用是使React能够区分同类元素的不同个体，以便在刷新时能够确定其变化的位置，减少重新渲染的开销。若不指定此函数，则默认抽取<code>item.key</code>作为key值。若<code>item.key</code>也不存在，则使用数组下标。</p></div>
+    <div class="prop">
+    	<h4 class="propTitle"><a class="anchor" name="inverted"></a>inverted?: <span class="propType"><span>?boolean</span></span> <a class="hash-link" href="#inverted">#</a></h4>
+    	<div><p>翻转滚动方向。实质是将scale变换设置为-1。</p></div>
+	</div>
+    <div class="prop">
+	    <h4 class="propTitle"><a class="anchor" name="keyextractor"></a>keyExtractor: <span
+	            class="propType"><code>(item: ItemT, index: number) =&gt; string</code></span> <a class="hash-link" href="#keyextractor">#</a>
+	    </h4>
+	    <div><p>此函数用于为给定的item生成一个不重复的key。Key的作用是使React能够区分同类元素的不同个体，以便在刷新时能够确定其变化的位置，减少重新渲染的开销。若不指定此函数，则默认抽取<code>item.key</code>作为key值。若<code>item.key</code>也不存在，则使用数组下标。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="legacyimplementation"></a>legacyImplementation?:
         <span class="propType"><code>?boolean</code></span> <a class="hash-link"
@@ -249,6 +253,10 @@ your use-case.</p>
     </h4>
         <div><p>请参考<a href="https://github.com/facebook/react-native/blob/master/Libraries/Lists/ViewabilityHelper.js"><code>ViewabilityHelper</code></a>的源码来了解具体的配置。</p></div>
     </div>
+    <div class="prop">
+    	<h4 class="propTitle"><a class="anchor" name="progressviewoffset"></a><span class="platform">android</span>progressViewOffset?: <span class="propType">number</span> <a class="hash-link" href="#progressviewoffset">#</a></h4>
+    	<div><p>Set this when offset is needed for the loading indicator to show correctly.</p></div>
+	</div>
 </div>
 
 ### 方法
@@ -283,6 +291,10 @@ your use-case.</p>
             if <code>waitForInteractions</code> is true and the user has not scrolled. This is typically called by
             taps on items or by navigation actions.</p></div>
     </div>
+    <div class="prop">
+    	<h4 class="methodTitle"><a class="anchor" name="flashscrollindicators"></a>flashScrollIndicators<span class="methodType">()</span> <a class="hash-link" href="#flashscrollindicators">#</a></h4>
+    	<div><p>Displays the scroll indicators momentarily.</p></div>
+	</div>
 </div>
 
 
