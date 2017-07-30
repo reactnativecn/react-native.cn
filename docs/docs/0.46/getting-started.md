@@ -601,15 +601,16 @@ choco install git
 
 </div><div markdown class="md-block mac ios">
 
+
+**注意**：init命令默认会创建最新的版本，而目前最新的0.45及以上版本需要下载boost库编译。此库体积庞大，在国内即便翻墙也很难下载成功，导致很多人**无法正常运行iOS项目**，中文网在论坛中提供了这些库的[国内下载链接](http://bbs.reactnative.cn/topic/4301/)。如果你嫌麻烦，又没有对新版本的需求，那么可以暂时创建`0.44.3`的版本。
+
+> 提示：你可以使用`--version`参数（注意是`两`个杠）创建指定版本的项目。例如`react-native init MyApp --version 0.44.3`。注意版本号必须精确到两个小数点。
+
 ```
 react-native init AwesomeProject
 cd AwesomeProject
 react-native run-ios
 ```
-
-**注意**：init命令默认会创建最新的版本，而目前最新的0.45及以上版本需要下载boost库编译。此库体积庞大，在国内即便翻墙也很难下载成功，导致很多人无法正常运行iOS项目，推荐暂时使用`0.44.3`的版本。
-
-> 提示：你可以使用`--version`参数（注意是`两`个杠）创建指定版本的项目。例如`react-native init MyApp --version 0.44.3`。注意版本号必须精确到两个小数点。
 
 > 提示：如果run-ios无法正常运行，请使用Xcode运行来查看具体错误（run-ios的报错没有任何具体信息）。
 
@@ -663,7 +664,7 @@ cd AwesomeProject
 react-native run-android
 ```
 
-> 提示：你可以使用`--version`参数创建指定版本的项目。例如`react-native init MyApp --version 0.39.2`。注意版本号必须精确到两个小数点。
+> 提示：你可以使用`--version`参数创建指定版本的项目。例如`react-native init MyApp --version 0.44.3`。注意版本号必须精确到两个小数点。
 
 __Windows用户请注意，请不要在命令行默认的System32目录中init项目！会有各种权限限制导致不能运行！__
 </div>
