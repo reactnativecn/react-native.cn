@@ -96,8 +96,8 @@
     </div>
     <div class="prop">
         <h4 class="methodTitle"><a class="anchor" name="setBackgroundColor"></a><span
-                class="methodType">static </span>setBackgroundColor<span class="methodType">(visible:boolean)</span> <a
-                class="hash-link" href="#setBackgroundColor">#</a></h4>
+                class="methodType">static </span>setNetworkActivityIndicatorVisible<span class="methodType">(visible:boolean)</span> <a
+                class="hash-link" href="#">#</a></h4>
         <div>
             <p>显示／隐藏网络活动指示器</p>
             <ul>
@@ -107,7 +107,7 @@
     </div>
     <div class="prop">
         <h4 class="methodTitle"><a class="anchor" name="setNetworkActivityIndicatorVisible"></a><span
-                class="methodType">static </span>setNetworkActivityIndicatorVisible<span class="methodType">(color:string, animated?:boolean)</span> <a
+                class="methodType">static </span>setBackgroundColor<span class="methodType">(color:string, animated?:boolean)</span> <a
                 class="hash-link" href="#setNetworkActivityIndicatorVisible">#</a></h4>
         <div>
             <p>设置状态栏的背景色</p>
