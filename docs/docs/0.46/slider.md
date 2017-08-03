@@ -22,7 +22,7 @@
 		</div>
 	</div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="maximumvalue"></a><span class="platform">ios</span>maximumValue <span class="propType">number</span> <a class="hash-link" href="#maximumvalue">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="maximumvalue"></a>maximumValue <span class="propType">number</span> <a class="hash-link" href="#maximumvalue">#</a></h4>
 		<div>
 			<p>滑块的最大值（当滑块滑到最右端时表示的值）。默认为1。</p>
 		</div>
@@ -37,7 +37,7 @@
 		</div>
 	</div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="minimumvalue"></a><span class="platform">ios</span>minimumValue <span class="propType">number</span> <a class="hash-link" href="#minimumvalue">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="minimumvalue"></a>minimumValue <span class="propType">number</span> <a class="hash-link" href="#minimumvalue">#</a></h4>
 		<div>
 			<p>滑块的最小值（当滑块滑到最左侧时表示的值）。默认为0。</p>
 		</div>
