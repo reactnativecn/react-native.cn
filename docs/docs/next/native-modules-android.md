@@ -6,7 +6,7 @@
 
 本向导会用[Toast](http://developer.android.com/reference/android/widget/Toast.html)作为例子。假设我们希望可以从Javascript发起一个Toast消息（Android中的一种会在屏幕下方弹出、保持一段时间的消息通知）
 
-我们首先来创建一个原生模块。一个原生模块是一个继承了`ReactContextBaseJavaModule`的Java类，它可以实现一些JavaScript所需的功能。我们这里的目标是可以在JavaScript里写`ToastAndroid.show('Awesome', ToastAndroid.SHORT);`，来调起一个Toast通知。
+我们首先来创建一个原生模块。一个原生模块是一个继承了`ReactContextBaseJavaModule`的Java类，它可以实现一些JavaScript所需的功能。我们这里的目标是可以在JavaScript里写`ToastExample.show('Awesome', ToastExample.SHORT);`，来调起一个Toast通知。
 
 ```java
 package com.facebook.react.modules.toast;
@@ -33,16 +33,16 @@ public class ToastModule extends ReactContextBaseJavaModule {
 }
 ```
 
-`ReactContextBaseJavaModule`要求派生类实现`getName`方法。这个函数用于返回一个字符串名字，这个名字在JavaScript端标记这个模块。这里我们把这个模块叫做`ToastAndroid`，这样就可以在JavaScript中通过`React.NativeModules.ToastAndroid`访问到这个模块。**译注：RN已经内置了一个名为ToastAndroid的模块，所以如果你在练习时完全照抄，那么运行时会报错名字冲突！所以请在这里选择另外一个名字！**
+`ReactContextBaseJavaModule`要求派生类实现`getName`方法。这个函数用于返回一个字符串名字，这个名字在JavaScript端标记这个模块。这里我们把这个模块叫做`ToastExample`，这样就可以在JavaScript中通过`React.NativeModules.ToastExample`访问到这个模块。**译注：RN已经内置了一个名为ToastAndroid的模块，所以在练习时请勿使用ToastAndroid的名字，否则运行时会报错名字冲突！**
 
 ```java
   @Override
   public String getName() {
-    return "ToastAndroid";
+    return "ToastExample";
   }
 ```
 
-_译注_：模块名前的RCT前缀会被自动移除。所以如果返回的字符串为"RCTToastAndroid"，在JavaScript端依然可以通过`React.NativeModules.ToastAndroid`访问到这个模块。
+_译注_：模块名前的RCT前缀会被自动移除。所以如果返回的字符串为"RCTToastExample"，在JavaScript端依然可以通过`React.NativeModules.ToastExample`访问到这个模块。
 
 一个可选的方法`getContants`返回了需要导出给JavaScript使用的常量。它并不一定需要实现，但在定义一些可以被JavaScript同步访问到的预定义的值时非常有用。
 
@@ -131,26 +131,25 @@ protected List<ReactPackage> getPackages() {
 'use strict';
 
 /**
- * This exposes the native ToastAndroid module as a JS module. This has a function 'show'
+ * This exposes the native ToastExample module as a JS module. This has a function 'show'
  * which takes the following parameters:
  *
  * 1. String message: A string with the text to toast
- * 2. int duration: The duration of the toast. May be ToastAndroid.SHORT or ToastAndroid.LONG
+ * 2. int duration: The duration of the toast. May be ToastExample.SHORT or ToastExample.LONG
  */
 import { NativeModules } from 'react-native';
 
-// 下一句中的ToastAndroid即对应上文
+// 下一句中的ToastExample即对应上文
 // public String getName()中返回的字符串
-// 练习时请务必选择另外的名字！
 
-export default NativeModules.ToastAndroid;
+export default NativeModules.ToastExample;
 ```
 
 现在，在别处的JavaScript代码中可以这样调用你的方法：
 
 ```javascript
-import ToastAndroid from './ToastAndroid';
-ToastAndroid.show('Awesome', ToastAndroid.SHORT);
+import ToastExample from './ToastExample';
+ToastExample.show('Awesome', ToastExample.SHORT);
 ```
 
 ## 更多特性
