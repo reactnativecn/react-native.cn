@@ -1,5 +1,12 @@
 [
 	{
+		"name": "京东金融",
+		"desc": "一站式全场景金融生活服务平台",
+		"ios": "https://itunes.apple.com/cn/app/id895682747?mt=8",
+		"android": "https://download.jr.jd.com/downapp/jrapp_jr464.apk",
+		"icon": "http://is5.mzstatic.com/image/thumb/Purple127/v4/5f/bd/de/5fbdde01-36e5-5d52-9b38-e82de0faa8cb/source/175x175bb.jpg"
+	},
+	{
 		"name": "大浙惠生活",
 		"desc": "腾讯大浙网旗下，浙江省本地吃喝玩乐活动、优惠福利信息的推荐平台",
 		"ios": "https://itunes.apple.com/app/apple-store/id1184729110??l=zh&ls=1&mt=8",
