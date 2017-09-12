@@ -7,12 +7,12 @@ NetInfo.fetch().done((reach) => {
 function handleFirstConnectivityChange(reach) {
   console.log('First change: ' + reach);
   NetInfo.removeEventListener(
-    'change',
+    'connectionChange',
     handleFirstConnectivityChange
   );
 }
 NetInfo.addEventListener(
-  'change',
+  'connectionChange',
   handleFirstConnectivityChange
 );
 ```
