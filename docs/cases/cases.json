@@ -1,5 +1,12 @@
 [
 	{
+		"name": "京东金融",
+		"desc": "金融生活服务平台",
+		"ios": "https://itunes.apple.com/cn/app/id895682747?mt=8",
+		"android": "https://download.jr.jd.com/downapp/jrapp_jr464.apk",
+		"icon": "http://is5.mzstatic.com/image/thumb/Purple127/v4/5f/bd/de/5fbdde01-36e5-5d52-9b38-e82de0faa8cb/source/175x175bb.jpg"
+	},
+	{
 		"name": "漂漂共享书",
 		"desc": "与朋友同事分享纸质图书",
 		"ios": "https://itunes.apple.com/cn/app/id1201678520?ls=1&mt=8",
