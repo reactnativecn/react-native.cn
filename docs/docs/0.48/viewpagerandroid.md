@@ -54,6 +54,18 @@ var styles = {
 		</div>
 	</div>
 	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="peekenabled"></a>peekEnabled <span class="propType">bool</span> <a class="hash-link" href="#peekenabled">#</a></h4>
+		<div>
+			<p>是否在当前页滑动时展示前一页或者后一页，默认为<code>false</code></p>
+		</div>
+	</div>
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="pagemargin"></a>pageMargin <span class="propType">number</span> <a class="hash-link" href="#pagemargin">#</a></h4>
+		<div>
+			<p>页面滑动时两个页面之间的间距，配合<code>peekEnabled</code>使用。</p>
+		</div>
+	</div>
+	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onpagescroll"></a>onPageScroll <span class="propType">function</span> <a class="hash-link" href="#onpagescroll">#</a></h4>
 		<div>
 			<p>当在页间切换时（不论是由于动画还是由于用户在页间滑动/拖拽）执行。</p>
