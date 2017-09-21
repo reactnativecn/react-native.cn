@@ -167,7 +167,7 @@
                     "mdlink": "running-on-simulator-ios"
                 },
                 {
-                    "subject": "在原生和React Native间通信",
+                    "subject": "和原生端通信",
                     "mdlink": "communication-ios"
                 },
                 {
@@ -206,6 +206,10 @@
                 {
                     "subject": "从源代码编译React Native",
                     "mdlink": "android-building-from-source"
+                },
+                {
+                    "subject": "和原生端通信",
+                    "mdlink": "communication-android"
                 }
             ]
         },
