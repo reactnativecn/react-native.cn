@@ -5,8 +5,10 @@ As the name implies, it is only available on iOS. Take a look at Navigator for a
 To set up the navigator, provide the `initialRoute` prop with a route object. A route object is used to describe each scene that your app navigates to. `initialRoute` represents the first route in your navigator.
 
 ```js
-import React, { Component, PropTypes } from 'react';
-import { NavigatorIOS, Text } from 'react-native';
+import React, { Component } from 'react';
+// 这样避免报错
+import PropTypes from 'prop-types';
+import { NavigatorIOS,View,Text,TouchableHighlight,StyleSheet } from 'react-native';
 
 export default class NavigatorIOSApp extends Component {
   render() {
@@ -24,33 +26,60 @@ export default class NavigatorIOSApp extends Component {
 
 class MyScene extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
+  //去掉这句，会引起一个警告，不必注明是必须的，默认导航器是有一个title字段的
+//    title: PropTypes.string.isRequired,
     navigator: PropTypes.object.isRequired,
   }
 
   constructor(props, context) {
     super(props, context);
     this._onForward = this._onForward.bind(this);
-    this._onBack = this._onBack.bind(this);
+    // 这句缺少实现，导致运行js报错，实现见 _onBack()
+    this._onBack = this._onBack.bind(this);
   }
 
   _onForward() {
     this.props.navigator.push({
-      title: 'Scene ' + nextIndex,
+    //添加这个，是为了可以推出一个新的scene。
+      component:MyScene,
+      // 想改变标题可以把nextIndex当参数，不去掉会报错
+//      title: 'Scene ' + nextIndex,
+      title: 'Scene'
     });
+  }
+  
+  _onBack(){// 补充的实现
+    this.props.navigator.pop();
   }
 
   render() {
     return (
-      <View>
-        <Text>Current Scene: { this.props.title }</Text>
+      <View style={styles.navigatorView}>
+        <Text style={styles.navigatorViewText}>Current Scene: { this.props.title }</Text>
         <TouchableHighlight onPress={this._onForward}>
-          <Text>Tap me to load the next scene</Text>
+          <Text style={styles.navigatorViewTapText}>Tap me to load the next scene</Text>
         </TouchableHighlight>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+    navigatorView:{
+      flex:1,
+      justifyContent:'center',
+      alignItems:'center'
+    },
+    navigatorViewText:{
+      fontSize:20
+    },
+    navigatorViewTapText:{
+      fontSize:24,
+      fontWeight:'bold',
+      color:'#FF0000'
+    }
+});
+
 ```
 
 In this code, the navigator renders the component specified in `initialRoute`, which in this case is `MyScene`. This component will receive a `route` prop and a `navigator` prop representing the navigator. The navigator's navigation bar will render the title for the current scene, "My Initial Scene".
