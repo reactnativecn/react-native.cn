@@ -48,16 +48,14 @@
                                                                              href="#itemseparatorcomponent">#</a>
     </h4>
         <div>
-        	<p>行与行之间的分隔线组件。不会出现在第一行之前和最后一行之后。 By default, <code>highlighted</code>,
-<code>section</code>, and <code>[leading/trailing][Item/Separator]</code> props are provided. <code>renderItem</code> provides
-<code>separators.highlight</code>/<code>unhighlight</code> which will update the <code>highlighted</code> prop, but you can also
-add custom props with <code>separators.updateProps</code>.</p>
+        	<p>行与行之间的分隔线组件。不会出现在第一行之前和最后一行之后。 <code>highlighted</code>,
+<code>section</code>, and <code>[leading/trailing][Item/Separator]</code> 这三个属性是默认提供的. <code>renderItem</code> 提供了
+<code>separators.highlight</code>/<code>unhighlight</code> 这两个方法来更新 <code>highlighted</code> 这个属性的状态, 但是你也可以利用<code>separators.updateProps</code>这个方法来添加自定义属性.</p>
         </div>
     </div>
     <div class="prop">
     <h4 class="propTitle"><a class="anchor" name="listemptycomponent"></a>ListEmptyComponent?: <span class="propType"><span>?<span><span>ReactClass&lt;any&gt; | </span>React.Element&lt;any&gt;</span></span></span> <a class="hash-link" href="#listemptycomponent">#</a></h4>
-	    <div><p>Rendered when the list is empty. Can be a React Component Class, a render function, or
-	a rendered element.</p>
+	    <div><p>当列表为空时渲染。可以是一个React组件类，一个渲染函数，或一个已经渲染的元素。</p>
 		</div>
 	</div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="listfootercomponent"></a>ListFooterComponent?: <span
@@ -74,11 +72,8 @@ add custom props with <code>separators.updateProps</code>.</p>
     </div>
     <div class="prop">
     	<h4 class="propTitle"><a class="anchor" name="sectionseparatorcomponent"></a>SectionSeparatorComponent?: <span class="propType"><span>?ReactClass&lt;any&gt;</span></span> <a class="hash-link" href="#sectionseparatorcomponent">#</a></h4>
-	    <div><p>Rendered at the top and bottom of each section (note this is different from
-	<code>ItemSeparatorComponent</code> which is only rendered between items). These are intended to separate
-	sections from the headers above and below and typically have the same highlight response as
-	<code>ItemSeparatorComponent</code>. Also receives <code>highlighted</code>, <code>[leading/trailing][Item/Separator]</code>,
-	and any custom props from <code>separators.updateProps</code>.</p>
+	    <div><p>在每个`section`的顶部和底部渲染(区别于
+	<code>ItemSeparatorComponent</code>，它仅在列表项之间渲染)。它的作用是为了从视觉上把`section`与它上方或下方的`headers`区别开来，从这个意义上讲，它的作用和<code>ItemSeparatorComponent</code>是一样的. 它也 接受<code>highlighted</code>, <code>[leading/trailing][Item/Separator]</code>这两个默认提供的属性或其他通过<code>separators.updateProps</code>添加的自定义属性.</p>
 		</div>
 	</div>
    <div class="prop">
@@ -133,16 +128,15 @@ add custom props with <code>separators.updateProps</code>.</p>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="renderitem"></a>renderItem: <span
             class="propType"><code>(info: {item: Item, index: number}) =&gt; ?React.Element&lt;any&gt;</code></span> <a
             class="hash-link" href="#renderitem">#</a></h4>
-        <div><p>Default renderer for every item in every section. Can be over-ridden on a per-section basis.</p></div>
+        <div><p>用来渲染每一个section中的每一个列表项的默认渲染器。可以在section级别上进行覆盖重写。</p></div>
     </div>
     <div class="prop">
     	<h4 class="propTitle"><a class="anchor" name="rendersectionheader"></a>renderSectionHeader?: <span class="propType"><span>?(info: {section: SectionT}) =&gt; ?React.Element&lt;any&gt;</span></span> <a class="hash-link" href="#rendersectionheader">#</a></h4>
-    	<div><p>Rendered at the top of each section. These stick to the top of the <code>ScrollView</code> by default on
-iOS. See <a href="#stickysectionheadersenabled"><code>stickySectionHeadersEnabled</code></a>.</p></div>
+    	<div><p>在每个section的头部渲染。在iOS上，这些headers是默认粘接在<code>ScrollView</code>的顶部的. 参见<a href="#stickysectionheadersenabled"><code>stickySectionHeadersEnabled</code></a>.</p></div>
 	</div>
  	<div class="prop">
 	 	<h4 class="propTitle"><a class="anchor" name="sections"></a>sections: <span class="propType">$ReadOnlyArray&lt;SectionT&gt;</span> <a class="hash-link" href="#sections">#</a></h4>
-	 	<div><p>The actual data to render, akin to the <code>data</code> prop in <a href="flatlist.html" target="_blank"><code>&lt;FlatList&gt;</code></a>.</p><p>General shape:</p><div class="prism language-javascript">sections<span class="token punctuation">:</span> $ReadOnlyArray<span class="token operator">&lt;</span><span class="token punctuation">{</span>
+	 	<div><p>用来渲染的数据，类似于<a href="flatlist.html" target="_blank"><code>&lt;FlatList&gt;</code></a>中的<code>data</code>属性。</p><p>一般格式:</p><div class="prism language-javascript">sections<span class="token punctuation">:</span> $ReadOnlyArray<span class="token operator">&lt;</span><span class="token punctuation">{</span>
 	  data<span class="token punctuation">:</span> $ReadOnlyArray<span class="token operator">&lt;</span>SectionItem<span class="token operator">&gt;</span><span class="token punctuation">,</span>
 	  renderItem<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>item<span class="token punctuation">:</span> SectionItem<span class="token punctuation">,</span> <span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token operator">?</span>React<span class="token punctuation">.</span>Element<span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
 	  ItemSeparatorComponent<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token operator">?</span>ReactClass<span class="token operator">&lt;</span><span class="token punctuation">{</span>highlighted<span class="token punctuation">:</span> boolean<span class="token punctuation">,</span> <span class="token operator">...</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
@@ -150,8 +144,7 @@ iOS. See <a href="#stickysectionheadersenabled"><code>stickySectionHeadersEnable
 	</div>
     <div class="prop">
 	    <h4 class="propTitle"><a class="anchor" name="stickysectionheadersenabled"></a>stickySectionHeadersEnabled?: <span class="propType">boolean</span> <a class="hash-link" href="#stickysectionheadersenabled">#</a></h4>
-	    <div><p>Makes section headers stick to the top of the screen until the next one pushes it off. Only
-	enabled by default on iOS because that is the platform standard there.</p></div>
+	    <div><p>当下一个section把它的前一个section的可视区推离屏幕的时候，让这个section的header粘连在屏幕的顶端。这个属性在iOS上是默认可用的，因为这是iOS的平台规范。</p></div>
 	</div>
 </div>
 
@@ -162,21 +155,15 @@ iOS. See <a href="#stickysectionheadersenabled"><code>stickySectionHeadersEnable
 <div class="props">
 	<div class="prop">
 		<h4 class="methodTitle"><a class="anchor" name="scrolltolocation"></a>scrollToLocation<span class="methodType">(params: object)</span> <a class="hash-link" href="#scrolltolocation">#</a></h4>
-		<div><p>Scrolls to the item at the specified <code>sectionIndex</code> and <code>itemIndex</code> (within the section)
-	positioned in the viewable area such that <code>viewPosition</code> 0 places it at the top (and may be
-	covered by a sticky header), 1 at the bottom, and 0.5 centered in the middle. <code>viewOffset</code> is a
-	fixed number of pixels to offset the final target position, e.g. to compensate for sticky
-	headers.</p><p>Note: cannot scroll to locations outside the render window without specifying the
-	<code>getItemLayout</code> prop.</p></div></div>
+		<div><p>将可视区内位于特定<code>sectionIndex</code> 或 <code>itemIndex</code> (section内)位置的列表项，滚动到可视区的制定位置。比如说，<code>viewPosition</code> 为0时将这个列表项滚动到可视区顶部 (可能会被顶部粘接的header覆盖), 为1时将它滚动到可视区底部, 为0.5时将它滚动到可视区中央。<code>viewOffset</code>是一个以像素为单位，到最终位置偏移距离的固定值，比如为了弥补粘接的header所占据的空间</p>
+		<p>注意: 如果没有设置<code>getItemLayout</code>，就不能滚动到位于外部渲染区的位置。</p></div></div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="recordinteraction"></a>recordInteraction<span
             class="methodType">()</span> <a class="hash-link" href="#recordinteraction">#</a></h4>
-        <div><p>Tells the list an interaction has occured, which should trigger viewability calculations, e.g.
-            if <code>waitForInteractions</code> is true and the user has not scrolled. This is typically called by
-            taps on items or by navigation actions.</p></div>
+        <div><p>通知列表发生了一个事件，而这个事件触发了可视性计算，比如说当<code>waitForInteractions</code> 为 true 并且用户没有滚动列表时，就可以调用这个方法。不过一般来说，当用户点击了一个列表项，或发生了一个导航动作时，我们就可以调用这个方法。</p></div>
     </div>
     <div class="prop">
     	<h4 class="methodTitle"><a class="anchor" name="flashscrollindicators"></a>flashScrollIndicators<span class="methodType">()</span> <a class="hash-link" href="#flashscrollindicators">#</a></h4>
-    	<div><p>Displays the scroll indicators momentarily.</p></div>
+    	<div><p>短暂地显示滚动指示器。</p></div>
 	</div>
 </div>
 
