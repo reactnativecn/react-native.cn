@@ -18,7 +18,7 @@
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="maximumtracktintcolor"></a>maximumTrackTintColor <span class="propType">string</span> <a class="hash-link" href="#maximumtracktintcolor">#</a></h4>
 		<div>
-			<p>滑块右侧轨道的颜色。默认为一个蓝色的渐变色。</p>
+			<p>滑块左侧轨道的颜色。默认为一个蓝色的渐变色。</p>
 		</div>
 	</div>
 	<div class="prop">
