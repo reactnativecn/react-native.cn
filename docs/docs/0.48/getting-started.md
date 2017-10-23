@@ -137,7 +137,7 @@ React Native目前需要[Xcode](https://developer.apple.com/xcode/downloads/) 8.
 React Native目前需要[Android Studio](http://developer.android.com/sdk/index.html)2.0或更高版本。
 
 > Android Studio需要Java Development Kit [JDK] 1.8或更高版本。你可以在命令行中输入
-> `javac -version`来查看你当前安装的JDK版本。如果版本不合要求，则可以到
+> `java -version`来查看你当前安装的JDK版本。如果版本不合要求，则可以到
 > [官网](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)上下载。
 
 Android Studio包含了运行和测试React Native应用所需的Android SDK和模拟器。
