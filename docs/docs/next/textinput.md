@@ -301,11 +301,7 @@ AppRegistry.registerComponent(
     <div class="prop">
     	<h4 class="propTitle"><a class="anchor" name="disablefullscreenui"></a><span class="platform">android</span>disableFullscreenUI <span class="propType">bool</span> <a class="hash-link" href="#disablefullscreenui">#</a></h4>
     	<div>
-    	<p>When <code>false</code>, if there is a small amount of space available around a text input
-			(e.g. landscape orientation on a phone), the OS may choose to have the user edit
-			the text inside of a full screen text input mode. When <code>true</code>, this feature is
-			disabled and users will always edit the text directly inside of the text input.
-			Defaults to <code>false</code>.</p>
+    	<p>当值为 <code>false</code>时, 如果 text input 的周围有少量可用空间的话（比如说，当手机横过来时），操作系统可能会将这个 text input 设置为全屏模式。 当值为 <code>true</code> 时, 这个特性不可用，text input 就是普通的模式。默认为 <code>false</code>.</p>
 		</div>
 	</div>
 	<div class="prop">
@@ -318,12 +314,12 @@ AppRegistry.registerComponent(
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="returnkeylabel"></a><span class="platform">android</span>returnKeyLabel <span class="propType">string</span> <a class="hash-link" href="#returnkeylabel">#</a></h4>
-		<div><p>Sets the return key to the label. Use it instead of <code>returnKeyType</code>.</p></div>
+		<div><p>将软键盘返回键上的文字设置为指定的 label。可以用它来代替 <code>returnKeyType</code>.</p></div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="textbreakstrategy"></a><span class="platform">android</span>textBreakStrategy <span class="propType">enum('simple', 'highQuality', 'balanced')</span> <a class="hash-link" href="#textbreakstrategy">#</a></h4>
-		<div><p>Set text break strategy on Android API Level 23+, possible values are <code>simple</code>, <code>highQuality</code>, <code>balanced</code>
-The default value is <code>simple</code>.</p></div>
+		<div><p>在 Android API Level 23+ 的平台上设置文字断行策略, 可能值有 <code>simple</code>, <code>highQuality</code>, <code>balanced</code>
+默认值为 <code>simple</code>.</p></div>
 	</div>
     <div class="prop">
         <h4 class="propTitle"><a class="anchor" name="clearbuttonmode"></a><span class="platform">ios</span>clearButtonMode <span class="propType">enum('never', 'while-editing', 'unless-editing', 'always')</span> <a class="hash-link" href="#clearbuttonmode">#</a></h4>
@@ -346,7 +342,7 @@ The default value is <code>simple</code>.</p></div>
     <div class="prop">
     	<h4 class="propTitle"><a class="anchor" name="datadetectortypes"></a><span class="platform">ios</span>dataDetectorTypes <span class="propType">enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all'), [object Object]</span> <a class="hash-link" href="#datadetectortypes">#</a></h4>
     	<div>
-    		<p>Determines the types of data converted to clickable URLs in the text input. Only valid if <code>multiline={true}</code> and <code>editable={false}</code>. By default no data types are detected.</p><p>You can provide one type or an array of many types.</p><p>Possible values for <code>dataDetectorTypes</code> are:</p>
+    		<p>设置 text input 内能被转化为可点击URL的数据的类型。当且仅当 <code>multiline={true}</code> 和 <code>editable={false}</code> 时起作用。默认情况下不检测任何数据类型。</p><p>可接受一个类型值或类型值数组。</p><p><code>dataDetectorTypes</code> 的可用值有:</p>
 			<ul>
 				<li><code>'phoneNumber'</code></li>
 				<li><code>'link'</code></li>
