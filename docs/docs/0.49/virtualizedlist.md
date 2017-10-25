@@ -45,18 +45,21 @@ NOTE: `LayoutAnimation` 和可粘接的section headers 在与 `VirtualizedList` 
     </div>
     <div class="prop">
       <h4 class="propTitle"><a class="anchor" name="getitemlayout"></a>getItemLayout?: <span class="propType">(data: any, index: number) =&gt; {length: number, offset: number, index: number}</span> <a class="hash-link" href="#getitemlayout">#</a></h4>
+      <p><code>getItemLayout</code>是一个可选的优化，用于避免动态测量内容尺寸的开销，不过前提是你可以提前知道内容的高度。如果你的行高是固定的，<code>getItemLayout</code>用起来就既高效又简单。</p>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="horizontal"></a>horizontal?: <span class="propType"><span>?boolean</span></span>
-        <a class="hash-link" href="#horizontal">#</a></h4></div>
+        <a class="hash-link" href="#horizontal">#</a></h4>
+        <p>设置为true则变为水平布局模式。</p>
+    </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="initialnumtorender"></a>initialNumToRender: <span
             class="propType">number</span> <a class="hash-link"
                                               href="#initialnumtorender">#</a></h4>
         <div><p>首批应该渲染的元素数量。这些元素应该能够覆盖住屏幕，但再多就不好了。注意：为了响应“滚动到顶部”这个事件并最优化其性能，这些元素将作为窗口渲染的一部分，永远不会被卸载。</p></div>
     </div>
-    <div class="prop"><h4 class="propTitle"><a class="anchor" name="keyextractor"></a>keyExtractor: <span
-            class="propType">(item: Item, index: number) =&gt; string</span> <a class="hash-link"
-                                                                                href="#keyextractor">#</a>
-    </h4></div>
+    <div class="prop"><h4 class="propTitle"><a class="anchor" name="keyextractor"></a>keyExtractor: <span class="propType">(item: Item, index: number) =&gt; string</span> <a class="hash-link" href="#keyextractor">#</a>
+    </h4>
+      <p>此函数用于为给定的item生成一个不重复的key。Key的作用是使React能够区分同类元素的不同个体，以便在刷新时能够确定其变化的位置，减少重新渲染的开销。若不指定此函数，则默认抽取item.key作为key值。若item.key也不存在，则使用数组下标。</p>
+    </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="maxtorenderperbatch"></a>maxToRenderPerBatch: <span
             class="propType">number</span> <a class="hash-link"
                                               href="#maxtorenderperbatch">#</a></h4>
@@ -65,18 +68,24 @@ NOTE: `LayoutAnimation` 和可粘接的section headers 在与 `VirtualizedList` 
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onendreached"></a>onEndReached?: <span
             class="propType"><span>?(info: {distanceFromEnd: number}) =&gt; void</span></span> <a class="hash-link"
                                                                                                   href="#onendreached">#</a>
-    </h4></div>
+    </h4>
+      <p>当列表被滚动到距离内容最底部不足 <code>onEndReachedThreshold</code> 的距离时调用。</p>
+    </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onendreachedthreshold"></a>onEndReachedThreshold?:
         <span class="propType"><span>?number</span></span> <a class="hash-link"
                                                               href="#onendreachedthreshold">#</a>
-    </h4></div>
+    </h4>
+      <p>决定当距离内容最底部还有多远时触发 <code>onEndReached</code> 回调。注意此参数是一个比值而非像素单位。比如，0.5表示距离内容最底部的距离为当前列表可见长度的一半时触发。</p>
+    </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onlayout"></a>onLayout?: <span
             class="propType"><span>?Function</span></span> <a class="hash-link"
-                                                              href="#onlayout">#</a></h4></div>
+                                                              href="#onlayout">#</a></h4>
+      <p>参见 <a href="view.html#onlayout">View#onlayout</a></p>
+    </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onrefresh"></a>onRefresh?: <span
             class="propType"><span>?Function</span></span> <a class="hash-link"
                                                               href="#onrefresh">#</a></h4>
-        <div><p>如果设置了这个属性，一个标准的 <em>刷新控制 </em> 功能就会被加入到“拉取刷新”功能中。要确保<code>refreshing</code>属性被正确设置。</p></div>
+        <div><p>如果设置了此选项，则会在列表头部添加一个标准的<code>RefreshControl</code>控件，以便实现“下拉刷新”的功能。同时你需要正确设置<code>refreshing</code>属性。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="onviewableitemschanged"></a>onViewableItemsChanged?:
         <span class="propType"><span>?(info: {
@@ -96,7 +105,9 @@ NOTE: `LayoutAnimation` 和可粘接的section headers 在与 `VirtualizedList` 
         <div><p></p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="renderitem"></a>renderItem: <span class="propType">(info: {item: Item, index: number}) =&gt; ?React.Element&lt;any&gt;</span>
-        <a class="hash-link" href="#renderitem">#</a></h4></div>
+        <a class="hash-link" href="#renderitem">#</a></h4>
+        <p>参见 <a href="flatlist.html#renderitem">FlatList#renderitem</a></p>
+    </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="renderscrollcomponent"></a>renderScrollComponent:
         <span class="propType">(props: Object) =&gt; React.Element&lt;any&gt;</span> <a class="hash-link" href="#renderscrollcomponent">#</a>
     </h4>
