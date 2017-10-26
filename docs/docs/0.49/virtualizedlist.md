@@ -1,6 +1,6 @@
-[`FlatList`](flatlist.html) and [`SectionList`](sectionlist.html) 的底层实现。`FlatList` 和 `SectionList` 使用起来更方便，同时也被更好的文档化。一般来说，仅当想获得比 `FlatList` 更高的灵活性（比如说在使用 immutable data 而不是 普通数组）的时候，你才会想使用 `VirtualizedList`。
+[`FlatList`](flatlist.html) and [`SectionList`](sectionlist.html) 的底层实现。`FlatList` 和 `SectionList` 使用起来更方便，同时也有相对更详细的文档。一般来说，仅当想获得比 `FlatList` 更高的灵活性（比如说在使用 immutable data 而不是 普通数组）的时候，你才应该考虑使用`VirtualizedList`。
 
-`Vritualization` 通过维护一个有限的渲染窗口（其中包含活跃元素），并将渲染窗口之外的元素全部用合适的定长空白空间代替的方式，极大的改善了内存消耗以及在有大量数据情况下的使用性能。这个渲染窗口能响应滚动行为。当一个元素离可视区太远时，它就有一个较低优先级；否则就获得一个较高的优先级。渲染窗口通过这种方式逐步渲染其中的元素（在进行了任何交互之后），以最小化见到空白区域的可能性。
+`Vritualization` 通过维护一个有限的渲染窗口（其中包含可见的元素），并将渲染窗口之外的元素全部用合适的定长空白空间代替的方式，极大的改善了内存消耗以及在有大量数据情况下的使用性能。这个渲染窗口能响应滚动行为。当一个元素离可视区太远时，它就有一个较低优先级；否则就获得一个较高的优先级。渲染窗口通过这种方式逐步渲染其中的元素（在进行了任何交互之后），以尽量减少出现空白区域的可能性。
 
 注意事项：
 
@@ -23,12 +23,12 @@ NOTE: `LayoutAnimation` 和可粘接的section headers 在与 `VirtualizedList` 
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="debug"></a>debug?: <span class="propType"><span>?boolean</span></span>
         <a class="hash-link" href="#debug">#</a></h4>
-        <div><p>开启格外的日志和视觉覆盖功能，来协助对使用和实现的调试。但是会严重地影响性能。</p></div>
+        <div><p>开启额外的日志和视觉覆盖功能，来协助对使用和实现的调试。但是会严重地影响性能。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="disablevirtualization"></a>disableVirtualization:
         <span class="propType">boolean</span> <a class="hash-link"
                                                  href="#disablevirtualization">#</a></h4>
-        <div><p>警告: Virtualization 提供了显著的性能和内存优化，并且完全卸载了位于可视区之外的 react 实例。当且仅当为了调试，你才可以关闭这个特性。</p></div>
+        <div><p>已过时: Virtualization 提供了显著的性能和内存优化，并且完全卸载了位于可视区之外的 react 实例。当且仅当为了调试，你才可以关闭这个特性。</p></div>
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="extradata"></a>extraData?: <span class="propType">any</span>
         <a class="hash-link" href="#extradata">#</a></h4>

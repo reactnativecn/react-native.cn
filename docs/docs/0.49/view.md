@@ -85,7 +85,7 @@
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onresponderrelease"></a>onResponderRelease <span class="propType">function</span> <a class="hash-link" href="#onresponderrelease">#</a></h4>
 		<div>
-		  <p>在整个触摸事件的末尾调用这个函数。</p>
+		  <p>在整个触摸事件的结束时调用这个函数。</p>
 			<p><code>View.props.onResponderRelease: (event) => {}</code>, 其中 event 是一个合成触摸事件。</p>
 		</div>
 	</div>
@@ -106,14 +106,14 @@
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onstartshouldsetresponder"></a>onStartShouldSetResponder <span class="propType">function</span> <a class="hash-link" href="#onstartshouldsetresponder">#</a></h4>
 		<div>
-		  <p>设置这个视图是否要相应 touch start 事件。</p>
+		  <p>设置这个视图是否要响应 touch start 事件。</p>
 			<p><code>View.props.onStartShouldSetResponder: (event) => [true | false]</code>, 其中 event 是一个合成触摸事件。</p>
 		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onstartshouldsetrespondercapture"></a>onStartShouldSetResponderCapture <span class="propType">function</span> <a class="hash-link" href="#onstartshouldsetrespondercapture">#</a></h4>
 		<div>
-		  <p>如果父视图想要阻止子视图相应 touch start 事件，它就应该设置这个方法并返回 true。</p>
+		  <p>如果父视图想要阻止子视图响应 touch start 事件，它就应该设置这个方法并返回 true。</p>
 			<p><code>View.props.onStartShouldSetResponderCapture: (event) => [true | false]</code>, 其中 event 是一个合成触摸事件。</p>
 		</div>
 	</div>

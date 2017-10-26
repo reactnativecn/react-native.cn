@@ -165,7 +165,7 @@ class MyList extends React.PureComponent {
     <div class="prop">
 	    <h4 class="propTitle"><a class="anchor" name="initialscrollindex"></a>initialScrollIndex?: <span class="propType"><span>?number</span></span> <a class="hash-link" href="#initialscrollindex">#</a>
 	    </h4>
-    <div><p>开始时屏幕顶端的元素是列表中的第 <code>initialScrollIndex</code> 个元素, 而不是第一个元素。设置这个属性会关闭对“滚动到顶端”这个动作的优化（参见<code>VirtualizedList</code> 的 <code>initialNumToRender</code> 属性)。位于 <code>initialScrollIndex</code> 位置的元素总是会被立刻渲染。</p></div>
+    <div><p>开始时屏幕顶端的元素是列表中的第 <code>initialScrollIndex</code> 个元素, 而不是第一个元素。设置这个属性会关闭对“滚动到顶端”这个动作的优化（参见<code>VirtualizedList</code> 的 <code>initialNumToRender</code> 属性)。位于 <code>initialScrollIndex</code> 位置的元素总是会被立刻渲染。需要先设置 <code>getItemLayout</code> 属性。</p></div>
 	</div>
     <div class="prop">
     	<h4 class="propTitle"><a class="anchor" name="inverted"></a>inverted?: <span class="propType"><span>?boolean</span></span> <a class="hash-link" href="#inverted">#</a></h4>
@@ -220,22 +220,24 @@ class MyList extends React.PureComponent {
             class="propType"><code>(info: {item: ItemT, index: number}) =&gt; ?React.Element&lt;any&gt;</code></span> <a
             class="hash-link" href="#renderitem">#</a></h4>
         <div><p>根据行数据<code>data</code>渲染每一行的组件。典型用法：</p>
-			<div class="prism language-javascript">&lt;FlatList
-			  ItemSeparatorComponent<span class="token operator">=</span><span class="token punctuation">{</span>Platform<span class="token punctuation">.</span>OS <span class="token operator">!</span><span class="token operator">==</span> <span class="token string">'android'</span> &amp;&amp; <span class="token punctuation">(</span><span class="token punctuation">{</span>highlighted<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">(</span>
-			    &lt;View style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span>style<span class="token punctuation">.</span>separator<span class="token punctuation">,</span> highlighted &amp;&amp; <span class="token punctuation">{</span>marginLeft<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
-			  <span class="token punctuation">)</span><span class="token punctuation">}</span>
-			  data<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token punctuation">{</span>title<span class="token punctuation">:</span> <span class="token string">'Title Text'</span><span class="token punctuation">,</span> key<span class="token punctuation">:</span> <span class="token string">'item1'</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">}</span>
-			  renderItem<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">{</span>item<span class="token punctuation">,</span> separators<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">(</span>
-			    &lt;TouchableHighlight
-			      onPress<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_onPress<span class="token punctuation">(</span></span>item<span class="token punctuation">)</span><span class="token punctuation">}</span>
-			      onShowUnderlay<span class="token operator">=</span><span class="token punctuation">{</span>separators<span class="token punctuation">.</span>highlight<span class="token punctuation">}</span>
-			      onHideUnderlay<span class="token operator">=</span><span class="token punctuation">{</span>separators<span class="token punctuation">.</span>unhighlight<span class="token punctuation">}</span><span class="token operator">&gt;</span>
-			      &lt;View style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>backgroundColor<span class="token punctuation">:</span> <span class="token string">'white'</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>
-			        &lt;Text<span class="token operator">&gt;</span><span class="token punctuation">{</span>item<span class="token punctuation">.</span>title<span class="token punctuation">}</span><span class="token punctuation">}</span>&lt;<span class="token operator">/</span>Text<span class="token operator">&gt;</span>
-			      &lt;<span class="token operator">/</span>View<span class="token operator">&gt;</span>
-			    &lt;<span class="token operator">/</span>TouchableHighlight<span class="token operator">&gt;</span>
-			  <span class="token punctuation">)</span><span class="token punctuation">}</span>
-			<span class="token operator">/</span><span class="token operator">&gt;</span></div>
+			<div class="prism language-javascript">
+<pre>
+&lt;FlatList
+  ItemSeparatorComponent={Platform.OS !== 'android' && ({highlighted}) => (&lt;View style={[style.separator, highlighted && {marginLeft: 0}]} /> )} 
+  data={[{title: 'Title Text', key: 'item1'}]}
+  renderItem={({item, separators}) => (
+    &lt;TouchableHighlight
+      onPress={() => this._onPress(item)}
+      onShowUnderlay={separators.highlight}
+      onHideUnderlay={separators.unhighlight}> 
+      &lt;View style={{backgroundColor: 'white'}}>
+        &lt;Text>{item.title}}&lt;/Text>
+      &lt;/View>
+    &lt;/TouchableHighlight>
+  )}
+/>
+</pre>
+</div>
           <p>如果需要的话，你可以设置 <code>index</code> 属性的值。同样，如果 <code>highlight</code> 和 <code>unhightlight</code>（这两个方法设置 <code>highlighted: boolean</code> 属性） 不能满足你的要求的话，你也可以提供一个更加通用的 <code>separators.updateProps</code> 方法。通过这个方法，你可以设置一些属性来改变列表的顶部分隔符和底部分隔符的样式。</p>
         </div>
     </div>
@@ -263,7 +265,7 @@ class MyList extends React.PureComponent {
             class="methodType">(params: object)</span> <a class="hash-link"
                                                           href="#scrolltoindex">#</a></h4>
         <div>
-          <p>将位于指定序号的元素滚动到可视区的制定位置，当 <code>viewPosition</code> 为 0 时将它滚动到屏幕顶部，为 1 时将它滚动到屏幕底部，为 0.5 时将它滚动到屏幕中央。</p>
+          <p>将位于指定位置的元素滚动到可视区的指定位置，当 <code>viewPosition</code> 为 0 时将它滚动到屏幕顶部，为 1 时将它滚动到屏幕底部，为 0.5 时将它滚动到屏幕中央。</p>
           <p>如果不设置<code>getItemLayout</code>属性的话，无法跳转到当前可视区域以外的位置。</p>
         </div>
     </div>
@@ -276,12 +278,12 @@ class MyList extends React.PureComponent {
             class="methodType">(params: object)</span> <a class="hash-link"
             href="#scrolltooffset">#</a></h4>
         <div>
-          <p>滚动列表到指定的偏移（以像素为单位）。这是列表表现的就像普通的 <code>ScrollView</code> 一样。</p>
+          <p>滚动列表到指定的偏移（以像素为单位），等同于 <code>ScrollView</code> 的 <code>scrollTo</code> 方法。</p>
         </div>
     </div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="recordinteraction"></a>recordInteraction<span
             class="methodType">()</span> <a class="hash-link" href="#recordinteraction">#</a></h4>
-        <div><p>通知列表发生了一个事件，而这个事件触发了可视性计算，比如说当<code>waitForInteractions</code> 为 true 并且用户没有滚动列表时，就可以调用这个方法。不过一般来说，当用户点击了一个列表项，或发生了一个导航动作时，我们就可以调用这个方法。</p></div>
+        <div><p>主动通知列表发生了一个事件，以使列表重新计算可视区域。比如说当<code>waitForInteractions</code> 为 true 并且用户没有滚动列表时，就可以调用这个方法。不过一般来说，当用户点击了一个列表项，或发生了一个导航动作时，我们就可以调用这个方法。</p></div>
     </div>
     <div class="prop">
     	<h4 class="methodTitle"><a class="anchor" name="flashscrollindicators"></a>flashScrollIndicators<span class="methodType">()</span> <a class="hash-link" href="#flashscrollindicators">#</a></h4>
