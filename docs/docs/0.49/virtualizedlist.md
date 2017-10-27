@@ -124,7 +124,7 @@ NOTE: `LayoutAnimation` 和可粘接的section headers 在与 `VirtualizedList` 
     </div>
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="windowsize"></a>windowSize: <span class="propType">number</span>
         <a class="hash-link" href="#windowsize">#</a></h4>
-        <div><p>设置可视区外最大能被渲染的元素的数量，以可视区的长度为单位。比如说，如果列表占满了整个屏幕，而<code>windowSize</code>属性被设置为 <i>21</i> 的话，那渲染的长度为包括当前可见屏幕区域在内，往上10个屏幕的长度和往下10个屏幕的长度。将<code>windowSize</code>设置为一个较小值，能有减小内存消耗并提高性能，但是当你快速滚动列表时，遇到尚未渲染的内容的几率会增大，而这些尚未渲染的内容会暂时性地被黑色区块所替代。</p></div>
+        <div><p>设置可视区外最大能被渲染的元素的数量，以可视区的长度为单位。比如说，如果列表占满了整个屏幕，而<code>windowSize</code>属性被设置为 <i>21</i> 的话，那渲染的长度为包括当前可见屏幕区域在内，往上10个屏幕的长度和往下10个屏幕的长度。将<code>windowSize</code>设置为一个较小值，能有减小内存消耗并提高性能，但是当你快速滚动列表时，遇到尚未渲染的内容的几率会增大，而这些尚未渲染的内容会暂时性地被空白区块所替代。</p></div>
     </div>
 </div>
 
