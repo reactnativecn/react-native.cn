@@ -50,9 +50,17 @@
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onmoveshouldsetresponder"></a>onMoveShouldSetResponder <span class="propType">function</span> <a class="hash-link" href="#onmoveshouldsetresponder">#</a></h4>
+		<div>
+		  <p>这个视图想要“认领”这个 touch move 事件吗？每当有touch move事件在这个视图中发生，并且这个视图没有被设置为这个 touch move 的响应时，这个函数就会被调用。</p>
+			<p><code>View.props.onMoveShouldSetResponder: (event) => [true | false]</code>, 其中 event 是一个合成触摸事件。</p>
+		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onmoveshouldsetrespondercapture"></a>onMoveShouldSetResponderCapture <span class="propType">function</span> <a class="hash-link" href="#onmoveshouldsetrespondercapture">#</a></h4>
+		<div>
+		  <p>如果父视图想要阻止子视图响应 touch move 事件时，它就应该设置这个方法并返回 <code>true</code></p>
+			<p><code>View.props.onMoveShouldSetResponderCapture: (event) => [true | false]</code>, 其中 event 是一个合成触摸事件。</p>
+		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onrespondergrant"></a>onResponderGrant <span class="propType">function</span> <a class="hash-link" href="#onrespondergrant">#</a></h4>
@@ -62,24 +70,52 @@
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onrespondermove"></a>onResponderMove <span class="propType">function</span> <a class="hash-link" href="#onrespondermove">#</a></h4>
+		<div>
+		  <p>当用户正在屏幕上移动手指时调用这个函数。</p>
+			<p><code>View.props.onResponderMove: (event) => {}</code>, 其中 event 是一个合成触摸事件。</p>
+		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onresponderreject"></a>onResponderReject <span class="propType">function</span> <a class="hash-link" href="#onresponderreject">#</a></h4>
+		<div>
+		  <p>有一个响应器正处于活跃状态，并且不会向另一个要求响应这个事件的视图释放这个事件。</p>
+			<p><code>View.props.onResponderReject: (event) => {}</code>, 其中 event 是一个合成触摸事件。</p>
+		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onresponderrelease"></a>onResponderRelease <span class="propType">function</span> <a class="hash-link" href="#onresponderrelease">#</a></h4>
+		<div>
+		  <p>在整个触摸事件结束时调用这个函数。</p>
+			<p><code>View.props.onResponderRelease: (event) => {}</code>, 其中 event 是一个合成触摸事件。</p>
+		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onresponderterminate"></a>onResponderTerminate <span class="propType">function</span> <a class="hash-link" href="#onresponderterminate">#</a></h4>
+		<div>
+		  <p>响应被从这个视图上“劫走”了。可能是在调用了<code>onResponderTerminationRequest</code>之后，被另一个视图“劫走”了（见<code>onresponderterminationrequest</code>), 也可能是由于 OS 无条件终止了响应（比如说被 iOS 上的控制中心／消息中心）</p>
+			<p><code>View.props.onResponderTerminate: (event) => {}</code>, 其中 event 是一个合成触摸事件。</p>
+		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onresponderterminationrequest"></a>onResponderTerminationRequest <span class="propType">function</span> <a class="hash-link" href="#onresponderterminationrequest">#</a></h4>
+		<div>
+		  <p>其他某个视图想要成为事件的响应者，并要求这个视图放弃对事件的响应时，就会调用这个函数。如果允许释放响应，就返回<code>true</code></p>
+			<p><code>View.props.onResponderTerminationRequest: (event) => {}</code>, 其中 event 是一个合成触摸事件。</p>
+		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onstartshouldsetresponder"></a>onStartShouldSetResponder <span class="propType">function</span> <a class="hash-link" href="#onstartshouldsetresponder">#</a></h4>
+		<div>
+		  <p>设置这个视图是否要响应 touch start 事件。</p>
+			<p><code>View.props.onStartShouldSetResponder: (event) => [true | false]</code>, 其中 event 是一个合成触摸事件。</p>
+		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onstartshouldsetrespondercapture"></a>onStartShouldSetResponderCapture <span class="propType">function</span> <a class="hash-link" href="#onstartshouldsetrespondercapture">#</a></h4>
+		<div>
+		  <p>如果父视图想要阻止子视图响应 touch start 事件，它就应该设置这个方法并返回 true。</p>
+			<p><code>View.props.onStartShouldSetResponderCapture: (event) => [true | false]</code>, 其中 event 是一个合成触摸事件。</p>
+		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="pointerevents"></a>pointerEvents <span class="propType">enum('box-none', 'none', 'box-only', 'auto')</span> <a class="hash-link" href="#pointerevents">#</a></h4>

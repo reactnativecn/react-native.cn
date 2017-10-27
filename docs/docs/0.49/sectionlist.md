@@ -159,7 +159,7 @@
 		<p>注意: 如果没有设置<code>getItemLayout</code>，就不能滚动到位于外部渲染区的位置。</p></div></div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="recordinteraction"></a>recordInteraction<span
             class="methodType">()</span> <a class="hash-link" href="#recordinteraction">#</a></h4>
-        <div><p>通知列表发生了一个事件，而这个事件触发了可视性计算，比如说当<code>waitForInteractions</code> 为 true 并且用户没有滚动列表时，就可以调用这个方法。不过一般来说，当用户点击了一个列表项，或发生了一个导航动作时，我们就可以调用这个方法。</p></div>
+        <div><p>主动通知列表发生了一个事件，以使列表重新计算可视区域。比如说当<code>waitForInteractions</code> 为 true 并且用户没有滚动列表时，就可以调用这个方法。不过一般来说，当用户点击了一个列表项，或发生了一个导航动作时，我们就可以调用这个方法。</p></div>
     </div>
     <div class="prop">
     	<h4 class="methodTitle"><a class="anchor" name="flashscrollindicators"></a>flashScrollIndicators<span class="methodType">()</span> <a class="hash-link" href="#flashscrollindicators">#</a></h4>
