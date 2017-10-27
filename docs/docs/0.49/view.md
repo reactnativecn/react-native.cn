@@ -71,7 +71,7 @@
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onrespondermove"></a>onResponderMove <span class="propType">function</span> <a class="hash-link" href="#onrespondermove">#</a></h4>
 		<div>
-		  <p>当用户正在移动他的手指时调用这个函数。</p>
+		  <p>当用户正在屏幕上移动手指时调用这个函数。</p>
 			<p><code>View.props.onResponderMove: (event) => {}</code>, 其中 event 是一个合成触摸事件。</p>
 		</div>
 	</div>
@@ -85,7 +85,7 @@
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onresponderrelease"></a>onResponderRelease <span class="propType">function</span> <a class="hash-link" href="#onresponderrelease">#</a></h4>
 		<div>
-		  <p>在整个触摸事件的结束时调用这个函数。</p>
+		  <p>在整个触摸事件结束时调用这个函数。</p>
 			<p><code>View.props.onResponderRelease: (event) => {}</code>, 其中 event 是一个合成触摸事件。</p>
 		</div>
 	</div>
