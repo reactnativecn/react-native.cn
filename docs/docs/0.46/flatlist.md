@@ -171,10 +171,7 @@ class MyList extends React.PureComponent {
 		<code>getItemLayout</code> to be implemented.</p>
 		</div>
 	</div>
-    <div class="prop">
-    	<h4 class="propTitle"><a class="anchor" name="inverted"></a>inverted?: <span class="propType"><span>?boolean</span></span> <a class="hash-link" href="#inverted">#</a></h4>
-    	<div><p>翻转滚动方向。实质是将scale变换设置为-1。</p></div>
-	</div>
+
     <div class="prop">
 	    <h4 class="propTitle"><a class="anchor" name="keyextractor"></a>keyExtractor: <span
 	            class="propType"><code>(item: ItemT, index: number) =&gt; string</code></span> <a class="hash-link" href="#keyextractor">#</a>
