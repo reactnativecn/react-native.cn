@@ -1,11 +1,11 @@
 NetInfo模块可以获知设备联网或离线的状态信息。  
 
 ```javascript
-NetInfo.fetch().done((reach) => {
-  console.log('Initial: ' + reach);
+NetInfo.getConnectionInfo().then((connectionInfo) => {
+  console.log('Initial, type: ' + connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType);
 });
-function handleFirstConnectivityChange(reach) {
-  console.log('First change: ' + reach);
+function handleFirstConnectivityChange(connectionInfo) {
+  console.log('First change, type: ' + connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType);
   NetInfo.removeEventListener(
     'connectionChange',
     handleFirstConnectivityChange
