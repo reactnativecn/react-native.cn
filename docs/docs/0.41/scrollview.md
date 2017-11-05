@@ -4,6 +4,12 @@
 
 ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者。
 
+`ScrollView`和`ListView/FlatList`应该如何选择？ScrollView会简单粗暴地把所有子元素一次性全部渲染出来。其原理浅显易懂，使用上自然也最简单。然而这样简单的渲染逻辑自然带来了性能上的不足。想象一下你有一个特别长的列表需要显示，可能有好几屏的高度。创建和渲染那些屏幕以外的JS组件和原生视图，显然对于渲染性能和内存占用都是一种极大的拖累和浪费。
+
+这就是为什么我们还有专门的`ListView`组件。`ListView`会惰性渲染子元素，只在它们将要出现在屏幕中时开始渲染。这种惰性渲染逻辑要复杂很多，因而API在使用上也更为繁琐。除非你要渲染的数据特别少，否则你都应该尽量使用`ListView`，哪怕它们用起来更麻烦。
+
+`FlatList`是0.43版本开始新出的改进版的`ListView`，性能更优，但可能不够稳定，尚待时间考验。
+
 ### 属性
 
 <div class="props">
@@ -62,6 +68,14 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	        <p>调用参数为内容视图的宽和高: <code>(contentWidth,
 	            contentHeight)</code></p>
 	        <p>此方法是通过绑定在内容容器上的onLayout来实现的。</p></div>
+	</div>
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="onmomentumscrollstart"></a>onMomentumScrollStart?: <span class="propType">function</span> <a class="hash-link" href="#onmomentumscrollstart">#</a></h4>
+		<div><p>滚动动画开始时调用此函数。</p></div>
+	</div>
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="onmomentumscrollend"></a>onMomentumScrollEnd?: <span class="propType">function</span> <a class="hash-link" href="#onmomentumscrollend">#</a></h4>
+		<div><p>滚动动画结束时调用此函数。</p></div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onscroll"></a>onScroll <span class="propType">function</span> <a class="hash-link" href="#onscroll">#</a></h4>
@@ -180,12 +194,35 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	    <h4 class="propTitle">
 	        <a class="anchor" name="endfillcolor"></a>
 	        <span class="platform">android</span>endFillColor
-	        <span class="propType"><a href="colors.html">color</a></span> 
+	        <span class="propType"><a href="colors.html">color</a></span>
 	        <a class="hash-link" href="#endfillcolor">#</a>
 	    </h4>
 	    <div>
 	        <p>有时候滚动视图会占据比实际内容更多的空间。这种情况下可以使用此属性，指定以某种颜色来填充多余的空间，以避免设置背景和创建不必要的绘制开销。一般情况下并不需要这种高级优化技巧。</p>
 	    </div>
+	</div>
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="overscrollmode"></a><span
+        class="platform">android</span>overScrollMode <span class="propType">enum('auto', 'always', 'never')</span> <a
+        class="hash-link" href="#overscrollmode">#</a></h4>
+    <div><p>覆盖默认的overScroll模式</p>
+        <p>可选的值有：</p>
+        <ul>
+            <li><code>'auto'</code> - 默认值，允许用户在内容超出视图高度之后可以滚动视图。
+            </li>
+            <li><code>'always'</code> - 无论内容尺寸，用户始终可以滚动视图。</li>
+            <li><code>'never'</code> - 始终不允许用户滚动视图。</li>
+        </ul>
+    		</div>
+  </div>
+  <div class="prop">
+    	<h4 class="propTitle"><a class="anchor" name="scrollperftag"></a><span class="platform">android</span>scrollPerfTag
+    <span class="propType">string</span> <a class="hash-link" href="#scrollperftag">#</a></h4>
+	    <div><p>Tag used to log scroll performance on this scroll view. Will force
+	        momentum events to be turned on (see sendMomentumEvents). This doesn't do
+	        anything out of the box and you need to implement a custom native
+	        FpsListener for it to be useful.</p>
+			</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="alwaysbouncehorizontal"></a><span class="platform">ios</span>alwaysBounceHorizontal <span class="propType">bool</span> <a class="hash-link" href="#alwaysbouncehorizontal">#</a></h4>
@@ -202,13 +239,13 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="automaticallyadjustcontentinsets"></a><span class="platform">ios</span>automaticallyAdjustContentInsets <span class="propType">bool</span> <a class="hash-link" href="#automaticallyadjustcontentinsets">#</a></h4>
 		<div>
-			<p>如果滚动视图放在一个导航条或者工具条后面的时候，iOS系统是否要自动调整内容的范围。默认值为true。（译注：如果你的ScrollView或ListView的头部出现莫名其妙的空白，尝试将此属性置为false）</p>
+			<p>当滚动视图放在一个导航条或者工具条后面的时候，iOS系统是否要自动调整内容的范围。默认值为true。（译注：如果你的ScrollView或ListView的头部出现莫名其妙的空白，尝试将此属性置为false）</p>
 		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="bounces"></a><span class="platform">ios</span>bounces <span class="propType">bool</span> <a class="hash-link" href="#bounces">#</a></h4>
 		<div>
-			<p>当值为true时，如果内容范围比滚动视图本身大，在到达内容末尾的时候，可以弹性地拉动一截。如果为false，尾部的所有弹性都会被禁用，即使<code>alwaysBounce*</code>属性为true。默认值为true。</p>
+			<p>当值为true时，如果内容范围比滚动视图本身大，在到达内容末尾的时候，可以弹性地拉动一截。如果为false，尾部的所有弹性都会被禁用，即使<code>alwaysBounce</code>属性为true。默认值为true。</p>
 		</div>
 	</div>
 	<div class="prop">
@@ -258,6 +295,19 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 		</div>
 	</div>
 	<div class="prop">
+    <h4 class="propTitle"><a class="anchor" name="indicatorstyle"></a><span class="platform">ios</span>indicatorStyle
+    <span class="propType">enum('default', 'black', 'white')</span> <a class="hash-link"
+                                                                       href="#indicatorstyle">#</a>
+    </h4>
+    <div><p>设置滚动条的样式。</p>
+        <ul>
+            <li><code>default</code>，默认值，等同<code>black</code>.</li>
+            <li><code>black</code>，黑色滚动条。</li>
+            <li><code>white</code>，白色滚动条。</li>
+        </ul>
+    </div>
+	</div>
+	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="maximumzoomscale"></a><span class="platform">ios</span>maximumZoomScale <span class="propType">number</span> <a class="hash-link" href="#maximumzoomscale">#</a></h4>
 		<div>
 			<p>允许的最大缩放比例。默认值为1.0。</p>
@@ -277,12 +327,6 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	</div>
 	</div>
 	</div>
-	</div>
-	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="onscrollanimationend"></a><span class="platform">ios</span>onScrollAnimationEnd <span class="propType">function</span> <a class="hash-link" href="#onscrollanimationend">#</a></h4>
-		<div>
-			<p>当滚动动画结束之后调用此回调。</p>
-		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="pagingenabled"></a>pagingEnabled <span class="propType">bool</span> <a class="hash-link" href="#pagingenabled">#</a></h4>
@@ -332,7 +376,7 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 		</div>
 	</div>
 	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="stickyheaderindices"></a><span class="platform">ios</span>stickyHeaderIndices <span class="propType">[number]</span> <a class="hash-link" href="#stickyheaderindices">#</a></h4>
+		<h4 class="propTitle"><a class="anchor" name="stickyheaderindices"></a>stickyHeaderIndices <span class="propType">[number]</span> <a class="hash-link" href="#stickyheaderindices">#</a></h4>
 		<div>
 			<p>一个子视图下标的数组，用于决定哪些成员会在滚动之后固定在屏幕顶端。举个例子，传递<code>stickyHeaderIndices={[0]}</code>会让第一个成员固定在滚动视图顶端。这个属性不能和<code>horizontal={true}</code>一起使用。</p>
 		</div>

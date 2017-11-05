@@ -194,7 +194,7 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	    <h4 class="propTitle">
 	        <a class="anchor" name="endfillcolor"></a>
 	        <span class="platform">android</span>endFillColor
-	        <span class="propType"><a href="colors.html">color</a></span> 
+	        <span class="propType"><a href="colors.html">color</a></span>
 	        <a class="hash-link" href="#endfillcolor">#</a>
 	    </h4>
 	    <div>
@@ -213,16 +213,16 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
             <li><code>'always'</code> - 无论内容尺寸，用户始终可以滚动视图。</li>
             <li><code>'never'</code> - 始终不允许用户滚动视图。</li>
         </ul>
-    </div>
-    </div>
-    <div class="prop">
+    		</div>
+  </div>
+  <div class="prop">
     	<h4 class="propTitle"><a class="anchor" name="scrollperftag"></a><span class="platform">android</span>scrollPerfTag
     <span class="propType">string</span> <a class="hash-link" href="#scrollperftag">#</a></h4>
 	    <div><p>Tag used to log scroll performance on this scroll view. Will force
 	        momentum events to be turned on (see sendMomentumEvents). This doesn't do
 	        anything out of the box and you need to implement a custom native
-	        FpsListener for it to be useful.</p></div>
-		</div>
+	        FpsListener for it to be useful.</p>
+			</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="alwaysbouncehorizontal"></a><span class="platform">ios</span>alwaysBounceHorizontal <span class="propType">bool</span> <a class="hash-link" href="#alwaysbouncehorizontal">#</a></h4>

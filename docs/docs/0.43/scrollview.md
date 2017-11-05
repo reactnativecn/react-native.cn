@@ -70,6 +70,14 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	        <p>此方法是通过绑定在内容容器上的onLayout来实现的。</p></div>
 	</div>
 	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="onmomentumscrollstart"></a>onMomentumScrollStart?: <span class="propType">function</span> <a class="hash-link" href="#onmomentumscrollstart">#</a></h4>
+		<div><p>滚动动画开始时调用此函数。</p></div>
+	</div>
+	<div class="prop">
+		<h4 class="propTitle"><a class="anchor" name="onmomentumscrollend"></a>onMomentumScrollEnd?: <span class="propType">function</span> <a class="hash-link" href="#onmomentumscrollend">#</a></h4>
+		<div><p>滚动动画结束时调用此函数。</p></div>
+	</div>
+	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onscroll"></a>onScroll <span class="propType">function</span> <a class="hash-link" href="#onscroll">#</a></h4>
 		<div>
 			<p>在滚动的过程中，每帧最多调用一次此回调函数。调用的频率可以用<code>scrollEventThrottle</code>属性来控制。</p>
@@ -186,7 +194,7 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	    <h4 class="propTitle">
 	        <a class="anchor" name="endfillcolor"></a>
 	        <span class="platform">android</span>endFillColor
-	        <span class="propType"><a href="colors.html">color</a></span> 
+	        <span class="propType"><a href="colors.html">color</a></span>
 	        <a class="hash-link" href="#endfillcolor">#</a>
 	    </h4>
 	    <div>
@@ -205,16 +213,16 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
             <li><code>'always'</code> - 无论内容尺寸，用户始终可以滚动视图。</li>
             <li><code>'never'</code> - 始终不允许用户滚动视图。</li>
         </ul>
-    </div>
-    </div>
-    <div class="prop">
+    		</div>
+  </div>
+  <div class="prop">
     	<h4 class="propTitle"><a class="anchor" name="scrollperftag"></a><span class="platform">android</span>scrollPerfTag
     <span class="propType">string</span> <a class="hash-link" href="#scrollperftag">#</a></h4>
 	    <div><p>Tag used to log scroll performance on this scroll view. Will force
 	        momentum events to be turned on (see sendMomentumEvents). This doesn't do
 	        anything out of the box and you need to implement a custom native
-	        FpsListener for it to be useful.</p></div>
-		</div>
+	        FpsListener for it to be useful.</p>
+			</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="alwaysbouncehorizontal"></a><span class="platform">ios</span>alwaysBounceHorizontal <span class="propType">bool</span> <a class="hash-link" href="#alwaysbouncehorizontal">#</a></h4>
@@ -319,12 +327,6 @@ ScrollView内部的其他响应者尚无法阻止ScrollView本身成为响应者
 	</div>
 	</div>
 	</div>
-	</div>
-	<div class="prop">
-		<h4 class="propTitle"><a class="anchor" name="onscrollanimationend"></a><span class="platform">ios</span>onScrollAnimationEnd <span class="propType">function</span> <a class="hash-link" href="#onscrollanimationend">#</a></h4>
-		<div>
-			<p>当滚动动画结束之后调用此回调。</p>
-		</div>
 	</div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="pagingenabled"></a>pagingEnabled <span class="propType">bool</span> <a class="hash-link" href="#pagingenabled">#</a></h4>
