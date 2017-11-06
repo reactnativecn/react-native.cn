@@ -29,6 +29,9 @@
 				<li><code>excludedActivityTypes</code>（数组） - 指定在actionsheet中不显示的活动</li>
 			</ul>
 			<p>注：如果<code>url</code>指向本地文件，或者是一个base64编码的url，则会直接读取并分享相应的文件。你可以用这样的方式来分享图片、视频以及PDF文件等。</p>
+      <p>The 'failureCallback' function takes one parameter, an error object. The only property defined on this object is an optional <code>stack</code> property of type <code>string</code>.</p>
+      <p>The 'successCallback' function takes two parameters:</p>
+      <ul><li>a boolean value signifying success or failure</li><li>a string that, in the case of success, indicates the method of sharing</li></ul>
 		</div>
 </div>
 </div>
