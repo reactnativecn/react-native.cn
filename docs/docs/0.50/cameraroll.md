@@ -5,6 +5,9 @@
 ### iOS 10的权限要求
 从iOS10开始，访问相册需要用户授权。你需要在`Info.plist`中添加一条名为`NSPhotoLibraryUsageDescription`的键，然后在其值中填写向用户请求权限的具体描述。编辑完成后这个键在Xcode中实际会显示为`Privacy - Photo Library Usage Description`。
 
+### iOS 11的权限要求
+从iOS11开始，写入相册需要用户授权。你需要在`Info.plist`中添加一条名为`NSPhotoLibraryAddUsageDescription`的键，然后在其值中填写向用户请求权限的具体描述。编辑完成后这个键在Xcode中实际会显示为`Privacy - Photo Library Additions Usage Description`。而名为`NSPhotoLibraryUsageDescription`的键无需添加，系统默认开启读取相册的权限。
+
 ### 截图
 ![cameraroll](img/api/cameraroll.png)
 
