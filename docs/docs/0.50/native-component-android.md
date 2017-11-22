@@ -6,7 +6,7 @@
 
 在这个例子里，我们来看看为了让JavaScript中可以使用ImageView，需要做哪些准备工作。
 
-原生视图需要被一个`ViewManager`的派生类（或者更常见的，`SimpleViewManage`的派生类）创建和管理。一个`SimpleViewManager`可以用于这个场景，是因为它能够包含更多公共的属性，譬如背景颜色、透明度、Flexbox布局等等。
+原生视图需要被一个`ViewManager`的派生类（或者更常见的，`SimpleViewManager`的派生类）创建和管理。一个`SimpleViewManager`可以用于这个场景，是因为它能够包含更多公共的属性，譬如背景颜色、透明度、Flexbox布局等等。
 
 这些子类本质上都是单例——React Native只会为每个管理器创建一个实例。它们创建原生的视图并提供给`NativeViewHierarchyManager`，NativeViewHierarchyManager则会反过来委托它们在需要的时候去设置和更新视图的属性。`ViewManager`还会代理视图的所有委托，并给JavaScript发回对应的事件。
 
@@ -60,7 +60,7 @@ public class ReactImageManager extends SimpleViewManager<ReactImageView> {
 
 ```java
   @ReactProp(name = "src")
-  public void setSrc(ReactImageView view, @Nullable String src) {
+  public void setSrc(ReactImageView view, @Nullable ReadableArray src) {
     view.setSource(src);
   }
   
