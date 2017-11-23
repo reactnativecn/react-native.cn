@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 AppRegistry.registerComponent('AwesomeProject', () => FlatListBasics);
 ```
 
-如果要渲染的是一组分组的数据，比如带个分组标签的， 那么`SectionList`将是个良好的选择.
+如果要渲染的是一组需要分组的数据，也许还带有分组标签的，那么`SectionList`将是个不错的选择.
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
