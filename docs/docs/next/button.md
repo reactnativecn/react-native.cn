@@ -2,8 +2,10 @@
 
 ![](img/components/buttonExample.png)
 
-如果这个组件外观并不怎么搭配你的设计，那你可以使用`TouchableOpacity`或是`TouchableNativeFeedback`组件来制作自己所需要的按钮，视频教程[如何制作一个按钮](http://v.youku.com/v_show/id_XMTQ5OTE3MjkzNg==.html?f=26822355&from=y1.7-1.3)讲述了完整的过程。或者你也可以在github.com网站上搜索'react native button'来看看社区其他人的作品。
-
+这个组件的样式是固定的。所以如果它的外观并不怎么搭配你的设计，那你需要使用`TouchableOpacity`或
+是`TouchableNativeFeedback`组件来定制自己所需要的按钮，视频教
+程[如何制作一个按钮](http://v.youku.com/v_show/id_XMTQ5OTE3MjkzNg==.html?f=26822355&from=y1.7-1.3)讲
+述了完整的过程。或者你也可以在 github.com 网站上搜索 'react native button' 来看看社区其他人的作品。
 
 用法示例：
 
@@ -13,10 +15,11 @@
   title="Learn More"
   color="#841584"
   accessibilityLabel="Learn more about this purple button"
-/>
+/>;
 ```
 
 ### 属性
+
 <div class="props">
     <div class="prop"><h4 class="propTitle"><a class="anchor" name="accessibilitylabel"></a>accessibilityLabel <span
             class="propType">string</span> <a class="hash-link" href="#accessibilitylabel">#</a></h4>
