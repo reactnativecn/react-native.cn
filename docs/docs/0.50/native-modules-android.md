@@ -159,6 +159,8 @@ ToastExample.show('Awesome', ToastExample.SHORT);
 原生模块还支持一种特殊的参数——回调函数。它提供了一个函数来把返回值传回给JavaScript。
 
 ```java
+import com.facebook.react.bridge.Callback;
+
 public class UIManagerModule extends ReactContextBaseJavaModule {
 
 ...
