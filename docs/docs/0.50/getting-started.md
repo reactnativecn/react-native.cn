@@ -134,7 +134,7 @@ React Native目前需要[Xcode](https://developer.apple.com/xcode/downloads/) 8.
 
 React Native目前需要[Android Studio](http://developer.android.com/sdk/index.html)2.0或更高版本。
 
-> Android Studio需要Java Development Kit [JDK] 1.8。你可以在命令行中输入
+> Android Studio需要Java Development Kit [JDK] 1.8（暂不支持更高版本）。你可以在命令行中输入
 > `javac -version`来查看你当前安装的JDK版本。如果版本不合要求，则可以到
 > [官网](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)上下载。
 
@@ -329,7 +329,7 @@ yarn config set disturl https://npm.taobao.org/dist --global
 
 React Native目前需要[Android Studio](http://developer.android.com/sdk/index.html)2.0或更高版本。
 
-> Android Studio需要Java Development Kit [JDK] 1.8或更高版本。你可以在命令行中输入
+> Android Studio需要Java Development Kit [JDK] 1.8（暂不支持更高版本）。你可以在命令行中输入
 > `javac -version`来查看你当前安装的JDK版本。如果版本不合要求，则可以到
 > [官网](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)上下载。
 > 或是使用包管理器来安装（比如`choco install jdk8`或是
