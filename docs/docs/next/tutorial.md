@@ -10,7 +10,7 @@ React Native看起来很像React，只不过其基础组件是原生组件而非
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 
-class HelloWorldApp extends Component {
+export default class HelloWorldApp extends Component {
   render() {
     return (
       <Text>Hello world!</Text>
