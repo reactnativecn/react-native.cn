@@ -134,7 +134,7 @@ React Native目前需要[Xcode](https://developer.apple.com/xcode/downloads/) 8.
 
 React Native目前需要[Android Studio](http://developer.android.com/sdk/index.html)2.0或更高版本。
 
-> Android Studio需要Java Development Kit [JDK] 1.8。你可以在命令行中输入
+> Android Studio需要Java Development Kit [JDK] 1.8（暂不支持更高版本）。你可以在命令行中输入
 > `javac -version`来查看你当前安装的JDK版本。如果版本不合要求，则可以到
 > [官网](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)上下载。
 
@@ -329,7 +329,7 @@ yarn config set disturl https://npm.taobao.org/dist --global
 
 React Native目前需要[Android Studio](http://developer.android.com/sdk/index.html)2.0或更高版本。
 
-> Android Studio需要Java Development Kit [JDK] 1.8或更高版本。你可以在命令行中输入
+> Android Studio需要Java Development Kit [JDK] 1.8（暂不支持更高版本）。你可以在命令行中输入
 > `javac -version`来查看你当前安装的JDK版本。如果版本不合要求，则可以到
 > [官网](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)上下载。
 > 或是使用包管理器来安装（比如`choco install jdk8`或是
@@ -592,7 +592,7 @@ choco install git
 </div><div markdown class="md-block mac ios">
 
 
-**注意**：init命令默认会创建最新的版本，而目前最新的0.45及以上版本需要下载boost库编译。此库体积庞大，在国内即便翻墙也很难下载成功，导致很多人**无法正常运行iOS项目**，中文网在论坛中提供了这些库的[国内下载链接](http://bbs.reactnative.cn/topic/4301/)。如果你嫌麻烦，又没有对新版本的需求，那么可以暂时创建`0.44.3`的版本。
+**！！！注意！！！**：init命令默认会创建最新的版本，而目前最新的0.45及以上版本需要下载boost等几个第三方库编译。这些库在国内即便翻墙也很难下载成功，导致很多人`无法运行iOS项目`！！！中文网在论坛中提供了这些库的[国内下载链接](http://bbs.reactnative.cn/topic/4301/)。如果你嫌麻烦，又没有对新版本的需求，那么可以暂时创建`0.44.3`的版本。
 
 > 提示：你可以使用`--version`参数（注意是`两`个杠）创建指定版本的项目。例如`react-native init MyApp --version 0.44.3`。注意版本号必须精确到两个小数点。
 
