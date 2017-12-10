@@ -4,9 +4,9 @@ TextInput是一个允许用户在应用中通过键盘输入文本的基本组�
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
-import { AppRegistry, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 
-class UselessTextInput extends Component {
+export default class UselessTextInput extends Component {
   constructor(props) {
     super(props);
     this.state = { text: 'Useless Placeholder' };
@@ -23,15 +23,13 @@ class UselessTextInput extends Component {
   }
 }
 
-// App registration and rendering
-AppRegistry.registerComponent('AwesomeProject', () => UselessTextInput);
 ```
 
 注意有些属性仅在`multiline`为true或者为false的时候有效。此外，当`multiline=false`时，为元素的某一个边添加边框样式（例如：`borderBottomColor`，`borderLeftWidth`等）将不会生效。为了能够实现效果你可以使用一个`View`来包裹`TextInput`：
 
 ``` ReactNativeWebPlayer
 import React, { Component } from 'react';
-import { AppRegistry, View, TextInput } from 'react-native';
+import { View, TextInput } from 'react-native';
 
 class UselessTextInput extends Component {
   render() {
@@ -45,7 +43,7 @@ class UselessTextInput extends Component {
   }
 }
 
-class UselessTextInputMultiline extends Component {
+export default class UselessTextInputMultiline extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -72,11 +70,6 @@ class UselessTextInputMultiline extends Component {
   }
 }
 
-// App registration and rendering
-AppRegistry.registerComponent(
- 'AwesomeProject',
- () => UselessTextInputMultiline
-);
 ```
 
 `TextInput`在安卓上默认有一个底边框，同时会有一些padding。如果要想使其看起来和iOS上尽量一致，则需要设置`padding: 0`，同时设置`underlineColorAndroid="transparent"`来去掉底边框。

@@ -6,12 +6,12 @@ React Native提供了几个适用于展示长列表数据的组件，一般而�
 
 `FlatList`组件必须的两个属性是`data`和`renderItem`。`data`是列表的数据源，而`renderItem`则从数据源中逐个解析数据，然后返回一个设定好格式的组件来渲染。
 
-下面的例子创建了一个简单的`FlatList`，并预设了一些模拟数据。首先是初始化`FlatList`所需的`data`，其中的每一项（行）数据之后都在`renderItem`中被渲染成了`Text`组件，最后构成整个`FlatList`。 
+下面的例子创建了一个简单的`FlatList`，并预设了一些模拟数据。首先是初始化`FlatList`所需的`data`，其中的每一项（行）数据之后都在`renderItem`中被渲染成了`Text`组件，最后构成整个`FlatList`。
 
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
-import { AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 export default class FlatListBasics extends Component {
   render() {
@@ -47,15 +47,13 @@ const styles = StyleSheet.create({
   },
 })
 
-// skip this line if using Create React Native App
-AppRegistry.registerComponent('AwesomeProject', () => FlatListBasics);
 ```
 
 如果要渲染的是一组需要分组的数据，也许还带有分组标签的，那么`SectionList`将是个不错的选择.
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
-import { AppRegistry, SectionList, StyleSheet, Text, View } from 'react-native';
+import { SectionList, StyleSheet, Text, View } from 'react-native';
 
 export default class SectionListBasics extends Component {
   render() {
@@ -95,8 +93,6 @@ const styles = StyleSheet.create({
   },
 })
 
-// skip this line if using Create React Native App
-AppRegistry.registerComponent('AwesomeProject', () => SectionListBasics);
 ```
 
 列表的一个常用场景就是从服务器端取回列表数据然后显示，要实现这一过程，你可能还需要学习[React Native的网络相关用法](network.html).

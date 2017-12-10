@@ -6,7 +6,7 @@
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 class Blink extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class Blink extends Component {
   }
 }
 
-class BlinkApp extends Component {
+export default class BlinkApp extends Component {
   render() {
     return (
       <View>
@@ -43,7 +43,6 @@ class BlinkApp extends Component {
   }
 }
 
-AppRegistry.registerComponent('BlinkApp', () => BlinkApp);
 ```
 
 实际开发中，我们一般不会在定时器函数（setInterval、setTimeout等）中来操作state。典型的场景是在接收到服务器返回的新数据，或者在用户输入数据之后。你也可以使用一些“状态容器”比如[Redux](http://redux.js.org/index.html)来统一管理数据流（译注：但我们不建议新手过早去学习redux）。

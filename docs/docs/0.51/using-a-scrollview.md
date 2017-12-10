@@ -6,9 +6,9 @@
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
-import{ AppRegistry, ScrollView, Image, Text, View } from 'react-native'
+import{ ScrollView, Image, Text, View } from 'react-native'
 
-class IScrolledDownAndWhatHappenedNextShockedMe extends Component {
+export default class IScrolledDownAndWhatHappenedNextShockedMe extends Component {
   render() {
       return(
         <ScrollView>
@@ -48,11 +48,6 @@ class IScrolledDownAndWhatHappenedNextShockedMe extends Component {
   }
 }
 
-// 注册应用(registerComponent)后才能正确渲染
-// 注意：只把应用作为一个整体注册一次，而不是每个组件/模块都注册
-AppRegistry.registerComponent(
-  'IScrolledDownAndWhatHappenedNextShockedMe',
-  () => IScrolledDownAndWhatHappenedNextShockedMe);
 ```
 
 `ScrollView`适合用来显示数量不多的滚动元素。放置在`ScollView`中的所有组件都会被渲染，哪怕有些组件因为内容太长被挤出了屏幕外。如果你需要显示较长的滚动列表，那么应该使用功能差不多但性能更好的`ListView`组件。下面我们来看看[如何使用ListView](using-a-listview.html)。

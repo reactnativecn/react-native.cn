@@ -4,9 +4,9 @@
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
-import { AppRegistry, Image } from 'react-native';
+import { Image } from 'react-native';
 
-class Bananas extends Component {
+export default class Bananas extends Component {
   render() {
     let pic = {
       uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
@@ -17,7 +17,6 @@ class Bananas extends Component {
   }
 }
 
-AppRegistry.registerComponent('Bananas', () => Bananas);
 ```
 
 译注：在iOS上使用http链接的图片地址可能不会显示，参见[这篇说明修改](https://segmentfault.com/a/1190000002933776)。
@@ -28,7 +27,7 @@ AppRegistry.registerComponent('Bananas', () => Bananas);
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 class Greeting extends Component {
   render() {
@@ -38,7 +37,7 @@ class Greeting extends Component {
   }
 }
 
-class LotsOfGreetings extends Component {
+export default class LotsOfGreetings extends Component {
   render() {
     return (
       <View style={{alignItems: 'center'}}>
@@ -50,10 +49,9 @@ class LotsOfGreetings extends Component {
   }
 }
 
-AppRegistry.registerComponent('LotsOfGreetings', () => LotsOfGreetings);
 ```
 
-我们在`Greeting`组件中将`name`作为一个属性来定制，这样可以复用这一组件来制作各种不同的“问候语”。上面的例子把`Greeting`组件写在JSX语句中，用法和内置组件并无二致——这正是React体系的魅力所在——如果你想搭建一套自己的基础UI框架，那就放手做吧！ 
+我们在`Greeting`组件中将`name`作为一个属性来定制，这样可以复用这一组件来制作各种不同的“问候语”。上面的例子把`Greeting`组件写在JSX语句中，用法和内置组件并无二致——这正是React体系的魅力所在——如果你想搭建一套自己的基础UI框架，那就放手做吧！
 
 上面的例子出现了一样新的名为[`View`](view.html)的组件。[`View`](view.html) 常用作其他组件的容器，来帮助控制布局和样式。
 
