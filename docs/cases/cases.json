@@ -224,11 +224,18 @@
 		"android": "http://sj.qq.com/myapp/detail.htm?apkName=com.sanyuanse",
 		"icon": "http://img.youcyou.com/logo.png"
 	},
-  {
+	{
 		"name": "红包圈",
 		"desc": "红包交友同城聊天应用",
 		"ios": "https://itunes.apple.com/cn/app/hong-bao-quan-hong-bao-jiao/id1193509121?mt=8",
 		"android": "http://h5.down.bwgame.com.cn/redpackage.apk",
 		"icon": "http://ohg9m5uoq.bkt.clouddn.com/1024.png"
-  }
+	},
+	{
+		"name": "宾得相机伴侣",
+		"desc": "更好的宾得相机同步助手",
+		"ios": "https://itunes.apple.com/us/app/pentax-photo-sync/id1260957200?l=zh&ls=1&mt=8",
+		"android": "https://play.google.com/apps/publish/?account=7528363839997010893#ManageReleasesPlace:p=com.luckyxmobile.pentaxphotosync",
+		"icon": "https://raw.githubusercontent.com/SleetShang/SomeMaterial/master/PentaxPhotoSync/AppIcon120x120.png"
+	}
 ]
