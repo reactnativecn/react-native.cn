@@ -299,5 +299,12 @@
 		"ios": "https://www.gaaamee.com/download-app.html",
 		"android": "https://www.gaaamee.com/download-app.html",
 		"icon": "https://www.gaaamee.com/download/images/download/code.png"
+	},
+	{
+		"name": "宾得相机伴侣",
+		"desc": "更好的宾得相机同步助手",
+		"ios": "https://itunes.apple.com/us/app/pentax-photo-sync/id1260957200?l=zh&ls=1&mt=8",
+		"android": "https://play.google.com/apps/publish/?account=7528363839997010893#ManageReleasesPlace:p=com.luckyxmobile.pentaxphotosync",
+		"icon": "https://raw.githubusercontent.com/SleetShang/SomeMaterial/master/PentaxPhotoSync/AppIcon120x120.png"
 	}
 ]
