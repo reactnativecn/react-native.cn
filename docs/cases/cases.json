@@ -306,5 +306,12 @@
 		"ios": "https://itunes.apple.com/us/app/pentax-photo-sync/id1260957200?l=zh&ls=1&mt=8",
 		"android": "https://play.google.com/apps/publish/?account=7528363839997010893#ManageReleasesPlace:p=com.luckyxmobile.pentaxphotosync",
 		"icon": "https://raw.githubusercontent.com/SleetShang/SomeMaterial/master/PentaxPhotoSync/AppIcon120x120.png"
+	},
+	{
+	    "name": "我来贷银行版",
+	    "desc": "年轻人的口袋银行",
+	    "ios": "https://itunes.apple.com/us/app/id218618489?ls=1&mt=8",
+	    "android": "http://web.wolaidai.com/webapp/qxsd/download/download.html?channel=bd_qxsd_share",
+	    "icon": "https://web.wolaidai.com/webapp/qxsd/img/login/logo.png"
 	}
 ]
