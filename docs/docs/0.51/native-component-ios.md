@@ -74,7 +74,7 @@ import React, { Component, PropTypes } from 'react';
 import { requireNativeComponent } from 'react-native';
 
 var RNTMap = requireNativeComponent('RNTMap', MapView);
-
+import PropTypes  from 'prop-types';
 export default class MapView extends Component {
   static propTypes = {
     /**
@@ -151,14 +151,14 @@ RCT_CONVERTER(CLLocationDistance, CLLocationDistance, doubleValue);
 
 ```javascript
 // MapView.js
-
+import PropTypes  from 'prop-types';
 MapView.propTypes = {
   /**
    * 当这个属性被设置为true，并且地图上绑定了一个有效的可视区域的情况下，
    * 可以通过捏放操作来改变摄像头的偏转角度。
    * 当这个属性被设置成false时，摄像头的角度会被忽略，地图会一直显示为俯视状态。
    */
-  pitchEnabled: React.PropTypes.bool,
+  pitchEnabled: PropTypes.bool,
 
   /**
    * 地图要显示的区域。
@@ -170,14 +170,14 @@ MapView.propTypes = {
     /**
      * 地图中心点的坐标。
      */
-    latitude: React.PropTypes.number.isRequired,
-    longitude: React.PropTypes.number.isRequired,
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
 
     /**
      * 最小/最大经、纬度间的距离。
      */
-    latitudeDelta: React.PropTypes.number.isRequired,
-    longitudeDelta: React.PropTypes.number.isRequired,
+    latitudeDelta: PropTypes.number.isRequired,
+    longitudeDelta: PropTypes.number.isRequired,
   }),
 };
 
@@ -282,13 +282,13 @@ RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 
 ```javascript
 // MapView.js
-
+import PropTypes  from 'prop-types';
 class MapView extends React.Component {
   static propTypes = {
     /**
      * Callback that is called continuously when the user is dragging the map.
      */
-    onChange: React.PropTypes.func,
+    onChange: PropTypes.func,
     ...
   };
   _onChange = (event: Event) => {
@@ -316,7 +316,7 @@ class MapViewExample extends React.Component {
      };
  
      return (
-       <MapView region={region} pitchEnabled={false} style={{flex: 1}} onChange={this.onRegionChange}/>
+       <MapView region={region} pitchEnabled={false} style={{flex: 1}} onRegionChange={this.onRegionChange}/>
      );
    }  
  }
