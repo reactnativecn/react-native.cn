@@ -418,7 +418,7 @@ Swift不支持宏，所以从Swift向React Native导出类和函数需要多做�
 @objc(CalendarManager)
 class CalendarManager: NSObject {
 
-  @objc func addEvent(name: String, location: String, date: NSNumber) -> Void {
+  @objc func addEvent(_ name: String, location: String, date: NSNumber) -> Void {
     // Date is ready to use!
   }
 
@@ -426,6 +426,7 @@ class CalendarManager: NSObject {
 ```
 
 > **注意**: 你必须使用@objc标记来确保类和函数对Objective-C公开。
+> **注意**: Swift3以上在实现方法的时候必须隐去第一个变量名，即在`name`前面加`_`，不然注册是失败的
 
 接着，创建一个私有的实现文件，并将必要的信息注册到React Native中。
 
