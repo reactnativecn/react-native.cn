@@ -418,8 +418,13 @@ Swift不支持宏，所以从Swift向React Native导出类和函数需要多做�
 @objc(CalendarManager)
 class CalendarManager: NSObject {
 
-  @objc func addEvent(name: String, location: String, date: NSNumber) -> Void {
+  @objc(addEvent:location:date:)
+  func addEvent(name: String, location: String, date: NSNumber) -> Void {
     // Date is ready to use!
+  }
+
+  func constantsToExport() -> [AnyHashable: Any]! {
+    return ["someKey": "someValue"]
   }
 
 }
