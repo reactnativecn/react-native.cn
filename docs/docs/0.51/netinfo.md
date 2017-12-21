@@ -66,12 +66,12 @@ NetInfo.isConnected.fetch().done((isConnected) => {
 function handleFirstConnectivityChange(isConnected) {
   console.log('Then, is ' + (isConnected ? 'online' : 'offline'));
   NetInfo.isConnected.removeEventListener(
-    'change',
+    'connectionChange',
     handleFirstConnectivityChange
   );
 }
 NetInfo.isConnected.addEventListener(
-  'change',
+  'connectionChange',
   handleFirstConnectivityChange
 );
 ```
