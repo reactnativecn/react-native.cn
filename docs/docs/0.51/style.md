@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 
-class LotsOfStyles extends Component {
+export default class LotsOfStyles extends Component {
   render() {
     return (
       <View>
