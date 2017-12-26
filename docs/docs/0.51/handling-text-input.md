@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, TextInput, View } from 'react-native';
 
-class PizzaTranslator extends Component {
+export default class PizzaTranslator extends Component {
   constructor(props) {
     super(props);
     this.state = {text: ''};
@@ -27,9 +27,6 @@ class PizzaTranslator extends Component {
     );
   }
 }
-// 注册应用(registerComponent)后才能正确渲染
-// 注意：只把应用作为一个整体注册一次，而不是每个组件/模块都注册
-AppRegistry.registerComponent('PizzaTranslator', () => PizzaTranslator);
 ```
 
 在上面的例子里，我们把`text`保存到state中，因为它会随着时间变化。
