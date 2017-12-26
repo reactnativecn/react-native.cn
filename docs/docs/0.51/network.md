@@ -28,7 +28,7 @@ fetch('https://mywebsite.com/endpoint/', {
 })
 ```
 
-译注：如果你的服务器无法识别上面POST的数据格式，那么可以尝试传统的form格式，示例如下：
+提交数据的格式关键取决于headers中的`Content-Type`。`Content-Type`有很多种，对应body的格式也有区别。到底应该采用什么样的`Content-Type`取决于服务器端，所以请和服务器端的开发人员沟通确定清楚。常用的'Content-Type'除了上面的'application/json'，还有传统的网页表单形式，示例如下：
 
 ```js
 fetch('https://mywebsite.com/endpoint/', {
