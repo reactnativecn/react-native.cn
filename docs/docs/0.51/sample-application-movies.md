@@ -1,6 +1,6 @@
 ## 简介
 
-在本示例教程中，我们将编写一个简单的应用，可以从电影数据库中取得最近正在上映的25部电影，并在一个`ListView`中展示出来。
+在本示例教程中，我们将编写一个简单的应用，可以从电影数据库中取得最近正在上映的25部电影，并在一个`FlatList`中展示出来。
 
 ## 准备工作
 
@@ -192,7 +192,7 @@ var styles = StyleSheet.create({
  * 请求，这个样例数据放在React Native的Github库中。
  * 当然，由于众所周知的原因，这个地址可能国内访问也比较困难。
  */
-var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
+var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/0.51-stable/docs/MoviesExample.json';
 ```
 
 首先在应用中创建一个初始的null状态，这样可以通过`this.state.movies == null`来判断我们的数据是不是已经被抓取到了。我们在服务器响应返回的时候执行`this.setState({movies: moviesData})`来改变这个状态。把下面这段代码放到我们的React类的render函数之前（下面注释中的“绑定操作”你可以看看这个[短视频教程](http://v.youku.com/v_show/id_XMTgyNzM0NjQzMg==.html)）：
@@ -386,7 +386,7 @@ import {
   View,
 } from 'react-native';
 
-var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
+var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/0.51-stable/docs/MoviesExample.json';
 
 export default class SampleAppMovies extends Component {
   constructor(props) {

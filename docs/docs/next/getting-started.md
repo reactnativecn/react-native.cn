@@ -615,6 +615,8 @@ cd AwesomeProject
 react-native run-android
 ```
 
+如果你在设备上看到了红屏报错，请参阅[在设备上运行](running-on-device-android.html#content)。
+
 > 提示：你可以使用`--version`参数创建指定版本的项目。例如`react-native init MyApp --version 0.39.2`。注意版本号必须精确到两个小数点。
 
 你也可以在[Nuclide](http://nuclide.io)中打开[`AwesomeProject`](http://nuclide.io/docs/quick-start/getting-started/#adding-a-project)文件夹然后[运行](http://nuclide.io/docs/platforms/react-native/#command-line)。
@@ -653,6 +655,8 @@ react-native init AwesomeProject
 cd AwesomeProject
 react-native run-android
 ```
+
+如果你在设备上看到了红屏报错，请参阅[在设备上运行](running-on-device-android.html#content)。
 
 > 提示：你可以使用`--version`参数创建指定版本的项目。例如`react-native init MyApp --version 0.44.3`。注意版本号必须精确到两个小数点。
 

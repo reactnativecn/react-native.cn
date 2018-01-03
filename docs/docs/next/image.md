@@ -29,17 +29,17 @@ renderImages() {
 ```
 dependencies {
   // 如果你需要支持Android4.0(API level 14)之前的版本
-  compile 'com.facebook.fresco:animated-base-support:1.0.1'
+  compile 'com.facebook.fresco:animated-base-support:1.3.0'
 
   // 如果你需要支持GIF动图
-  compile 'com.facebook.fresco:animated-gif:1.0.1'
+  compile 'com.facebook.fresco:animated-gif:1.3.0'
 
   // 如果你需要支持WebP格式，包括WebP动图
-  compile 'com.facebook.fresco:animated-webp:1.0.1'
-  compile 'com.facebook.fresco:webpsupport:1.0.1'
+  compile 'com.facebook.fresco:animated-webp:1.3.0'
+  compile 'com.facebook.fresco:webpsupport:1.3.0'
 
   // 如果只需要支持WebP格式而不需要动图
-  compile 'com.facebook.fresco:webpsupport:1.0.1'
+  compile 'com.facebook.fresco:webpsupport:1.3.0'
 }
 ```
 
