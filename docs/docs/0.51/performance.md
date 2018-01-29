@@ -142,6 +142,156 @@ handleOnPress() {
 
 ## 分析
 
-你可以利用内置的分析器来同时获取JavaScript线程和主线程中代码执行情况的详细信息。
+可以使用内置的分析器来同时获得有关在JavaScript线程和主线程代码执行的详细信息（通过从调试菜单中选择`perf monitor`来访问它）。
 
-对于iOS来说，Instruments是一个宝贵的工具库，Android的话，你可以使用systrace，参见[调试Android UI性能](/docs/android-ui-performance.html#content)。
+对于ios，`Instruments`是一个宝贵的工具，在android上，你应该学会使用`systrace`。
+
+但首先，确保开发模式已经关闭！通过开发者面板`Dev Settings`关闭`JS Dev Mode`选项，你应该看到`__DEV__ === false, development-level warning are OFF, performance optimizations are ON` 在您的应用程序日志中。
+
+另一种剖析javascript的方法是在调试时使用 Chrome profiler。这个结果是**不准确**的，因为代码运行在 Chrome 中，但会给你一个瓶颈可能发生的一般概念。在Chrome的`Performance`标签下运行profiler。在`User Timing`下会出现火焰图。要以表格形式查看更多详细信息，请单击下部上方的`Bottom Up`标签，然后在左上方菜单中选择`DedicatedWorker Thread`。
+
+![Chrome Performance](https://user-images.githubusercontent.com/19166761/35501868-269a6bf6-0516-11e8-9f45-1c020c76b997.jpg)
+
+
+### 用`systrace`分析Android UI性能
+
+Android 支持10k+不同的手机，并且被广泛应用于软件渲染：框架体系结构和跨多终端的需求，意味着相对于 iOS 你会有更少的自由度。但是有时候，有些东西是可以改进的——很多时候它不是原生代码的问题！
+
+调试的第一步是回答你的时间在每个16ms帧期间开销情况的问题。为此，我们将使用称为`systrace`的标准 Android 分析工具。
+
+`systrace`是一个基于标记的 Android 标准分析工具（当你安装Android平台工具包的时候安装）。代码块被开始/结束标记包围，然后以彩色图表格式显示。Android SDK 和 React Native 框架都提供了可视化的标准标记。
+
+#### 1. 运行 systrace
+
+首先，将显示您想要调查的出现卡顿的设备通过USB连接到您的计算机，并在您想要进行收集信息的导航/动画之前将其启动。通过如下命令运行`systrace`：
+
+```Bash
+$ <path_to_android_sdk>/platform-tools/systrace/systrace.py --time=10 -o trace.html sched gfx view -a <your_package_name>
+```
+
+这个命令的快速分解：
+
+- `time`收集trace的时间，以秒为单位
+- `sched`, `gfx`和 `view` 是我们希望了解的Android SDK标记（标记集合）：`sched`为您提供了有关手机每个核心运行的信息，`gfx`为您提供了图形信息，例如框架边界，并且`view`为您提供了有关测量、布局及渲染方面的信息
+- `-a <your_package_name>` 启动特定的应用程序标记, 特别是使用React Native 框架的应用。 `your_package_name` 可以在 `AndroidManifest.xml` 中找到，类似`com.example.app`
+
+一旦 trace 开始收集，执行您关心的动画或交互。在追踪结束时，systrace将会给你一个你可以在 Chrome 中打开的跟踪链接。
+
+#### 2. 查看 trace
+
+在浏览器（最好是Chrome）打开 trace.html ，你会看到如下信息：
+
+![Example](https://facebook.github.io/react-native/docs/assets/SystraceExample.png)
+
+>**提示**：使用WASD键可以进行拖动和缩放
+
+如果 trace.html打开失败，检查浏览器的consoles是否有：
+
+![ObjectObserveError](https://facebook.github.io/react-native/docs/assets/ObjectObserveError.png)
+
+由于在最近的浏览器中不推荐使用`object.observe`，所以您可能需要从Google Chrome跟踪工具中打开该文件。你可以这样做：
+
+- 在Chrome中打开链接 [chrome://tracing](chrome://tracing/)
+- 选择 Load
+- 选择之前生成的trace文件（trace.html）
+
+> **勾选 VSync highlighting**
+>
+> 选中该屏幕右上角的复选框以突出显示16ms帧边界：
+>
+> ![Enable VSync Highlighting](https://facebook.github.io/react-native/docs/assets/SystraceHighlightVSync.png)
+>
+> 你应该看到上面的截图斑马条纹。 如果你不这样做，试着在不同的设备上进行分析：三星已经知道显示vsyncs的问题，而Nexus系列通常非常可靠（译者：然而未必不见得）。
+
+
+
+#### 3. 找到程序进程
+
+找到程序的包名（或一部分）。 在这个例子里，我的包名是`com.facebook.adsmanager`，但因为内核线程名称限制的问题显示为 `book.adsmanager`。
+
+在左边，你会看到一组与右边的时间线相对应的线程。有几个线程是我们关心的：`UI thread`（它有你的包名称或名称 UI 线程），`mqt_js ` 和 `mqt_native_modules`。如果你在Android 5+上运行，我们也关心 Render Thread。
+
+- **UI Thread.**  这里记录了Android标准 measure/layout/draw 的发生。在右边的线程名称将是您的包名称（在我的案例是 book.adsmanager）或 UI Thread。在这个线程上看到的事件应该看起来像这样，具有`Choreographer`, `traversals`和 `DispatchUI`:
+
+  ![UI Thread Example](https://facebook.github.io/react-native/docs/assets/SystraceUIThreadExample.png)
+
+- **JS Thread.**  这里是JavaScript的执行情况，线程名称将是`mqt_j`或`<…>`，具体取决于设备上内核的协作方式。找出它，如果它没有一个名字，寻找像`JSCall`, `Bridge.executeJSCall`的标记：
+
+  ![JS Thread Example](https://facebook.github.io/react-native/docs/assets/SystraceJSThreadExample.png)
+
+
+
+- **Native Modules Thread.**  这里显示原生模块的调用 (比如 `UIManager`)。 线程名称是 `mqt_native_modules` 或 `<...>`。在后一种情况下识别它，寻找像 `NativeCall`, `callJavaModuleMethod`,  `onBatchComplete`的标记：![Native Modules Thread Example](https://facebook.github.io/react-native/docs/assets/SystraceNativeModulesThreadExample.png)
+
+
+
+- **Bonus: Render Thread.** 如果你在使用 Android L (5.0) 或以上， 你的应用程序中也会有一个渲染线程，这个线程生成用来绘制你的UI的实际的OpenGL命令。 线程名称是 `RenderThread` 或 `<...>`. 在后一种情况下识别它，寻找像  `DrawFrame` 和 `queueBuffer`的标记:
+
+  ![Render Thread Example](https://facebook.github.io/react-native/docs/assets/SystraceRenderThreadExample.png)
+
+#### 找到罪魁祸首
+
+一个流畅的动画应该看起来像下面这样：
+
+![Smooth Animation](https://facebook.github.io/react-native/docs/assets/SystraceWellBehaved.png)
+
+每一个颜色的变化都是一个帧——请记住，为了显示一帧，我们所有的UI工作都需要在这个16ms周期结束的时候完成。注意，没有线程靠近每帧的边界。trace 像这样的应用程序会以60fps呈现。
+
+如果你感觉卡顿，你可能会看到这样的trace：
+
+![Choppy Animation from JS](https://facebook.github.io/react-native/docs/assets/SystraceBadJS.png)
+
+注意到 JS 线程基本上一直在执行，并跨越了单帧边界！这个应用程序不是在60帧/秒运行。在这种情况下，**问题在于 JS**。
+
+你也可能会看到这样的情况：
+
+![Choppy Animation from UI](https://facebook.github.io/react-native/docs/assets/SystraceBadUI.png)
+
+在这种情况下，UI和渲染线程是跨越框架边界的工作线程。我们试图在每一帧上渲染的UI需要做太多的工作。在这种情况下，**问题在于原生视图渲染**。
+
+在这一点上，你会有一些非常有用的信息来通知你的下一个步骤。
+
+
+
+#### 解决 JavaScript 引起的问题
+
+如果你发现了一个 JS 问题，在你正在执行的特定 JS 中寻找线索。在上面的情况中，我们看到 `RCTEventEmitter`每帧被多次调用。这里是跟踪放大的js线程：
+
+![Too much JS](https://facebook.github.io/react-native/docs/assets/SystraceBadJS2.png)
+
+这似乎不正确。为什么这么频繁呢？他们实际上是不同的事件？这些问题的答案可能取决于您的产品代码。很多时候，你会想看看  [shouldComponentUpdate](https://facebook.github.io/react/component-specs.md#updating-shouldcomponentupdate)。
+
+
+#### 解决原生 UI 引起的问题
+
+如果你确定了一个原生 UI 问题，通常有两种情况：
+
+1. 你试图绘制每一帧的 UI 涉及太多的任务在 GPU 上，或者…
+2. 您正在构建新的UI，在动画/交互期间（例如在滚动期间加载新内容）。
+
+##### 太多 GPU 任务引起的问题
+
+在第一种情况下，你将看到具有 UI thread 和/或 Render Thread 的跟踪，如下所示：
+
+![Overloaded GPU](https://facebook.github.io/react-native/docs/assets/SystraceBadUI.png)
+
+注意到，跨越每帧边界的`DrawFrame`花费的时间很长。这是等待 GPU 从前一帧消耗其命令缓冲区的时间。
+
+为了减轻这一点，你应该：
+
+- 使用 `renderToHardwareTextureAndroid` 对正在进行 animated/transformed 的复杂静态内容（例如，`Navigator` slide/ alpha 动画）
+- 确保你**没有**使用 `needsOffscreenAlphaCompositing`，默认情况下它是禁用的，因为在大多数情况下，它大大增加了GPU上的每帧负载。
+
+如果这些没有帮助，而且你想更深入地了解 GPU 究竟在做什么，那么你可以查看一下 [Tracer for OpenGL ES](http://developer.android.com/tools/help/gltracer.html)。
+
+##### 构建新的 UI 引起的问题
+
+在第二种情况下，你会看到更像这样的东西：
+
+![Creating Views](https://facebook.github.io/react-native/docs/assets/SystraceBadCreateUI.png)
+
+注意到，首先 JS thread 持续运行了一段时间，然后你看到一些工作在 native modules thread 上完成，之后在 UI thread 上进行了昂贵的遍历。
+
+除非您能够推迟在交互之后创建新的 UI ，或者您可以简化创建的UI，否则没有一种简单的方法来减轻这种情况。React Native 团队正在为此设计一个基础架构级别的解决方案，这将允许在主线程（main thread）中创建和配置新的 UI，从而使交互顺利进行。
+
+
