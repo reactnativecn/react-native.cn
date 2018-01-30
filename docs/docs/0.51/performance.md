@@ -145,3 +145,301 @@ handleOnPress() {
 你可以利用内置的分析器来同时获取JavaScript线程和主线程中代码执行情况的详细信息。
 
 对于iOS来说，Instruments是一个宝贵的工具库，Android的话，你可以使用systrace，参见[调试Android UI性能](/docs/android-ui-performance.html#content)。
+
+
+
+
+
+
+
+## Unbundling + inline requires
+
+如果你有一个较为庞大的应用程序，你可能要考虑使用拆分和内联引用。这对于具有大量页面的应用程序是非常有用的，这些页面在应用程序的典型使用过程中可能不会被打开。通常对于启动后一段时间内不需要大量代码的应用程序来说是非常有用的。例如应用程序包含复杂的配置文件屏幕或较少使用的功能，但大多数会话只涉及访问应用程序的主屏幕更新。我们可以通过使用打包器的`unbundle`特性来优化`bundle`的加载，并且内联引用这些功能和页面（当它们被实际使用时）。
+
+
+
+### Loading JavaScript 
+
+在 react-native 执行 JS 代码之前，必须将代码加载到内存中并进行解析。如果你加载了一个50MB的bundle，那么所有的50mb都必须被加载和解析才能被执行。
+
+拆分后的优化是，启动时只加载 50MB 中实际需要的部分，并随着需要的部分逐渐加载更多的包。
+
+
+
+### Inline Requires 内联引用
+
+内联引用延迟模块或文件的加载，直到实际需要该文件。一个基本的例子看起来像这样：
+
+#### VeryExpensive.js 
+
+```javascript
+import React, { Component } from 'react';
+import { Text } from 'react-native';
+// ... import some very expensive modules
+
+// You may want to log at the file level to verify when this is happening
+console.log('VeryExpensive component loaded');
+
+export default class VeryExpensive extends Component {
+  // lots and lots of code
+  render() {
+    return <Text>Very Expensive Component</Text>;
+  }
+}
+```
+
+#### Optimized.js 
+
+```javascript
+import React, { Component } from 'react';
+import { TouchableOpacity, View, Text } from 'react-native';
+
+let VeryExpensive = null;
+
+export default class Optimized extends Component {
+  state = { needsExpensive: false };
+
+  didPress = () => {
+    if (VeryExpensive == null) {
+      VeryExpensive = require('./VeryExpensive').default;
+    }
+
+    this.setState(() => ({
+      needsExpensive: true,
+    }));
+  };
+
+  render() {
+    return (
+      <View style={{ marginTop: 20 }}>
+        <TouchableOpacity onPress={this.didPress}>
+          <Text>Load</Text>
+        </TouchableOpacity>
+        {this.state.needsExpensive ? <VeryExpensive /> : null}
+      </View>
+    );
+  }
+}
+```
+
+
+
+即使没有使用 unbundling，内联引用也会使启动时间减少，因为 VeryExpensive.js中的代码只有在第一次 require 时才会执行。
+
+### Enable Unbundling（启动分拆）
+
+在 iOS 上 unbundling 将创建一个简单的索引文件，React Native 将一次加载一个模块。在 Android 上，默认情况下它会为每个模块创建一组文件。你可以像 iOS 一样，强制 Android 只创建一个文件，但使用多个文件可以更高性能，并需要更少的内存。
+
+通过编辑 build phase "Bundle React Native code and images"，在 Xcode 中启用 unbundling。在`../node_modules/react-native/packager/react-native-xcode.sh` 添加 `export BUNDLE_COMMAND="unbundle"`:
+
+```bash
+export BUNDLE_COMMAND="unbundle"
+export NODE_BINARY=node
+../node_modules/react-native/packager/react-native-xcode.sh
+```
+
+在Android上，通过编辑你的 android/app/build.gradle 文件启用 unbundling。在`apply from: "../../node_modules/react-native/react.gradle"`之前修改或添加`project.ext.react`块：
+
+```javascript
+project.ext.react = [
+  bundleCommand: "unbundle",
+]
+```
+
+如果在Android上，你想使用单个索引文件（如前所述），请在Android上使用以下行：
+
+```javascript
+project.ext.react = [
+  bundleCommand: "unbundle",
+  extraPackagerArgs: ["--indexed-unbundle"]
+]
+```
+
+
+
+### Configure Preloading and Inline Requires
+
+### 配置预加载及内联引用
+
+现在我们已经拆分了我们的代码，调用 require 需要开销。当遇到尚未加载的模块时，需要现在需要通过桥发送消息。这会对启动造成巨大影响，因为在应用程序加载初始模块时可能触发相当大量的请求调用。幸运的是，我们可以配置一部分模块进行预加载。为了做到这一点，你将需要实现某种形式的内联引用。
+
+### Adding a packager config file 添加模块配置文件
+
+在项目中创建一个名为 packager 的文件夹，并创建一个名为 config.js 的文件。添加以下内容：
+
+```javascript
+const config = {
+  getTransformOptions: () => {
+    return {
+      transform: { inlineRequires: true },
+    };
+  },
+};
+
+module.exports = config;
+```
+
+
+
+在Xcode，Build phase 中添加`export BUNDLE_CONFIG="packager/config.js"`
+
+```Bash
+export BUNDLE_COMMAND="unbundle"
+export BUNDLE_CONFIG="packager/config.js"
+export NODE_BINARY=node
+../node_modules/react-native/packager/react-native-xcode.sh
+```
+
+
+
+编辑  android/app/build.gradle 文件，添加`bundleConfig: "packager/config.js",`
+
+```Bash
+project.ext.react = [
+  bundleCommand: "unbundle",
+  bundleConfig: "packager/config.js"
+]
+```
+
+
+
+最后，你可以在你的package.json的“scripts”下更新“start”来使用config：
+
+`"start": "node node_modules/react-native/local-cli/cli.js start --config ../../../../packager/config.js",`
+
+用`npm start`启动你的 package 服务。请注意，当 package 服务 通过 xcode 和 react-native run-android 等自动启动时，它不会使用npm start，所以它不会使用 config。
+
+
+
+### Investigating the Loaded Modules
+
+在您的根文件 (index.(ios|android).js) 中，您可以在初始导入(initial imports)之后添加以下内容：
+
+```javascript
+const modules = require.getModules();
+const moduleIds = Object.keys(modules);
+const loadedModuleNames = moduleIds
+  .filter(moduleId => modules[moduleId].isInitialized)
+  .map(moduleId => modules[moduleId].verboseName);
+const waitingModuleNames = moduleIds
+  .filter(moduleId => !modules[moduleId].isInitialized)
+  .map(moduleId => modules[moduleId].verboseName);
+
+// make sure that the modules you expect to be waiting are actually waiting
+console.log(
+  'loaded:',
+  loadedModuleNames.length,
+  'waiting:',
+  waitingModuleNames.length
+);
+
+// grab this text blob, and put it in a file named packager/moduleNames.js
+console.log(`module.exports = ${JSON.stringify(loadedModuleNames.sort())};`);
+
+```
+
+当你运行你的应用程序时，你可以查看 console 控制台，有多少模块已经加载，有多少模块在等待。你可能想查看 moduleNames，看看是否有任何意外。注意在首次 import 时调用的内联引用。你可能需要检查和重构，以确保只有你想要的模块在启动时加载。请注意，您可以根据需要修改 Systrace 对象，以帮助调试有问题的引用。
+
+```javascript
+require.Systrace.beginEvent = (message) => {
+  if(message.includes(problematicModule)) {
+    throw new Error();
+  }
+}
+```
+
+虽然每个应用程序各有不同，但只加载第一个页面所需的模块是有普适意义的。当你满意时，把 loadedModuleNames 的输出放到 packager/modulenames.js 文件中。
+
+### Transforming to Module Paths 转化模块路径
+
+The loaded module names get us part of the way there, but we actually need absolute module paths, so the next script will set that up. Add `packager/generateModulePaths.js` to your project with the following:
+
+我们已经得到了需要预加载的模块名，但实际上我们需要的是模块的绝对路径，所以接下来将会搞定它。添加 `packager/generatemodulepaths.js` 文件：
+
+```javascript
+// @flow
+/* eslint-disable no-console */
+const execSync = require('child_process').execSync;
+const fs = require('fs');
+const moduleNames = require('./moduleNames');
+
+const pjson = require('../package.json');
+const localPrefix = `${pjson.name}/`;
+
+const modulePaths = moduleNames.map(moduleName => {
+  if (moduleName.startsWith(localPrefix)) {
+    return `./${moduleName.substring(localPrefix.length)}`;
+  }
+  if (moduleName.endsWith('.js')) {
+    return `./node_modules/${moduleName}`;
+  }
+  try {
+    const result = execSync(
+      `grep "@providesModule ${moduleName}" $(find . -name ${moduleName}\\\\.js) -l`
+    )
+      .toString()
+      .trim()
+      .split('\n')[0];
+    if (result != null) {
+      return result;
+    }
+  } catch (e) {
+    return null;
+  }
+  return null;
+});
+
+const paths = modulePaths
+  .filter(path => path != null)
+  .map(path => `'${path}'`)
+  .join(',\n');
+
+const fileData = `module.exports = [${paths}];`;
+
+fs.writeFile('./packager/modulePaths.js', fileData, err => {
+  if (err) {
+    console.log(err);
+  }
+
+  console.log('Done');
+});
+```
+
+你可以通过  `node packager/modulePaths.js`运行。
+
+此脚本尝试从模块名称映射到模块路径，但它不是万无一失的。例如，它忽略了平台特定的文件（* ios.js和* .android.js）。然而根据最初的测试，它处理了95％的情况。当它运行一段时间后，它应该完成并输出一个名为`packager/modulePaths.js`的文件。它应该包含相对于你的项目根目录的模块文件路径。您可以将 modulePaths.js 提交到您的代码仓库，以便它可以被传递。
+
+### Updating the config.js 更新 config.js
+
+返回到 packager/config.js 我们应该更新它来使用我们新生成的 modulePaths.js 文件。
+
+```javascript
+const modulePaths = require('./modulePaths');
+const resolve = require('path').resolve;
+const fs = require('fs');
+
+const config = {
+  getTransformOptions: () => {
+    const moduleMap = {};
+    modulePaths.forEach(path => {
+      if (fs.existsSync(path)) {
+        moduleMap[resolve(path)] = true;
+      }
+    });
+    return {
+      preloadedModules: moduleMap,
+      transform: { inlineRequires: { blacklist: moduleMap } },
+    };
+  },
+};
+
+module.exports = config;
+```
+
+
+
+配置文件中的 preloadedModules 条目指示哪些模块应被标记为由 unbundler 预加载。当 bundle 被加载时，这些模块立即被加载，甚至在任何 requires 执行之前。blacklist 表明这些模块不应该被要求内联。因为它们是预加载的，所以使用内联没有性能优势。实际上 JavaScript 会花费额外的时间来解析内联引用在首次引用的时候。
+
+### Test and Measure Improvements 测试和衡量改进
+
+您现在应该准备好使用分拆和内联引用来构建您的应用程序。确保您保存了测量启动前后的时间。
