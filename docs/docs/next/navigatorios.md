@@ -361,7 +361,9 @@ In the example above the navigation bar color is changed when the new route is p
 const React = require('react');
 const ReactNative = require('react-native');
 const ViewExample = require('./ViewExample');
+
 const createExamplePage = require('./createExamplePage');
+const nativeImageSource = require('nativeImageSource');
 const {
   AlertIOS,
   NavigatorIOS,
@@ -372,8 +374,8 @@ const {
   View,
 } = ReactNative;
 
-const EmptyPage = React.createClass({
-  render: function() {
+class EmptyPage extends React.Component {
+  render() {
     return (
       <View style={styles.emptyPage}>
         <Text style={styles.emptyPageText}>
@@ -381,11 +383,11 @@ const EmptyPage = React.createClass({
         </Text>
       </View>
     );
-  },
-});
+  }
+}
 
-const NavigatorIOSExamplePage = React.createClass({
-  render: function() {
+class NavigatorIOSExamplePage extends React.Component {
+  render() {
     var recurseTitle = 'Recurse Navigation';
     if (!this.props.depth || this.props.depth === 1) {
       recurseTitle += ' - more examples here';
@@ -408,6 +410,13 @@ const NavigatorIOSExamplePage = React.createClass({
               component: createExamplePage(null, ViewExample),
             });
           })}
+          {this._renderRow('Custom title image Example', () => {
+            this.props.navigator.push({
+              title: 'Custom title image Example',
+              titleImage: require('./relay.png'),
+              component: createExamplePage(null, ViewExample),
+            });
+          })}
           {this._renderRow('Custom Right Button', () => {
             this.props.navigator.push({
               title: NavigatorIOSExample.title,
@@ -419,13 +428,52 @@ const NavigatorIOSExamplePage = React.createClass({
               }
             });
           })}
+          {this._renderRow('Custom Right System Button', () => {
+            this.props.navigator.push({
+              title: NavigatorIOSExample.title,
+              component: EmptyPage,
+              rightButtonSystemIcon: 'bookmarks',
+              onRightButtonPress: () => this.props.navigator.pop(),
+              passProps: {
+                text: 'This page has a right system button in the nav bar',
+              }
+            });
+          })}
           {this._renderRow('Custom Left & Right Icons', () => {
             this.props.navigator.push({
               title: NavigatorIOSExample.title,
               component: EmptyPage,
               leftButtonTitle: 'Custom Left',
               onLeftButtonPress: () => this.props.navigator.pop(),
-              rightButtonIcon: require('image!NavBarButtonPlus'),
+              rightButtonIcon: nativeImageSource({
+                ios: 'NavBarButtonPlus',
+                width: 17,
+                height: 17
+              }),
+              onRightButtonPress: () => {
+                AlertIOS.alert(
+                  'Bar Button Action',
+                  'Recognized a tap on the bar button icon',
+                  [
+                    {
+                      text: 'OK',
+                      onPress: () => console.log('Tapped OK'),
+                    },
+                  ]
+                );
+              },
+              passProps: {
+                text: 'This page has an icon for the right button in the nav bar',
+              }
+            });
+          })}
+          {this._renderRow('Custom Left & Right System Icons', () => {
+            this.props.navigator.push({
+              title: NavigatorIOSExample.title,
+              component: EmptyPage,
+              leftButtonSystemIcon: 'cancel',
+              onLeftButtonPress: () => this.props.navigator.pop(),
+              rightButtonSystemIcon: 'search',
               onRightButtonPress: () => {
                 AlertIOS.alert(
                   'Bar Button Action',
@@ -457,9 +505,9 @@ const NavigatorIOSExamplePage = React.createClass({
         <View style={styles.line}/>
       </ScrollView>
     );
-  },
+  }
 
-  _renderReplace: function() {
+  _renderReplace = () => {
     if (!this.props.depth) {
       // this is to avoid replacing the top of the stack
       return null;
@@ -477,9 +525,9 @@ const NavigatorIOSExamplePage = React.createClass({
         }
       });
     });
-  },
+  };
 
-  _renderReplacePrevious: function() {
+  _renderReplacePrevious = () => {
     if (!this.props.depth || this.props.depth < 2) {
       // this is to avoid replacing the top of the stack
       return null;
@@ -494,9 +542,9 @@ const NavigatorIOSExamplePage = React.createClass({
         wrapperStyle: styles.customWrapperStyle,
       });
     });
-  },
+  };
 
-  _renderReplacePreviousAndPop: function() {
+  _renderReplacePreviousAndPop = () => {
     if (!this.props.depth || this.props.depth < 2) {
       // this is to avoid replacing the top of the stack
       return null;
@@ -511,9 +559,9 @@ const NavigatorIOSExamplePage = React.createClass({
         wrapperStyle: styles.customWrapperStyle,
       });
     });
-  },
+  };
 
-  _renderRow: function(title: string, onPress: Function) {
+  _renderRow = (title: string, onPress: Function) => {
     return (
       <View>
         <TouchableHighlight onPress={onPress}>
@@ -526,17 +574,15 @@ const NavigatorIOSExamplePage = React.createClass({
         <View style={styles.separator} />
       </View>
     );
-  },
-});
+  };
+}
 
-const NavigatorIOSExample = React.createClass({
-  statics: {
-    title: '<NavigatorIOS>',
-    description: 'iOS navigation capabilities',
-    external: true,
-  },
+class NavigatorIOSExample extends React.Component {
+  static title = '<NavigatorIOS>';
+  static description = 'iOS navigation capabilities';
+  static external = true;
 
-  render: function() {
+  render() {
     const {onExampleExit} = this.props;
     return (
       <NavigatorIOS
@@ -546,12 +592,11 @@ const NavigatorIOSExample = React.createClass({
           component: NavigatorIOSExamplePage,
           passProps: {onExampleExit},
         }}
-        itemWrapperStyle={styles.itemWrapper}
         tintColor="#008888"
       />
     );
-  },
-});
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

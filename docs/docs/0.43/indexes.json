@@ -1,0 +1,507 @@
+{
+    "contains": [
+        {
+            "group": "入门基础",
+            "contains": [
+                {
+                    "subject": "搭建开发环境",
+                    "mdlink": "getting-started"
+                },
+                {
+                    "subject": "编写Hello World",
+                    "mdlink": "tutorial"
+                },
+                {
+                    "subject": "Props（属性）",
+                    "mdlink": "props"
+                },
+                {
+                    "subject": "State（状态）",
+                    "mdlink": "state"
+                },
+                {
+                    "subject": "样式",
+                    "mdlink": "style"
+                },
+                {
+                    "subject": "高度与宽度",
+                    "mdlink": "height-and-width"
+                },
+                {
+                    "subject": "使用Flexbox布局",
+                    "mdlink": "layout-with-flexbox"
+                },
+                {
+                    "subject": "处理文本输入",
+                    "mdlink": "handling-text-input"
+                },
+                {
+                    "subject": "如何使用ScrollView",
+                    "mdlink": "using-a-scrollview"
+                },
+                {
+                    "subject": "如何使用ListView",
+                    "mdlink": "using-a-listview"
+                },
+                {
+                    "subject": "网络",
+                    "mdlink": "network"
+                },
+                {
+                    "subject": "其他参考资源",
+                    "mdlink": "more-resources"
+                }
+            ]
+        },
+        {
+            "group": "进阶指南",
+            "contains": [
+                {
+                    "subject": "嵌入到现有原生应用",
+                    "mdlink": "integration-with-existing-apps"
+                },
+                {
+                    "subject": "颜色",
+                    "mdlink": "colors"
+                },
+                {
+                    "subject": "图片",
+                    "mdlink": "images"
+                },
+                {
+                    "subject": "处理触摸事件",
+                    "mdlink": "handling-touches"
+                },
+                {
+                    "subject": "动画",
+                    "mdlink": "animations"
+                },
+                {
+                    "subject": "无障碍功能",
+                    "mdlink": "accessibility"
+                },
+                {
+                    "subject": "定时器",
+                    "mdlink": "timers"
+                },
+                {
+                    "subject": "直接操作",
+                    "mdlink": "direct-manipulation"
+                },
+                {
+                    "subject": "调试",
+                    "mdlink": "debugging"
+                },
+                {
+                    "subject": "自动化测试",
+                    "mdlink": "testing"
+                },
+                {
+                    "subject": "JavaScript环境",
+                    "mdlink": "javascript-environment"
+                },
+                {
+                    "subject": "导航器对比",
+                    "mdlink": "navigation"
+                },
+                {
+                    "subject": "性能",
+                    "mdlink": "performance"
+                },
+                {
+                    "subject": "升级",
+                    "mdlink": "upgrading"
+                },
+                {
+                    "subject": "特定平台代码",
+                    "mdlink": "platform-specific-code"
+                },
+                {
+                    "subject": "手势响应系统",
+                    "mdlink": "gesture-responder-system"
+                }
+            ]
+        },
+        {
+            "group": "社区资源",
+            "contains": [
+                {
+                    "subject": "中文视频教程",
+                    "external": "/videos.html"
+                },
+                {
+                    "subject": "js.coach第三方组件库",
+                    "external": "https://js.coach/react-native"
+                },
+                {
+                    "subject": "中文论坛组件分享区",
+                    "external": "http://bbs.reactnative.cn/category/5"
+                },
+                {
+                    "subject": "中文论坛问题求助区",
+                    "external": "http://bbs.reactnative.cn/category/4"
+                }
+            ]
+        },
+        {
+            "group": "使用指南(iOS)",
+            "contains": [
+                {
+                    "subject": "原生模块",
+                    "mdlink": "native-modules-ios"
+                },
+                {
+                    "subject": "原生UI组件",
+                    "mdlink": "native-component-ios"
+                },
+                {
+                    "subject": "链接原生库",
+                    "mdlink": "linking-libraries-ios"
+                },
+                {
+                    "subject": "在设备上运行",
+                    "mdlink": "running-on-device-ios"
+                },
+                {
+                    "subject": "在模拟器上运行",
+                    "mdlink": "running-on-simulator-ios"
+                },
+                {
+                    "subject": "在原生和React Native间通信",
+                    "mdlink": "communication-ios"
+                }
+            ]
+        },
+        {
+            "group": "使用指南(Android)",
+            "contains": [
+                {
+                    "subject": "原生模块",
+                    "mdlink": "native-modules-android"
+                },
+                {
+                    "subject": "原生UI组件",
+                    "mdlink": "native-component-android"
+                },
+                {
+                    "subject": "Headless JS（后台任务）",
+                    "mdlink": "headless-js-android"
+                },
+                {
+                    "subject": "在设备上运行",
+                    "mdlink": "running-on-device-android"
+                },
+                {
+                    "subject": "打包APK",
+                    "mdlink": "signed-apk-android"
+                },
+                {
+                    "subject": "调试Android UI性能",
+                    "mdlink": "android-ui-performance"
+                },
+                {
+                    "subject": "从源代码编译React Native",
+                    "mdlink": "android-building-from-source"
+                }
+            ]
+        },
+        {
+            "group": "组件",
+            "contains": [
+                {
+                    "subject": "ActivityIndicator",
+                    "mdlink": "activityindicator"
+                },
+                {
+                    "subject": "Button",
+                    "mdlink": "button"
+                },
+                {
+                    "subject": "DatePickerIOS",
+                    "mdlink": "datepickerios"
+                },
+                {
+                    "subject": "DrawerLayoutAndroid",
+                    "mdlink": "drawerlayoutandroid"
+                },
+                {
+                    "subject": "FlatList",
+                    "mdlink": "flatlist"
+                },
+                {
+                    "subject": "Image",
+                    "mdlink": "image"
+                },
+                {
+                    "subject": "KeyboardAvoidingView",
+                    "mdlink": "keyboardavoidingview"
+                },
+                {
+                    "subject": "ListView",
+                    "mdlink": "listview"
+                },
+                {
+                    "subject": "ListView.DataSource",
+                    "mdlink": "listviewdatasource"
+                },
+                {
+                    "subject": "Modal",
+                    "mdlink": "modal"
+                },
+                {
+                    "subject": "Navigator",
+                    "mdlink": "navigator"
+                },
+                {
+                    "subject": "NavigatorIOS",
+                    "mdlink": "navigatorios"
+                },
+                {
+                    "subject": "Picker",
+                    "mdlink": "picker"
+                },
+                {
+                    "subject": "PickerIOS",
+                    "mdlink": "pickerios"
+                },
+                {
+                    "subject": "ProgressBarAndroid",
+                    "mdlink": "progressbarandroid"
+                },
+                {
+                    "subject": "ProgressViewIOS",
+                    "mdlink": "progressviewios"
+                },
+                {
+                    "subject": "RefreshControl",
+                    "mdlink": "refreshcontrol"
+                },
+                {
+                    "subject": "ScrollView",
+                    "mdlink": "scrollview"
+                },
+                {
+                    "subject": "SectionList",
+                    "mdlink": "sectionlist"
+                },
+                {
+                    "subject": "SegmentedControlIOS",
+                    "mdlink": "segmentedcontrolios"
+                },
+                {
+                    "subject": "Slider",
+                    "mdlink": "slider"
+                },
+                {
+                    "subject": "StatusBar",
+                    "mdlink": "statusbar"
+                },
+                {
+                    "subject": "Switch",
+                    "mdlink": "switch"
+                },
+                {
+                    "subject": "TabBarIOS",
+                    "mdlink": "tabbarios"
+                },
+                {
+                    "subject": "TabBarIOS.Item",
+                    "mdlink": "tabbarios-item"
+                },
+                {
+                    "subject": "Text",
+                    "mdlink": "text"
+                },
+                {
+                    "subject": "TextInput",
+                    "mdlink": "textinput"
+                },
+                {
+                    "subject": "ToolbarAndroid",
+                    "mdlink": "toolbarandroid"
+                },
+                {
+                    "subject": "TouchableHighlight",
+                    "mdlink": "touchablehighlight"
+                },
+                {
+                    "subject": "TouchableNativeFeedback",
+                    "mdlink": "touchablenativefeedback"
+                },
+                {
+                    "subject": "TouchableOpacity",
+                    "mdlink": "touchableopacity"
+                },
+                {
+                    "subject": "TouchableWithoutFeedback",
+                    "mdlink": "touchablewithoutfeedback"
+                },
+                {
+                    "subject": "View",
+                    "mdlink": "view"
+                },
+                {
+                    "subject": "ViewPagerAndroid",
+                    "mdlink": "viewpagerandroid"
+                },
+                {
+                    "subject": "VirtualizedList",
+                    "mdlink": "virtualizedlist"
+                },
+                {
+                    "subject": "WebView",
+                    "mdlink": "webview"
+                }
+            ]
+        },
+        {
+            "group": "API",
+            "contains": [
+                {
+                    "subject": "ActionSheetIOS",
+                    "mdlink": "actionsheetios"
+                },
+                {
+                    "subject": "AdSupportIOS",
+                    "mdlink": "adsupportios"
+                },
+                {
+                    "subject": "Alert",
+                    "mdlink": "alert"
+                },
+                {
+                    "subject": "AlertIOS",
+                    "mdlink": "alertios"
+                },
+                {
+                    "subject": "Animated",
+                    "mdlink": "animated"
+                },
+                {
+                    "subject": "AppRegistry",
+                    "mdlink": "appregistry"
+                },
+                {
+                    "subject": "AppState",
+                    "mdlink": "appstate"
+                },
+                {
+                    "subject": "AsyncStorage",
+                    "mdlink": "asyncstorage"
+                },
+                {
+                    "subject": "BackAndroid",
+                    "mdlink": "backandroid"
+                },
+                {
+                    "subject": "CameraRoll",
+                    "mdlink": "cameraroll"
+                },
+                {
+                    "subject": "Clipboard",
+                    "mdlink": "clipboard"
+                },
+                {
+                    "subject": "DatePickerAndroid",
+                    "mdlink": "datepickerandroid"
+                },
+                {
+                    "subject": "Dimensions",
+                    "mdlink": "dimensions"
+                },
+                {
+                    "subject": "Easing",
+                    "mdlink": "easing"
+                },
+                {
+                    "subject": "Geolocation",
+                    "mdlink": "geolocation"
+                },
+                {
+                    "subject": "ImageEditor",
+                    "mdlink": "imageeditor"
+                },
+                {
+                    "subject": "ImagePickerIOS",
+                    "mdlink": "imagepickerios"
+                },
+                {
+                    "subject": "ImageStore",
+                    "mdlink": "imagestore"
+                },
+                {
+                    "subject": "InteractionManager",
+                    "mdlink": "interactionmanager"
+                },
+                {
+                    "subject": "Keyboard",
+                    "mdlink": "keyboard"
+                },
+                {
+                    "subject": "LayoutAnimation",
+                    "mdlink": "layoutanimation"
+                },
+                {
+                    "subject": "Linking",
+                    "mdlink": "linking"
+                },
+                {
+                    "subject": "NativeMethodsMixin",
+                    "mdlink": "nativemethodsmixin"
+                },
+                {
+                    "subject": "NetInfo",
+                    "mdlink": "netinfo"
+                },
+                {
+                    "subject": "PanResponder",
+                    "mdlink": "panresponder"
+                },
+                {
+                    "subject": "PermissionsAndroid",
+                    "mdlink": "permissionsandroid"
+                },
+                {
+                    "subject": "PixelRatio",
+                    "mdlink": "pixelratio"
+                },
+                {
+                    "subject": "PushNotificationIOS",
+                    "mdlink": "pushnotificationios"
+                },
+                {
+                    "subject": "Share",
+                    "mdlink": "share"
+                },
+                {
+                    "subject": "StyleSheet",
+                    "mdlink": "stylesheet"
+                },
+                {
+                    "subject": "Systrace",
+                    "mdlink": "systrace"
+                },
+                {
+                    "subject": "TimePickerAndroid",
+                    "mdlink": "timepickerandroid"
+                },
+                {
+                    "subject": "ToastAndroid",
+                    "mdlink": "toastandroid"
+                },
+                {
+                    "subject": "Vibration",
+                    "mdlink": "vibration"
+                },
+                {
+                    "subject": "布局样式属性",
+                    "mdlink": "layout-props"
+                },
+                {
+                    "subject": "阴影样式属性",
+                    "mdlink": "shadow-props"
+                }
+            ]
+        }
+    ]
+}
