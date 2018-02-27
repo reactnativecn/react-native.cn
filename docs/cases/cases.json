@@ -1,5 +1,11 @@
 [
 	{
+		"name": "享健身",
+		"desc": "想健身？当然享健身！",
+		"ios": "https://itunes.apple.com/cn/app/id1085961062?mt=8",
+		"android": "",
+		"icon": "https://images.vmartaw.com/2018/02/27/246x0w.jpg"
+	},{
 		"name": "京东金融",
 		"desc": "金融生活服务平台",
 		"ios": "https://itunes.apple.com/cn/app/id895682747?mt=8",
