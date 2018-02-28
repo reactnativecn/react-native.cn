@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, View } from 'react-native';
 
-class FixedDimensionsBasics extends Component {
+export default class FixedDimensionsBasics extends Component {
   render() {
     return (
       <View>
@@ -35,7 +35,7 @@ AppRegistry.registerComponent('AwesomeProject', () => FixedDimensionsBasics);
 import React, { Component } from 'react';
 import { AppRegistry, View } from 'react-native';
 
-class FlexDimensionsBasics extends Component {
+export default class FlexDimensionsBasics extends Component {
   render() {
     return (
       // 试试去掉父View中的`flex: 1`。
