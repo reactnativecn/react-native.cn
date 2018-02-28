@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, View } from 'react-native';
 
-class FixedDimensionsBasics extends Component {
+export default class FixedDimensionsBasics extends Component {
   render() {
     return (
       <View>
