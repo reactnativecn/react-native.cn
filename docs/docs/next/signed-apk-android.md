@@ -2,13 +2,14 @@ Android要求所有应用都有一个数字签名才会被允许安装在用户�
 
 ### 生成一个签名密钥
 
-你可以用`keytool`命令生成一个私有密钥。在Windows上`keytool`命令放在JDK的bin目录中（比如`C:\Program Files\Java\jdkx.x.x_x\bin`），你可能需要在命令行中先进入那个目录才能执行此命令。
+你可以用`keytool`命令生成一个私有密钥。在Windows上`keytool`命令放在JDK的bin目录中（比如`C:\Program Files\Java\jdkx.x.x_x\bin`），如果你没有配置Java环境变量的话，需要先进入那个目录才能在命令行中执行此命令。
 
     $ keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
 
-这条命令会要求你输入密钥库（keystore）和对应密钥的密码，然后设置一些发行相关的信息。最后它会生成一个叫做`my-release-key.keystore`的密钥库文件。
-
+执行命令后会要求你输入密钥库（keystore）和对应密钥的密码，然后设置一些发行相关的信息。最后它会在当前目录下生成一个叫做`my-release-key.keystore`的密钥库文件。
 在运行上面这条语句之后，密钥库里应该已经生成了一个单独的密钥，有效期为10000天。--alias参数后面的别名是你将来为应用签名时所需要用到的，所以记得记录这个别名。
+
+    查看keystore参数信息：keytool -list -v -keystore android.keystore
 
 **注意：请记得妥善地保管好你的密钥库文件，不要上传到版本库或者其它的地方。**
 
@@ -91,37 +92,35 @@ $ cd android && ./gradlew installRelease
 
 > 在debug和release版本间来回切换安装时可能会报错签名不匹配，此时需要先卸载前一个版本再尝试安装。
 
-### Split APKs by ABI to reduce file size
+### 针对设备不同的CPU架构生成APK以减小APK文件的大小
 
-By default, the generated APK has the native code for both x86 and ARMv7a CPU architectures. This makes it easier to share APKs that run on almost all Android devices. However, this has the downside that there will be some unused native code on any device, leading to unnecessarily bigger APKs.
+默认情况下，生成的APK会同时包含针对于x86和ARMv7aCPU架构的原生代码。 这样可以让我们更方便的向其他人分享这个APK，因为它几乎可以运行在所有的Android设备上。 但是，这有一个缺点，首先是APK文件更大，其次任何设备上都会有一些未使用的代码。
 
-You can create an APK for each CPU by changing the following line in android/app/build.gradle:
-``` diff
+你可以在`android/app/build.gradle`:修改如下代码来打包生成针对不同CPU架构的APK
+``` 
 - def enableSeparateBuildPerCPUArchitecture = false
 + def enableSeparateBuildPerCPUArchitecture = true
 ```
-
-Upload both these files to markets which support device targetting, such as [Google Play](https://developer.android.com/google/play/publishing/multiple-apks.html) and [Amazon AppStore](https://developer.amazon.com/docs/app-submission/getting-started-with-device-targeting.html) and the users will automatically get the appropriate APK. If you want to upload to other markets such as [APKFiles](https://www.apkfiles.com/), which do not support multiple APKs for a single app, change the following line as well to create the default universal APK with binaries for both CPUs.
-
-``` diff
+你可以把这上面打包生成的两个APK都上传到支持对用户设备CPU架构定位的应用程序商店，例如Google Play和Amazon AppStore，用户将自动获得相应的APK。如果您想上传到其他市场，例如APKFiles（不支持一个应用有多个APK文件），可以修改下面的代码（下面代码的修改会覆盖前面的设置），来生成适用不同CPU架构的通用APK。
+``` 
 - universalApk false  // If true, also generate a universal APK
 + universalApk true  // If true, also generate a universal APK
 ```
 
+### 启用Proguard来减小APK文件的大小（可选）
 
-### 启用Proguard代码混淆来缩小APK文件的大小（可选）
-
-Proguard是一个Java字节码混淆压缩工具，它可以移除掉React Native Java（和它的依赖库中）中没有被使用到的部分，最终有效的减少APK的大小。
+Proguard是一个减小APK的大小的工具，它通过移除掉React Native Java字节码文件（和它的依赖库中）中没有被使用到的部分，最终有效的减少APK的大小。
 
 **重要**：启用Proguard之后，你必须再次全面地测试你的应用。Proguard有时候需要为你引入的每个原生库做一些额外的配置。参见`app/proguard-rules.pro`文件。
 
-要启用Proguard，在`android/app/build.gradle`文件中设置`minifyEnabled`选项为`true`：
+在`android/app/build.gradle`文件中修改如下代码来启用Proguard
 
-```gradle
-/**
- * 在release发行版中启用Proguard来减小 to shrink the Java bytecode in release builds.
- */
-def enableProguardInReleaseBuilds = true
+``` 
+- def enableProguardInReleaseBuilds = false 
++ def enableProguardInReleaseBuilds = true
 ```
 
-> 启动混淆后需清空缓存 `Android Studio Build > Clean Project`, 否则可能会报错。
+> 启动Proguard后需清空缓存，否则可能会报错：
+``` 
+cd android && ./gradlew.bat clean
+``` 
