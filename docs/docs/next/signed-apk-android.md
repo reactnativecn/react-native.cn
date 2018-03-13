@@ -92,7 +92,7 @@ $ cd android && ./gradlew installRelease
 
 > 在debug和release版本间来回切换安装时可能会报错签名不匹配，此时需要先卸载前一个版本再尝试安装。
 
-### 针对设备不同的CPU架构生成APK以减小APK文件的大小
+### 针对不同的CPU架构生成APK以减小APK文件的大小
 
 默认情况下，生成的APK会同时包含针对于x86和ARMv7aCPU架构的原生代码。 这样可以让我们更方便的向其他人分享这个APK，因为它几乎可以运行在所有的Android设备上。 但是，这有一个缺点，首先是APK文件更大，其次任何设备上都会有一些未使用的代码。
 
@@ -101,10 +101,10 @@ $ cd android && ./gradlew installRelease
 - def enableSeparateBuildPerCPUArchitecture = false
 + def enableSeparateBuildPerCPUArchitecture = true
 ```
-你可以把这上面打包生成的两个APK都上传到支持对用户设备CPU架构定位的应用程序商店，例如Google Play和Amazon AppStore，用户将自动获得相应的APK。如果您想上传到其他市场，例如APKFiles（不支持一个应用有多个APK文件），可以修改下面的代码（下面代码的修改会覆盖前面的设置），来生成适用不同CPU架构的通用APK。
+你可以把这上面打包生成的两个APK都上传到支持对用户设备CPU架构定位的应用程序商店，例如Google Play和Amazon AppStore，用户将自动获得相应的APK。如果您想上传到其他市场，例如APKFiles（不支持一个应用有多个APK文件），可以修改下面的代码，来生成适用不同CPU架构的通用APK。
 ``` 
-- universalApk false  // If true, also generate a universal APK
-+ universalApk true  // If true, also generate a universal APK
+- universalApk false 
++ universalApk true  // 设置为true时，会覆盖前面的设置，生成适用不同CPU架构的通用APK
 ```
 
 ### 启用Proguard来减小APK文件的大小（可选）
