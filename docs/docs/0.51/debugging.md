@@ -91,7 +91,8 @@ react-devtools
 ```
 
 执行命令后会启动 React Develpoer Tools
-> 注意：andorid版本的调试菜单换成了"Toggle Inspector"(自动执行)，这个时候需要重启下对应的模拟器中的APP。
+> 注意：使用 React Develpoer Tools 调试之前必须先到模拟器中关闭 "Debug JS Remotely" 功能，否则会连接不上。
+> 注意：Andorid版本的调试菜单换成了"Toggle Inspector"(自动执行)。
 
 <img src="https://camo.githubusercontent.com/3226d81c8d40f07f10c1f78876905a1bfc2d6d82/687474703a2f2f692e696d6775722e636f6d2f49586548695a442e706e67" width="700" alt="React DevTools">
 
