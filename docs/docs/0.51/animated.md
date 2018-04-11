@@ -27,7 +27,7 @@ Animated.timing(                            // Animate value over time
 `Animated`提供了三种动画类型。每种动画类型都提供了特定的函数曲线，用于控制动画值从初始值变化到最终值的变化过程：
 
 - `Animated.decay()`以指定的初始速度开始变化，然后变化速度越来越慢直至停下。
-- `Animated.spring()`提供一个简单的弹簧物理模型.
+- `Animated.spring()`提供一个简单的[弹簧物理模型](https://zh.wikipedia.org/wiki/%E8%AB%A7%E6%8C%AF%E5%AD%90#.E9.98.BB.E5.B0.BC.E8.AB.A7.E6.8C.AF.E5.AD.90).
 - `Animated.timing()`使用[easing函数](easing.html)让数据随时间动起来。
 
 大多数情况下你应该使用`timing()`。默认情况下，它使用对称的 easeInOut 曲线，将对象逐渐加速到全速，然后通过逐渐减速停止结束。
