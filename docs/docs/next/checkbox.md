@@ -14,8 +14,7 @@
   </h4></div>
   <div class="prop"><h4 class="propTitle"><a class="anchor" name="disabled"></a>disabled?: <span
     class="propType">bool</span> <a class="hash-link" href="#disabled">#</a></h4>
-    <div><p>如果为true，这个组件不能进行交互
-      Default value is false.</p></div>
+    <div><p>如果为true，这个组件不能进行交互,默认为false</p></div>
   </div>
   <div class="prop"><h4 class="propTitle"><a class="anchor" name="onchange"></a>onChange?: <span class="propType">function</span>
     <a class="hash-link" href="#onchange">#</a></h4>
