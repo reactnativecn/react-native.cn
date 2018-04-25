@@ -2,7 +2,7 @@
 
 这是一个“受控组件”（controlled component）。你必须使用onValueChange回调来更新value属性以响应用户的操作。如果不更新value属性，组件只会按一开始给定的value值来渲染且保持不变。
 
-注意:Checkbox只在Android端实现，IOS端暂未实现
+注意:CheckBox只在Android端实现，IOS端暂未实现
 
 @keyword checkbox @keyword toggle
 
@@ -30,6 +30,6 @@
   </div>
   <div class="prop"><h4 class="propTitle"><a class="anchor" name="value"></a>value?: <span class="propType">bool</span>
     <a class="hash-link" href="#value">#</a></h4>
-    <div><p>表示此开关是否打开。默认为false（关闭状态）。</p></div>
+    <div><p>表示CheckBox是否打开。默认为false（关闭状态）。</p></div>
   </div>
 </div>
