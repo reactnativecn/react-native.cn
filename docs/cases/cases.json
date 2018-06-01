@@ -1,5 +1,12 @@
 [
 	{
+		"name": "医联",
+		"desc": "医生社交学术平台",
+		"ios": "https://itunes.apple.com/cn/app/id929939829?&mt=8",
+		"android": "http://www.medlinker.com/download/android",
+		"icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple115/v4/03/da/38/03da3833-9db9-0921-c0ff-2e15b4816fea/AppIcon-1x_U007emarketing-85-220-8.png/460x0w.jpg"
+	},
+	{
 		"name": "大浙惠生活",
 		"desc": "腾讯大浙网旗下，浙江省本地吃喝玩乐活动、优惠福利信息的推荐平台",
 		"ios": "https://itunes.apple.com/app/apple-store/id1184729110??l=zh&ls=1&mt=8",
@@ -224,11 +231,11 @@
 		"android": "http://sj.qq.com/myapp/detail.htm?apkName=com.sanyuanse",
 		"icon": "http://img.youcyou.com/logo.png"
 	},
-  {
+  	{
 		"name": "红包圈",
 		"desc": "红包交友同城聊天应用",
 		"ios": "https://itunes.apple.com/cn/app/hong-bao-quan-hong-bao-jiao/id1193509121?mt=8",
 		"android": "http://h5.down.bwgame.com.cn/redpackage.apk",
 		"icon": "http://ohg9m5uoq.bkt.clouddn.com/1024.png"
-  }
+  	}
 ]
