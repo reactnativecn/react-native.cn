@@ -677,7 +677,7 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
 
-        // 注意这里的MyReactNativeApp必须对应“index.android.js”中的
+        // 注意这里的MyReactNativeApp必须对应“index.js”中的
         // “AppRegistry.registerComponent()”的第一个参数
         mReactRootView.startReactApplication(mReactInstanceManager, "MyReactNativeApp", null);  
 
