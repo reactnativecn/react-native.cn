@@ -12,7 +12,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, View } from 'react-native';
 
-class FlexDirectionBasics extends Component {
+export default class FlexDirectionBasics extends Component {
   render() {
     return (
       // 尝试把`flexDirection`改为`column`看看
@@ -36,7 +36,7 @@ AppRegistry.registerComponent('AwesomeProject', () => FlexDirectionBasics);
 import React, { Component } from 'react';
 import { AppRegistry, View } from 'react-native';
 
-export defualt class JustifyContentBasics extends Component {
+export default class JustifyContentBasics extends Component {
   render() {
     return (
       // 尝试把`justifyContent`改为`center`看看
