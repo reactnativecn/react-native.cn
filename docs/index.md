@@ -273,14 +273,15 @@ RCT_EXPORT_VIEW_PROPERTY(myCustomProperty, NSString);
 
 import React, { 
   Component,
-  requireNativeComponent
-} from 'react-native';
+} from 'react';
+import PropTypes from 'prop-types';
+import { requireNativeComponent } from 'react-native';
 
 var NativeMyCustomView = requireNativeComponent('MyCustomView', MyCustomView);
 
 export default class MyCustomView extends Component {
   static propTypes = {
-    myCustomProperty: React.PropTypes.oneOf(['a', 'b']),
+    myCustomProperty: PropTypes.oneOf(['a', 'b']),
   };
   render() {
     return <NativeMyCustomView {...this.props} />;

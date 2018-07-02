@@ -42,8 +42,9 @@ function directPage(nextState, replace, callback) {
     // http://reactnative.cn/docs/view.html
     replace(`/docs/${versions.current}/${params.version}`);
   } else if (!params.doc) {
+    // http://reactnative.cn/docs/0.51
     // http://reactnative.cn/docs/
-    replace(`/docs/${params.version}/${docIndexPage}`);
+    replace(`/docs/${params.version || versions.current}/${docIndexPage}`);
   }
   // if (!params.version) {
   //   replace(`/docs/${versions.current}/getting-started.html`);
