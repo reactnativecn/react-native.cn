@@ -18,7 +18,7 @@
 // RCTMapManager.m
 #import <MapKit/MapKit.h>
 
-#import "RCTViewManager.h"
+#import <React/RCTViewManager.h>
 
 @interface RCTMapManager : RCTViewManager
 @end
@@ -214,7 +214,7 @@ var RCTSwitch = requireNativeComponent('RCTSwitch', Switch, {
 
 #import <MapKit/MapKit.h>
 
-#import "RCTComponent.h"
+#import <React/RCTComponent.h>
 
 @interface RCTMap: MKMapView
 
@@ -239,7 +239,7 @@ var RCTSwitch = requireNativeComponent('RCTSwitch', Switch, {
 #import <MapKit/MapKit.h>
 
 #import "RCTMap.h"
-#import "UIView+React.h"
+#import <React/UIView+React.h>
 
 @interface RCTMapManager() <MKMapViewDelegate>
 @end

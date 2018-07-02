@@ -46,8 +46,7 @@
 	</div>
 	<div class="prop">
 	<h4 class="propTitle"><a class="anchor" name="overlays"></a><span class="platform">ios</span>overlays <span class="propType">[{coordinates: [{latitude: number, longitude: number}], lineWidth: number, strokeColor: ColorPropType, fillColor: ColorPropType, id: string}]</span> <a class="hash-link" href="#overlays">#</a></h4>
-	<div><p>地图的覆盖层。</p></div><
-	/div>
+	<div><p>地图的覆盖层。</p></div></div>
 	<div class="prop">
 		<h4 class="propTitle"><a class="anchor" name="onannotationpress"></a>onAnnotationPress <span class="propType">function</span> <a class="hash-link" href="#onannotationpress">#</a></h4>
 		<div>

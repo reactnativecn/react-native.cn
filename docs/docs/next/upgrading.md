@@ -1,4 +1,4 @@
-时刻将React Native更新到最新的版本，可以获得更多API、视图、开发者工具以及其他一些好东西（译注：官方开发任务繁重，人手紧缺，几乎不会对旧版本提供维护支持，所以即便更新可能带来一些兼容上的变更，但建议开发者还是尽一切可能第一时间更新）。由于一个完整的React Native项目是由Android项目、iOS项目和JavaScript项目组成的，且都打包在一个npm包中，所以升级可能会有一些麻烦。我们会尽量简化这一流程。以下是目前所需的升级步骤：
+时刻将React Native更新到最新的版本，可以获得更多API、视图、开发者工具以及其他一些好东西（译注：官方开发任务繁重，人手紧缺，几乎不会对旧版本提供维护支持，所以即便更新可能带来一些兼容上的变更，但建议开发者还是尽一切可能第一时间更新）。由于一个完整的React Native项目是由Android项目、iOS项目和JavaScript项目组成的，且都打包在一个npm包中，所以升级可能会有一些麻烦。我们会尽量简化这一流程。你可以在项目目录下使用`react-native -v`命令查看当前的版本。以下是目前所需的升级步骤：
 
 __译注__：[更新日志点这里查看](http://bbs.reactnative.cn/category/1)
 
@@ -12,10 +12,6 @@ __译注__：[更新日志点这里查看](http://bbs.reactnative.cn/category/1)
 
 ### 2. 安装`react-native-git-upgrade`工具模块
 
-注意：如果你的React Native版本已经大于等于0.40的话，则`不需要安装此模块`。你可以在项目目录下使用`react-native -v`命令查看当前的版本。
-
-如果你的React Native版本低于0.40，则需要全局安装此命令行工具模块：
-
 ```sh
 $ npm install -g react-native-git-upgrade
 ```
@@ -26,20 +22,6 @@ $ npm install -g react-native-git-upgrade
 * 然后在用户的项目文件上应用补丁
 
 ### 3. 运行更新命令
-
-如果你的React Native版本已经大于等于0.40的话，则运行：
-
-```sh
-$ react-native upgrade
-# 这样会直接把react native升级到最新版本
-
-# 或者是：
-
-$ react-native upgrade X.Y.Z
-# 这样把react native升级到指定的X.Y.Z版本
-```
-
-如果你的React Native版本低于0.40，则运行：
 
 ```sh
 $ react-native-git-upgrade
