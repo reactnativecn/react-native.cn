@@ -7,6 +7,13 @@
 		"icon": "http://is5.mzstatic.com/image/thumb/Purple127/v4/5f/bd/de/5fbdde01-36e5-5d52-9b38-e82de0faa8cb/source/175x175bb.jpg"
 	},
 	{
+		"name": "电竞圈",
+		"desc": "游戏社区平台",
+		"ios": "https://itunes.apple.com/cn/app/dian-jing-quan-dian-jing-shi/id942848740?mt=8",
+		"android": "http://sj.qq.com/myapp/detail.htm?apkName=cn.dianjingquan.android",
+		"icon": "http://djq-img.dianjingquan.cn/share/icon.png"
+	},
+	{
 		"name": "漂漂共享书",
 		"desc": "与朋友同事分享纸质图书",
 		"ios": "https://itunes.apple.com/cn/app/id1201678520?ls=1&mt=8",
