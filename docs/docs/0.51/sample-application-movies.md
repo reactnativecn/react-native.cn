@@ -348,6 +348,25 @@ import {
   }
 ```
 
+`renderMovie`方法的构型也有变化。
+
+```javascript
+  renderMovie({ item }) {
+    return (
+      <View style={styles.container}>
+        <Image
+          source={{uri: item.posters.thumbnail}}
+          style={styles.thumbnail}
+        />
+        <View style={styles.rightContainer}>
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.year}>{item.year}</Text>
+        </View>
+      </View>
+    );
+  }
+```
+
 最后，我们再在`styles`对象里给`FlatList`添加一些样式。
 
 ```javascript
