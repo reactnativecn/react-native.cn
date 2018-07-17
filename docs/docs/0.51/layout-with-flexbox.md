@@ -67,7 +67,7 @@ AppRegistry.registerComponent('AwesomeProject', () => JustifyContentBasics);
 import React, { Component } from 'react';
 import { AppRegistry, View } from 'react-native';
 
-class AlignItemsBasics extends Component {
+export default class AlignItemsBasics extends Component {
   render() {
     return (
       // 尝试把`alignItems`改为`flex-start`看看
