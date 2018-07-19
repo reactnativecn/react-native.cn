@@ -1,6 +1,6 @@
-Sometimes it's useful to know whether or not the device has a screen reader that is currently active. The `AccessibilityInfo` API is designed for this purpose. You can use it to query the current state of the screen reader as well as to register to be notified when the state of the screen reader changes.
+有时我们很希望知道设备是否拥有屏幕阅读器与它的开启状态， `AccessibilityInfo` API因此而设计。 您不但可以查询屏幕阅读器的当前状态，而且可以监听屏幕阅读器状态的改变。
 
-Here's a small example illustrating how to use `AccessibilityInfo`:
+这里有一个小例子解释如何使用 `AccessibilityInfo`:
 
 ```js
 class ScreenReaderStatusExample extends React.Component {
@@ -50,9 +50,7 @@ class ScreenReaderStatusExample extends React.Component {
 <div class="props">
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="fetch"></a><span class="methodType">static </span>fetch<span
             class="methodType">()</span> <a class="hash-link" href="#fetch">#</a></h4>
-        <div><p>Query whether a screen reader is currently enabled. Returns a promise which
-            resolves to a boolean. The result is <code>true</code> when a screen reader is enabled
-            and <code>false</code> otherwise.</p></div>
+        <div><p>查询屏幕阅读器是否可用，返回一个布尔值的异步结果。当结果为 <code>true</code> 表示可用，反之为不可。</div>
     </div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="addeventlistener"></a><span class="methodType">static </span>addEventListener<span
             class="methodType">(eventName, handler)</span> <a class="hash-link"
