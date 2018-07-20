@@ -60,7 +60,7 @@ class ScreenReaderStatusExample extends React.Component {
             <ul>
                 <li><code>change</code>: 当屏幕阅读器状态发生改变时的监听函数，回调的参数为一个布尔值，当为<code>true</code> 时表示屏幕阅读器可用，反之为不可。
                 </li>
-                <li><code>announcementFinished</code>: 仅限iOS可用。 屏幕阅读器播报完成的监听函数，回调的参数为一个包含了以下值的dictionary：
+                <li><code>announcementFinished</code>: 仅限iOS可用。屏幕阅读器播报完成的监听函数，回调的参数为一个包含了以下值的dictionary：
                     <ul>
                         <li><code>announcement</code>: 屏幕阅读器的播报字符串</li>
                         <li><code>success</code>: 是否被成功播报的布尔值
