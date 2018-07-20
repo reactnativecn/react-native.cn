@@ -56,18 +56,14 @@ class ScreenReaderStatusExample extends React.Component {
             class="methodType">(eventName, handler)</span> <a class="hash-link"
                                                               href="#addeventlistener">#</a>
     </h4>
-        <div><p>Add an event handler. Supported events:</p>
+        <div><p>添加事件处理函数. 支持以下事件:</p>
             <ul>
-                <li><code>change</code>: Fires when the state of the screen reader changes. The argument
-                    to the event handler is a boolean. The boolean is <code>true</code> when a screen
-                    reader is enabled and <code>false</code> otherwise.
+                <li><code>change</code>: 当屏幕阅读器状态发生改变时的监听函数，回调的参数为一个布尔值，当为<code>true</code> 时表示屏幕阅读器可用，反之为不可。
                 </li>
-                <li><code>announcementFinished</code>: iOS-only event. Fires when the screen reader has
-                    finished making an announcement. The argument to the event handler is a dictionary
-                    with these keys:
+                <li><code>announcementFinished</code>: 仅限iOS可用。 屏幕阅读器播报完成的监听函数，回调的参数为一个包含了以下值的dictionary：
                     <ul>
-                        <li><code>announcement</code>: The string announced by the screen reader.</li>
-                        <li><code>success</code>: A boolean indicating whether the announcement was successfully made.
+                        <li><code>announcement</code>: 屏幕阅读器的播报字符串</li>
+                        <li><code>success</code>: 是否被成功播报的布尔值
                         </li>
                     </ul>
                 </li>
@@ -77,17 +73,17 @@ class ScreenReaderStatusExample extends React.Component {
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="setaccessibilityfocus"></a><span
             class="methodType">static </span>setAccessibilityFocus<span class="methodType">(reactTag)</span> <a
             class="hash-link" href="#setaccessibilityfocus">#</a></h4>
-        <div><p>iOS-Only. Set accessibility focus to a react component.</p></div>
+        <div><p>仅限iOS可用。 设置焦点位置。</p></div>
     </div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="announceforaccessibility"></a><span
             class="methodType">static </span>announceForAccessibility<span class="methodType">(announcement)</span> <a
             class="hash-link" href="#announceforaccessibility">#</a></h4>
-        <div><p>iOS-Only. Post a string to be announced by the screen reader.</p></div>
+        <div><p>仅限iOS可用。设置屏幕阅读器播报的字符串。</p></div>
     </div>
     <div class="prop"><h4 class="methodTitle"><a class="anchor" name="removeeventlistener"></a><span class="methodType">static </span>removeEventListener<span
             class="methodType">(eventName, handler)</span> <a class="hash-link"
                                                               href="#removeeventlistener">#</a>
     </h4>
-        <div><p>Remove an event handler.</p></div>
+        <div><p>移除一个监听函数。</p></div>
     </div>
 </div>
