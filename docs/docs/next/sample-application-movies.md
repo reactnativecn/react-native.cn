@@ -1,27 +1,18 @@
 ## 简介
 
-在本示例教程中，我们将编写一个简单的应用，可以从电影数据库中取得最近正在上映的25部电影，并在一个`ListView`中展示出来。
+在本示例教程中，我们将编写一个简单的应用，可以从电影数据库中取得最近正在上映的25部电影，并在一个`FlatList`中展示出来。
 
 ## 准备工作
 
 React Native需要一些基础的配置工作，你可以参考[开始使用React Native](getting-started.html)来进行。
 
-在所有依赖的软件都已经安装完毕后，只需要输入两条命令就可以创建一个React Native工程。
+在所有依赖的软件都已经安装完毕后，请创建一个React Native工程和我们一起开始这次示例：
 
-1. `npm install -g react-native-cli`
-
-    react-native-cli是一个终端命令，它可以完成其余的设置工作。它可以通过npm安装。刚才这条命令会往你的终端安装一个叫做`react-native`的命令。这个安装过程你只需要进行一次。
-
-2. `react-native init SampleAppMovies`
-
-    这个命令会初始化一个工程、下载React Native的所有源代码和依赖包，最后在`SampleAppMovies/iOS/SampleAppMovies.xcodeproj`和`SampleAppMovies/android/app`下分别创建一个新的XCode工程和一个gradle工程。  
-    
-__译注__：由于众所周知的网络原因，react-native命令行从npm官方源拖代码时会遇上麻烦。请先将npm仓库源替换为国内镜像：  
-
-```bash
-npm config set registry https://registry.npm.taobao.org --global
-npm config set disturl https://npm.taobao.org/dist --global
 ```
+react-native init SampleAppMovies
+```
+
+这个命令会初始化一个工程、下载React Native的所有源代码和依赖包，最后在`SampleAppMovies/iOS/SampleAppMovies.xcodeproj`和`SampleAppMovies/android/app`下分别创建一个新的XCode工程(iOS)和一个gradle工程(Android)。  
 
 另，执行init时切记`不要`在前面加上sudo（否则新项目的目录所有者会变为root而不是当前用户，导致一系列权限问题。如果你这样做了，请使用chown命令修复）。  
 
@@ -29,17 +20,17 @@ npm config set disturl https://npm.taobao.org/dist --global
 
 想开发iOS版本，你现在可以在XCode中打开刚刚创建的工程(`SampleAppMovies/iOS/SampleAppMovies.xcodeproj`)，然后只要按下`⌘+R`就可以构建并运行。这个操作会同时打开一个用于实现动态代码加载的Node服务（React Packager）。所以每当你修改代码，你只需要在模拟器中按下`⌘+R`，而无需重新在XCode中编译。
 
-想开发Android版本，先连接你的设备或启动模拟器，然后在`SampleAppMovies`目录下运行`react-native run-android`，就会构建工程并自动安装到你的模拟器或者设备，同时启动用于实现动态代码加载的Node服务。当你修改代码之后，你需要打开摇一摇菜单(摇一下设备，或者按下设备的Menu键，或者在模拟器上按下F2或Page Up，Genymotion按下⌘+M)，然后在菜单中点击“Reload JS”。
+想开发Android版本，先连接你的设备或启动模拟器，然后在`SampleAppMovies`目录下运行`react-native run-android`，就会构建工程（注意在第一次构建中会联网下载很多依赖，耗时较长。在国内的话务必使用稳定的XX工具，否则会一直失败）并自动安装到你的模拟器或者设备，同时启动用于实现动态代码加载的Node服务。当你修改代码之后，你需要打开摇一摇菜单(摇一下设备，或者按下设备的Menu键，或者在模拟器上按下F2或Page Up，Genymotion按下⌘+M)，然后在菜单中点击“Reload JS”。
 
 ### Hello World
 
-`react-native init`命令会创建一个指定名字的应用，我们刚才输入的命令就创建了一个名为SampleAppMovies的应用。这是一个简单的Hello World应用。对于iOS版本，你可以编辑`index.ios.js`来做一些改动，然后在模拟器中按⌘+R来看到修改的结果。对Android版本，你可以编辑`index.android.js`来做一些改动，然后在摇一摇菜单中点击“Reload JS”来看到修改的结果。
+`react-native init`命令会创建一个指定名字的应用，我们刚才输入的命令就创建了一个名为SampleAppMovies的应用。这是一个简单的Hello World应用。你可以编辑`App.js`来做一些改动，然后在模拟器中按⌘+R来看到修改的结果。
 
 ### 模拟数据
 
 __译注__：本文的示例代码改用了ES6语法，可能和其他文档写法不一致。但React Native从0.18之后，新建项目默认已经采用了ES6语法，故我们推荐不熟悉ES6与ES5区别的朋友先读读[这篇文章](http://bbs.reactnative.cn/topic/15)，另外还可以看看[阮一峰老师的书](http://es6.ruanyifeng.com/)。
 
-在我们真正从Rotten Tomatoes(_译注：一个国外的电影社区_)抓取数据之前，我们先制造一些模拟数据来练一练手。在Facebook我们通常在JS文件的开头，紧跟着import语句之后声明一个常量，不过这不重要，你可以把它放在`index.ios.js`和`index.android.js`的任意位置：
+在我们真正从Rotten Tomatoes(_译注：一个国外的电影社区_)抓取数据之前，我们先制造一些模拟数据来练一练手。在Facebook我们通常在JS文件的开头，紧跟着import语句之后声明一个常量，不过这不重要，你可以把它放在`App.js`的任意位置：
 
 ```javascript
 var MOCKED_MOVIES_DATA = [
@@ -57,7 +48,7 @@ var MOCKED_MOVIES_DATA = [
 import React, {
   Component,
 } from 'react';
-import { 
+import {
   AppRegistry,
   Image,
   StyleSheet,
@@ -101,10 +92,10 @@ var styles = StyleSheet.create({
 然后把它应用到Image组件上：
 
 ```javascript
-        <Image
-          source={{uri: movie.posters.thumbnail}}
-          style={styles.thumbnail}
-        />
+    <Image
+      source={{uri: movie.posters.thumbnail}}
+      style={styles.thumbnail}
+    />
 ```
 
 按下`⌘+R`或者`Reload JS`，现在图片应该可以被渲染出来了。
@@ -201,7 +192,7 @@ var styles = StyleSheet.create({
  * 请求，这个样例数据放在React Native的Github库中。
  * 当然，由于众所周知的原因，这个地址可能国内访问也比较困难。
  */
-var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
+var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/0.51-stable/docs/MoviesExample.json';
 ```
 
 首先在应用中创建一个初始的null状态，这样可以通过`this.state.movies == null`来判断我们的数据是不是已经被抓取到了。我们在服务器响应返回的时候执行`this.setState({movies: moviesData})`来改变这个状态。把下面这段代码放到我们的React类的render函数之前（下面注释中的“绑定操作”你可以看看这个[短视频教程](http://v.youku.com/v_show/id_XMTgyNzM0NjQzMg==.html)）：
@@ -214,7 +205,7 @@ var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/maste
     };
     // 在ES6中，如果在自定义的函数里使用了this关键字，则需要对其进行“绑定”操作，否则this的指向不对
     // 像下面这行代码一样，在constructor中使用bind是其中一种做法（还有一些其他做法，如使用箭头函数等）
-    this.fetchData = this.fetchData.bind(this); 
+    this.fetchData = this.fetchData.bind(this);
   }
 ```
 
@@ -286,13 +277,13 @@ var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/maste
 |--|--|
 |![](img/TutorialSingleFetched.png) |![](img/TutorialSingleFetched2.png)|
 
-## ListView
+## FlatList
 
-现在我们来让我们的应用能够渲染所有的数据而不是仅仅第一部电影。我们要用到的就是ListView组件。
+现在我们来让我们的应用能够渲染所有的数据而不是仅仅第一部电影。我们要用到的就是FlatList组件。
 
-为什么建议把内容放到ListView里？比起直接渲染出所有的元素，或是放到一个ScrollView里有什么优势？这是因为尽管React很高效，渲染一个可能很大的元素列表还是会很慢。`ListView`会安排视图的渲染，只显示当前在屏幕上的那些元素。而那些已经渲染好了但移动到了屏幕之外的元素，则会从原生视图结构中移除（以提高性能）。
+为什么建议把内容放到FlatList里？比起直接渲染出所有的元素，或是放到一个ScrollView里有什么优势？这是因为尽管React很高效，渲染一个可能很大的元素列表还是会很慢。`FlatList`会安排视图的渲染，只显示当前在屏幕上的那些元素。而那些已经渲染好了但移动到了屏幕之外的元素，则会从原生视图结构中移除（以提高性能）。
 
-首先要做的事情：在文件最开头，从React中引入`ListView`。
+首先要做的事情：在文件最开头引入`FlatList`。
 
 ```javascript
 import React, {
@@ -301,14 +292,14 @@ import React, {
 import {
   AppRegistry,
   Image,
-  ListView,
+  FlatList,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 ```
 
-现在来修改render函数。当我们已经有了数据之后，渲染一个包含多个电影信息的ListView，而不仅仅是单个的电影。
+现在来修改render函数。当我们已经有了数据之后，渲染一个包含多个电影信息的FlatList，而不仅仅是单个的电影。
 
 ```javascript
   render() {
@@ -317,35 +308,31 @@ import {
     }
 
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderMovie}
-        style={styles.listView}
+      <FlatList
+        data={this.state.data}
+        renderItem={this.renderMovie}
+        style={styles.list}
       />
     );
   }
 ```
 
-`dataSource`接口用来在ListView的整个更新过程中判断哪些数据行发生了变化。
-
-你会注意到我们现在用到了`this.state`中的`dataSource`。下一步就是在`constructor`生成的初始状态中添加一个空白的`dataSource`。另外，我们现在要把数据存储在`dataSource`中了，所以不再另外用`this.state.movies`来保存数据。我们可以在state里用一个布尔型的属性(`this.state.loaded`)来判断数据加载是否已经完成了。
+你会注意到我们现在用到了`this.state`中的`data`。下一步就是在`constructor`生成的初始状态中添加一个空白的`data`。另外，我们现在要把数据存储在`data`中了，所以不再另外用`this.state.movies`来保存数据。我们可以在state里用一个布尔型的属性(`this.state.loaded`)来判断数据加载是否已经完成了。
 
 ```javascript
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
+      data: [],
       loaded: false,
     };
     // 在ES6中，如果在自定义的函数里使用了this关键字，则需要对其进行“绑定”操作，否则this的指向不对
     // 像下面这行代码一样，在constructor中使用bind是其中一种做法（还有一些其他做法，如使用箭头函数等）
-    this.fetchData = this.fetchData.bind(this); 
+    this.fetchData = this.fetchData.bind(this);
   }
 ```
 
-同时我们也要修改`fetchData`方法来把数据更新到dataSource里：
+同时我们也要修改`fetchData`方法来把数据添加到data里（注意这里使用了数组的concat方法生成新数组，不能直接在原数组上push！）：
 
 ```javascript
   fetchData() {
@@ -354,17 +341,17 @@ import {
       .then((responseData) => {
         // 注意，这里使用了this关键字，为了保证this在调用时仍然指向当前组件，我们需要对其进行“绑定”操作
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+          data: this.state.data.concat(responseData.movies),
           loaded: true,
         });
       });
   }
 ```
 
-最后，我们再在`styles`对象里给`ListView`添加一些样式。
+最后，我们再在`styles`对象里给`FlatList`添加一些样式。
 
 ```javascript
-  listView: {
+  list: {
     paddingTop: 20,
     backgroundColor: '#F5FCFF',
   },
@@ -376,9 +363,9 @@ import {
 |--|--|
 |![](img/TutorialFinal.png) |![](img/TutorialFinal2.png)|
 
-为了实现一个完整功能的应用，接下来其实还有一些工作要做，譬如：添加导航器，搜索，加载更多，等等等等。可以在[Movies示例](https://github.com/facebook/react-native/tree/master/Examples/Movies)中看看我们是怎么做的。
+为了实现一个完整功能的应用，接下来其实还有一些工作要做，譬如：添加导航器，搜索，加载更多，等等等等。
 
-### 最终的代码
+### 最终的代码(App.js)
 
 ```javascript
 /**
@@ -393,26 +380,24 @@ import React, {
 import {
   AppRegistry,
   Image,
-  ListView,
+  FlatList,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 
-var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
+var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/0.51-stable/docs/MoviesExample.json';
 
-class SampleAppMovies extends Component {
+export default class SampleAppMovies extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
+      data: [],
       loaded: false,
     };
     // 在ES6中，如果在自定义的函数里使用了this关键字，则需要对其进行“绑定”操作，否则this的指向会变为空
     // 像下面这行代码一样，在constructor中使用bind是其中一种做法（还有一些其他做法，如使用箭头函数等）
-    this.fetchData = this.fetchData.bind(this); 
+    this.fetchData = this.fetchData.bind(this);
   }
 
   componentDidMount() {
@@ -425,7 +410,7 @@ class SampleAppMovies extends Component {
       .then((responseData) => {
         // 注意，这里使用了this关键字，为了保证this在调用时仍然指向当前组件，我们需要对其进行“绑定”操作
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+          data: this.state.data.concat(responseData.movies),
           loaded: true,
         });
       });
@@ -437,10 +422,10 @@ class SampleAppMovies extends Component {
     }
 
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderMovie}
-        style={styles.listView}
+      <FlatList
+        data={this.state.data}
+        renderItem={this.renderMovie}
+        style={styles.list}
       />
     );
   }
@@ -494,11 +479,10 @@ var styles = StyleSheet.create({
     width: 53,
     height: 81,
   },
-  listView: {
+  list: {
     paddingTop: 20,
     backgroundColor: '#F5FCFF',
   },
 });
 
-AppRegistry.registerComponent('SampleAppMovies', () => SampleAppMovies);
 ```

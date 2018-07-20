@@ -22,7 +22,7 @@ var styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-};
+});
 ```
 
 ### 截图
@@ -40,7 +40,7 @@ var styles = StyleSheet.create({
   <div class="prop">
     <h4 class="propTitle"><a class="anchor" name="allowfontscaling"></a>allowFontScaling <span class="propType">bool</span> <a class="hash-link" href="#allowfontscaling">#</a></h4>
     <div>
-      <p>控制字体是否要根据iOS的“文本大小”辅助选项来进行缩放。</p>
+      <p>控制字体是否要根据系统的“字体大小”辅助选项来进行缩放。</p>
     </div>
   </div>
   <div class="prop">
