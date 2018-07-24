@@ -230,5 +230,12 @@
 		"ios": "https://itunes.apple.com/cn/app/hong-bao-quan-hong-bao-jiao/id1193509121?mt=8",
 		"android": "http://h5.down.bwgame.com.cn/redpackage.apk",
 		"icon": "http://ohg9m5uoq.bkt.clouddn.com/1024.png"
+  },
+  {
+  	"name": "于何处",
+  	"desc": "发现身边的同类人",
+  	"ios": "https://itunes.apple.com/cn/app/id1397733421?mt=8",
+  	"android": "",
+  	"icon": "https://is5-ssl.mzstatic.com/image/thumb/Purple118/v4/28/ad/bc/28adbca6-f04a-cfe4-23a3-7daf32c98693/AppIcon-1x_U007emarketing-85-220-9.png/180x180bb.png"
   }
 ]
